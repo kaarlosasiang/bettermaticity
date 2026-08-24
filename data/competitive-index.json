@@ -1,5 +1,7 @@
 {
-  "title": "Solano Competitive Index",
+  "_status": "draft",
+  "_note": "PLACEHOLDER — the values below are carried over from the template and are NOT the City of Mati's actual CMCI scores. Replace with Mati's figures from the DTI Cities and Municipalities Competitiveness Index.",
+  "title": "Mati Competitive Index",
   "description": "Annual competitiveness indicators measuring local economic performance",
   "source": "Cities and Municipalities Competitiveness Index (CMCI)",
   "years": [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],

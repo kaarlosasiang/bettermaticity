@@ -1,7 +1,7 @@
 {
   "name": "bs-web",
-  "version": "1.1.19",
-  "description": "BetterSolano.org - Official Portal for LGU Solano",
+  "version": "1.2.0",
+  "description": "BetterMati.org - Official Portal for LGU Mati",
   "scripts": {
     "dev": "python3 -m http.server 8000",
     "build": "bash build.sh",
@@ -23,7 +23,7 @@
     "package:only": "bash scripts/package-cpanel.sh"
   },
   "keywords": [
-    "solano",
+    "mati",
     "nueva-vizcaya",
     "government",
     "lgu"

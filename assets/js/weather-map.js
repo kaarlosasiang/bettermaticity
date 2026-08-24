@@ -1,6 +1,6 @@
 /**
- * Weather & Map Section for Better Solano Homepage
- * Displays real-time weather data and interactive map of Solano, Nueva Vizcaya
+ * Weather & Map Section for Better Mati Homepage
+ * Displays real-time weather data and interactive map of Mati, Davao Oriental
  * With robust fallback system to ensure content always renders
  */
 
@@ -60,10 +60,10 @@
   // Weather Service - Handles fetching, caching, and providing weather data
   // ============================================================================
   const WeatherService = {
-    CACHE_KEY: 'solano_weather_cache',
+    CACHE_KEY: 'mati_weather_cache',
     CACHE_TTL: 30 * 60 * 1000,
     API_URL: 'https://api.open-meteo.com/v1/forecast',
-    COORDINATES: { lat: 16.5167, lon: 121.1833 },
+    COORDINATES: { lat: 6.9497, lon: 126.2094 },
 
     mapWeatherCode(code) {
       const mappings = {
@@ -253,7 +253,7 @@
           : '<span style="font-size:0.65rem;color:#06a77d;margin-left:4px;" title="Live data from Open-Meteo API">●</span>';
 
         container.innerHTML = `
-                <div class="weather-widget" role="region" aria-label="Current weather in Solano">
+                <div class="weather-widget" role="region" aria-label="Current weather in Mati">
                     <div class="weather-current">
                         <div class="weather-current-icon" aria-hidden="true">
                             <i class="bi ${data.icon}"></i>
@@ -262,7 +262,7 @@
                             <div class="weather-current-temp" aria-label="Temperature ${data.temperature} degrees Celsius">${data.temperature}°C</div>
                             <div class="weather-current-condition" aria-label="Condition: ${data.condition}">${data.condition}${dataSourceBadge}</div>
                             <div class="weather-current-location">
-                                <i class="bi bi-geo-alt" aria-hidden="true"></i> Solano, Nueva Vizcaya
+                                <i class="bi bi-geo-alt" aria-hidden="true"></i> Mati, Davao Oriental
                             </div>
                         </div>
                     </div>
@@ -336,7 +336,7 @@
   // Map Component - Initializes and manages the Leaflet map
   // ============================================================================
   const MapComponent = {
-    SOLANO_CENTER: [16.5167, 121.1833],
+    MATI_CENTER: [6.9497, 126.2094],
     DEFAULT_ZOOM: 14,
     map: null,
 
@@ -390,9 +390,9 @@
                 scrolling="no" 
                 marginheight="0" 
                 marginwidth="0" 
-                src="https://www.openstreetmap.org/export/embed.html?bbox=121.1633%2C16.5017%2C121.2033%2C16.5317&layer=mapnik&marker=16.5167%2C121.1833"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=126.1894%2C6.9297%2C126.2294%2C6.9697&layer=mapnik&marker=6.9497%2C126.2094"
                 style="border:0;display:block;"
-                title="Map of Solano, Nueva Vizcaya"
+                title="Map of Mati, Davao Oriental"
                 loading="lazy">
             </iframe>
         `;
@@ -421,7 +421,7 @@
 
         // Create the map with keyboard navigation support
         this.map = L.map(container, {
-          center: this.SOLANO_CENTER,
+          center: this.MATI_CENTER,
           zoom: this.DEFAULT_ZOOM,
           scrollWheelZoom: false,
           zoomControl: true,
@@ -463,8 +463,8 @@
         tileLayer.addTo(this.map);
 
         // Add marker
-        const marker = L.marker(this.SOLANO_CENTER).addTo(this.map);
-        marker.bindPopup('<strong>Solano Municipal Hall</strong><br>Nueva Vizcaya 3708');
+        const marker = L.marker(this.MATI_CENTER).addTo(this.map);
+        marker.bindPopup('<strong>Mati City Hall</strong><br>Davao Oriental 8200');
 
         container.setAttribute('data-map-loaded', 'leaflet');
 

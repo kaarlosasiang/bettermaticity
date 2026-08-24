@@ -1,6 +1,6 @@
 /**
  * Statistics Page - Chart.js Implementation
- * Better Solano Portal
+ * Better Mati Portal
  */
 
 // Site branding color palette for charts
@@ -42,44 +42,52 @@ function getChartColors(count) {
   return colors;
 }
 
-// Barangay population data (2024 Census) - Source: PSA, July 1, 2024
+// PLACEHOLDER — replace with City of Mati PSA figures
+// The City of Mati has 26 barangays. Replace each name with the real barangay
+// name, `population` with the PSA census figure, and set the correct classification.
 const barangayData = [
-  { name: 'Roxas', population: 9088, classification: 'Urban' },
-  { name: 'Quirino', population: 6572, classification: 'Urban' },
-  { name: 'Osmeña', population: 6403, classification: 'Urban' },
-  { name: 'Quezon', population: 5758, classification: 'Urban' },
-  { name: 'Curifang', population: 4885, classification: 'Rural' },
-  { name: 'Bagahabag', population: 4731, classification: 'Rural' },
-  { name: 'Uddiawan', population: 4217, classification: 'Rural' },
-  { name: 'Bascaran', population: 3845, classification: 'Rural' },
-  { name: 'Aggub', population: 3101, classification: 'Rural' },
-  { name: 'San Luis', population: 2668, classification: 'Rural' },
-  { name: 'Communal', population: 2586, classification: 'Rural' },
-  { name: 'Lactawan', population: 2109, classification: 'Rural' },
-  { name: 'Concepcion', population: 1954, classification: 'Rural' },
-  { name: 'San Juan', population: 1965, classification: 'Rural' },
-  { name: 'Wacal', population: 1398, classification: 'Rural' },
-  { name: 'Dadap', population: 1409, classification: 'Rural' },
-  { name: 'Tucal', population: 1244, classification: 'Rural' },
-  { name: 'Bangaan', population: 1284, classification: 'Rural' },
-  { name: 'Bangar', population: 1146, classification: 'Rural' },
-  { name: 'Pilar D. Galima', population: 1146, classification: 'Rural' },
-  { name: 'Poblacion North', population: 970, classification: 'Urban' },
-  { name: 'Poblacion South', population: 817, classification: 'Urban' },
+  { name: 'Barangay 1', population: 0, classification: 'TODO' },
+  { name: 'Barangay 2', population: 0, classification: 'TODO' },
+  { name: 'Barangay 3', population: 0, classification: 'TODO' },
+  { name: 'Barangay 4', population: 0, classification: 'TODO' },
+  { name: 'Barangay 5', population: 0, classification: 'TODO' },
+  { name: 'Barangay 6', population: 0, classification: 'TODO' },
+  { name: 'Barangay 7', population: 0, classification: 'TODO' },
+  { name: 'Barangay 8', population: 0, classification: 'TODO' },
+  { name: 'Barangay 9', population: 0, classification: 'TODO' },
+  { name: 'Barangay 10', population: 0, classification: 'TODO' },
+  { name: 'Barangay 11', population: 0, classification: 'TODO' },
+  { name: 'Barangay 12', population: 0, classification: 'TODO' },
+  { name: 'Barangay 13', population: 0, classification: 'TODO' },
+  { name: 'Barangay 14', population: 0, classification: 'TODO' },
+  { name: 'Barangay 15', population: 0, classification: 'TODO' },
+  { name: 'Barangay 16', population: 0, classification: 'TODO' },
+  { name: 'Barangay 17', population: 0, classification: 'TODO' },
+  { name: 'Barangay 18', population: 0, classification: 'TODO' },
+  { name: 'Barangay 19', population: 0, classification: 'TODO' },
+  { name: 'Barangay 20', population: 0, classification: 'TODO' },
+  { name: 'Barangay 21', population: 0, classification: 'TODO' },
+  { name: 'Barangay 22', population: 0, classification: 'TODO' },
+  { name: 'Barangay 23', population: 0, classification: 'TODO' },
+  { name: 'Barangay 24', population: 0, classification: 'TODO' },
+  { name: 'Barangay 25', population: 0, classification: 'TODO' },
+  { name: 'Barangay 26', population: 0, classification: 'TODO' },
 ];
 
 // Historical population data (Census years)
+// PLACEHOLDER — replace with City of Mati PSA figures
 const historicalData = {
   years: [1990, 1995, 2000, 2007, 2010, 2015, 2020, 2024],
-  populations: [38500, 43200, 48100, 52800, 56400, 60500, 65287, 69296],
+  populations: [0, 0, 0, 0, 0, 0, 0, 0],
 };
 
 // Economic indicators data
+// PLACEHOLDER — replace with City of Mati PSA figures
 const economicData = {
-  registeredBusinesses: 1200,
-  agriculturalLand: 8500, // hectares
-  incomeClass: '1st Class',
-  landArea: 162.7, // km²
+  registeredBusinesses: 0,
+  agriculturalLand: 0, // hectares — [TODO]
+  incomeClass: '[TODO]',
+  landArea: 0, // km² — [TODO]
 };
 
 // Chart instances storage
