@@ -2,11 +2,11 @@
 
 **Document Status:** Draft 1.0
 **Target Audience:** Technical Leads, Frontend Developers, LGU Data Custodians
-**Reference Implementation:** BetterSolano (GitHub)
+**Reference Implementation:** BetterMati (GitHub)
 
 ## Executive Summary
 
-This document serves as the authoritative "Source of Truth" for deploying the BetterLGU transparency platform. It outlines the mandatory design standards, data synchronization protocols, and architectural decisions required to scale the BetterSolano template to other Local Government Units (LGUs). All contributors must adhere to the "Kapwa" design values and the data normalization standards defined herein to ensure the platform remains accessible, maintainable, and civic-centric.
+This document serves as the authoritative "Source of Truth" for deploying the BetterLGU transparency platform. It outlines the mandatory design standards, data synchronization protocols, and architectural decisions required to scale the BetterMati template to other Local Government Units (LGUs). All contributors must adhere to the "Kapwa" design values and the data normalization standards defined herein to ensure the platform remains accessible, maintainable, and civic-centric.
 
 ---
 
@@ -52,7 +52,7 @@ Developers are responsible for ETL (Extract, Transform, Load) operations mapping
 | **Demographics**    | **PSA** (psa.gov.ph)       | Local CBMS Data           | `data/demographics.json`        |
 | **Fiscal Data**     | **BLGF** (blgf.gov.ph)     | LGU Accounting Office     | `data/fiscal_transparency.json` |
 | **Competitiveness** | **CMCI** (cmci.dti.gov.ph) | DTI Provincial Office     | `data/indices.json`             |
-| **Ordinances**      | **Sangguniang Bayan**      | Official SB Facebook Page | `data/legislative.json`         |
+| **Ordinances**      | **Sangguniang Panlungsod**      | Official SB Facebook Page | `data/legislative.json`         |
 | **Services**        | **Citizen's Charter**      | Department Heads          | `data/services.json`            |
 
 ### 2.2 Integration Workflows
@@ -74,7 +74,7 @@ This section defines the architectural modularity required to allow LGUs to sele
 
 ### 3.1 Stack Comparison Matrix
 
-| Feature         | **BetterSolano A (Lightweight)** | **BetterSolano B (React/TS)**              |
+| Feature         | **BetterMati A (Lightweight)** | **BetterMati B (React/TS)**              |
 | :-------------- | :------------------------------- | :----------------------------------------- |
 | **Core Tech**   | Vanilla JS, Bootstrap 5, Leaflet | React, TypeScript, Tailwind                |
 | **Data Store**  | Static JSON Fetching             | Typed JSON Imports / Context API           |
@@ -112,7 +112,7 @@ All new repositories must initialize with the following template:
 ```markdown
 # LGU Synchronization Protocol
 
-**LGU Name:** [Insert Municipality/City]
+**LGU Name:** [Insert City/City]
 **Last Sync Date:** [YYYY-MM-DD]
 
 ## Roles & Responsibilities
@@ -124,7 +124,7 @@ All new repositories must initialize with the following template:
 
 ### 2. Data Custodians (Source of Truth)
 
-- **Designation:** [e.g., Municipal Planning & Development Coordinator (MPDC)]
+- **Designation:** [e.g., City Planning & Development Coordinator (MPDC)]
 - **Responsibility:** Provides the raw CSV/Excel files for the Citizen's Charter and Annual Budget.
 - **Contact Protocol:** [e.g., Email submission by the 5th of every month]
 

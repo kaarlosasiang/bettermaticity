@@ -1,6 +1,20 @@
-# BetterSolano.org
+# BetterMati.org
 
-A civic-tech initiative providing transparent access to municipal services, programs, and public funds of LGU Solano, Nueva Vizcaya, Philippines.
+A civic-tech initiative providing transparent access to municipal services, programs, and public funds of LGU Mati, Davao Oriental, Philippines.
+
+> ### ⚠️ Placeholders to fill with real City of Mati data
+>
+> This site was adapted from a template originally built for LGU Solano. All branding, geography (coordinates recentered on Mati, `PH-DAO`), terminology (City / Sangguniang Panlungsod), and the domain (`bettermati.org`) have been rebranded. The following LGU-specific content is **placeholder / draft** and must be replaced with verified data before going live:
+>
+> - **Elected officials** — `data/officials.json`, `government/officials.html`, `government/index.html` (mayor, vice mayor, SP members shown as `[Name]` placeholders).
+> - **Barangays** — Mati has **26 barangays**. Distinctive Solano barangay names were replaced with `Barangay N` / `[Barangay]` placeholders in `assets/js/statistics-new.js`, `statistics/index.html`, `government/index.html`, and facility lists (`services/education.html`, `services/health.html`). A few common-word barangay names (e.g. Roxas, Quezon, Concepcion, San Juan, San Luis, Poblacion, Dadap, Tucal, Bangar) may still remain and should be verified against Mati's actual barangays.
+> - **Statistics** — population, land area, density, income class, historical trends, CMCI scores, poverty and economic figures are zeroed / `[TODO]` (`assets/js/statistics-new.js`, `assets/js/statistics.js`, `statistics/index.html`, `data/demographics.json`, `data/competitive-index.json`).
+> - **Legislation & projects** — `data/resolutions.json`, `data/ordinances.json`, `data/dpwh-projects.json` reduced to labeled placeholders.
+> - **City history** — the homepage timeline (`index.html` + `home-history-*` keys in `assets/js/translations.js`) is placeholdered; add verified City of Mati history.
+> - **Contact** — phone/hotline numbers use Davao Oriental's `(087)` area code but are placeholder subscriber numbers; emails use `@mati.gov.ph`; postal code `8200`. Replace with real values.
+> - **Config** — Google Analytics ID is `G-XXXXXXXXXX` (placeholder); set your GA4 property. Confirm the `mati.gov.ph` domain and official Facebook page.
+> - **Artwork** — `assets/images/logo/better-mati-logo*.svg`, `favicon.*`, and `assets/images/banners/opengraph.png` still carry template/Solano artwork; replace with City of Mati branding.
+> - **Cebuano (`ceb`)** — machine-assisted starter set only; the bulk of keys fall back to English pending a full translation + native review.
 
 ![Version](https://img.shields.io/badge/version-1.1.15-green)
 ![License](https://img.shields.io/badge/license-MIT%20%7C%20CC%20BY%204.0-blue)
@@ -13,7 +27,7 @@ A civic-tech initiative providing transparent access to municipal services, prog
 
 ## Version Notice
 
-A **React + TypeScript** version of BetterSolano.org is now available for contributors who prefer modern tooling and component-based architecture.
+A **React + TypeScript** version of BetterMati.org is now available for contributors who prefer modern tooling and component-based architecture.
 
 | Version            | Branch             | Status             | Documentation                |
 | ------------------ | ------------------ | ------------------ | ---------------------------- |
@@ -37,13 +51,13 @@ To adapt this project for your LGU, fork the repository and customize the conten
 
 ## About
 
-BetterSolano.org is a volunteer-driven, open-source project that empowers the people of Solano with easy access to local government information. The platform aggregates public data from official government portals and presents it in a user-friendly, accessible format.
+BetterMati.org is a volunteer-driven, open-source project that empowers the people of Mati with easy access to local government information. The platform aggregates public data from official government portals and presents it in a user-friendly, accessible format.
 
-**Cost to the People of Solano = ₱0**
+**Cost to the People of Mati = ₱0**
 
 ## Live Demo
 
-Visit the live website: [https://bettersolano.org](https://bettersolano.org)
+Visit the live website: [https://bettermati.org](https://bettermati.org)
 
 ## Technology Stack
 
@@ -75,20 +89,20 @@ Visit the live website: [https://bettersolano.org](https://bettersolano.org)
 
 | Feature                          | Description                                                                                                                                                                                                       |
 | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Municipal Services Directory** | Comprehensive guide to all LGU services with requirements, fees, and processing times                                                                                                                             |
+| **City Services Directory** | Comprehensive guide to all LGU services with requirements, fees, and processing times                                                                                                                             |
 | **Government Officials**         | Directory of elected officials and department heads with contact information                                                                                                                                      |
 | **Budget Transparency**          | Financial reports, income/expenditure breakdowns, and infrastructure projects                                                                                                                                     |
-| **Legislative Documents**        | Searchable database of ordinances and resolutions from Sangguniang Bayan                                                                                                                                          |
-| **Municipal Statistics**         | Demographics, economic data, and competitive index rankings                                                                                                                                                       |
+| **Legislative Documents**        | Searchable database of ordinances and resolutions from Sangguniang Panlungsod                                                                                                                                          |
+| **City Statistics**         | Demographics, economic data, and competitive index rankings                                                                                                                                                       |
 | **Appointment Services**         | Online appointment scheduling integration with the Mayor's Office (OASYS), featuring branded Lottie animation                                                                                                     |
-| **Solano Quiz**                  | Interactive quiz about Solano history and culture, linked from homepage CTA and footer across all pages                                                                                                           |
+| **Mati Quiz**                  | Interactive quiz about Mati history and culture, linked from homepage CTA and footer across all pages                                                                                                           |
 | **Real-time Information**        | Live weather updates, currency exchange rates, and Philippine time                                                                                                                                                |
 | **Emergency Hotline Marquee**    | Clickable scrolling marquee for emergency contacts on tablet and mobile viewports, with pause-on-hover/focus accessibility                                                                                        |
 | **Progressive Web App**          | Installable PWA with "Install App" prompt, seamless auto-updates via skipWaiting (no manual refresh), versioned service worker caching (static + runtime), offline fallback page with emergency hotlines, push notification foundation |
 | **Auto Version Management**      | Dynamic version display from `version.json`, auto-bumped on every git commit via pre-commit hook, synced across all 51+ HTML files, `package.json`, and React app                                                 |
-| **Multi-language Support**       | Full i18n coverage in English, Filipino, and Ilocano (5,546 keys per language with perfect parity)                                                                                                                |
+| **Multi-language Support**       | Full i18n coverage in English and Filipino (full), plus a Cebuano starter set (high-visibility UI; remaining keys fall back to English)                                                                                                                |
 | **Clean URLs**                   | SEO-friendly URLs without `.html` extensions, powered by Apache mod_rewrite                                                                                                                                       |
-| **Brief History of Solano**      | Interactive timeline (1760–1957) with fully translated cards in all three languages                                                                                                                               |
+| **Brief History of Mati**      | Interactive timeline (1760–1957) with fully translated cards in all three languages                                                                                                                               |
 | **Mobile Navigation**            | Responsive menu with GPU-accelerated open/close transitions, body scroll lock, animation guard against rapid toggles, debounced resize handling, touch-safe hover scoping, click-outside-to-close, and focus trap |
 | **Accessibility**                | WCAG 2.1 compliant with skip links, ARIA labels, keyboard navigation, and semantic HTML                                                                                                                           |
 | **SEO Optimized**                | Meta tags, Open Graph, Twitter Cards, structured data, and XML sitemap                                                                                                                                            |
@@ -98,10 +112,10 @@ Visit the live website: [https://bettersolano.org](https://bettersolano.org)
 
 ```bash
 # Clone the repository
-git clone https://github.com/BetterSolano/bettersolano.git
+git clone https://github.com/BetterMati/bettermati.git
 
 # Navigate to project directory
-cd bettersolano
+cd bettermati
 
 # Install dependencies
 npm install
@@ -129,8 +143,8 @@ py serve.py --port 8000 --directory .
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/BetterSolano/bettersolano.git
-cd bettersolano
+git clone https://github.com/BetterMati/bettermati.git
+cd bettermati
 ```
 
 2. **Install dependencies**
@@ -199,7 +213,7 @@ The site supports three languages with full translation coverage:
 | -------- | ----- | --------------------- |
 | English  | `en`  | Complete (5,546 keys) |
 | Filipino | `fil` | Complete (5,546 keys) |
-| Ilocano  | `ilo` | Complete (5,546 keys) |
+| Cebuano  | `ceb` | Starter set (high-visibility UI; rest falls back to English) |
 
 The static site uses a `TranslationEngine` in `assets/js/translations.js` with `data-i18n` attributes on HTML elements. The React version uses a `LanguageContext` provider with a `t()` function. Both systems support fallback to English for any missing keys.
 
@@ -218,7 +232,7 @@ All CSS, images, animations, and translations are kept in sync across all three 
 ## Project Structure
 
 ```
-bettersolano/
+bettermati/
 ├── assets/
 │   ├── css/              # Stylesheets (9 files)
 │   ├── js/               # JavaScript modules (18 files)
@@ -226,7 +240,7 @@ bettersolano/
 │   └── animation/        # Lottie JSON animation files
 ├── data/                 # JSON data files
 │   ├── officials.json    # Government officials data
-│   ├── services.json     # Municipal services data
+│   ├── services.json     # City services data
 │   ├── news.json         # News and announcements
 │   ├── ordinances.json   # Legislative ordinances
 │   └── resolutions.json  # Legislative resolutions
@@ -241,7 +255,7 @@ bettersolano/
 ├── government/           # Government directory pages
 ├── legislative/          # Legislative framework pages
 ├── budget/               # Budget transparency page
-├── statistics/           # Municipal statistics page
+├── statistics/           # City statistics page
 ├── news/                 # News and announcements page
 ├── contact/              # Contact information page
 ├── faq/                  # Frequently asked questions
@@ -292,7 +306,7 @@ bettersolano/
 - Raised tablet breakpoint from 991px to 1024px to properly capture iPad Pro portrait (1024px) and iPad Air landscape
 - Converted emergency hotline bar into a clickable scrolling marquee on all tablet and mobile viewports (≤1024px) with pause-on-hover/focus for accessibility
 - Centered hamburger menu icon between logo and language toggle on tablet viewports using flexbox ordering (logo → hamburger → lang toggle)
-- Tablet footer: left-aligned BetterSolano logo, tagline, and social icons to match the visual hierarchy of the brand column
+- Tablet footer: left-aligned BetterMati logo, tagline, and social icons to match the visual hierarchy of the brand column
 
 #### Progressive Web App (PWA)
 
@@ -336,9 +350,9 @@ bettersolano/
 
 ### Content & Features
 
-- Added Solano Quiz CTA section on homepage with branded Lottie animation (brand blue `#0032A0`)
-- Added Solano Quiz link to footer Quick Links across all 51 HTML pages and React Footer
-- Added Brief History of Solano interactive timeline section on homepage (1760–1957)
+- Added Mati Quiz CTA section on homepage with branded Lottie animation (brand blue `#0032A0`)
+- Added Mati Quiz link to footer Quick Links across all 51 HTML pages and React Footer
+- Added Brief History of Mati interactive timeline section on homepage (1760–1957)
 - Added quiz entry to HTML sitemap page
 - Added Abakada education tools CTA on services/education page with local SVG logo
 
@@ -348,14 +362,14 @@ bettersolano/
 - Fixed Brief History timeline cards — full paragraph translations now applied via `data-i18n` on `<p>` elements (previously only proper nouns inside `<strong>` tags were translated, leaving surrounding English text intact)
 - Corrected Filipino translations: proper religious title "Padre" (not "Ama"), fully translated historical paragraphs (no half-English)
 - Corrected Ilocano translations: proper Ilocano vocabulary ("Ababa a Pakasaritaan" not Filipino "Maikling Kasaysayan", "Dimteng" not "Dumating", "Ili" not "Lungsod"), fully translated paragraphs
-- Added 54 translation keys for Solano Quiz footer link across all page contexts
+- Added 54 translation keys for Mati Quiz footer link across all page contexts
 
 ### Footer & Copyright
 
 - Standardized copyright across all 51 HTML files and React Footer: three styled spans (`footer-copyright-text`, `footer-copyright-license`, `footer-copyright-disclaimer`)
-- Updated copyright year to 2026, name to "BetterSolano.org"
+- Updated copyright year to 2026, name to "BetterMati.org"
 - Footer copyright uses `flex-wrap: wrap; gap: 6px` layout with version badge right-aligned via `margin-left: auto`
-- Removed trailing period after "BetterSolano.org" from all pages and all 3 translation languages
+- Removed trailing period after "BetterMati.org" from all pages and all 3 translation languages
 
 ### Clean URLs
 
@@ -376,7 +390,7 @@ bettersolano/
 
 ## Contributing
 
-We welcome contributions from everyone! Whether you're a developer, designer, data researcher, content writer, translator, or a concerned citizen of Solano, your participation helps shape this project for all.
+We welcome contributions from everyone! Whether you're a developer, designer, data researcher, content writer, translator, or a concerned citizen of Mati, your participation helps shape this project for all.
 
 ### How to Contribute
 
@@ -404,7 +418,7 @@ We welcome contributions from everyone! Whether you're a developer, designer, da
 | **Bug Fixes**          | Report issues or submit fixes for existing bugs               |
 | **Features**           | Propose or implement new functionality                        |
 | **Content**            | Update service information, add missing municipal data        |
-| **Translations**       | Help translate content to Filipino or Ilocano                 |
+| **Translations**       | Help translate content to Filipino or Cebuano                 |
 | **Design**             | Improve UI/UX, accessibility, and visual consistency          |
 | **Data**               | Verify and update municipal statistics and records            |
 | **Documentation**      | Enhance README, code comments, and guides                     |
@@ -432,8 +446,8 @@ All public information is sourced from official government portals:
 
 | Source                             | URL                                                                       | Data Type                 |
 | ---------------------------------- | ------------------------------------------------------------------------- | ------------------------- |
-| LGU Solano Official Website        | [solano.gov.ph](https://solano.gov.ph/)                                   | Services, Officials       |
-| Sangguniang Bayan ng Solano        | [sangguniangbayan.solano.gov.ph](https://sangguniangbayan.solano.gov.ph/) | Ordinances, Resolutions   |
+| LGU Mati Official Website        | [mati.gov.ph](https://mati.gov.ph/)                                   | Services, Officials       |
+| Sangguniang Panlungsod ng Mati        | [sangguniangbayan.mati.gov.ph](https://sangguniangbayan.mati.gov.ph/) | Ordinances, Resolutions   |
 | Bureau of Local Government Finance | [blgf.gov.ph](https://blgf.gov.ph/)                                       | Budget, Financial Reports |
 | Philippine Statistics Authority    | [psa.gov.ph](https://psa.gov.ph/)                                         | Demographics, Census      |
 | DTI CMCI Portal                    | [cmci.dti.gov.ph](https://cmci.dti.gov.ph/)                               | Competitive Index         |
@@ -453,26 +467,26 @@ See [LICENSE](LICENSE) for full details.
 
 | Channel  | Link                                                                      |
 | -------- | ------------------------------------------------------------------------- |
-| Website  | [bettersolano.org](https://bettersolano.org)                              |
-| Email    | volunteer@bettersolano.org                                                |
-| Facebook | [@bettersolano.org](https://www.facebook.com/bettersolano.org)            |
-| LinkedIn | [BetterSolano](https://www.linkedin.com/company/bettersolano/)            |
+| Website  | [bettermati.org](https://bettermati.org)                              |
+| Email    | volunteer@bettermati.org                                                |
+| Facebook | [@bettermati.org](https://www.facebook.com/bettermati.org)            |
+| LinkedIn | [BetterMati](https://www.linkedin.com/company/bettermati/)            |
 | Discord  | [Join Community](https://discord.com/invite/qeSu7RJkjQ)                   |
-| GitHub   | [BetterSolano/bettersolano](https://github.com/BetterSolano/bettersolano) |
+| GitHub   | [BetterMati/bettermati](https://github.com/BetterMati/bettermati) |
 
 ## Acknowledgments
 
 - [BetterGov.ph](https://bettergov.ph) for the civic-tech initiative in the Philippines
 - [Abakada.org](https://abakada.org) for supporting civic technology efforts
-- LGU Solano for public data availability and transparency
+- LGU Mati for public data availability and transparency
 - All volunteers and contributors who dedicate their time
 - Open-source community for the tools and libraries used
-- Citizens of Solano for their feedback and support
+- Citizens of Mati for their feedback and support
 
 ---
 
-Made for the people of Solano, Nueva Vizcaya
+Made for the people of Mati, Davao Oriental
 
 ## Developer
 
-[Ramon Logan Jr.](https://ramonloganjr.com/) is a UAE-based full-stack developer and IT professional specializing in web development, design, cloud services, and cybersecurity. He is the developer behind BetterSolano.org, [Abakada.org](https://abakada.org), and the founder of the small cloud-based solutions initiative, [HelloPinas.com](https://hellopinas.com). Ramon actively contributes to civic-tech efforts like [BetterGov.ph](https://bettergov.ph) and is an individual participant in the [OpenJS Foundation](https://openjsf.org/).
+[Ramon Logan Jr.](https://ramonloganjr.com/) is a UAE-based full-stack developer and IT professional specializing in web development, design, cloud services, and cybersecurity. He is the developer behind BetterMati.org, [Abakada.org](https://abakada.org), and the founder of the small cloud-based solutions initiative, [HelloPinas.com](https://hellopinas.com). Ramon actively contributes to civic-tech efforts like [BetterGov.ph](https://bettergov.ph) and is an individual participant in the [OpenJS Foundation](https://openjsf.org/).
