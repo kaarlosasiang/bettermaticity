@@ -220,8 +220,8 @@ const CONFIG = {
   EXCHANGE_RATE_TTL: 30 * 60 * 1000, // 30 minutes
   WEATHER_TTL: 15 * 60 * 1000, // 15 minutes
   TIME_UPDATE_INTERVAL: 1000, // 1 second
-  MATI_LAT: 6.95,
-  MATI_LON: 126.22,
+  MATI_LAT: 6.9497,
+  MATI_LON: 126.2094,
   CURRENCIES: ['USD', 'GBP', 'SAR', 'AED', 'JPY', 'CAD', 'AUD'],
   CACHE_KEYS: {
     EXCHANGE_RATES: 'infobar_exchange_rates',

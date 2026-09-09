@@ -1,4 +1,4 @@
-/* Better Solano - Complete Main Stylesheet */
+/* Better Mati - Complete Main Stylesheet */
 :root {
   --color-primary: #0032a0;
   --color-primary-dark: #002170;
@@ -2580,7 +2580,7 @@ h6 {
 }
 
 .cost-badge::before {
-  content: 'Cost to the People of Solano';
+  content: 'Cost to the People of Mati';
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -6499,7 +6499,7 @@ cklist with Icons - Proper Indentation */
   display: grid;
   /* minmax(0, 1fr) keeps each column tied to the container rather than to its
      content's min-content width — the same floor that broke the mobile layout,
-     and a live risk here too since Filipino and Ilocano strings run longer. */
+     and a live risk here too since Filipino and Cebuano strings run longer. */
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--spacing-xl);
   align-items: center;
@@ -6942,7 +6942,7 @@ cklist with Icons - Proper Indentation */
   }
 }
 
-/* Solano Quiz CTA */
+/* Mati Quiz CTA */
 .quiz-cta-section {
   background:
     radial-gradient(circle, rgba(0, 50, 160, 0.1) 1px, transparent 1px),

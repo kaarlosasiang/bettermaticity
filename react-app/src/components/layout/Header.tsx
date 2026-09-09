@@ -240,11 +240,11 @@ export default function Header() {
             </button>
             <button
               type="button"
-              className={`btn btn-secondary btn-sm lang-btn ${language === 'ilo' ? 'active' : ''}`}
-              onClick={() => setLanguage('ilo')}
-              aria-label="Switch to Ilocano"
+              className={`btn btn-secondary btn-sm lang-btn ${language === 'ceb' ? 'active' : ''}`}
+              onClick={() => setLanguage('ceb')}
+              aria-label="Switch to Cebuano"
             >
-              ILO
+              CEB
             </button>
           </div>
         </div>

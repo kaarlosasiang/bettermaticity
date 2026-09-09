@@ -60,10 +60,10 @@
   // Weather Service - Handles fetching, caching, and providing weather data
   // ============================================================================
   const WeatherService = {
-    CACHE_KEY: 'solano_weather_cache',
+    CACHE_KEY: 'mati_weather_cache',
     CACHE_TTL: 30 * 60 * 1000,
     API_URL: 'https://api.open-meteo.com/v1/forecast',
-    COORDINATES: { lat: 6.95, lon: 126.22 },
+    COORDINATES: { lat: 6.9497, lon: 126.2094 },
 
     mapWeatherCode(code) {
       const mappings = {
@@ -336,7 +336,7 @@
   // Map Component - Initializes and manages the Leaflet map
   // ============================================================================
   const MapComponent = {
-    MATI_CENTER: [6.95, 126.22],
+    MATI_CENTER: [6.9497, 126.2094],
     DEFAULT_ZOOM: 14,
     map: null,
 
@@ -390,7 +390,7 @@
                 scrolling="no" 
                 marginheight="0" 
                 marginwidth="0" 
-                src="https://www.openstreetmap.org/export/embed.html?bbox=126.20%2C6.935%2C126.24%2C6.965&layer=mapnik&marker=6.95%2C126.22"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=126.1894%2C6.9297%2C126.2294%2C6.9697&layer=mapnik&marker=6.9497%2C126.2094"
                 style="border:0;display:block;"
                 title="Map of Mati, Davao Oriental"
                 loading="lazy">
@@ -464,7 +464,7 @@
 
         // Add marker
         const marker = L.marker(this.MATI_CENTER).addTo(this.map);
-        marker.bindPopup('<strong>Mati City Hall</strong><br>Davao Oriental');
+        marker.bindPopup('<strong>Mati City Hall</strong><br>Davao Oriental 8200');
 
         container.setAttribute('data-map-loaded', 'leaflet');
 
