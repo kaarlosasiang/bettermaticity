@@ -13,41 +13,40 @@ const COLORS = {
   info: '#0077BE',
 };
 
-// Barangay data — PLACEHOLDER. The City of Mati has 26 barangays.
-// Replace each name with the real barangay name and `pop` with the PSA census figure.
+// Barangay data — City of Mati (2024 POPCEN, PSA); sorted by population desc
 const barangayData = [
-  { name: 'Barangay 1', pop: 0 },
-  { name: 'Barangay 2', pop: 0 },
-  { name: 'Barangay 3', pop: 0 },
-  { name: 'Barangay 4', pop: 0 },
-  { name: 'Barangay 5', pop: 0 },
-  { name: 'Barangay 6', pop: 0 },
-  { name: 'Barangay 7', pop: 0 },
-  { name: 'Barangay 8', pop: 0 },
-  { name: 'Barangay 9', pop: 0 },
-  { name: 'Barangay 10', pop: 0 },
-  { name: 'Barangay 11', pop: 0 },
-  { name: 'Barangay 12', pop: 0 },
-  { name: 'Barangay 13', pop: 0 },
-  { name: 'Barangay 14', pop: 0 },
-  { name: 'Barangay 15', pop: 0 },
-  { name: 'Barangay 16', pop: 0 },
-  { name: 'Barangay 17', pop: 0 },
-  { name: 'Barangay 18', pop: 0 },
-  { name: 'Barangay 19', pop: 0 },
-  { name: 'Barangay 20', pop: 0 },
-  { name: 'Barangay 21', pop: 0 },
-  { name: 'Barangay 22', pop: 0 },
-  { name: 'Barangay 23', pop: 0 },
-  { name: 'Barangay 24', pop: 0 },
-  { name: 'Barangay 25', pop: 0 },
-  { name: 'Barangay 26', pop: 0 },
+  { name: 'Central', pop: 31934 },
+  { name: 'Dahican', pop: 18756 },
+  { name: 'Matiao', pop: 16719 },
+  { name: 'Sainz', pop: 10710 },
+  { name: 'Badas', pop: 7154 },
+  { name: 'Macambol', pop: 6290 },
+  { name: 'Bobon', pop: 5142 },
+  { name: 'Don Martin Marundan', pop: 5098 },
+  { name: 'Don Salvador Lopez, Sr.', pop: 4832 },
+  { name: 'Don Enrique Lopez', pop: 4303 },
+  { name: 'Dawan', pop: 4052 },
+  { name: 'Buso', pop: 3970 },
+  { name: 'Tamisan', pop: 3690 },
+  { name: 'Lawigan', pop: 3239 },
+  { name: 'Mayo', pop: 3129 },
+  { name: 'Libudon', pop: 2513 },
+  { name: 'Mamali', pop: 2362 },
+  { name: 'Taguibo', pop: 2338 },
+  { name: 'Cabuaya', pop: 2197 },
+  { name: 'Culian', pop: 1848 },
+  { name: 'Tagabakid', pop: 1809 },
+  { name: 'Tagbinonga', pop: 1663 },
+  { name: 'Sanghay', pop: 1505 },
+  { name: 'Luban', pop: 1373 },
+  { name: 'Langka', pop: 1271 },
+  { name: 'Danao', pop: 775 },
 ];
 
-// Historical data — PLACEHOLDER populations (all zero). Replace with Mati PSA census figures.
+// Historical data — City of Mati census counts (PSA CPH; 2024 POPCEN)
 const historicalData = {
   years: [1990, 1995, 2000, 2007, 2010, 2015, 2020, 2024],
-  populations: [0, 0, 0, 0, 0, 0, 0, 0],
+  populations: [93023, 93801, 105908, 122046, 126143, 141141, 147547, 148672],
 };
 
 // Chart instances
@@ -434,65 +433,20 @@ function initEconomyCounters() {
 /**
  * CMCI (Competitive Index) Data
  */
-// PLACEHOLDER — all CMCI values below are zeroed. These are NOT the City of Mati's
-// figures. Replace each data array with Mati's DTI CMCI scores per pillar/indicator.
-const ZEROS9 = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 const cmciData = {
-  years: ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
-  pillars: {
-    economicDynamism: {
-      labels: [
-        'Local Economy Size',
-        'Economy Growth',
-        'Active Establishments',
-        'Safety Compliant',
-        'Employment',
-      ],
-      data: [[...ZEROS9], [...ZEROS9], [...ZEROS9], [...ZEROS9], [...ZEROS9]],
-    },
-    governmentEfficiency: {
-      labels: [
-        'Cost of Living',
-        'Cost of Business',
-        'Financial Deepening',
-        'Productivity',
-        'Compliance',
-      ],
-      data: [[...ZEROS9], [...ZEROS9], [...ZEROS9], [...ZEROS9], [...ZEROS9]],
-    },
-    infrastructure: {
-      labels: [
-        'Road Network',
-        'Distance to Ports',
-        'Basic Utilities',
-        'Transportation',
-        'IT Capacity',
-      ],
-      data: [[...ZEROS9], [...ZEROS9], [...ZEROS9], [...ZEROS9], [...ZEROS9]],
-    },
-    resiliency: {
-      labels: ['DRR Plan', 'Disaster Drill', 'Early Warning', 'DRRMP Budget', 'Risk Assessments'],
-      data: [[...ZEROS9], [...ZEROS9], [...ZEROS9], [...ZEROS9], [...ZEROS9]],
-    },
-    innovation: {
-      labels: [
-        'ICT Plan',
-        'R&D Expenditures',
-        'E-BPLS Software',
-        'STEM Graduates',
-        'Innovation Facilities',
-      ],
-      data: [[...ZEROS9], [...ZEROS9], [...ZEROS9], [...ZEROS9], [...ZEROS9]],
-    },
-  },
-  keyIndicators: {
-    labels: ['Health', 'Education', 'Social Protection', 'Peace & Order', 'LGU Investment'],
-    data: [[...ZEROS9], [...ZEROS9], [...ZEROS9], [...ZEROS9], [...ZEROS9]],
-  },
-};
+  year: '2024',
+  overall: { rank: 55, score: 38.2894 },
+  pillars: [
+    { label: 'Economic Dynamism', score: 3.3009 },
+    { label: 'Government Efficiency', score: 10.6206 },
+    { label: 'Infrastructure', score: 4.2019 },
+    { label: 'Resiliency', score: 11.5266 },
+    { label: 'Innovation', score: 8.6394 },
+  ],
+}
 
 /**
- * Create CMCI Overview Chart
+ * Create CMCI Overview Chart — 2024 pillar scores (bar)
  */
 function createCMCIOverviewChart() {
   const ctx = document.getElementById('cmciOverviewChart');
@@ -501,41 +455,30 @@ function createCMCIOverviewChart() {
   const chartColors = [COLORS.primary, COLORS.accent, COLORS.success, COLORS.info, '#8B5CF6'];
 
   charts.cmciOverview = new Chart(ctx, {
-    type: 'line',
+    type: 'bar',
     data: {
-      labels: cmciData.years,
-      datasets: cmciData.keyIndicators.labels.map((label, i) => ({
-        label: label,
-        data: cmciData.keyIndicators.data[i],
-        borderColor: chartColors[i],
-        backgroundColor: chartColors[i] + '20',
-        fill: false,
-        tension: 0.4,
-        pointRadius: 4,
-        pointHoverRadius: 6,
-        borderWidth: 2,
-      })),
+      labels: cmciData.pillars.map((p) => p.label),
+      datasets: [
+        {
+          label: 'Pillar Score (2024)',
+          data: cmciData.pillars.map((p) => p.score),
+          backgroundColor: cmciData.pillars.map((_, i) => chartColors[i % chartColors.length]),
+          borderRadius: 4,
+          borderSkipped: false,
+        },
+      ],
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
       animation: { duration: 1500, easing: 'easeOutQuart' },
-      interaction: { intersect: false, mode: 'index' },
       plugins: {
-        legend: {
-          position: 'bottom',
-          labels: { boxWidth: 12, padding: 16, font: { size: 11 }, usePointStyle: true },
-        },
+        legend: { display: false },
         tooltip: {
           backgroundColor: 'rgba(0, 50, 160, 0.95)',
           padding: 12,
           cornerRadius: 8,
-          callbacks: {
-            label: (ctx) =>
-              ctx.raw !== null
-                ? `${ctx.dataset.label}: ${ctx.raw.toFixed(4)}`
-                : `${ctx.dataset.label}: N/A`,
-          },
+          callbacks: { label: (ctx) => `${ctx.label}: ${ctx.raw.toFixed(4)}` },
         },
       },
       scales: {
@@ -544,68 +487,6 @@ function createCMCIOverviewChart() {
           beginAtZero: true,
           grid: { color: 'rgba(0,0,0,0.05)' },
           ticks: { font: { size: 11 } },
-        },
-      },
-    },
-  });
-}
-
-/**
- * Create CMCI Pillar Chart
- */
-function createCMCIPillarChart(pillarKey, canvasId) {
-  const ctx = document.getElementById(canvasId);
-  if (!ctx || charts[canvasId]) return;
-
-  const pillarData = cmciData.pillars[pillarKey];
-  if (!pillarData) return;
-
-  const chartColors = [COLORS.primary, COLORS.accent, COLORS.success, COLORS.info, '#8B5CF6'];
-
-  charts[canvasId] = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: cmciData.years,
-      datasets: pillarData.labels.map((label, i) => ({
-        label: label,
-        data: pillarData.data[i],
-        borderColor: chartColors[i],
-        backgroundColor: chartColors[i] + '20',
-        fill: false,
-        tension: 0.4,
-        pointRadius: 3,
-        pointHoverRadius: 5,
-        borderWidth: 2,
-      })),
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      animation: { duration: 1200, easing: 'easeOutQuart' },
-      interaction: { intersect: false, mode: 'index' },
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: { boxWidth: 10, padding: 12, font: { size: 10 }, usePointStyle: true },
-        },
-        tooltip: {
-          backgroundColor: 'rgba(0, 50, 160, 0.95)',
-          padding: 10,
-          cornerRadius: 6,
-          callbacks: {
-            label: (ctx) =>
-              ctx.raw !== null
-                ? `${ctx.dataset.label}: ${ctx.raw.toFixed(4)}`
-                : `${ctx.dataset.label}: N/A`,
-          },
-        },
-      },
-      scales: {
-        x: { grid: { display: false }, ticks: { font: { size: 10 } } },
-        y: {
-          beginAtZero: true,
-          grid: { color: 'rgba(0,0,0,0.05)' },
-          ticks: { font: { size: 10 } },
         },
       },
     },
@@ -635,19 +516,9 @@ function initCMCITabs() {
       if (activePanel) {
         activePanel.classList.add('active');
 
-        // Create chart for this panel if needed
+        // Create the overview chart the first time that panel is shown
         if (pillar === 'overview') {
           createCMCIOverviewChart();
-        } else if (pillar === 'economic-dynamism') {
-          createCMCIPillarChart('economicDynamism', 'cmciEconomicChart');
-        } else if (pillar === 'government-efficiency') {
-          createCMCIPillarChart('governmentEfficiency', 'cmciGovernmentChart');
-        } else if (pillar === 'infrastructure') {
-          createCMCIPillarChart('infrastructure', 'cmciInfraChart');
-        } else if (pillar === 'resiliency') {
-          createCMCIPillarChart('resiliency', 'cmciResiliencyChart');
-        } else if (pillar === 'innovation') {
-          createCMCIPillarChart('innovation', 'cmciInnovationChart');
         }
 
         // Animate indicator bars
