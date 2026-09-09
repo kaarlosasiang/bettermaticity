@@ -1,4 +1,4 @@
-# Better Solano - Robots.txt
+# Better Mati - Robots.txt
 # Author: Ramon Logan Jr
 # This file tells search engine crawlers which pages to index
 
