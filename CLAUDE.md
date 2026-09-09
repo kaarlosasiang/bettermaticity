@@ -73,3 +73,7 @@ Six stages: (1) bump version, (2) clean `dist/`, (3) rsync the legacy static sit
 - Because there is no bundler, cache-busting on the static site is done with query strings on script `src` (e.g. `weather-map.js?v=1.6.4`) — bump these when changing a cached module.
 - Any new/changed UI string on the static site should be added to `en` (required) in `translations.js`, plus `fil` and `ceb` when available; missing `ceb`/`fil` keys fall back to English automatically.
 - **This is a fork of a template originally built for LGU Solano.** It was rebranded to the City of Mati, Davao Oriental. LGU-specific records (officials, barangays, resolutions, ordinances, DPWH projects, statistics, budget, and the city history) are currently **clearly-marked placeholders** (`[Placeholder]` / `[TODO]` / `_status: "draft"`) awaiting verified City of Mati data — see the "Placeholders to fill" checklist in `README.md`.
+
+## Mati reference dataset (`data/mati/`)
+
+Canonical barangay layer (PSA PSGC + boundaries), separate from the `data/*.json` feeds. Read [`data/mati/CLAUDE.md`](data/mati/CLAUDE.md) for conventions/gotchas (non-contiguous PSGC codes, inflated `area_km2`, the build's PSGC integrity check) before joining anything to it. Regenerate with `cd data/mati && python3 build_barangays.py` (cache in `data/mati/data/` is gitignored; `dist/` is committed). Barangay population sums to 148,672. Acquisition plan: [`docs/DATA-PLAN.md`](docs/DATA-PLAN.md).
