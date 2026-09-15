@@ -124,24 +124,18 @@ htmlDirs.forEach(function (dir) {
 
 console.log('Updated ' + filesUpdated + ' HTML file(s)');
 
-// Sync version.json to react-app/public/ (consumed by React Footer at runtime)
-var reactPublicVersion = path.join(__dirname, '..', 'react-app', 'public', 'version.json');
-if (fs.existsSync(path.dirname(reactPublicVersion))) {
-  fs.copyFileSync(VERSION_FILE, reactPublicVersion);
-  console.log('Synced version.json → react-app/public/version.json');
-}
-
-// Sync version field in react-app/package.json
-var reactPkgFile = path.join(__dirname, '..', 'react-app', 'package.json');
+// Sync version field in web/package.json (Vite app). The React Footer reads
+// /version.json at runtime (served from the legacy rsync), so no public copy needed.
+var webPkgFile = path.join(__dirname, '..', 'web', 'package.json');
 try {
-  if (fs.existsSync(reactPkgFile)) {
-    var reactPkg = JSON.parse(fs.readFileSync(reactPkgFile, 'utf8'));
-    reactPkg.version = newVersion;
-    fs.writeFileSync(reactPkgFile, JSON.stringify(reactPkg, null, 2) + '\n');
-    console.log('Synced version → react-app/package.json');
+  if (fs.existsSync(webPkgFile)) {
+    var webPkg = JSON.parse(fs.readFileSync(webPkgFile, 'utf8'));
+    webPkg.version = newVersion;
+    fs.writeFileSync(webPkgFile, JSON.stringify(webPkg, null, 2) + '\n');
+    console.log('Synced version → web/package.json');
   }
 } catch (e) {
-  console.warn('Warning: Could not update react-app/package.json:', e.message);
+  console.warn('Warning: Could not update web/package.json:', e.message);
 }
 
 console.log('Done! Version is now ' + newVersion);

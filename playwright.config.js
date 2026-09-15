@@ -10,6 +10,8 @@ const { defineConfig, devices } = require('@playwright/test');
  */
 module.exports = defineConfig({
   testDir: './tests',
+  // Integration specs run against the built dist/ via playwright.integration.config.js.
+  testIgnore: '**/integration/**',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,

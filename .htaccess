@@ -172,17 +172,17 @@ AddDefaultCharset UTF-8
 </IfModule>
 
 # ============================================
-# IMMUTABLE ASSETS (Next.js build output)
+# IMMUTABLE ASSETS (Vite build output)
 # ============================================
-# Everything under /_next/static/ carries a content hash in its filename, so a
-# changed file is always a new URL and the old one can never go stale. Marking
-# it immutable stops browsers revalidating it at all.
+# Everything under /_app/ carries a content hash in its filename, so a changed
+# file is always a new URL and the old one can never go stale. Marking it
+# immutable stops browsers revalidating it at all.
 # Path-scoped rules are not possible with <FilesMatch>, and <Directory> is not
 # allowed in .htaccess, so the path is tagged via a rewrite env var and the
 # header keyed off that tag. This block sits after the generic rules above so
 # its Cache-Control wins for these files.
 <IfModule mod_rewrite.c>
-    RewriteRule ^_next/static/ - [E=IMMUTABLE_ASSET:1]
+    RewriteRule ^_app/ - [E=IMMUTABLE_ASSET:1]
 </IfModule>
 <IfModule mod_headers.c>
     Header set Cache-Control "public, max-age=31536000, immutable" env=IMMUTABLE_ASSET

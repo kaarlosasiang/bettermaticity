@@ -3,5 +3,6 @@ dist
 package-lock.json
 *.min.js
 *.min.css
-react-app/.next
-react-app/node_modules
+web/dist
+web/node_modules
+web/src/locales
