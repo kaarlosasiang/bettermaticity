@@ -12,12 +12,29 @@ import {
   Globe,
   ArrowRight,
   LayoutGrid,
+  Baby,
+  HeartHandshake,
+  Accessibility as AccessibilityIcon,
+  Hammer,
+  Siren,
+  Heart,
 } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
 import { ServiceSearch } from '@/components/ServiceSearch';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Container, Section, PageHeader, Grid } from '@/components/primitives';
+import { Container, Section, SectionTitle, PageHeader, Grid } from '@/components/primitives';
+
+const lifeEvents: { Icon: LucideIcon; key: string; to: string }[] = [
+  { Icon: Store, key: 'svc-starting-a-business', to: '/services/business' },
+  { Icon: Heart, key: 'svc-getting-married', to: '/services/certificates' },
+  { Icon: Baby, key: 'svc-having-a-baby', to: '/services/certificates' },
+  { Icon: HeartHandshake, key: 'svc-need-financial-help', to: '/services/social-services' },
+  { Icon: Users, key: 'svc-senior-citizen-services', to: '/services/social-services' },
+  { Icon: AccessibilityIcon, key: 'svc-person-with-disability', to: '/services/social-services' },
+  { Icon: Hammer, key: 'svc-buildinghome-improvement', to: '/services/infrastructure' },
+  { Icon: Siren, key: 'svc-got-in-trouble', to: '/services/public-safety' },
+];
 
 const categories: { Icon: LucideIcon; key: string; descKey: string; to: string }[] = [
   { Icon: FileText, key: 'cat-certificates', descKey: 'cat-certificates-desc', to: '/services/certificates' },
@@ -89,6 +106,29 @@ export default function Services() {
               </AppLink>
             ))}
           </Grid>
+        </Container>
+      </Section>
+
+      {/* Browse by Life Event */}
+      <Section compact altBg>
+        <Container>
+          <SectionTitle>{t('life-events-title')}</SectionTitle>
+          <p className="-mt-4 mb-5 text-[0.8125rem] text-muted-foreground">{t('life-events-subtitle')}</p>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {lifeEvents.map(({ Icon, key, to }) => (
+              <AppLink
+                key={key}
+                to={to}
+                className="group flex items-center gap-3 rounded-xl border border-border bg-card p-4 no-underline transition hover:-translate-y-0.5 hover:border-primary hover:shadow-sm"
+              >
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <Icon className="size-5" aria-hidden="true" />
+                </span>
+                <span className="text-sm font-medium text-foreground">{t(key)}</span>
+                <ArrowRight className="ml-auto size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" aria-hidden="true" />
+              </AppLink>
+            ))}
+          </div>
         </Container>
       </Section>
     </>

@@ -12,6 +12,10 @@ export interface Official {
   name: string;
   title: string;
   image?: string;
+  email?: string;
+  phone?: string;
+  tel?: string;
+  hours?: string;
 }
 
 export interface OfficialsData {

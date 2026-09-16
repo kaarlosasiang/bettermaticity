@@ -1,8 +1,9 @@
-import { Newspaper, ArrowRight } from 'lucide-react';
+import { Newspaper, ArrowRight, ExternalLink } from 'lucide-react';
+import { FaFacebookF } from 'react-icons/fa6';
 import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Container, Section, PageHeader } from '@/components/primitives';
+import { Container, Section, SectionTitle, PageHeader } from '@/components/primitives';
 import { useNews, formatNewsDate, safeNewsUrl, type NewsBadge } from '@/hooks/useNews';
 
 const badgeClass: Record<NewsBadge, string> = {
@@ -96,6 +97,36 @@ export default function News() {
               </p>
             </div>
           )}
+        </Container>
+      </Section>
+
+      {/* From our Facebook Page */}
+      <Section compact altBg>
+        <Container>
+          <SectionTitle>
+            <FaFacebookF className="size-4 text-primary" aria-hidden="true" />
+            From our Facebook Page
+          </SectionTitle>
+          <p className="-mt-4 mb-5 text-[0.8125rem] text-muted-foreground">
+            The latest posts published by the Official LGU Mati Facebook Page.
+          </p>
+          <div className="overflow-hidden rounded-xl border border-border">
+            <iframe
+              title="LGU Mati Facebook"
+              className="h-[500px] w-full"
+              loading="lazy"
+              src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FOfficialLGUMati%2F&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
+            />
+          </div>
+          <a
+            href="https://www.facebook.com/OfficialLGUMati/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+          >
+            Visit the Official LGU Mati Facebook Page
+            <ExternalLink className="size-4" aria-hidden="true" />
+          </a>
         </Container>
       </Section>
     </>

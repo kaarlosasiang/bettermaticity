@@ -1,4 +1,4 @@
-import { UserRound } from 'lucide-react';
+import { UserRound, Mail, Phone } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -17,6 +17,20 @@ function OfficialCard({ official, role }: { official: Official; role: string }) 
       </div>
       <h3 className="text-base font-semibold text-foreground">{official.name}</h3>
       <p className="font-semibold text-primary">{official.title || role}</p>
+      {(official.email || official.phone) && (
+        <div className="mt-3 flex flex-col items-center gap-1 text-sm text-muted-foreground">
+          {official.email && (
+            <a href={`mailto:${official.email}`} className="inline-flex items-center gap-1.5 hover:text-primary">
+              <Mail className="size-3.5" aria-hidden="true" /> {official.email}
+            </a>
+          )}
+          {official.phone && (
+            <a href={`tel:${official.tel ?? official.phone}`} className="inline-flex items-center gap-1.5 hover:text-primary">
+              <Phone className="size-3.5" aria-hidden="true" /> {official.phone}
+            </a>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -55,6 +69,9 @@ export default function GovernmentOfficials() {
             </p>
           )}
 
+          <h2 className="mb-6 text-center text-[1.375rem] font-semibold text-foreground">
+            {t('gov-executive-branch')}
+          </h2>
           <div className="mx-auto mb-10 grid max-w-3xl gap-6 sm:grid-cols-2">
             {officials.mayor && <OfficialCard official={officials.mayor} role="City Mayor" />}
             {officials.vice_mayor && <OfficialCard official={officials.vice_mayor} role="City Vice Mayor" />}

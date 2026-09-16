@@ -1,11 +1,22 @@
 import { ClientOnly } from 'vite-react-ssg';
 import { Doughnut } from 'react-chartjs-2';
-import { Wallet, TrendingUp, TrendingDown, PiggyBank } from 'lucide-react';
+import {
+  Wallet,
+  TrendingUp,
+  TrendingDown,
+  PiggyBank,
+  Building2,
+  MapPin,
+  ArrowUpRight,
+  Info,
+} from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Container, Section, SectionTitle, PageHeader, StatCard } from '@/components/primitives';
 import { financialData, peso } from '@/lib/budgetData';
+import { infraProjects } from '@/lib/infrastructureData';
+import { DpwhProjects } from '@/components/DpwhProjects';
 import { CHART_COLORS, chartFont } from '@/lib/charts';
 
 const q = financialData.q2; // latest quarter headline
@@ -107,6 +118,18 @@ export default function Budget() {
               </div>
             </div>
           </div>
+          <p className="mt-4 flex items-center gap-1.5 text-xs text-muted-foreground">
+            <Info className="size-3.5" aria-hidden="true" />
+            Source:{' '}
+            <a
+              href="https://blgf.gov.ph/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              {t('budget-bureau-of-local-government-finance-blgf')}
+            </a>
+          </p>
         </Container>
       </Section>
 
@@ -149,6 +172,85 @@ export default function Budget() {
           </div>
         </Container>
       </Section>
+
+      {/* Infrastructure Investments — local flood-control projects (real data) */}
+      <Section>
+        <Container>
+          <p className="mb-1 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-primary">
+            <Building2 className="size-4" aria-hidden="true" />
+            {t('budget-public-works')}
+          </p>
+          <h2 className="mb-1 text-[1.375rem] font-semibold text-foreground">
+            {t('budget-infrastructure-investments')}
+          </h2>
+          <p className="mb-6 text-[0.8125rem] text-muted-foreground">
+            {t('budget-major-development-projects-serving-the-community')}
+          </p>
+
+          <div className="grid gap-4">
+            {infraProjects.map((p) => (
+              <div
+                key={p.titleKey + p.location}
+                className="rounded-xl border border-border bg-card p-5"
+              >
+                <div className="mb-2 flex flex-wrap items-center gap-2">
+                  <span className="rounded-full bg-muted px-2 py-0.5 text-xs font-medium text-foreground">
+                    {p.year}
+                  </span>
+                  <span className="flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
+                    {t('budget-flood-control')}
+                  </span>
+                </div>
+                <h3 className="mb-1 text-base font-semibold text-foreground">{t(p.titleKey)}</h3>
+                <p className="mb-4 flex items-center gap-1 text-sm text-muted-foreground">
+                  <MapPin className="size-3.5 shrink-0" aria-hidden="true" />
+                  {p.location}
+                </p>
+
+                <div className="grid gap-4 border-t border-border pt-4 sm:grid-cols-3">
+                  <div>
+                    <span className="block text-xs uppercase tracking-wide text-muted-foreground">
+                      {t('budget-type-of-work')}
+                    </span>
+                    <span className="text-sm font-medium text-foreground">{t(p.typeOfWorkKey)}</span>
+                  </div>
+                  <div>
+                    <span className="block text-xs uppercase tracking-wide text-muted-foreground">
+                      {t('budget-contractor')}
+                    </span>
+                    <span className="text-sm font-medium text-foreground">{t(p.contractorKey)}</span>
+                  </div>
+                  <div>
+                    <span className="block text-xs uppercase tracking-wide text-muted-foreground">
+                      {t('budget-contract-cost')}
+                    </span>
+                    <span className="text-sm font-semibold text-foreground">{p.contractCost}</span>
+                  </div>
+                </div>
+
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-border pt-3">
+                  <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                    <Info className="size-3.5" aria-hidden="true" />
+                    {t('budget-source-sumbong-sa-pangulo')}
+                  </span>
+                  <a
+                    href={p.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-xs font-medium text-primary hover:underline"
+                  >
+                    {t('budget-view-on-map')}
+                    <ArrowUpRight className="size-3.5" aria-hidden="true" />
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </Section>
+
+      {/* DPWH national-government projects (data-backed, currently placeholder) */}
+      <DpwhProjects />
     </>
   );
 }

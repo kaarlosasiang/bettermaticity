@@ -23,6 +23,8 @@ export interface CategoryService {
    */
   fee?: string;
   time?: string;
+  /** When set, the card links to this internal route (legacy some cards were <a>). */
+  to?: string;
 }
 
 export interface CategoryOffice {
@@ -109,30 +111,39 @@ export function ServiceCategoryPage({
         <Section>
           <Container>
             <Grid min={250}>
-              {services.map((s) => (
-                <ServiceCard
-                  key={s.titleKey}
-                  icon={<s.Icon className="size-5 text-primary" aria-hidden="true" />}
-                  title={t(s.titleKey)}
-                  description={t(s.descKey)}
-                  meta={
-                    s.fee || s.time ? (
-                      <>
-                        {s.fee && (
-                          <span>
-                            <strong className="font-semibold">{t('label-fee')}</strong> {s.fee}
-                          </span>
-                        )}
-                        {s.time && (
-                          <span>
-                            <strong className="font-semibold">{t('label-time')}</strong> {s.time}
-                          </span>
-                        )}
-                      </>
-                    ) : undefined
-                  }
-                />
-              ))}
+              {services.map((s) => {
+                const meta =
+                  s.fee || s.time ? (
+                    <>
+                      {s.fee && (
+                        <span>
+                          <strong className="font-semibold">{t('label-fee')}</strong> {s.fee}
+                        </span>
+                      )}
+                      {s.time && (
+                        <span>
+                          <strong className="font-semibold">{t('label-time')}</strong> {s.time}
+                        </span>
+                      )}
+                    </>
+                  ) : undefined;
+                const card = (
+                  <ServiceCard
+                    icon={<s.Icon className="size-5 text-primary" aria-hidden="true" />}
+                    title={t(s.titleKey)}
+                    description={t(s.descKey)}
+                    meta={meta}
+                    className={s.to ? 'h-full cursor-pointer hover:-translate-y-0.5' : undefined}
+                  />
+                );
+                return s.to ? (
+                  <AppLink key={s.titleKey} to={s.to} className="block no-underline text-inherit">
+                    {card}
+                  </AppLink>
+                ) : (
+                  <div key={s.titleKey}>{card}</div>
+                );
+              })}
             </Grid>
           </Container>
         </Section>

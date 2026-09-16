@@ -11,10 +11,15 @@ describe('isMigratedRoute', () => {
     expect(isMigratedRoute('/contact')).toBe(true);
   });
 
-  it('is false for un-migrated legacy routes', () => {
-    expect(isMigratedRoute('/government')).toBe(false);
-    expect(isMigratedRoute('/')).toBe(false); // home not migrated yet (Wave 8)
-    expect(isMigratedRoute('/news')).toBe(false);
+  it('is true for the now-migrated core routes (migration complete)', () => {
+    expect(isMigratedRoute('/government')).toBe(true);
+    expect(isMigratedRoute('/')).toBe(true);
+    expect(isMigratedRoute('/news')).toBe(true);
+  });
+
+  it('is false for paths not in migrated-routes.json', () => {
+    expect(isMigratedRoute('/nonexistent-page')).toBe(false);
+    expect(isMigratedRoute('/services/does-not-exist')).toBe(false);
   });
 
   it('is false for external and protocol links', () => {

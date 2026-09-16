@@ -35,7 +35,7 @@ const businessServices: CategoryService[] = [
   { Icon: Store, titleKey: 'biz-permit-new', descKey: 'biz-permit-new-desc', fee: 'Varies', time: '3-5 days' },
   { Icon: RefreshCw, titleKey: 'biz-permit-renew', descKey: 'biz-permit-renew-desc', fee: 'Varies', time: 'Same day' },
   { Icon: ClipboardCheck, titleKey: 'biz-closure', descKey: 'biz-closure-desc', fee: 'Free', time: '1-2 days' },
-  { Icon: Coins, titleKey: 'biz-cedula', descKey: 'biz-cedula-desc', time: 'Same day' },
+  { Icon: Coins, titleKey: 'biz-cedula', descKey: 'biz-cedula-desc', fee: '₱5+', time: 'Same day' },
 ];
 
 const businessOnline: OnlineService[] = [
@@ -149,8 +149,8 @@ export function ServicesTaxPayments() {
 
 /* ── Education & Scholarship ──────────────────────────────────────────────── */
 const educationServices: CategoryService[] = [
-  { Icon: Award, titleKey: 'edu-scholarship', descKey: 'edu-scholarship-desc', fee: 'Free' },
-  { Icon: BookOpen, titleKey: 'edu-training', descKey: 'edu-training-desc', fee: 'Free' },
+  { Icon: Award, titleKey: 'edu-scholarship', descKey: 'edu-scholarship-desc', fee: 'Free', time: 'Annual application' },
+  { Icon: BookOpen, titleKey: 'edu-training', descKey: 'edu-training-desc', fee: 'Free', time: 'Per semester' },
 ];
 
 const elementary = [

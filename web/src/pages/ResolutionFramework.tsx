@@ -1,13 +1,36 @@
+import { ScrollText, Info, ExternalLink } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Container, Section, PageHeader } from '@/components/primitives';
+import { Container, Section, SectionTitle, PageHeader } from '@/components/primitives';
 import { resolutions, formatSessionDate, getRecordYear, type Resolution } from '@/lib/govData';
 
-function ResolutionTable({ rows, heading, t }: { rows: Resolution[]; heading: string; t: (k: string) => string }) {
+const resolutionTypes = [
+  'reso-type-commendation',
+  'reso-type-request',
+  'reso-type-support',
+  'reso-type-condolence',
+  'reso-type-authorization',
+  'reso-type-appropriation',
+];
+
+const SB_RESO_URL = 'https://sangguniangbayan.mati.gov.ph/index.php?page=legislative_framework_reso';
+
+function ResolutionTable({
+  rows,
+  heading,
+  subtitle,
+  t,
+}: {
+  rows: Resolution[];
+  heading: string;
+  subtitle: string;
+  t: (k: string) => string;
+}) {
   return (
     <div className="mb-8">
-      <h2 className="mb-4 text-lg font-semibold text-foreground">{heading}</h2>
+      <h2 className="mb-1 text-lg font-semibold text-foreground">{heading}</h2>
+      <p className="mb-4 text-[0.8125rem] text-muted-foreground">{subtitle}</p>
       <div className="overflow-x-auto rounded-lg border border-border">
         <table className="w-full border-collapse text-left text-sm">
           <thead>
@@ -36,6 +59,15 @@ function ResolutionTable({ rows, heading, t }: { rows: Resolution[]; heading: st
           </tbody>
         </table>
       </div>
+      <a
+        href={SB_RESO_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground no-underline transition hover:opacity-90"
+      >
+        {t('reso-view-all-resolutions-on-sb-website')}
+        <ExternalLink className="size-4" aria-hidden="true" />
+      </a>
     </div>
   );
 }
@@ -65,12 +97,51 @@ export default function ResolutionFramework() {
         </nav>
       </Container>
 
-      <PageHeader title={t('reso-page-title')} description={t('reso-page-desc')} />
+      <PageHeader
+        badge={
+          <>
+            <ScrollText className="size-4" aria-hidden="true" />
+            {t('nav-legislative')}
+          </>
+        }
+        title={t('reso-page-title')}
+        description={t('reso-page-desc')}
+      />
+
+      {/* What is a Resolution? */}
+      <Section compact>
+        <Container>
+          <div className="rounded-xl border border-border bg-card p-6">
+            <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold text-foreground">
+              <Info className="size-5 text-primary" aria-hidden="true" />
+              {t('reso-what-is')}
+            </h2>
+            <p className="mb-3 text-sm text-muted-foreground">{t('reso-what-is-p1')}</p>
+            <p className="m-0 text-sm text-muted-foreground">{t('reso-what-is-p2')}</p>
+          </div>
+        </Container>
+      </Section>
+
+      {/* Types of resolutions */}
+      <Section compact altBg>
+        <Container>
+          <SectionTitle>{t('reso-types-title')}</SectionTitle>
+          <div className="flex flex-wrap gap-2">
+            {resolutionTypes.map((k) => (
+              <span key={k} className="rounded-full border border-border bg-card px-3 py-1.5 text-sm font-medium text-foreground">
+                {t(k)}
+              </span>
+            ))}
+          </div>
+        </Container>
+      </Section>
 
       <Section>
         <Container>
-          {rows2026.length > 0 && <ResolutionTable rows={rows2026} heading="2026" t={t} />}
-          <ResolutionTable rows={rows2025} heading="2025" t={t} />
+          {rows2026.length > 0 && (
+            <ResolutionTable rows={rows2026} heading={t('reso-2026-title')} subtitle={t('reso-2026-subtitle')} t={t} />
+          )}
+          <ResolutionTable rows={rows2025} heading={t('reso-2025-title')} subtitle={t('reso-2025-subtitle')} t={t} />
         </Container>
       </Section>
     </>

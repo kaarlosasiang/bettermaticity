@@ -25,11 +25,11 @@
   },
   "keywords": [
     "mati",
-    "nueva-vizcaya",
+    "davao-oriental",
     "government",
     "lgu"
   ],
-  "author": "Ramon Logan Jr.",
+  "author": "Kaarlo Ruy P. Sasiang",
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.23.9",
