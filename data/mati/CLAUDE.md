@@ -38,8 +38,18 @@ CLUP cadastral base from the City Planning and Development Office, not yet
 obtained.
 
 **Population is 2024 POPCEN**, summing to 148,672, which matches PSA's published
-city total exactly. If a change to this pipeline breaks that sum, the change is
-wrong.
+city total exactly. The PSA PSGC page also lists all 26 barangays and their 2024
+populations. If a change to this pipeline breaks that count or sum, the change
+is wrong.
+
+Primary evidence for city-wide facts:
+
+- Population and barangay count: [PSA PSGC — City of Mati](https://psa.gov.ph/classification/psgc/barangays/1102509000)
+  and the [PSA Region XI 2024 POPCEN special release](https://rsso11.psa.gov.ph/content/highlights-davao-oriental-population-based-2024-census-population).
+- Land area: PSA's _Population, Land Area, Population Density, and Percent Change
+  in Population Density_ table reports 588.63 km² for the City of Mati. Use the
+  wording "PSA-reported city land area" because the table uses the PSA's 2013
+  land-area basis.
 
 ## Regenerating
 
