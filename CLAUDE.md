@@ -14,6 +14,7 @@ Both are present on `main`. When a change is requested, assume it targets the **
 ## Commands
 
 Static site (root):
+
 - `npm run dev` / `npm run serve` — serve at `http://localhost:8000` (Python http.server; no build needed for dev)
 - `npm run build` — full production build via `build.sh` → outputs `dist/` (bumps patch version first)
 - `npm run build:minor` / `build:major` — bump that level, then build without a second bump
@@ -22,6 +23,7 @@ Static site (root):
 - `npm run version:patch|minor|major` — bump version only (see version system below)
 
 Tests (Playwright, cross-browser: chrome/edge/firefox/safari + mobile):
+
 - `npm test` — run all specs (auto-starts a server on `:8321`)
 - `npm run test:chrome` — single project
 - Run one file/test: `npx playwright test tests/volunteer-modal.behavior.spec.js` or add `-g "test name"`
@@ -29,6 +31,7 @@ Tests (Playwright, cross-browser: chrome/edge/firefox/safari + mobile):
 - Test coverage is currently limited to the volunteer modal (`tests/volunteer-modal.*.spec.js`).
 
 React app (`cd react-app`):
+
 - `npm run dev` — Next dev server
 - `npm run build` — `next build` (static export to `react-app/out/`)
 
@@ -40,7 +43,7 @@ Lighthouse: `npm run lighthouse` (`.lighthouserc.json`).
 
 ## i18n — two separate translation systems (important)
 
-The static site and React app have **completely independent** translation data. Keeping a string translated in one does *not* touch the other.
+The static site and React app have **completely independent** translation data. Keeping a string translated in one does _not_ touch the other.
 
 - **Static site:** `assets/js/translations.js` holds a `translations` object for `en` / `fil` (Filipino, full) / `ceb` (Cebuano). `TranslationEngine` (exposed as `window.TranslationEngine` and `window.t(key, params)`) applies strings to `[data-i18n]` elements, persists the choice, and notifies observers on language switch. `getTranslation` **falls back to English** for any key missing in the current language — the `ceb` block is a machine-assisted starter set covering high-visibility UI, so most keys currently fall back to English and are pending a full Cebuano translation + native review. Adding UI text means adding a `data-i18n` key in `en` (and ideally `fil`/`ceb`). Helper scripts in `scripts/` (`i18n-upgrade.py`, `add-*-keys.py`, `translate-pass*.py`) manage bulk key operations.
 - **React app:** translations are inlined in `react-app/src/contexts/LanguageContext.tsx` — a much smaller subset covering only the migrated routes. Consumed via `useLanguage()` → `t()`.

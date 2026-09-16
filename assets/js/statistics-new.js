@@ -443,7 +443,7 @@ const cmciData = {
     { label: 'Resiliency', score: 11.5266 },
     { label: 'Innovation', score: 8.6394 },
   ],
-}
+};
 
 /**
  * Create CMCI Overview Chart — 2024 pillar scores (bar)

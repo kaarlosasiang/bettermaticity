@@ -27,15 +27,15 @@
 
 The following hotlines must be verified monthly against official LGU records:
 
-| Service                 | Number         | Source                    |
-| ----------------------- | -------------- | ------------------------- |
-| Police (PNP)            | 0927 400 8033  | LGU Mati City Hall |
-| MSWDO                   | 0916 284 0885  | LGU Mati City Hall |
-| Fire (BFP)              | 0936 062 0305  | LGU Mati City Hall |
-| DILG                    | 0906 188 086   | LGU Mati City Hall |
-| MDRRMO                  | 0926 383 3744  | LGU Mati City Hall |
-| R2TMC                   | 0906 819 5569  | LGU Mati City Hall |
-| City Hall Landline | (078) 805-3581 | Official records          |
+| Service            | Number         | Source             |
+| ------------------ | -------------- | ------------------ |
+| Police (PNP)       | 0927 400 8033  | LGU Mati City Hall |
+| MSWDO              | 0916 284 0885  | LGU Mati City Hall |
+| Fire (BFP)         | 0936 062 0305  | LGU Mati City Hall |
+| DILG               | 0906 188 086   | LGU Mati City Hall |
+| MDRRMO             | 0926 383 3744  | LGU Mati City Hall |
+| R2TMC              | 0906 819 5569  | LGU Mati City Hall |
+| City Hall Landline | (078) 805-3581 | Official records   |
 
 **Last Verified:** [DATE]
 

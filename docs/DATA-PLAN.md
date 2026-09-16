@@ -22,11 +22,11 @@ for at 2am.
 The canonical barangay layer. Everything else in the app joins to this, so it
 had to be right before anything else got built.
 
-| Output | What it is |
-|---|---|
-| `mati_barangays.csv` | 26 barangays: PSGC code, name, urban/rural, 2024 population, area, density, centroid |
-| `mati_barangays.geojson` | Same attributes attached to boundary polygons (medium resolution, ~44 KB) |
-| `mati_barangays.min.json` | Geometry only, low resolution (~12 KB) for first paint |
+| Output                    | What it is                                                                           |
+| ------------------------- | ------------------------------------------------------------------------------------ |
+| `mati_barangays.csv`      | 26 barangays: PSGC code, name, urban/rural, 2024 population, area, density, centroid |
+| `mati_barangays.geojson`  | Same attributes attached to boundary polygons (medium resolution, ~44 KB)            |
+| `mati_barangays.min.json` | Geometry only, low resolution (~12 KB) for first paint                               |
 
 **Sources**
 
@@ -152,14 +152,14 @@ add after launch.
 
 ## Refresh cadence
 
-| Dataset | Cadence | Trigger |
-|---|---|---|
-| PSGC codes and names | Quarterly | PSA publishes 13 Jan / 13 Apr / 13 Jul / 13 Oct |
-| Population | Every census | Next POPCEN |
-| Boundaries | On PSGC change | Barangay creation, merger, rename |
-| OSM extract | Monthly | Automated |
-| Hazard layers | Annually | Or after a major event |
-| LGU documents | On new release | Manual check |
+| Dataset              | Cadence        | Trigger                                         |
+| -------------------- | -------------- | ----------------------------------------------- |
+| PSGC codes and names | Quarterly      | PSA publishes 13 Jan / 13 Apr / 13 Jul / 13 Oct |
+| Population           | Every census   | Next POPCEN                                     |
+| Boundaries           | On PSGC change | Barangay creation, merger, rename               |
+| OSM extract          | Monthly        | Automated                                       |
+| Hazard layers        | Annually       | Or after a major event                          |
+| LGU documents        | On new release | Manual check                                    |
 
 The PSGC quarterly release is the one that will actually bite. Barangays get
 merged and renamed more often than people expect — Q1 2026 alone merged two

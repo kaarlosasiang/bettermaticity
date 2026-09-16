@@ -111,8 +111,7 @@ const translations = {
 
     // Footer
     'footer-title': 'Better Mati',
-    'footer-desc':
-      'A service-first information portal for the City of Mati, Davao Oriental.',
+    'footer-desc': 'A service-first information portal for the City of Mati, Davao Oriental.',
     'footer-quick-links': 'Quick Links',
     'footer-all-services': 'All Services',
     'footer-officials': 'Officials',
@@ -304,7 +303,8 @@ const translations = {
     'ord-cat-traffic': 'Traffic & Transportation',
     'ord-cat-zoning': 'Zoning & Land Use',
     'ord-2025-title': '2025 Ordinances',
-    'ord-2025-subtitle': 'Official ordinances enacted by the Sangguniang Panlungsod ng Mati in 2025',
+    'ord-2025-subtitle':
+      'Official ordinances enacted by the Sangguniang Panlungsod ng Mati in 2025',
     'ord-table-number': 'Ordinance No.',
     'ord-table-title': 'Title',
     'ord-table-date': 'Session Date',
@@ -327,9 +327,11 @@ const translations = {
     'reso-type-authorization': 'Authorization',
     'reso-type-appropriation': 'Appropriation',
     'reso-2026-title': '2026 Resolutions',
-    'reso-2026-subtitle': 'Official resolutions passed by the Sangguniang Panlungsod ng Mati in 2026',
+    'reso-2026-subtitle':
+      'Official resolutions passed by the Sangguniang Panlungsod ng Mati in 2026',
     'reso-2025-title': '2025 Resolutions',
-    'reso-2025-subtitle': 'Official resolutions passed by the Sangguniang Panlungsod ng Mati in 2025',
+    'reso-2025-subtitle':
+      'Official resolutions passed by the Sangguniang Panlungsod ng Mati in 2025',
     'reso-table-number': 'Resolution No.',
     'reso-table-title': 'Title',
     'reso-table-date': 'Session Date',
@@ -1142,8 +1144,7 @@ const translations = {
     'bc-legislative': 'Legislative',
     'bc-local-civil-registrar': 'Local Civil Registrar',
     'bc-marriage-certificate': 'Marriage Certificate',
-    'bc-municipal-hall-2nd-floor-mati-nueva-vizcaya':
-      'City Hall, 2nd Floor Mati, Davao Oriental',
+    'bc-municipal-hall-2nd-floor-mati-nueva-vizcaya': 'City Hall, 2nd Floor Mati, Davao Oriental',
     'bc-need-help': 'Need Help?',
     'bc-office-information': 'Office Information',
     'bc-official-certified-copy-of-birth-certificate':
@@ -1870,8 +1871,7 @@ const translations = {
     'dc-marriage-certificate': 'Marriage Certificate',
     'dc-mho-certification-of-cause-of-death': 'MHO Certification of Cause of Death',
     'dc-mto-collection-officer': 'MTO Collection Officer',
-    'dc-municipal-hall-2nd-floor-mati-nueva-vizcaya':
-      'City Hall, 2nd Floor Mati, Davao Oriental',
+    'dc-municipal-hall-2nd-floor-mati-nueva-vizcaya': 'City Hall, 2nd Floor Mati, Davao Oriental',
     'dc-municipal-health-officer': 'City Health Officer',
     'dc-need-help': 'Need Help?',
     'dc-office-information': 'Office Information',
@@ -2871,7 +2871,8 @@ const translations = {
       '[Placeholder — replace with a verified milestone from the history of the City of Mati]',
     'home-history-1957':
       '[Placeholder — replace with a verified milestone from the history of the City of Mati]',
-    'home-ilocanos-arrived': '[Placeholder — replace with a verified milestone from the history of the City of Mati]',
+    'home-ilocanos-arrived':
+      '[Placeholder — replace with a verified milestone from the history of the City of Mati]',
     'home-income-classification': 'Income Classification',
     'home-infrastructure': 'Infrastructure',
     'home-interactive-map-showing-the-location-of-mati':
@@ -3443,8 +3444,7 @@ const translations = {
       'Support for organic farming practices and certification',
     'magri-support-for-pgs-and-thirdparty-organic':
       'Support for PGS and third-party organic certification',
-    'magri-support-programs-for-corn-farmers-in-mati':
-      'Support programs for corn farmers in Mati',
+    'magri-support-programs-for-corn-farmers-in-mati': 'Support programs for corn farmers in Mati',
     'magri-support-programs-for-rice-farmers-under-the-rice':
       'Support programs for rice farmers under the Rice Competitiveness Enhancement Fund (RCEF)',
     'magri-support-services-for-fisherfolk-and-aquaculture':
@@ -3882,8 +3882,7 @@ const translations = {
     'mc-marriage-certificate-local-registration': 'Marriage Certificate (Local Registration)',
     'mc-mswdo-staff': 'MSWDO Staff',
     'mc-mto-collection-officer': 'MTO Collection Officer',
-    'mc-municipal-hall-2nd-floor-mati-nueva-vizcaya':
-      'City Hall, 2nd Floor Mati, Davao Oriental',
+    'mc-municipal-hall-2nd-floor-mati-nueva-vizcaya': 'City Hall, 2nd Floor Mati, Davao Oriental',
     'mc-nationwide': 'Nationwide',
     'mc-need-help': 'Need Help?',
     'mc-office-information': 'Office Information',
@@ -7861,8 +7860,7 @@ const translations = {
     'budget-contractor': 'Kontratista',
     'budget-contribute-code-with-us': 'Mag-ambag ng code sa amin',
     'budget-debt-service': 'Serbisyo sa Utang',
-    'budget-dpwh-infrastructure-projects-in-mati':
-      'Mga Proyekto ng Imprastraktura ng DPWH sa Mati',
+    'budget-dpwh-infrastructure-projects-in-mati': 'Mga Proyekto ng Imprastraktura ng DPWH sa Mati',
     'budget-dpwh-transparency-portal': 'DPWH Transparency Portal',
     'budget-economic-services': 'Mga Serbisyong Pang-ekonomiya',
     'budget-education': 'Edukasyon',
@@ -9289,7 +9287,8 @@ const translations = {
       '[Placeholder — palitan ng napatunayang pangyayari sa kasaysayan ng Lungsod ng Mati]',
     'home-history-1957':
       '[Placeholder — palitan ng napatunayang pangyayari sa kasaysayan ng Lungsod ng Mati]',
-    'home-ilocanos-arrived': '[Placeholder — palitan ng napatunayang pangyayari sa kasaysayan ng Lungsod ng Mati]',
+    'home-ilocanos-arrived':
+      '[Placeholder — palitan ng napatunayang pangyayari sa kasaysayan ng Lungsod ng Mati]',
     'home-income-classification': 'Klasipikasyon ng Kita',
     'home-infrastructure': 'Imprastraktura',
     'home-interactive-map-showing-the-location-of-mati':
@@ -9327,8 +9326,7 @@ const translations = {
     'home-social-services': 'Serbisyong Panlipunan',
     'home-mati': 'Mati',
     'home-mati-at-a-glance': 'Mati sa Isang Tingin',
-    'home-mati-municipal-hall-nueva-vizcaya-3708':
-      'Mati Pangmunisipyo Hall, Davao Oriental 3708',
+    'home-mati-municipal-hall-nueva-vizcaya-3708': 'Mati Pangmunisipyo Hall, Davao Oriental 3708',
     'home-mati-nueva-vizcaya-3708': 'Mati, Davao Oriental 3708',
     'home-mati-was-the-largest-municipality-in-the':
       '[Placeholder — palitan ng napatunayang pangyayari sa kasaysayan ng Lungsod ng Mati]',
@@ -11378,8 +11376,7 @@ const translations = {
     'news-empowering-the-people-of-mati-with-transparent':
       'Pagbibigay-kapangyarihan sa mga mamamayan ng Mati na may transparent na access sa mga serbisyo, programa, at pampublikong pondo ng LGU Mati.',
     'news-environment': 'Kapaligiran',
-    'news-fetching-news-and-updates-from-mati':
-      'Kinukuha ang mga balita at update mula sa Mati.',
+    'news-fetching-news-and-updates-from-mati': 'Kinukuha ang mga balita at update mula sa Mati.',
     'news-freedom-of-information': 'Kalayaan sa Impormasyon',
     'news-health': 'Kalusugan',
     'news-home': 'Tahanan',
@@ -11459,8 +11456,7 @@ const translations = {
     'officials-terms-of-use': 'Mga Tuntunin ng Paggamit',
     'officials-vicemayormatigovph': 'vicemayor@mati.gov.ph',
     'officials-volunteer-with-us': 'Mag-volunteer sa amin',
-    'offline-emergency-hotlines-mati-nueva-vizcaya':
-      'Mga Emergency Hotline - Mati, Davao Oriental',
+    'offline-emergency-hotlines-mati-nueva-vizcaya': 'Mga Emergency Hotline - Mati, Davao Oriental',
     'offline-fire-bfp': 'Sunog (BFP)',
     'offline-municipal-hall': 'Munisipyo',
     'offline-police-pnp': 'Pulis (PNP)',
@@ -12931,8 +12927,7 @@ const translations = {
     'terms-mati-quiz': 'Mati Quiz',
     'treas-mati-quiz': 'Mati Quiz',
     'tricycle-mati-quiz': 'Mati Quiz',
-    'home-how-well-do-you-know-mati-nueva-vizcaya':
-      'Gaano mo kakilala ang Mati, Davao Oriental?',
+    'home-how-well-do-you-know-mati-nueva-vizcaya': 'Gaano mo kakilala ang Mati, Davao Oriental?',
     'home-evaluate-your-familiarity-with-the-municipalitys':
       'Suriin ang iyong kaalaman sa pamana, pagkakakilanlan sa kultura, at kahalagahang heograpiko ng munisipalidad sa pamamagitan ng isang interactive na pagtatasa ng kaalaman na idinisenyo upang ipakita ang isa sa mga pinakatanyag na lokalidad ng Davao Oriental.',
     'home-take-the-quiz': 'Subukin ang Quiz',
@@ -12997,7 +12992,8 @@ const translations = {
     'hero-find-service': 'Pangita og Serbisyo',
 
     // Appointment CTA
-    'appointment-cta-heading': "Pagpalambo sa mga Serbisyo sa Appointment sa Buhatan sa Mayor sa LGU Mati",
+    'appointment-cta-heading':
+      'Pagpalambo sa mga Serbisyo sa Appointment sa Buhatan sa Mayor sa LGU Mati',
     'appointment-cta-subtitle': 'Walay pila. Walay balik-balik. Episyente nga appointment.',
     'appointment-schedule-btn': 'Pag-iskedyul og Appointment',
     'appointment-create-btn': 'Paghimo og Account',
@@ -13049,7 +13045,8 @@ const translations = {
 
     // Footer
     'footer-title': 'Better Mati',
-    'footer-desc': 'Usa ka service-first nga portal sa impormasyon para sa Siyudad sa Mati, Davao Oriental.',
+    'footer-desc':
+      'Usa ka service-first nga portal sa impormasyon para sa Siyudad sa Mati, Davao Oriental.',
     'footer-quick-links': 'Dali nga mga Link',
     'footer-all-services': 'Tanang Serbisyo',
     'footer-officials': 'Mga Opisyal',
@@ -13089,27 +13086,35 @@ const translations = {
 
     // Service Categories
     'cat-certificates': 'Mga Sertipiko ug Vital Records',
-    'cat-certificates-desc': 'Sertipiko sa pagkatawo, kamatayon, kasal, ug uban pang vital records.',
+    'cat-certificates-desc':
+      'Sertipiko sa pagkatawo, kamatayon, kasal, ug uban pang vital records.',
     'cat-business': 'Negosyo, Pamatigayon ug Pamuhunan',
     'cat-business-desc': 'Mga permit sa negosyo, lisensya, ug pagparehistro sa pamatigayon.',
     'cat-social': 'Serbisyong Sosyal ug Tabang',
-    'cat-social-desc': 'Mga programa sa kaayohan, serbisyo sa senior citizen, benepisyo sa PWD, ug tabang pinansyal.',
+    'cat-social-desc':
+      'Mga programa sa kaayohan, serbisyo sa senior citizen, benepisyo sa PWD, ug tabang pinansyal.',
     'cat-health': 'Panglawas ug Kaayohan',
     'cat-health-desc': 'Mga programa sa bakuna, sertipiko sa panglawas, ug tabang medikal.',
     'cat-tax': 'Pagbuhis ug Bayad',
     'cat-tax-desc': 'Buhis sa propyedad, buhis sa negosyo, bayad, ug tax clearance.',
     'cat-agriculture': 'Agrikultura ug Kalamboan sa Ekonomiya',
-    'cat-agriculture-desc': 'Mga pautang sa agrikultura, insurance sa tanom, tabang sa abono, ug pagbansay.',
+    'cat-agriculture-desc':
+      'Mga pautang sa agrikultura, insurance sa tanom, tabang sa abono, ug pagbansay.',
     'cat-infrastructure': 'Imprastraktura ug Publikong Buhat',
-    'cat-infrastructure-desc': 'Mga permit sa konstruksyon, hangyo sa pag-ayo sa dalan, ug pampublikong pasilidad.',
+    'cat-infrastructure-desc':
+      'Mga permit sa konstruksyon, hangyo sa pag-ayo sa dalan, ug pampublikong pasilidad.',
     'cat-education': 'Edukasyon ug Iskolarship',
-    'cat-education-desc': 'Mga programa sa iskolarship, tabang sa estudyante, ug mga grant sa edukasyon.',
+    'cat-education-desc':
+      'Mga programa sa iskolarship, tabang sa estudyante, ug mga grant sa edukasyon.',
     'cat-safety': 'Kaluwasan ug Seguridad sa Publiko',
-    'cat-safety-desc': 'Serbisyo sa emerhensya, pagpangandam sa katalagman, ug programa sa kaluwasan sa komunidad.',
+    'cat-safety-desc':
+      'Serbisyo sa emerhensya, pagpangandam sa katalagman, ug programa sa kaluwasan sa komunidad.',
     'cat-environment': 'Kalikupan ug Kinaiyanhong Kahinguhaan',
-    'cat-environment-desc': 'Mga permit sa kalikupan, pagdumala sa basura, ug mga programa sa konserbasyon.',
+    'cat-environment-desc':
+      'Mga permit sa kalikupan, pagdumala sa basura, ug mga programa sa konserbasyon.',
     'cat-online': 'Online nga mga Serbisyo',
-    'cat-online-desc': 'Digital nga serbisyo nga magamit pinaagi sa Filipizen ug uban pang online nga plataporma.',
+    'cat-online-desc':
+      'Digital nga serbisyo nga magamit pinaagi sa Filipizen ug uban pang online nga plataporma.',
     'cat-government': 'Serbisyo sa Gobyerno',
     'cat-government-desc': 'Kinatibuk-ang serbisyo sa siyudad ug administratibong buluhaton.',
 

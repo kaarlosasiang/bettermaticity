@@ -78,7 +78,11 @@ export default function PWAManager() {
             <span>Install BetterMati for quick access to services.</span>
           </div>
           <div className="pwa-install-actions">
-            <button className="pwa-install-btn" onClick={handleInstall} aria-label="Install BetterMati app">
+            <button
+              className="pwa-install-btn"
+              onClick={handleInstall}
+              aria-label="Install BetterMati app"
+            >
               Install
             </button>
             <button

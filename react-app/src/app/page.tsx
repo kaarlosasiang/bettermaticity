@@ -232,11 +232,7 @@ export default function HomePage() {
           <div className="weather-map-grid">
             <div className="weather-column">
               <div id="weather-container" aria-live="polite">
-                <div
-                  className="weather-widget"
-                  role="region"
-                  aria-label="Current weather in Mati"
-                >
+                <div className="weather-widget" role="region" aria-label="Current weather in Mati">
                   <div className="weather-current">
                     <div className="weather-current-icon">
                       <i className="bi bi-cloud-sun-fill"></i>
@@ -279,8 +275,8 @@ export default function HomePage() {
                   ></iframe>
                 </div>
                 <p className="map-attribution">
-                  <i className="bi bi-geo-alt" aria-hidden="true"></i> Mati City Hall, Nueva
-                  Vizcaya 3708
+                  <i className="bi bi-geo-alt" aria-hidden="true"></i> Mati City Hall, Nueva Vizcaya
+                  3708
                 </p>
               </div>
             </div>
