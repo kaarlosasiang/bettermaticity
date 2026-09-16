@@ -1,0 +1,137 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@import '@fontsource-variable/inter';
+
+@custom-variant dark (&:is(.dark *));
+
+/* ── LGU Mati design system ──────────────────────────────────────────────────
+   Tokens extracted faithfully from the legacy assets/css/style.css :root, mapped
+   onto shadcn's semantic tokens. Preflight is ON (React pages carry no legacy CSS).
+   Brand: primary #0032a0, accent #f77f00, Inter. */
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: 'Inter Variable', sans-serif;
+
+  /* shadcn semantic color tokens */
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+
+  /* LGU brand extras (utilities: bg-brand-accent, text-brand-success, ...) */
+  --color-primary-dark: var(--brand-primary-dark);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-success: var(--brand-success);
+  --color-brand-info: var(--brand-info);
+
+  /* radius (legacy --border-radius: 8px) */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* shadows (legacy --shadow-sm / --shadow-md) */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  /* hotline marquee (mobile/tablet) — legacy @keyframes hotlineScroll */
+  --animate-hotline-scroll: hotline-scroll 25s linear infinite;
+}
+
+@keyframes hotline-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #1a1a1a;
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
+
+  --primary: #0032a0; /* LGU blue */
+  --primary-foreground: #ffffff;
+  --secondary: #f1f3f5; /* shadcn secondary = subtle neutral */
+  --secondary-foreground: #1a1a1a;
+  --muted: #f8f9fa; /* legacy --color-bg-alt */
+  --muted-foreground: #666666; /* legacy --color-text-light */
+  --accent: #f1f3f5; /* shadcn hover neutral (NOT the orange brand accent) */
+  --accent-foreground: #0032a0;
+  --destructive: #d62828; /* legacy --color-danger */
+
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #0032a0; /* focus ring = brand */
+  --radius: 0.5rem; /* 8px */
+
+  /* LGU brand extras */
+  --brand-primary-dark: #002170;
+  --brand-secondary: #003d82;
+  --brand-accent: #f77f00; /* orange */
+  --brand-success: #06a77d;
+  --brand-info: #0077be;
+
+  /* chart palette (brand-derived) */
+  --chart-1: #0032a0;
+  --chart-2: #0077be;
+  --chart-3: #06a77d;
+  --chart-4: #f77f00;
+  --chart-5: #d62828;
+
+  --sidebar: #f8f9fa;
+  --sidebar-foreground: #1a1a1a;
+  --sidebar-primary: #0032a0;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f1f3f5;
+  --sidebar-accent-foreground: #0032a0;
+  --sidebar-border: #e5e7eb;
+  --sidebar-ring: #0032a0;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}

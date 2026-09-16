@@ -15,6 +15,7 @@
     "version:check": "node scripts/bump-version.js",
     "test": "playwright test",
     "test:chrome": "playwright test --project=chrome",
+    "test:integration": "playwright test --config playwright.integration.config.js",
     "test:report": "playwright show-report",
     "lighthouse": "lhci autorun",
     "format": "prettier --write .",
@@ -24,11 +25,11 @@
   },
   "keywords": [
     "mati",
-    "nueva-vizcaya",
+    "davao-oriental",
     "government",
     "lgu"
   ],
-  "author": "Ramon Logan Jr.",
+  "author": "Kaarlo Ruy P. Sasiang",
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.23.9",

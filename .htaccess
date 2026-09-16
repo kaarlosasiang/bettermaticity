@@ -56,7 +56,12 @@
     # (SDK bootstrap), staticxx.facebook.com in frame-src (XD-arbiter bridge), and
     # www.facebook.com + graph.facebook.com in connect-src (plugin API calls). Without these,
     # the plugin loads but renders blank because its internal communication is blocked.
-    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://unpkg.com https://cdn.jsdelivr.net https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://unpkg.com https://*.fbcdn.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: blob: https: https://unpkg.com https://cdn.jsdelivr.net https://*.tile.openstreetmap.org https://www.google-analytics.com https://*.fbcdn.net https://*.facebook.com; connect-src 'self' blob: https://api.open-meteo.com https://api.exchangerate.host https://open.er-api.com https://www.google-analytics.com https://*.tile.openstreetmap.org https://unpkg.com https://cdn.jsdelivr.net https://www.facebook.com https://graph.facebook.com https://connect.facebook.net; frame-src 'self' https://www.openstreetmap.org https://www.google.com https://www.facebook.com https://web.facebook.com https://staticxx.facebook.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self';"
+    # Note: unpkg.com / cdn.jsdelivr.net removed at the React cutover — the Vite app
+    # bundles all JS/CSS/fonts (self-hosted Inter via @fontsource) under /_app; no CDN
+    # runtime deps remain. 'unsafe-inline' is retained because vite-react-ssg inlines
+    # hydration/module-preload scripts. External hosts kept: GA, Facebook plugin, OSM
+    # tiles, Open-Meteo/exchangerate, Google Fonts (harmless fallback).
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.fbcdn.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https: https://*.tile.openstreetmap.org https://www.google-analytics.com https://*.fbcdn.net https://*.facebook.com; connect-src 'self' blob: https://api.open-meteo.com https://api.exchangerate.host https://open.er-api.com https://www.google-analytics.com https://*.tile.openstreetmap.org https://www.facebook.com https://graph.facebook.com https://connect.facebook.net; frame-src 'self' https://www.openstreetmap.org https://www.google.com https://www.facebook.com https://web.facebook.com https://staticxx.facebook.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self';"
     
     # Strict Transport Security (HSTS) - Enable after confirming HTTPS works
     # Tells browsers to only use HTTPS for 1 year
@@ -172,17 +177,17 @@ AddDefaultCharset UTF-8
 </IfModule>
 
 # ============================================
-# IMMUTABLE ASSETS (Next.js build output)
+# IMMUTABLE ASSETS (Vite build output)
 # ============================================
-# Everything under /_next/static/ carries a content hash in its filename, so a
-# changed file is always a new URL and the old one can never go stale. Marking
-# it immutable stops browsers revalidating it at all.
+# Everything under /_app/ carries a content hash in its filename, so a changed
+# file is always a new URL and the old one can never go stale. Marking it
+# immutable stops browsers revalidating it at all.
 # Path-scoped rules are not possible with <FilesMatch>, and <Directory> is not
 # allowed in .htaccess, so the path is tagged via a rewrite env var and the
 # header keyed off that tag. This block sits after the generic rules above so
 # its Cache-Control wins for these files.
 <IfModule mod_rewrite.c>
-    RewriteRule ^_next/static/ - [E=IMMUTABLE_ASSET:1]
+    RewriteRule ^_app/ - [E=IMMUTABLE_ASSET:1]
 </IfModule>
 <IfModule mod_headers.c>
     Header set Cache-Control "public, max-age=31536000, immutable" env=IMMUTABLE_ASSET

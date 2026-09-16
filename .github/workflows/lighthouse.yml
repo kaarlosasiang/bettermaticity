@@ -24,9 +24,10 @@ jobs:
         run: npm run build
 
       - name: Start server
+        # serve.py emulates the .htaccess clean-URL rewrites (plain http.server
+        # cannot), so extensionless React routes like /services/health resolve.
         run: |
-          cd dist
-          python3 -m http.server 8080 &
+          python3 serve.py -d dist -p 8080 &
           sleep 3
 
       - name: Run Lighthouse CI
@@ -35,6 +36,7 @@ jobs:
           urls: |
             http://localhost:8080/
             http://localhost:8080/services/
+            http://localhost:8080/services/health
             http://localhost:8080/contact/
             http://localhost:8080/government/
           configPath: .lighthouserc.json

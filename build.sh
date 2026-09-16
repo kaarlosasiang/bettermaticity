@@ -1,188 +1,133 @@
 #!/bin/bash
-# BetterSolano — Production Build Script
+# BetterMati — Production Build Script (end-state: single Vite/React SSG app)
 # Usage:
 #   bash build.sh            — bump patch, build everything
 #   bash build.sh --no-bump  — keep current version, build everything
 #   bash build.sh minor      — bump minor, build everything
 #   bash build.sh major      — bump major, build everything
+#
+# Pipeline (React is the whole site; the legacy static site has been retired):
+#   0 env → 1 version → 2 clean → 3 vite build → 4 assemble dist → 5 chmod
+# The Vite SSG output IS the site. Static passthrough (assets/images, data, admin,
+# error/offline pages, .htaccess, sw.js, manifest, robots, version.json) is layered
+# on top, and sitemap.xml is generated from migrated-routes.json.
 
 set -e
 
 BUMP_TYPE="patch"
 SKIP_BUMP=false
-REACT_BUILD=true
 
 for arg in "$@"; do
     case $arg in
         --no-bump) SKIP_BUMP=true ;;
-        --no-react) REACT_BUILD=false ;;
         major|minor|patch) BUMP_TYPE=$arg ;;
     esac
 done
 
 echo ""
 echo "╔══════════════════════════════════════════╗"
-echo "║   BetterSolano — Production Build        ║"
+echo "║   BetterMati — Production Build           ║"
 echo "╚══════════════════════════════════════════╝"
 
-# ── 0. Build-time configuration (optional .env, see .env.example) ────────────
-# Exported so the React build inherits SITE_URL. The file is git-ignored and
-# excluded from dist/, so nothing here reaches the served output directly.
+# ── 0. Build-time configuration (optional .env, see web/.env.example) ─────────
+SITE_URL_DEFAULT="https://bettermati.org"
 if [ -f .env ]; then
     set -a
     # shellcheck disable=SC1091
     . ./.env
     set +a
+    export VITE_SITE_URL="${VITE_SITE_URL:-$SITE_URL}"
     echo ""
-    echo "▶ [0/6] Loaded .env (SITE_URL=${SITE_URL:-unset})"
+    echo "▶ [0/5] Loaded .env (VITE_SITE_URL=${VITE_SITE_URL:-unset})"
 fi
+SITE_URL="${VITE_SITE_URL:-${SITE_URL:-$SITE_URL_DEFAULT}}"
 
 # ── 1. Version (single source of truth: version.json) ────────────────────────
 echo ""
-echo "▶ [1/6] Version management..."
+echo "▶ [1/5] Version management..."
 if [ "$SKIP_BUMP" = false ]; then
-    # bump-version.js: updates version.json → package.json → all HTML files
-    #                  → react-app/public/version.json
     node scripts/bump-version.js "$BUMP_TYPE"
 else
     echo "  Skipping bump (--no-bump). Current: $(node -e "console.log(require('./version.json').version)")"
 fi
-
 VERSION=$(node -e "console.log(require('./version.json').version)")
 
 # ── 2. Clean dist ────────────────────────────────────────────────────────────
 echo ""
-echo "▶ [2/6] Cleaning dist/..."
+echo "▶ [2/5] Cleaning dist/..."
 rm -rf dist
 mkdir -p dist
 
-# ── 3. Copy legacy site (rsync excludes dev-only files) ──────────────────────
+# ── 3. Build Vite/React app (SSG → web/dist) ─────────────────────────────────
 echo ""
-echo "▶ [3/6] Copying legacy site files..."
-if command -v rsync &>/dev/null; then
-    rsync -a \
-        --exclude='node_modules' \
-        --exclude='dist' \
-        --exclude='.git' \
-        --exclude='.vscode' \
-        --exclude='.DS_Store' \
-        --exclude='react-app' \
-        --exclude='admin' \
-        --exclude='backup-restore-point-*' \
-        --exclude='package*.json' \
-        --exclude='build.sh' \
-        --exclude='babel.config.json' \
-        --exclude='serve.py' \
-        --exclude='scripts' \
-        --exclude='docs' \
-        --exclude='*.backup' \
-        --exclude='*.md' \
-        --exclude='.lighthouserc.json' \
-        --exclude='.github' \
-        --exclude='.gitignore' \
-        --exclude='validate-translations.js' \
-        --exclude='tests' \
-        --exclude='playwright.config.js' \
-        --exclude='playwright-report' \
-        --exclude='test-results' \
-        --exclude='.prettierrc' \
-        --exclude='.prettierignore' \
-        --exclude='.editorconfig' \
-        --exclude='.env' \
-        --exclude='.env.*' \
-        --exclude='release' \
-        --exclude='*.zip' \
-        --exclude='*.tar.gz' \
-        --exclude='*.log' \
-        . dist/
-else
-    # Fallback: cross-platform Node.js copy (Windows / no rsync)
-    node scripts/copy-dist.js . dist
-fi
-echo "  Legacy files copied."
+echo "▶ [3/5] Vite (React) SSG build..."
+(
+    cd web
+    echo "  Installing dependencies..."
+    npm ci --prefer-offline 2>/dev/null || npm install --silent
+    echo "  Running vite-react-ssg build..."
+    npm run build
+)
+echo "  Vite build complete (web/dist)."
 
-# ── 4. Build React app and merge health page ──────────────────────────────────
+# ── 4. Assemble dist ─────────────────────────────────────────────────────────
 echo ""
-echo "▶ [4/6] React app build..."
-if [ "$REACT_BUILD" = true ] && [ -f "react-app/package.json" ]; then
-    (
-        cd react-app
-        echo "  Installing dependencies..."
-        npm ci --prefer-offline 2>/dev/null || npm install --silent
-        echo "  Running next build..."
-        npm run build
-    )
+echo "▶ [4/5] Assembling dist/..."
 
-    # _next contains all JS chunks and static assets for React pages
-    if [ -d "react-app/out/_next" ]; then
-        echo "  Merging React static assets → dist/_next/"
-        cp -r react-app/out/_next dist/_next
-    fi
+# 4a. The SSG output is the site (hashed /_app bundles + prerendered route HTML).
+cp -r web/dist/. dist/
 
-    # Merge only React-owned routes into dist (do not overwrite legacy pages)
-    # Currently: /services/health is the only React-served route in production
-    if [ -f "react-app/out/services/health.html" ]; then
-        echo "  Merging health page → dist/services/health.html"
-        cp react-app/out/services/health.html dist/services/health.html
-    fi
+# 4b. Flat → folder for parent routes. vite-react-ssg (dirStyle:'flat') emits
+# government.html AND government/officials.html; a directory named "government"
+# shadows government.html in Apache, so parent routes (those with children) must
+# live at <route>/index.html. Leaf routes stay flat. Computed from migrated-routes.json.
+node -e '
+  const fs = require("fs"), path = require("path");
+  const routes = require("./web/migrated-routes.json");
+  const isParent = (r) => r !== "/" && routes.some((o) => o !== r && o.startsWith(r + "/"));
+  for (const r of routes) {
+    if (!isParent(r)) continue;
+    const rel = r.replace(/^\//, "");
+    const flat = path.join("dist", rel + ".html");
+    const dir = path.join("dist", rel);
+    if (!fs.existsSync(flat)) { console.error("  MISSING parent route: " + rel + ".html"); process.exit(1); }
+    fs.mkdirSync(dir, { recursive: true });
+    fs.renameSync(flat, path.join(dir, "index.html"));
+    console.log("  folderized " + rel + " → " + rel + "/index.html");
+  }
+'
 
-    echo "  React build merged."
-elif [ "$REACT_BUILD" = false ]; then
-    echo "  Skipped (--no-react)."
-else
-    echo "  Skipped (react-app/package.json not found)."
-fi
+# 4c. Static passthrough (things the React app needs at runtime + server config).
+echo "  Static passthrough (assets/images, data, admin, error pages, config)..."
+cp -r assets dist/assets
+mkdir -p dist/data && cp -r data/. dist/data/
+[ -d admin ] && cp -r admin dist/admin
+cp 403.html 404.html 500.html offline.html dist/ 2>/dev/null || true
+cp .htaccess sw.js manifest.webmanifest robots.txt version.json dist/ 2>/dev/null || true
 
-# ── 5. Minify assets ─────────────────────────────────────────────────────────
+# 4d. Generate sitemap.xml from migrated-routes.json.
+node scripts/generate-sitemap.js "$SITE_URL" > dist/sitemap.xml
+echo "  sitemap.xml generated ($SITE_URL)"
+
+# ── 5. cPanel file permissions (755 dirs / 644 files) ────────────────────────
 echo ""
-echo "▶ [5/6] Minifying assets..."
-
-echo "  HTML..."
-find dist -name "*.html" -not -path "dist/_next/*" -type f | while read -r file; do
-    npx --yes html-minifier-terser \
-        --collapse-whitespace \
-        --remove-comments \
-        --remove-optional-tags \
-        --remove-redundant-attributes \
-        --remove-script-type-attributes \
-        --remove-style-link-type-attributes \
-        --minify-css true \
-        --minify-js true \
-        -o "$file" "$file" 2>/dev/null || true
-done
-
-echo "  CSS..."
-find dist/assets/css -name "*.css" -type f 2>/dev/null | while read -r file; do
-    npx --yes cleancss -o "$file" "$file" 2>/dev/null || true
-done
-
-echo "  JavaScript (transpile + minify)..."
-find dist/assets/js -name "*.js" -type f 2>/dev/null | while read -r file; do
-    npx --yes babel "$file" --out-file "$file" 2>/dev/null || true
-    npx --yes terser "$file" -o "$file" --compress --mangle 2>/dev/null || true
-done
-
-echo "  Assets minified."
-
-# ── 6. cPanel file permissions (755 dirs / 644 files) ────────────────────────
-echo ""
-echo "▶ [6/6] Setting cPanel file permissions..."
+echo "▶ [5/5] Setting cPanel file permissions..."
 find dist -type d -exec chmod 755 {} \;
 find dist -type f -exec chmod 644 {} \;
 echo "  Directories: 755 | Files: 644"
 
 # ── Summary ───────────────────────────────────────────────────────────────────
-ORIG_SIZE=$(du -sh . --exclude=node_modules --exclude=dist --exclude=.git --exclude="react-app/node_modules" 2>/dev/null | cut -f1 || echo "N/A")
 DIST_SIZE=$(du -sh dist 2>/dev/null | cut -f1 || echo "N/A")
+ROUTE_COUNT=$(node -e "console.log(require('./web/migrated-routes.json').length)")
 
 echo ""
 echo "╔══════════════════════════════════════════╗"
 printf  "║  ✓ Build complete!  v%-20s║\n" "${VERSION}"
 echo "╠══════════════════════════════════════════╣"
-printf  "║  Source: %-31s║\n" "${ORIG_SIZE}"
+printf  "║  Routes: %-31s║\n" "${ROUTE_COUNT}"
 printf  "║  Dist:   %-31s║\n" "${DIST_SIZE}"
 echo "╠══════════════════════════════════════════╣"
-echo "║  Upload dist/ → cPanel public_html/     ║"
-echo "║  Preview: cd dist && python3 -m http.server 8080  ║"
+echo "║  Upload dist/ → cPanel public_html/      ║"
+echo "║  Preview: python3 serve.py -d dist -p 8888 ║"
 echo "╚══════════════════════════════════════════╝"
 echo ""

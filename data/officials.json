@@ -4,12 +4,20 @@
   "mayor": {
     "name": "Hon. [City Mayor Name]",
     "title": "City Mayor",
-    "image": "assets/images/officials/mayor.jpg"
+    "image": "assets/images/officials/mayor.jpg",
+    "email": "mayor@mati.gov.ph",
+    "phone": "(087) 326-5002",
+    "tel": "0873265002",
+    "hours": "Mon-Fri: 8:00 AM - 5:00 PM"
   },
   "vice_mayor": {
     "name": "Hon. [City Vice Mayor Name]",
     "title": "City Vice Mayor",
-    "image": "assets/images/officials/vice-mayor.jpg"
+    "image": "assets/images/officials/vice-mayor.jpg",
+    "email": "vicemayor@mati.gov.ph",
+    "phone": "(087) 326-5003",
+    "tel": "0873265003",
+    "hours": "Mon-Fri: 8:00 AM - 5:00 PM"
   },
   "councilors": [
     {

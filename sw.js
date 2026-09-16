@@ -3,27 +3,22 @@
  * Enterprise-grade PWA with versioned caching, runtime strategies, and offline resilience.
  */
 
-var CACHE_VERSION = 'v4';
+var CACHE_VERSION = 'v6';
 var STATIC_CACHE = 'bettermati-static-' + CACHE_VERSION;
 var RUNTIME_CACHE = 'bettermati-runtime-' + CACHE_VERSION;
 var OFFLINE_URL = '/offline.html';
 
-// Core shell: precached on install for instant offline load
+// Core shell precached on install. Hashed Vite bundles under /_app/ are cached at
+// runtime (stale-while-revalidate) rather than precached, since their filenames
+// change every build — only stable, always-present paths belong here.
 var PRECACHE_URLS = [
   '/',
   '/offline.html',
-  '/assets/css/style.css',
-  '/assets/css/responsive.css',
-  '/assets/css/footer.css',
-  '/assets/css/accessibility.css',
-  '/assets/js/main.js',
-  '/assets/js/translations.js',
-  '/assets/js/info-bar.js',
-  '/assets/images/logo/better-mati-logo.svg',
+  '/manifest.webmanifest',
+  '/assets/images/logo/better-mati-logo.png',
   '/assets/images/logo/better-mati-logo-white.svg',
   '/assets/images/logo/favicon.svg',
   '/assets/images/logo/favicon.ico',
-  '/manifest.webmanifest',
 ];
 
 // Max items in runtime cache to prevent unbounded growth

@@ -13,7 +13,7 @@ const EXCLUDED = new Set([
   '.git',
   '.vscode',
   '.DS_Store',
-  'react-app',
+  'web',
   'admin',
   'build.sh',
   'babel.config.json',
