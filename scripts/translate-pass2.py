@@ -669,7 +669,7 @@ PASS2_FIL_3 = {
     "Solano Competitive Index": "Competitive Index ng Solano",
     "Solano at a Glance": "Solano sa Isang Tingin",
     "Brief History of Solano": "Maikling Kasaysayan ng Solano",
-    "22 Barangays": "22 Barangay",
+    "26 Barangays": "26 Barangay",
     "24/7 Operations": "24/7 Operasyon",
     "60 Years+": "60 Taon+",
     "Nationwide": "Buong Bansa",

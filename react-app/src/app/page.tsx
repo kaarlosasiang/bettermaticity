@@ -184,7 +184,7 @@ export default function HomePage() {
                 <i className="bi bi-people-fill"></i>
               </div>
               <div className="home-stat-card-content">
-                <span className="home-stat-card-value">69,296</span>
+                <span className="home-stat-card-value">148,672</span>
                 <span className="home-stat-card-label">{t('stats-population-label')}</span>
                 <span className="home-stat-card-source">{t('stats-population-source')}</span>
               </div>
@@ -194,7 +194,7 @@ export default function HomePage() {
                 <i className="bi bi-geo-alt-fill"></i>
               </div>
               <div className="home-stat-card-content">
-                <span className="home-stat-card-value">22</span>
+                <span className="home-stat-card-value">26</span>
                 <span className="home-stat-card-label">{t('stats-barangays-label')}</span>
                 <span className="home-stat-card-source">{t('stats-barangays-source')}</span>
               </div>
@@ -214,7 +214,7 @@ export default function HomePage() {
                 <i className="bi bi-rulers"></i>
               </div>
               <div className="home-stat-card-content">
-                <span className="home-stat-card-value">162.70 km²</span>
+                <span className="home-stat-card-value">588.63 km²</span>
                 <span className="home-stat-card-label">{t('stats-land-area-label')}</span>
                 <span className="home-stat-card-source">{t('stats-land-area-source')}</span>
               </div>
@@ -279,8 +279,8 @@ export default function HomePage() {
                   ></iframe>
                 </div>
                 <p className="map-attribution">
-                  <i className="bi bi-geo-alt" aria-hidden="true"></i> Mati City Hall, Nueva
-                  Vizcaya 3708
+                  <i className="bi bi-geo-alt" aria-hidden="true"></i> Mati City Hall, Davao
+                  Oriental 8200
                 </p>
               </div>
             </div>

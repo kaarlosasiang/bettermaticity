@@ -107,15 +107,15 @@ export default function HealthPage() {
         <div className="container">
           <div className="health-stats-grid">
             <div className="health-stat-card">
-              <span className="health-stat-num">88</span>
+              <span className="health-stat-num">54</span>
               <span className="health-stat-label">{t('health-stat-facilities')}</span>
             </div>
             <div className="health-stat-card">
-              <span className="health-stat-num">3</span>
+              <span className="health-stat-num">2</span>
               <span className="health-stat-label">{t('health-stat-hospitals')}</span>
             </div>
             <div className="health-stat-card">
-              <span className="health-stat-num">22</span>
+              <span className="health-stat-num">34</span>
               <span className="health-stat-label">{t('health-stat-bhs')}</span>
             </div>
             <div className="health-stat-card">
@@ -123,6 +123,17 @@ export default function HealthPage() {
               <span className="health-stat-label">{t('health-stat-mho')}</span>
             </div>
           </div>
+          <p className="data-source">
+            <i className="bi bi-info-circle"></i> {t('health-source-label')}{' '}
+            <a
+              href="https://nhfr.doh.gov.ph/VActivefacilitiesList"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              DOH National Health Facility Registry
+            </a>{' '}
+            {t('health-source-retrieved')}
+          </p>
         </div>
       </section>
 
@@ -135,47 +146,37 @@ export default function HealthPage() {
           </h2>
           <div className="health-facilities-grid">
             <div className="health-facility-card health-facility-card--hospital">
-              <div className="health-facility-badge">Tertiary Hospital</div>
-              <h3>{t('health-pltciluis-a-tiam-medical-center')}</h3>
-              <p className="health-facility-desc">
-                {t('health-a-tertiary-level-philhealthaccredited-private')}
-              </p>
+              <div className="health-facility-badge">{t('health-badge-government-hospital')}</div>
+              <h3>{t('health-davao-oriental-provincial-medical-center')}</h3>
+              <p className="health-facility-desc">{t('health-dopmc-desc')}</p>
               <div className="health-facility-meta">
                 <span>
-                  <i className="bi bi-geo-alt"></i>
-                  <span>{t('health-national-highway-mati')}</span>
+                  <i className="bi bi-geo-alt"></i> <span>{t('health-city-of-mati')}</span>
                 </span>
               </div>
             </div>
-
             <div className="health-facility-card health-facility-card--hospital">
-              <div className="health-facility-badge">Private Hospital</div>
-              <h3>{t('health-medical-mission-group-hospital-health-services')}</h3>
-              <p className="health-facility-desc">
-                {t('health-also-known-as-new-mmg-hospital-providing-quality')}
-              </p>
+              <div className="health-facility-badge">{t('health-badge-private-hospital')}</div>
+              <h3>{t('health-st-camillus-hospital-of-mati')}</h3>
+              <p className="health-facility-desc">{t('health-st-camillus-desc')}</p>
               <div className="health-facility-meta">
                 <span>
-                  <i className="bi bi-geo-alt"></i>
-                  <span>{t('health-bintawan-road-brgy-quezon')}</span>
-                </span>
-              </div>
-            </div>
-
-            <div className="health-facility-card health-facility-card--hospital">
-              <div className="health-facility-badge">Medical Center</div>
-              <h3>{t('health-salubris-inc-salubris-medical-center')}</h3>
-              <p className="health-facility-desc">
-                {t('health-private-medical-center-offering-various')}
-              </p>
-              <div className="health-facility-meta">
-                <span>
-                  <i className="bi bi-geo-alt"></i>
-                  <span>{t('health-national-highway-mati')}</span>
+                  <i className="bi bi-geo-alt"></i> <span>{t('health-city-of-mati')}</span>
                 </span>
               </div>
             </div>
           </div>
+          <p className="data-source">
+            <i className="bi bi-info-circle"></i> {t('health-source-label')}{' '}
+            <a
+              href="https://nhfr.doh.gov.ph/VActivefacilitiesList"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              DOH National Health Facility Registry
+            </a>{' '}
+            {t('health-source-retrieved')}
+          </p>
         </div>
       </section>
 
@@ -231,72 +232,119 @@ export default function HealthPage() {
           <p className="section-subtitle">{t('health-bhs-subtitle')}</p>
           <div className="health-bhs-grid">
             <div className="health-bhs-item">
-              <span>{t('health-aggub-bhs')}</span>
+              <span>Badas BHS</span>
             </div>
             <div className="health-bhs-item">
-              <span>{t('health-bagahabag-bhs')}</span>
+              <span>Bobon BHS</span>
             </div>
             <div className="health-bhs-item">
-              <span>{t('health-bangaan-bhs')}</span>
+              <span>Buso BHS</span>
             </div>
             <div className="health-bhs-item">
-              <span>{t('health-bangar-bhs')}</span>
+              <span>Cabuaya BHS</span>
             </div>
             <div className="health-bhs-item">
-              <span>{t('health-buenavista-bhs')}</span>
+              <span>Culian BHS</span>
             </div>
             <div className="health-bhs-item">
-              <span>{t('health-calaocan-bhs')}</span>
+              <span>Dahican A BHS</span>
             </div>
             <div className="health-bhs-item">
-              <span>{t('health-commando-bhs')}</span>
+              <span>Dahican B BHS</span>
             </div>
             <div className="health-bhs-item">
-              <span>{t('health-concepcion-bhs')}</span>
+              <span>Dahican C BHS</span>
             </div>
             <div className="health-bhs-item">
-              <span>{t('health-curifang-bhs')}</span>
+              <span>Danao BHS</span>
             </div>
             <div className="health-bhs-item">
-              <span>{t('health-dadap-bhs')}</span>
+              <span>Dawan BHS</span>
             </div>
             <div className="health-bhs-item">
-              <span>{t('health-lactawan-bhs')}</span>
+              <span>Don Enrique Lopez BHS</span>
             </div>
             <div className="health-bhs-item">
-              <span>{t('health-nangalisan-bhs')}</span>
+              <span>Don Martin Marundan BHS</span>
             </div>
             <div className="health-bhs-item">
-              <span>{t('health-ocapon-bhs')}</span>
+              <span>Don Salvador Lopez, Sr. BHS</span>
             </div>
             <div className="health-bhs-item">
-              <span>{t('health-osmea-bhs')}</span>
+              <span>Langka BHS</span>
             </div>
             <div className="health-bhs-item">
-              <span>{t('health-paitan-bhs')}</span>
+              <span>Lawigan BHS</span>
             </div>
             <div className="health-bhs-item">
-              <span>{t('health-pilar-bhs')}</span>
+              <span>Libudon BHS</span>
             </div>
             <div className="health-bhs-item">
-              <span>{t('health-poblacion-bhs')}</span>
+              <span>Luban BHS</span>
             </div>
             <div className="health-bhs-item">
-              <span>{t('health-quezon-bhs')}</span>
+              <span>Macambol BHS</span>
             </div>
             <div className="health-bhs-item">
-              <span>{t('health-quirino-bhs')}</span>
+              <span>Mamali BHS</span>
             </div>
             <div className="health-bhs-item">
-              <span>{t('health-roxas-bhs')}</span>
+              <span>Matiao A BHS</span>
             </div>
             <div className="health-bhs-item">
-              <span>{t('health-tucal-bhs')}</span>
+              <span>Matiao B BHS</span>
             </div>
             <div className="health-bhs-item">
-              <span>{t('health-uddiawan-bhs')}</span>
+              <span>Mayo BHS</span>
+            </div>
+            <div className="health-bhs-item">
+              <span>Poblacion 1 BHS</span>
+            </div>
+            <div className="health-bhs-item">
+              <span>Poblacion 2 BHS</span>
+            </div>
+            <div className="health-bhs-item">
+              <span>Poblacion 3 BHS</span>
+            </div>
+            <div className="health-bhs-item">
+              <span>Poblacion 4 BHS</span>
+            </div>
+            <div className="health-bhs-item">
+              <span>Poblacion 5 BHS</span>
+            </div>
+            <div className="health-bhs-item">
+              <span>Poblacion 6 BHS</span>
+            </div>
+            <div className="health-bhs-item">
+              <span>Sainz BHS</span>
+            </div>
+            <div className="health-bhs-item">
+              <span>Sanghay BHS</span>
+            </div>
+            <div className="health-bhs-item">
+              <span>Tagabakid BHS</span>
+            </div>
+            <div className="health-bhs-item">
+              <span>Tagbinonga BHS</span>
+            </div>
+            <div className="health-bhs-item">
+              <span>Taguibo BHS</span>
+            </div>
+            <div className="health-bhs-item">
+              <span>Tamisan BHS</span>
             </div>
           </div>
+          <p className="data-source">
+            <i className="bi bi-info-circle"></i> {t('health-source-label')}{' '}
+            <a
+              href="https://nhfr.doh.gov.ph/VActivefacilitiesList"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              DOH National Health Facility Registry
+            </a>{' '}
+            {t('health-source-retrieved')}
+          </p>
         </div>
       </section>
 

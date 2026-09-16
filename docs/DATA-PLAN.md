@@ -30,9 +30,12 @@ had to be right before anything else got built.
 
 **Sources**
 
-- Attributes: PSA Philippine Standard Geographic Code, 2Q 2026 release, with
-  2024 POPCEN populations. Licensed **CC BY 4.0** — commercial use is fine with
-  attribution.
+- Attributes: PSA [Philippine Standard Geographic Code](https://psa.gov.ph/classification/psgc),
+  2Q 2026 release, with 2024 POPCEN populations. The current
+  [PSA PSGC page for the City of Mati](https://psa.gov.ph/classification/psgc/barangays/1102509000)
+  lists the 26 barangays, while the city total is independently confirmed by the
+  [PSA Region XI 2024 POPCEN special release](https://rsso11.psa.gov.ph/content/highlights-davao-oriental-population-based-2024-census-population).
+  Licensed **CC BY 4.0** — commercial use is fine with attribution.
 - Geometry: `faeldon/philippines-json-maps`, 2023 PSGC vintage, derived from
   `altcoder/philippines-psgc-shapefiles`.
 
