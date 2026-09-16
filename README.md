@@ -61,52 +61,52 @@ Visit the live website: [https://bettermati.org](https://bettermati.org)
 
 ## Technology Stack
 
-| Category            | Technologies                                                           |
-| ------------------- | ---------------------------------------------------------------------- |
-| **Frontend**        | HTML5, CSS3, JavaScript (ES6+)                                         |
-| **Styling**         | Custom CSS, CSS Variables, Flexbox, CSS Grid, Responsive Design        |
-| **Icons**           | Bootstrap Icons (CDN)                                                  |
-| **Fonts**           | Google Fonts (Inter)                                                   |
-| **Maps**            | Leaflet.js, OpenStreetMap                                              |
-| **Charts**          | Chart.js (Canvas-based)                                                |
-| **Animations**      | Lottie (dotlottie-player web component)                                |
-| **Data Format**     | JSON                                                                   |
-| **APIs**            | Open-Meteo (Weather), ExchangeRate API (Currency)                      |
-| **Build Tools**     | Node.js, npm, Bash, Babel (@babel/preset-env)                          |
-| **Minification**    | html-minifier-terser, clean-css-cli, terser                            |
-| **Code Formatting** | Prettier (auto-format on commit via git pre-commit hook)               |
-| **Version Control** | Git, GitHub                                                            |
-| **Server**          | Apache (.htaccess), mod_rewrite, mod_deflate                           |
-| **Hosting**         | cPanel (Production), Python HTTP Server (Development)                  |
+| Category            | Technologies                                                                                             |
+| ------------------- | -------------------------------------------------------------------------------------------------------- |
+| **Frontend**        | HTML5, CSS3, JavaScript (ES6+)                                                                           |
+| **Styling**         | Custom CSS, CSS Variables, Flexbox, CSS Grid, Responsive Design                                          |
+| **Icons**           | Bootstrap Icons (CDN)                                                                                    |
+| **Fonts**           | Google Fonts (Inter)                                                                                     |
+| **Maps**            | Leaflet.js, OpenStreetMap                                                                                |
+| **Charts**          | Chart.js (Canvas-based)                                                                                  |
+| **Animations**      | Lottie (dotlottie-player web component)                                                                  |
+| **Data Format**     | JSON                                                                                                     |
+| **APIs**            | Open-Meteo (Weather), ExchangeRate API (Currency)                                                        |
+| **Build Tools**     | Node.js, npm, Bash, Babel (@babel/preset-env)                                                            |
+| **Minification**    | html-minifier-terser, clean-css-cli, terser                                                              |
+| **Code Formatting** | Prettier (run `npm run format`; enforced in CI)                                                          |
+| **Version Control** | Git, GitHub                                                                                              |
+| **Server**          | Apache (.htaccess), mod_rewrite, mod_deflate                                                             |
+| **Hosting**         | cPanel (Production), Python HTTP Server (Development)                                                    |
 | **PWA**             | Service Worker (versioned caching, install prompt, seamless updates), Web App Manifest, offline fallback |
-| **SEO**             | Open Graph, Twitter Cards, XML Sitemap, robots.txt                     |
-| **Security**        | HTTPS, CSP Headers, HSTS, X-Frame-Options                              |
-| **Analytics**       | Google Analytics (gtag.js)                                             |
-| **Accessibility**   | WCAG 2.1, ARIA, Semantic HTML                                          |
-| **Performance**     | GZIP Compression, Browser Caching, Asset Minification                  |
+| **SEO**             | Open Graph, Twitter Cards, XML Sitemap, robots.txt                                                       |
+| **Security**        | HTTPS, CSP Headers, HSTS, X-Frame-Options                                                                |
+| **Analytics**       | Google Analytics (gtag.js)                                                                               |
+| **Accessibility**   | WCAG 2.1, ARIA, Semantic HTML                                                                            |
+| **Performance**     | GZIP Compression, Browser Caching, Asset Minification                                                    |
 
 ## Key Features
 
-| Feature                          | Description                                                                                                                                                                                                       |
-| -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **City Services Directory** | Comprehensive guide to all LGU services with requirements, fees, and processing times                                                                                                                             |
-| **Government Officials**         | Directory of elected officials and department heads with contact information                                                                                                                                      |
-| **Budget Transparency**          | Financial reports, income/expenditure breakdowns, and infrastructure projects                                                                                                                                     |
-| **Legislative Documents**        | Searchable database of ordinances and resolutions from Sangguniang Panlungsod                                                                                                                                          |
-| **City Statistics**         | Demographics, economic data, and competitive index rankings                                                                                                                                                       |
-| **Appointment Services**         | Online appointment scheduling integration with the Mayor's Office (OASYS), featuring branded Lottie animation                                                                                                     |
-| **Mati Quiz**                  | Interactive quiz about Mati history and culture, linked from homepage CTA and footer across all pages                                                                                                           |
-| **Real-time Information**        | Live weather updates, currency exchange rates, and Philippine time                                                                                                                                                |
-| **Emergency Hotline Marquee**    | Clickable scrolling marquee for emergency contacts on tablet and mobile viewports, with pause-on-hover/focus accessibility                                                                                        |
-| **Progressive Web App**          | Installable PWA with "Install App" prompt, seamless auto-updates via skipWaiting (no manual refresh), versioned service worker caching (static + runtime), offline fallback page with emergency hotlines, push notification foundation |
-| **Auto Version Management**      | Dynamic version display from `version.json`, auto-bumped on every git commit via pre-commit hook, synced across all 51+ HTML files, `package.json`, and React app                                                 |
-| **Multi-language Support**       | Full i18n coverage in English and Filipino (full), plus a Cebuano starter set (high-visibility UI; remaining keys fall back to English)                                                                                                                |
-| **Clean URLs**                   | SEO-friendly URLs without `.html` extensions, powered by Apache mod_rewrite                                                                                                                                       |
-| **Brief History of Mati**      | Interactive timeline (1760–1957) with fully translated cards in all three languages                                                                                                                               |
-| **Mobile Navigation**            | Responsive menu with GPU-accelerated open/close transitions, body scroll lock, animation guard against rapid toggles, debounced resize handling, touch-safe hover scoping, click-outside-to-close, and focus trap |
-| **Accessibility**                | WCAG 2.1 compliant with skip links, ARIA labels, keyboard navigation, and semantic HTML                                                                                                                           |
-| **SEO Optimized**                | Meta tags, Open Graph, Twitter Cards, structured data, and XML sitemap                                                                                                                                            |
-| **Performance**                  | 90%+ size reduction through minification, GZIP compression, Babel transpilation, and browser caching                                                                                                              |
+| Feature                       | Description                                                                                                                                                                                                                            |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **City Services Directory**   | Comprehensive guide to all LGU services with requirements, fees, and processing times                                                                                                                                                  |
+| **Government Officials**      | Directory of elected officials and department heads with contact information                                                                                                                                                           |
+| **Budget Transparency**       | Financial reports, income/expenditure breakdowns, and infrastructure projects                                                                                                                                                          |
+| **Legislative Documents**     | Searchable database of ordinances and resolutions from Sangguniang Panlungsod                                                                                                                                                          |
+| **City Statistics**           | Demographics, economic data, and competitive index rankings                                                                                                                                                                            |
+| **Appointment Services**      | Online appointment scheduling integration with the Mayor's Office (OASYS), featuring branded Lottie animation                                                                                                                          |
+| **Mati Quiz**                 | Interactive quiz about Mati history and culture, linked from homepage CTA and footer across all pages                                                                                                                                  |
+| **Real-time Information**     | Live weather updates, currency exchange rates, and Philippine time                                                                                                                                                                     |
+| **Emergency Hotline Marquee** | Clickable scrolling marquee for emergency contacts on tablet and mobile viewports, with pause-on-hover/focus accessibility                                                                                                             |
+| **Progressive Web App**       | Installable PWA with "Install App" prompt, seamless auto-updates via skipWaiting (no manual refresh), versioned service worker caching (static + runtime), offline fallback page with emergency hotlines, push notification foundation |
+| **Auto Version Management**   | Dynamic version display from `version.json`, bumped by `scripts/bump-version.js` (automatically on `npm run build`, or on demand via `npm run version:patch`), synced across all 51+ HTML files, `package.json`, and React app         |
+| **Multi-language Support**    | Full i18n coverage in English and Filipino (full), plus a Cebuano starter set (high-visibility UI; remaining keys fall back to English)                                                                                                |
+| **Clean URLs**                | SEO-friendly URLs without `.html` extensions, powered by Apache mod_rewrite                                                                                                                                                            |
+| **Brief History of Mati**     | Interactive timeline (1760–1957) with fully translated cards in all three languages                                                                                                                                                    |
+| **Mobile Navigation**         | Responsive menu with GPU-accelerated open/close transitions, body scroll lock, animation guard against rapid toggles, debounced resize handling, touch-safe hover scoping, click-outside-to-close, and focus trap                      |
+| **Accessibility**             | WCAG 2.1 compliant with skip links, ARIA labels, keyboard navigation, and semantic HTML                                                                                                                                                |
+| **SEO Optimized**             | Meta tags, Open Graph, Twitter Cards, structured data, and XML sitemap                                                                                                                                                                 |
+| **Performance**               | 90%+ size reduction through minification, GZIP compression, Babel transpilation, and browser caching                                                                                                                                   |
 
 ## Quick Start
 
@@ -182,6 +182,20 @@ npm run dev
 | `npm run format`             | Format all files with Prettier                                        |
 | `npm run format:check`       | Check formatting without writing changes                              |
 
+### Code Formatting
+
+The whole repository is Prettier-formatted against `.prettierrc`, and
+`.github/workflows/format.yml` runs `npm run format:check` on every push and
+pull request to `main`. There is **no Git pre-commit hook** — run
+`npm run format` yourself before committing.
+
+`.prettierignore` excludes only dependencies, build output (`dist/`,
+`react-app/out/`), Playwright results, minified bundles, the generated
+`data/mati/data/` cache and `data/mati/dist/` output, and the vendored
+stylesheet copy under `react-app/public/assets/`. Everything else is expected
+to pass the check, so new exclusions belong in `.prettierignore` with a comment
+explaining why — not in an unformatted commit.
+
 ### Production Deployment
 
 1. **Build production files**
@@ -209,10 +223,10 @@ npm run build
 
 The site supports three languages with full translation coverage:
 
-| Language | Code  | Status                |
-| -------- | ----- | --------------------- |
-| English  | `en`  | Complete (5,546 keys) |
-| Filipino | `fil` | Complete (5,546 keys) |
+| Language | Code  | Status                                                       |
+| -------- | ----- | ------------------------------------------------------------ |
+| English  | `en`  | Complete (5,546 keys)                                        |
+| Filipino | `fil` | Complete (5,546 keys)                                        |
 | Cebuano  | `ceb` | Starter set (high-visibility UI; rest falls back to English) |
 
 The static site uses a `TranslationEngine` in `assets/js/translations.js` with `data-i18n` attributes on HTML elements. The React version uses a `LanguageContext` provider with a `t()` function. Both systems support fallback to English for any missing keys.
@@ -271,7 +285,7 @@ bettermati/
 ├── .htaccess             # Apache configuration (CSP, rewrites, caching)
 ├── .prettierrc           # Prettier code formatting configuration
 ├── .prettierignore       # Prettier ignore patterns
-├── version.json          # Version tracking (auto-bumped on commit)
+├── version.json          # Version tracking (bumped by scripts/bump-version.js)
 ├── build.sh              # Build automation script
 ├── babel.config.json     # Babel transpilation configuration
 ├── package.json          # Node.js configuration
@@ -323,7 +337,7 @@ bettermati/
 
 - Created cross-platform `scripts/bump-version.js` (Node.js) replacing the bash-only `version.sh` for Windows compatibility
 - Version bump updates `version.json`, `package.json`, all 51+ HTML files, and syncs to `react-app/public/version.json`
-- Git pre-commit hook auto-bumps patch version on every commit (skips version-only commits to prevent loops)
+- Version bumps are explicit: `npm run build` bumps the patch level as its first stage, and `npm run version:patch|minor|major` bumps without building (the repo ships no Git hook)
 - Footer version displayed dynamically at runtime via `version.js` fetching from `version.json`
 
 #### React App Sync
@@ -341,7 +355,7 @@ bettermati/
 
 - Installed Prettier as dev dependency with project-wide configuration (`.prettierrc`, `.prettierignore`)
 - Formatted entire codebase (120+ files) for consistent code style
-- Git pre-commit hook auto-formats staged files with Prettier before each commit
+- Formatting is enforced by CI (`.github/workflows/format.yml`), not by a Git hook — run `npm run format` before committing
 - Fixed `privacy/index.html` malformed HTML (duplicate `</body></html>` closing tags)
 - Resolved all npm vulnerabilities: upgraded `@lhci/cli` to ^0.15.1, added `tmp` override to 0.2.5 (0 vulnerabilities)
 - Added `npm run format` and `npm run format:check` scripts
@@ -427,30 +441,30 @@ We welcome contributions from everyone! Whether you're a developer, designer, da
 
 ### Code Style Guidelines
 
-| Guideline         | Description                                                              |
-| ----------------- | ------------------------------------------------------------------------ |
-| **Formatting**    | Prettier auto-formats on commit; run `npm run format` to format manually |
-| **HTML**          | Use semantic HTML5 elements; validate before committing                  |
-| **CSS**           | Follow BEM naming conventions; use CSS custom properties                 |
-| **JavaScript**    | Keep vanilla JS unless proposing framework for data visualization        |
-| **Naming**        | Use meaningful, descriptive variable and function names                  |
-| **Comments**      | Add comments for complex logic and non-obvious implementations           |
-| **Accessibility** | Ensure WCAG 2.1 compliance (alt text, ARIA, keyboard navigation)         |
-| **Performance**   | Optimize images; minimize DOM manipulation                               |
-| **Testing**       | Test on Chrome, Firefox, Safari, Edge; test mobile responsiveness        |
-| **Validation**    | Validate HTML/CSS before pull requests                                   |
+| Guideline         | Description                                                            |
+| ----------------- | ---------------------------------------------------------------------- |
+| **Formatting**    | Run `npm run format` before committing; CI runs `npm run format:check` |
+| **HTML**          | Use semantic HTML5 elements; validate before committing                |
+| **CSS**           | Follow BEM naming conventions; use CSS custom properties               |
+| **JavaScript**    | Keep vanilla JS unless proposing framework for data visualization      |
+| **Naming**        | Use meaningful, descriptive variable and function names                |
+| **Comments**      | Add comments for complex logic and non-obvious implementations         |
+| **Accessibility** | Ensure WCAG 2.1 compliance (alt text, ARIA, keyboard navigation)       |
+| **Performance**   | Optimize images; minimize DOM manipulation                             |
+| **Testing**       | Test on Chrome, Firefox, Safari, Edge; test mobile responsiveness      |
+| **Validation**    | Validate HTML/CSS before pull requests                                 |
 
 ## Data Sources
 
 All public information is sourced from official government portals:
 
-| Source                             | URL                                                                       | Data Type                 |
-| ---------------------------------- | ------------------------------------------------------------------------- | ------------------------- |
-| LGU Mati Official Website        | [mati.gov.ph](https://mati.gov.ph/)                                   | Services, Officials       |
-| Sangguniang Panlungsod ng Mati        | [sangguniangbayan.mati.gov.ph](https://sangguniangbayan.mati.gov.ph/) | Ordinances, Resolutions   |
-| Bureau of Local Government Finance | [blgf.gov.ph](https://blgf.gov.ph/)                                       | Budget, Financial Reports |
-| Philippine Statistics Authority    | [psa.gov.ph](https://psa.gov.ph/)                                         | Demographics, Census      |
-| DTI CMCI Portal                    | [cmci.dti.gov.ph](https://cmci.dti.gov.ph/)                               | Competitive Index         |
+| Source                             | URL                                                                   | Data Type                 |
+| ---------------------------------- | --------------------------------------------------------------------- | ------------------------- |
+| LGU Mati Official Website          | [mati.gov.ph](https://mati.gov.ph/)                                   | Services, Officials       |
+| Sangguniang Panlungsod ng Mati     | [sangguniangbayan.mati.gov.ph](https://sangguniangbayan.mati.gov.ph/) | Ordinances, Resolutions   |
+| Bureau of Local Government Finance | [blgf.gov.ph](https://blgf.gov.ph/)                                   | Budget, Financial Reports |
+| Philippine Statistics Authority    | [psa.gov.ph](https://psa.gov.ph/)                                     | Demographics, Census      |
+| DTI CMCI Portal                    | [cmci.dti.gov.ph](https://cmci.dti.gov.ph/)                           | Competitive Index         |
 
 ## License
 
@@ -465,13 +479,13 @@ See [LICENSE](LICENSE) for full details.
 
 ## Contact
 
-| Channel  | Link                                                                      |
-| -------- | ------------------------------------------------------------------------- |
-| Website  | [bettermati.org](https://bettermati.org)                              |
-| Email    | volunteer@bettermati.org                                                |
-| Facebook | [@bettermati.org](https://www.facebook.com/bettermati.org)            |
-| LinkedIn | [BetterMati](https://www.linkedin.com/company/bettermati/)            |
-| Discord  | [Join Community](https://discord.com/invite/qeSu7RJkjQ)                   |
+| Channel  | Link                                                              |
+| -------- | ----------------------------------------------------------------- |
+| Website  | [bettermati.org](https://bettermati.org)                          |
+| Email    | volunteer@bettermati.org                                          |
+| Facebook | [@bettermati.org](https://www.facebook.com/bettermati.org)        |
+| LinkedIn | [BetterMati](https://www.linkedin.com/company/bettermati/)        |
+| Discord  | [Join Community](https://discord.com/invite/qeSu7RJkjQ)           |
 | GitHub   | [BetterMati/bettermati](https://github.com/BetterMati/bettermati) |
 
 ## Acknowledgments
