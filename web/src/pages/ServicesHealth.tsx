@@ -39,16 +39,41 @@ const services: { Icon: LucideIcon; title: string; desc: string; fee: string; ti
 ];
 
 const stats: [string, string][] = [
-  ['88', 'health-stat-facilities'],
-  ['3', 'health-stat-hospitals'],
-  ['22', 'health-stat-bhs'],
+  ['54', 'health-stat-facilities'],
+  ['2', 'health-stat-hospitals'],
+  ['34', 'health-stat-bhs'],
   ['1', 'health-stat-mho'],
 ];
 
+// Facilities per DOH National Health Facility Registry (active, City of Mati),
+// retrieved 16 September 2026. Literal text — corrected from Solano-template data.
 const hospitals: { badge: string; title: string; desc: string; loc: string }[] = [
-  { badge: 'Tertiary Hospital', title: 'health-pltciluis-a-tiam-medical-center', desc: 'health-a-tertiary-level-philhealthaccredited-private', loc: 'health-national-highway-mati' },
-  { badge: 'Private Hospital', title: 'health-medical-mission-group-hospital-health-services', desc: 'health-also-known-as-new-mmg-hospital-providing-quality', loc: 'health-bintawan-road-brgy-quezon' },
-  { badge: 'Medical Center', title: 'health-salubris-inc-salubris-medical-center', desc: 'health-private-medical-center-offering-various', loc: 'health-national-highway-mati' },
+  {
+    badge: 'Government Hospital',
+    title: 'Davao Oriental Provincial Medical Center',
+    desc: 'The government hospital serving Mati and the wider province of Davao Oriental.',
+    loc: 'City of Mati, Davao Oriental',
+  },
+  {
+    badge: 'Private Hospital',
+    title: 'St. Camillus Hospital of Mati Foundation, Inc.',
+    desc: 'A private hospital providing inpatient and outpatient care in the City of Mati.',
+    loc: 'City of Mati, Davao Oriental',
+  },
+];
+
+const NHFR_URL = 'https://nhfr.doh.gov.ph/VActivefacilitiesList';
+const NHFR_RETRIEVED = '— active facilities registered in the City of Mati, retrieved 16 September 2026';
+
+// 34 Barangay Health Stations (DOH NHFR). Literal names — corrected from Solano leftovers.
+const bhs: string[] = [
+  'Badas BHS', 'Bobon BHS', 'Buso BHS', 'Cabuaya BHS', 'Culian BHS', 'Dahican A BHS',
+  'Dahican B BHS', 'Dahican C BHS', 'Danao BHS', 'Dawan BHS', 'Don Enrique Lopez BHS',
+  'Don Martin Marundan BHS', 'Don Salvador Lopez, Sr. BHS', 'Langka BHS', 'Lawigan BHS',
+  'Libudon BHS', 'Luban BHS', 'Macambol BHS', 'Mamali BHS', 'Matiao A BHS', 'Matiao B BHS',
+  'Mayo BHS', 'Poblacion 1 BHS', 'Poblacion 2 BHS', 'Poblacion 3 BHS', 'Poblacion 4 BHS',
+  'Poblacion 5 BHS', 'Poblacion 6 BHS', 'Sainz BHS', 'Sanghay BHS', 'Tagabakid BHS',
+  'Tagbinonga BHS', 'Taguibo BHS', 'Tamisan BHS',
 ];
 
 const mhoServices = [
@@ -58,12 +83,6 @@ const mhoServices = [
   'health-service-prenatal',
   'health-service-family-planning',
   'health-service-tb-dots',
-];
-
-const bhs = [
-  'aggub', 'bagahabag', 'bangaan', 'bangar', 'buenavista', 'calaocan', 'commando',
-  'concepcion', 'curifang', 'dadap', 'lactawan', 'nangalisan', 'ocapon', 'osmea',
-  'paitan', 'pilar', 'poblacion', 'quezon', 'quirino', 'roxas', 'tucal', 'uddiawan',
 ];
 
 // Legacy .health-facility-card: white card with a primary left rule.
@@ -180,12 +199,19 @@ export default function ServicesHealth() {
               <FacilityCard
                 key={h.title}
                 badge={h.badge}
-                title={t(h.title)}
-                description={t(h.desc)}
-                location={t(h.loc)}
+                title={h.title}
+                description={h.desc}
+                location={h.loc}
               />
             ))}
           </div>
+          <p className="mt-3 text-xs text-muted-foreground">
+            Source:{' '}
+            <a href={NHFR_URL} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+              DOH National Health Facility Registry
+            </a>{' '}
+            {NHFR_RETRIEVED}
+          </p>
         </Container>
       </Section>
 
@@ -230,10 +256,17 @@ export default function ServicesHealth() {
                 key={name}
                 className="rounded-r-md border-l-[3px] border-l-primary bg-muted px-3 py-2.5 text-[0.8125rem] font-medium text-foreground"
               >
-                {t(`health-${name}-bhs`)}
+                {name}
               </div>
             ))}
           </div>
+          <p className="mt-3 text-xs text-muted-foreground">
+            Source:{' '}
+            <a href={NHFR_URL} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+              DOH National Health Facility Registry
+            </a>{' '}
+            {NHFR_RETRIEVED}
+          </p>
         </Container>
       </Section>
 
