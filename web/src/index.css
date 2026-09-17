@@ -2,6 +2,12 @@
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 @import '@fontsource-variable/inter';
+/* Homepage revamp typography: Plus Jakarta Sans (display) + IBM Plex Mono (labels).
+   Self-hosted to satisfy the .htaccess CSP (no Google Fonts / CDN). */
+@import '@fontsource-variable/plus-jakarta-sans';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+@import '@fontsource/ibm-plex-mono/600.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -13,6 +19,15 @@
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: 'Inter Variable', sans-serif;
+
+  /* Homepage revamp (variant 3a "Feel Mati"): additive utilities only — these do
+     NOT override the global semantic tokens, so the other routes are untouched.
+     font-display / font-mono, and the Pujada-navy + royal + Feel-Mati-amber palette. */
+  --font-display: 'Plus Jakarta Sans Variable', 'Inter Variable', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --color-navy: #123c7a; /* Pujada navy — dark surfaces & headings */
+  --color-royal: #2b62ee; /* royal blue — primary accent */
+  --color-amber: #ffc001; /* Feel Mati amber */
 
   /* shadcn semantic color tokens */
   --color-sidebar-ring: var(--sidebar-ring);
