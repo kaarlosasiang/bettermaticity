@@ -159,11 +159,14 @@ export default function Header() {
     };
   }, [mobileMenuOpen, closeMenu]);
 
+  // Inactive: small, medium-weight, muted. Desktop links become rounded pills with a
+  // subtle hover fill. Active pill = tinted primary bg + semibold (see linkActive).
   const linkBase =
-    'block py-3 font-medium text-foreground transition-colors select-none hover:text-primary lg:py-0';
+    'block rounded-lg py-3 text-[0.9375rem] font-medium text-foreground transition select-none hover:text-primary lg:px-3.5 lg:py-2 lg:hover:bg-muted';
+  const linkActive = 'font-semibold text-primary lg:bg-primary/10 lg:hover:bg-primary/10';
 
   return (
-    <header className="sticky top-0 z-[1000] bg-white py-3 shadow-sm">
+    <header className="sticky top-0 z-[1000] bg-white py-1.5 shadow-sm">
       <div className="mx-auto flex min-h-12 w-full max-w-[1200px] flex-wrap items-center justify-between px-6">
         {/* Logo */}
         <AppLink to="/" className="order-first flex items-center" aria-label="Better Mati home">
@@ -186,7 +189,7 @@ export default function Header() {
             'lg:visible lg:order-none lg:mt-0 lg:max-h-none lg:w-auto lg:overflow-visible lg:border-0 lg:pt-0 lg:opacity-100'
           )}
         >
-          <ul className="flex flex-col gap-0 lg:flex-row lg:items-center lg:gap-6">
+          <ul className="flex flex-col gap-0 lg:flex-row lg:items-center lg:gap-1">
             {NAV.map((entry) => {
               const active =
                 entry.to === '/' ? pathname === '/' : pathname.startsWith(entry.to);
@@ -196,7 +199,7 @@ export default function Header() {
                     <AppLink
                       to={entry.to}
                       onClick={closeMenu}
-                      className={cn(linkBase, active && 'text-primary')}
+                      className={cn(linkBase, active && linkActive)}
                     >
                       {t(entry.key)}
                     </AppLink>
@@ -214,7 +217,7 @@ export default function Header() {
                     className={cn(
                       linkBase,
                       'flex items-center justify-between gap-1 lg:justify-start',
-                      active && 'text-primary'
+                      active && linkActive
                     )}
                   >
                     {t(entry.key)}
