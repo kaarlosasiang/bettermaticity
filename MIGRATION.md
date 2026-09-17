@@ -1,15 +1,29 @@
 # Migration Guide: Static HTML to React + TypeScript
 
+> ### ✅ Migration complete — this document is historical
+>
+> BetterMati.org **has finished** migrating from the static-HTML site to a modern React app.
+> The site is now a single **Vite + React 19 + TypeScript + Tailwind v4 + shadcn/ui**
+> application in [`web/`](web/), statically prerendered by `vite-react-ssg`. The legacy static
+> pages and the interim Next.js `react-app/` have been **removed**. See the
+> [root README](README.md) for the current architecture, commands, and deployment.
+>
+> The guidance below is retained for historical reference and describes the two-version
+> transition period; it no longer reflects the repository layout.
+
 This document provides guidance for contributors migrating from the static HTML version to the React + TypeScript version of BetterMati.org.
 
 ## Overview
 
-BetterMati.org now has two versions:
+During the migration, BetterMati.org temporarily maintained two versions:
 
-| Version            | Branch             | Status             | Technology                       |
-| ------------------ | ------------------ | ------------------ | -------------------------------- |
-| Static HTML        | `main`             | Stable (Legacy)    | HTML5, CSS3, Vanilla JavaScript  |
-| React + TypeScript | `react-typescript` | Active Development | Next.js 14, React 18, TypeScript |
+| Version            | Branch             | Status           | Technology                       |
+| ------------------ | ------------------ | ---------------- | -------------------------------- |
+| Static HTML        | `main`             | Removed (Legacy) | HTML5, CSS3, Vanilla JavaScript  |
+| React + TypeScript | `react-typescript` | Superseded       | Next.js 14, React 18, TypeScript |
+
+> **Note:** the final architecture is neither of the above — it is a **Vite + React 19 SSG**
+> app in `web/` (not Next.js). See the root README.
 
 ## Version Comparison
 

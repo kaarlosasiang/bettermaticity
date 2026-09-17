@@ -1,32 +1,35 @@
-# React + TypeScript + Vite
+# BetterMati.org — web app
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+This is the **Vite + React 19 + TypeScript + Tailwind v4 + shadcn/ui** application that powers
+the entire BetterMati.org site. It is statically prerendered to HTML by
+[`vite-react-ssg`](https://github.com/Daydreamer-riri/vite-react-ssg).
 
-Currently, two official plugins are available:
+**The canonical project documentation lives in the [root README](../README.md)** — project
+overview, architecture, production build (`build.sh`), deployment, and contribution guide.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Commands
 
-## React Compiler
+Run these from inside `web/`:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Command             | Description                                       |
+| ------------------- | ------------------------------------------------- |
+| `npm install`       | Install dependencies                              |
+| `npm run dev`       | Start the Vite dev server → http://localhost:5173 |
+| `npm run build`     | Build + statically prerender (`vite-react-ssg`)   |
+| `npm run preview`   | Preview this app's build output                   |
+| `npm run typecheck` | Type-check with `tsc -b`                          |
+| `npm run lint`      | Lint with oxlint                                  |
+| `npm run test`      | Run unit tests (Vitest + Testing Library)         |
 
-## Expanding the Oxlint configuration
+> For a full production build (app + root static passthrough merged into `dist/` for cPanel),
+> run `npm run build` from the **repo root**, which invokes `build.sh`.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## Layout
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+- `src/pages/` — route components; `src/routes.tsx` — route table; `migrated-routes.json` —
+  the set of routes prerendered at build time.
+- `src/components/{layout,ui,primitives}/` — shared chrome, shadcn/ui primitives, and layout
+  primitives.
+- `src/lib/` — typed data modules + helpers; `src/locales/` — i18next resources (`en`/`fil`/`ceb`).
+- `src/index.css` — Tailwind theme + design tokens; `vite.config.ts` — build/SSG config and
+  the dev-only static-passthrough plugin for the root `assets/` and `data/` folders.
