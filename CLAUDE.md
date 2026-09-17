@@ -119,8 +119,9 @@ The React app is the whole _site_, but a handful of plain static files are still
 - `offline.html` — PWA offline fallback, precached and served by `sw.js`.
 - `admin/news-editor.html` — a standalone ~800-line tool that writes `data/news.json` (the feed `useNews` fetches at runtime).
 - `sw.js`, `manifest.webmanifest`, `.htaccess`, `robots.txt`.
+- **`serve.py`** — the standard way to serve a built `dist/`. It emulates the `.htaccess` clean-URL rewrites, which a plain `http.server` does not, so it is what CI and the tests use: the Lighthouse workflow (`.github/workflows/lighthouse.yml`), the Playwright integration harness (`playwright.integration.config.js`), and `build.sh` itself, which prints `python3 serve.py -d dist -p 8888` as the preview command. Both packaging scripts list it deliberately. Prefer it over `npm run serve:dist` when previewing a build — that one skips the rewrites, so clean URLs 404. It is not a dev server for source; use Vite for that.
 
-All of these are self-contained (inline CSS/JS); none reference the deleted `assets/css` or `assets/js`. `build.sh` copies them into `dist/` in the stage-4 static passthrough.
+All of the HTML files are self-contained (inline CSS/JS); none reference the deleted `assets/css` or `assets/js`. `build.sh` copies them into `dist/` in the stage-4 static passthrough.
 
 ## Known stale leftovers from the static era
 
@@ -129,7 +130,7 @@ They are **deliberately retained**, so don't propose deleting them; just don't t
 extend them without fixing them first, and don't cite them as the way to do something:
 
 - **Root `package.json`** `dev` / `serve` run `python3 -m http.server 8000` against a root `index.html` that no longer exists. Use `cd web && npm run dev`.
-- **`serve.py`** — a clean-URL dev server mimicking mod_rewrite for the root static site. Nothing to serve from the repo root now; use the Vite dev server, or `npm run serve:dist` to preview a build.
+- **`tests/integration/health.spec.js`** — the harness itself is current (it builds `dist/` and serves it via `serve.py`), but two of its five tests assert coexistence that no longer exists: "un-migrated legacy route is still served by legacy" expects `/government/` to be non-React, and "legacy home is still served" expects `/` to load `assets/js/main.js`. Both routes are now React, so those two will fail.
 - **All 10 `scripts/*.py` i18n scripts** (`i18n-upgrade.py`, `add-*-keys.py`, `translate-pass*.py`, `translate-remaining.py`, `fix-footer-quiz-copyright.py`) operate on `assets/js/translations.js` and/or the old page `*.html` — all deleted. Translations now live in `web/src/locales/*.json`; edit those directly or write new tooling against them. (**`data/mati/build_barangays.py` is the exception** — it is current and still the supported way to regenerate the barangay dataset.)
 - **`playwright.config.js` + `tests/volunteer-modal.*.spec.js`** serve the repo root and `goto('/index.html')` — they target the deleted legacy site and cannot pass. The volunteer modal now lives in `web/src/components/VolunteerDialog.tsx`; its coverage belongs in Vitest under `web/`.
 - **`scripts/bump-version.js`** still walks a hardcoded `htmlDirs` list stamping `Ver. X.X.X` into HTML files; those directories are gone, so that pass is a no-op. The `web/package.json` sync is the part that matters.
