@@ -4,76 +4,133 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-BetterMati.org — a civic-tech portal for LGU Mati, Davao Oriental, Philippines. The repo holds **two coexisting implementations of the same site**:
+BetterMati.org — a civic-tech portal for LGU Mati, Davao Oriental, Philippines.
 
-1. **Static HTML site (root directory)** — the stable, production version. Vanilla HTML5/CSS3/ES6+, no framework, served directly. This is where almost all content and features live.
-2. **React app (`react-app/`)** — Next.js 15 App Router, static export. In-progress migration. Currently only the `/services/health` route is actually shipped to production; everything else in the React app is scaffolding.
+The site is **one app: a Vite + React 19 + TypeScript + Tailwind v4 + shadcn/ui application in [`web/`](web/)**, statically prerendered to HTML by [`vite-react-ssg`](https://github.com/Daydreamer-riri/vite-react-ssg) and served as plain files from Apache/cPanel. There is no server runtime.
 
-Both are present on `main`. When a change is requested, assume it targets the **static site at root** unless the React app is explicitly named.
+The repo used to hold a vanilla static-HTML site at the root plus an interim Next.js `react-app/`. **Both are gone** (removed in the Phase 9 cutover, `8df27d2`). Assume every code change targets `web/`. What remains at the root is the build pipeline, the JSON content feeds in `data/`, images in `assets/`, and server config. [`MIGRATION.md`](MIGRATION.md) is historical and describes a layout that no longer exists — don't follow it.
 
 ## Commands
 
-Static site (root):
-- `npm run dev` / `npm run serve` — serve at `http://localhost:8000` (Python http.server; no build needed for dev)
-- `npm run build` — full production build via `build.sh` → outputs `dist/` (bumps patch version first)
+App (run inside `web/`):
+
+- `npm run dev` — Vite dev server → http://localhost:5173
+- `npm run build` — `vite-react-ssg build` → `web/dist/` (prerenders the migrated route set)
+- `npm run preview` — preview this app's own build
+- `npm run typecheck` — `tsc -b`
+- `npm run lint` — oxlint
+- `npm test` — Vitest + Testing Library (`npm run test:watch` to watch)
+
+Repo root:
+
+- `npm run build` — full production build via [`build.sh`](build.sh) → `dist/` (bumps patch version first)
 - `npm run build:minor` / `build:major` — bump that level, then build without a second bump
-- `npm run format` / `format:check` — Prettier over the whole repo
+- `npm run serve:dist` — preview the built `dist/` at :8080
+- `npm run version:patch|minor|major` — bump version only (see below)
+- `npm run format` / `format:check` — Prettier over the repo (`web/src/locales` is ignored)
 - `npm run package` — build + zip a cPanel-ready release archive
-- `npm run version:patch|minor|major` — bump version only (see version system below)
 
-Tests (Playwright, cross-browser: chrome/edge/firefox/safari + mobile):
-- `npm test` — run all specs (auto-starts a server on `:8321`)
-- `npm run test:chrome` — single project
-- Run one file/test: `npx playwright test tests/volunteer-modal.behavior.spec.js` or add `-g "test name"`
-- `npm run test:report` — open last HTML report
-- Test coverage is currently limited to the volunteer modal (`tests/volunteer-modal.*.spec.js`).
+## Routes — `migrated-routes.json` is the source of truth
 
-React app (`cd react-app`):
-- `npm run dev` — Next dev server
-- `npm run build` — `next build` (static export to `react-app/out/`)
+[`web/migrated-routes.json`](web/migrated-routes.json) lists every live route (48 today). It drives three things at once:
 
-Lighthouse: `npm run lighthouse` (`.lighthouserc.json`).
+1. the SSG prerender set (`ssgOptions.includedRoutes` in [`web/vite.config.ts`](web/vite.config.ts)),
+2. `build.sh`'s flat→folder pass and the route count in its summary,
+3. `AppLink`'s SPA-vs-full-navigation decision ([`web/src/components/AppLink.tsx`](web/src/components/AppLink.tsx)).
+
+**Adding a page means three edits:** the component under `web/src/pages/`, an entry in [`web/src/routes.tsx`](web/src/routes.tsx), and an entry in `migrated-routes.json`. Skipping the third means the page renders in dev but is never prerendered and never ships.
+
+Use `AppLink` (not bare `<Link>` or `<a>`) for internal navigation — it falls back to a full page load for anything not in the migrated set, and passes external/`mailto:`/`tel:` links straight through.
+
+## App architecture (`web/src/`)
+
+- `pages/` — route components. Service-category pages are grouped in `categories.tsx` / `categories2.tsx`; the 22 service-detail pages live in `pages/service-details/`.
+- `routes.tsx` — the route table; `Layout.tsx` — persistent chrome; `main.tsx` — the `ViteReactSSG` entry (drives both prerender and hydration).
+- `components/layout/` — `Header`, `Footer`, `HotlineBar`, `InfoBar`.
+- `components/ui/` — shadcn/ui primitives. `components/primitives/` — layout/content primitives (`Container`, `Section`, `Grid`, `PageHeader`, `SectionTitle`, `ServiceCard`, `StatCard`), re-exported from `primitives/index.ts`.
+- `components/` (top level) — `Seo`, `AppLink`, `PWAManager`, `Analytics`, `ServiceSearch`, `VolunteerDialog`, `DpwhProjects`, `OnlineServices`, `ServiceCategoryPage`, `ImageSlot`, `motion.ts`.
+- `lib/` — typed data modules and helpers (`services.ts`, `govData.ts`, `govDirectory.ts`, `budgetData.ts`, `statsData.ts`, `dpwhData.ts`, `infrastructureData.ts`, `legislativeProcess.ts`, `hotlines.ts`, `charts.ts`, `utils.ts`).
+- `hooks/` — `useLanguage`, `useNews`.
+- `index.css` — Tailwind v4 theme. Tokens are declared in `@theme inline`: the shadcn semantic set plus the brand palette (`--color-navy` Pujada navy, `--color-royal`, `--color-amber` "Feel Mati") and `--font-sans` / `--font-display` / `--font-mono`. Fonts are **self-hosted via `@fontsource`** — the `.htaccess` CSP forbids Google Fonts/CDN, so never add a font `<link>`.
+
+**SEO:** every page renders `<Seo title description canonicalPath />`, which serializes title/description/canonical/OpenGraph/Twitter into the prerendered HTML via `vite-react-ssg`'s `<Head>`. New routes should include one.
+
+**Motion:** use the shared primitives in [`web/src/components/motion.ts`](web/src/components/motion.ts) (`fadeUp`, `staggerContainer`, `revealViewport`) with the lean `LazyMotion` + `domAnimation` + `m.*` subset — importing `motion` directly from `framer-motion` pulls in the full bundle. Reduced motion is handled by wrapping a page's animated tree in `<MotionConfig reducedMotion="user">` (see `Home.tsx`), which drops transforms but keeps opacity fades — do that rather than gating animations by hand.
+
+## Data
+
+Content feeds live in the repo-root **`data/`** directory, not in `web/`. They are reached through the `@data` alias and **imported at build time**, so their contents are baked into the prerendered HTML:
+
+```ts
+import data from '@data/services.json'; // → repo-root data/services.json
+```
+
+To change displayed content, edit the JSON — not the components. Feeds: `services.json`, `officials.json`, `resolutions.json`, `ordinances.json`, `dpwh-projects.json`, `competitive-index.json`, `demographics.json`, `fiscal_transparency.json`, `news.json`.
+
+The one exception is **`news.json`**, fetched at runtime from `/data/news.json` by `useNews` so news can be updated without a rebuild (the `admin/` news editor writes it).
+
+`data/` is copied wholesale into `dist/data/` by `build.sh`, and the dev server is configured with `fs.allow: ['..']` so the root `data/` is importable during `npm run dev`.
+
+## i18n (`web/src/i18n.ts`)
+
+i18next + react-i18next, three languages: `en` / `fil` (Filipino, full) / `ceb` (Cebuano).
+
+- **Flat kebab-case keys.** `keySeparator` and `nsSeparator` are `false` — a `.` or `:` in a key is literal, not a path.
+- `en` is bundled (needed synchronously for prerender + hydration); `fil` and `ceb` are code-split and fetched on first switch via `loadLanguage`.
+- The choice persists in `localStorage` under `selectedLang`, read client-only in a `useEffect` so the first render stays `en` and matches the prerendered HTML. **Don't move that read to render time** — it causes a hydration mismatch.
+- `ceb.json` is a small machine-assisted starter set (~8 KB vs ~349 KB for `en`), so most Cebuano strings currently fall back to English pending a full translation + native review.
+- Any new UI string needs a key in `en.json` (required), plus `fil`/`ceb` when available. Missing keys fall back to English automatically.
 
 ## Version system — single source of truth
 
-`version.json` (root) is the master version. `scripts/bump-version.js` propagates it to: `package.json`, **every HTML file** (the `Ver. X.X.X` footer pattern), and `react-app/public/version.json`. `build.sh` calls this automatically. Never hand-edit version strings in individual files — always bump through the script. At runtime, `assets/js/version.js` fetches `/version.json` and fills `.footer-version` / `[data-version]` elements.
-
-## i18n — two separate translation systems (important)
-
-The static site and React app have **completely independent** translation data. Keeping a string translated in one does *not* touch the other.
-
-- **Static site:** `assets/js/translations.js` holds a `translations` object for `en` / `fil` (Filipino, full) / `ceb` (Cebuano). `TranslationEngine` (exposed as `window.TranslationEngine` and `window.t(key, params)`) applies strings to `[data-i18n]` elements, persists the choice, and notifies observers on language switch. `getTranslation` **falls back to English** for any key missing in the current language — the `ceb` block is a machine-assisted starter set covering high-visibility UI, so most keys currently fall back to English and are pending a full Cebuano translation + native review. Adding UI text means adding a `data-i18n` key in `en` (and ideally `fil`/`ceb`). Helper scripts in `scripts/` (`i18n-upgrade.py`, `add-*-keys.py`, `translate-pass*.py`) manage bulk key operations.
-- **React app:** translations are inlined in `react-app/src/contexts/LanguageContext.tsx` — a much smaller subset covering only the migrated routes. Consumed via `useLanguage()` → `t()`.
-
-## Static site architecture
-
-Multi-page site: each top-level directory (`services/`, `government/`, `legislative/`, `budget/`, `statistics/`, `service-details/`, `contact/`, etc.) is a page/section with its own `index.html`. Pages are wired up by including vanilla JS modules with `<script defer>`.
-
-- **Data-driven content:** page content comes from JSON in `data/` (`services.json`, `officials.json`, `resolutions.json`, `ordinances.json`, `dpwh-projects.json`, `competitive-index.json`, etc.). Matching modules in `assets/js/` fetch and render them (`officials.js`, `resolutions.js`, `ordinances.js`, `dpwh-projects.js`, `statistics*.js`, `news.js`). To change displayed data, edit the JSON — not the HTML.
-- **Shared JS (`assets/js/`):** `main.js` (nav, PWA install/update banners, service worker registration, global behavior), `search.js` (site-wide search/autocomplete), `info-bar.js` (weather/currency/time via Open-Meteo + ExchangeRate APIs), `weather-map.js` (Leaflet), `volunteer-popup.js`. No bundler — modules communicate via `window` globals and DOM.
-- **Styling:** `assets/css/style.css` is the main sheet (~188 KB); page-specific sheets (`statistics.css`, `legislative.css`, `transparency*.css`, `footer.css`, `responsive.css`, `accessibility.css`) layer on top. CSS custom properties, Flexbox/Grid, mobile-first.
-- **PWA:** `sw.js` (versioned static + runtime caching, `skipWaiting` seamless updates), `manifest.webmanifest`, `offline.html` fallback. SW registration and the update-banner flow live in `main.js`.
-
-## React app architecture (`react-app/`)
-
-Next.js 15 App Router, `output: 'export'` (fully static, no server). `src/app/` routes, `src/components/layout/` (Header/Footer/InfoBar/HotlineBar), `PWAManager.tsx`, `SearchAutocomplete.tsx`. It reuses the **same** CSS and assets as the static site via `react-app/public/assets/`. Only `services/health` is production-merged (see build).
+`version.json` (root) is the master version. [`scripts/bump-version.js`](scripts/bump-version.js) propagates it to `package.json` and `web/package.json`; `build.sh` calls this automatically. Never hand-edit version strings. At runtime the React `Footer` fetches `/version.json` and renders `Ver. X.X.X`.
 
 ## Build & deploy (`build.sh`)
 
-Six stages: (1) bump version, (2) clean `dist/`, (3) rsync the legacy static site into `dist/` (excluding all dev/tooling files — see the exclude list in `build.sh`), (4) `next build` the React app and merge only `react-app/out/_next/` → `dist/_next/` and `react-app/out/services/health.html` → `dist/services/health.html` (React routes are cherry-picked so they don't clobber legacy pages), (5) minify HTML (html-minifier-terser), CSS (clean-css), and JS (Babel transpile → Terser), (6) chmod `755` dirs / `644` files for cPanel.
+Five stages: (1) optional `.env` config + version bump, (2) clean `dist/`, (3) `npm ci` + `vite-react-ssg build` inside `web/` → `web/dist/`, (4) assemble `dist/`, (5) chmod `755` dirs / `644` files for cPanel.
 
-- **Deploy target:** upload `dist/` contents to cPanel `public_html/`. Preview with `npm run serve:dist` (`:8080`).
-- **Clean URLs:** `.htaccess` mod_rewrite strips `.html` (301 to clean URL, internal rewrite back to the file). Links should use extensionless paths.
-- **Build-time config:** optional git-ignored `.env` (see `.env.example`); `SITE_URL` is exported into the React build.
+Stage 4 is the one with teeth:
+
+- `web/dist/` is copied in as the site (hashed bundles land in `_app/`, **not** `assets/`, to avoid colliding with the passthrough `assets/`).
+- **Flat → folder for parent routes.** SSG uses `dirStyle: 'flat'`, emitting both `government.html` and `government/officials.html`; an Apache directory named `government` would shadow `government.html`. So any route that has children is moved to `<route>/index.html`. Leaf routes stay flat. This is computed from `migrated-routes.json`, and the build **fails** if an expected parent route HTML is missing.
+- Static passthrough: `assets/`, `data/`, `admin/`, the error pages, `.htaccess`, `sw.js`, `manifest.webmanifest`, `robots.txt`, `version.json`.
+- `sitemap.xml` is generated from `migrated-routes.json` by `scripts/generate-sitemap.js`.
+
+Deploy: upload `dist/` contents to cPanel `public_html/`. **Clean URLs** — `.htaccess` mod_rewrite strips `.html`, so links must use extensionless paths. Build-time config comes from an optional git-ignored root `.env`, sourced by `build.sh`: `VITE_SITE_URL` (or `SITE_URL`) sets the canonical origin used for `<Seo>` URLs and `sitemap.xml`, defaulting to `https://bettermati.org`. See `.env.example` / `web/.env.example`.
 
 ## Conventions
 
 - Prettier is enforced (`.prettierrc`): single quotes, semicolons, 2-space, 100-col, ES5 trailing commas. Run `npm run format` before committing.
-- Legacy JS uses `var` / ES5-style function expressions and defensive `try/catch` around browser storage (Safari private mode throws) — match the surrounding style when editing a file.
-- Because there is no bundler, cache-busting on the static site is done with query strings on script `src` (e.g. `weather-map.js?v=1.6.4`) — bump these when changing a cached module.
-- Any new/changed UI string on the static site should be added to `en` (required) in `translations.js`, plus `fil` and `ceb` when available; missing `ceb`/`fil` keys fall back to English automatically.
-- **This is a fork of a template originally built for LGU Solano.** It was rebranded to the City of Mati, Davao Oriental. LGU-specific records (officials, barangays, resolutions, ordinances, DPWH projects, statistics, budget, and the city history) are currently **clearly-marked placeholders** (`[Placeholder]` / `[TODO]` / `_status: "draft"`) awaiting verified City of Mati data — see the "Placeholders to fill" checklist in `README.md`.
+- TypeScript strict; avoid `any`. Functional components, PascalCase component files, `@/` alias for `web/src`, `@data` for the root `data/`.
+- Reach for an existing primitive (`Container`, `Section`, `Grid`, `ServiceCard`, `StatCard`) or a shadcn `ui/` component before writing new layout markup.
+- Tests are Vitest + Testing Library colocated next to the code (`primitives.test.tsx`, `AppLink.test.tsx`, `i18n.test.ts`), run from `web/`.
+- **This is a fork of a template originally built for LGU Solano**, rebranded to the City of Mati. LGU-specific records (officials, barangays, resolutions, ordinances, DPWH projects, statistics, budget, city history) are largely **clearly-marked placeholders** (`[Placeholder]` / `[TODO]` / `_status: "draft"`) awaiting verified City of Mati data — see the checklist in `README.md`. Canonical verified facts are tracked as BM-001; don't "correct" them from general knowledge.
+- [`web/GAP-AUDIT.md`](web/GAP-AUDIT.md) records the content-parity audit against the retired legacy site and the judgment calls made — useful when someone asks "was this section dropped or deliberately cut?"
 
 ## Mati reference dataset (`data/mati/`)
 
-Canonical barangay layer (PSA PSGC + boundaries), separate from the `data/*.json` feeds. Read [`data/mati/CLAUDE.md`](data/mati/CLAUDE.md) for conventions/gotchas (non-contiguous PSGC codes, inflated `area_km2`, the build's PSGC integrity check) before joining anything to it. Regenerate with `cd data/mati && python3 build_barangays.py` (cache in `data/mati/data/` is gitignored; `dist/` is committed). Barangay population sums to 148,672. Acquisition plan: [`docs/DATA-PLAN.md`](docs/DATA-PLAN.md).
+Canonical barangay layer (PSA PSGC + boundaries), separate from the `data/*.json` feeds. Read [`data/mati/CLAUDE.md`](data/mati/CLAUDE.md) for conventions/gotchas (non-contiguous PSGC codes, inflated `area_km2`, the build's PSGC integrity check) before joining anything to it. Consumed by `Government.tsx` via `@data/mati/dist/mati_barangays.min.json`. Regenerate with `cd data/mati && python3 build_barangays.py` (the cache in `data/mati/data/` is gitignored; `dist/` is committed). Barangay population sums to 148,672. Acquisition plan: [`docs/DATA-PLAN.md`](docs/DATA-PLAN.md).
+
+## Hand-written static files that are still live
+
+The React app is the whole _site_, but a handful of plain static files are still shipped and are **not** legacy residue — don't delete them:
+
+- `403.html`, `404.html`, `500.html` — Apache error pages (served outside React).
+- `offline.html` — PWA offline fallback, precached and served by `sw.js`.
+- `admin/news-editor.html` — a standalone ~800-line tool that writes `data/news.json` (the feed `useNews` fetches at runtime).
+- `sw.js`, `manifest.webmanifest`, `.htaccess`, `robots.txt`.
+
+All of these are self-contained (inline CSS/JS); none reference the deleted `assets/css` or `assets/js`. `build.sh` copies them into `dist/` in the stage-4 static passthrough.
+
+## Known stale leftovers from the static era
+
+These survive at the root but target files that no longer exist — they will fail if run.
+They are **deliberately retained**, so don't propose deleting them; just don't trust or
+extend them without fixing them first, and don't cite them as the way to do something:
+
+- **Root `package.json`** `dev` / `serve` run `python3 -m http.server 8000` against a root `index.html` that no longer exists. Use `cd web && npm run dev`.
+- **`serve.py`** — a clean-URL dev server mimicking mod_rewrite for the root static site. Nothing to serve from the repo root now; use the Vite dev server, or `npm run serve:dist` to preview a build.
+- **All 10 `scripts/*.py` i18n scripts** (`i18n-upgrade.py`, `add-*-keys.py`, `translate-pass*.py`, `translate-remaining.py`, `fix-footer-quiz-copyright.py`) operate on `assets/js/translations.js` and/or the old page `*.html` — all deleted. Translations now live in `web/src/locales/*.json`; edit those directly or write new tooling against them. (**`data/mati/build_barangays.py` is the exception** — it is current and still the supported way to regenerate the barangay dataset.)
+- **`playwright.config.js` + `tests/volunteer-modal.*.spec.js`** serve the repo root and `goto('/index.html')` — they target the deleted legacy site and cannot pass. The volunteer modal now lives in `web/src/components/VolunteerDialog.tsx`; its coverage belongs in Vitest under `web/`.
+- **`scripts/bump-version.js`** still walks a hardcoded `htmlDirs` list stamping `Ver. X.X.X` into HTML files; those directories are gone, so that pass is a no-op. The `web/package.json` sync is the part that matters.
+- **`react-app/`** may exist on disk as untracked build leftovers (`.next/`, `node_modules/`, `out/`). It is not in git and is safe to delete.
