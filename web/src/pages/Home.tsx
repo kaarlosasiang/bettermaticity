@@ -2,62 +2,199 @@ import { useEffect, useState } from 'react';
 import type { LucideIcon } from 'lucide-react';
 import {
   ArrowRight,
-  CalendarCheck,
-  UserPlus,
+  Compass,
   FileText,
   Store,
   Coins,
-  Users,
   HeartPulse,
-  LayoutGrid,
-  MapPin,
-  Award,
-  Ruler,
-  Thermometer,
-  Landmark,
-  UserRound,
-  Brain,
-  Megaphone,
+  Users,
+  Waves,
+  Signpost,
+  Building2,
+  Droplets,
+  TrendingUp,
+  Sun,
   CalendarDays,
-  Radio,
-  Phone,
+  Sprout,
+  ShieldAlert,
+  Briefcase,
   Mail,
+  MapPin,
 } from 'lucide-react';
-import { FaFacebookF } from 'react-icons/fa6';
 import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
 import { ServiceSearch } from '@/components/ServiceSearch';
+import { ImageSlot } from '@/components/ImageSlot';
+import { Container } from '@/components/primitives';
 import VolunteerDialog from '@/components/VolunteerDialog';
-import { useLanguage } from '@/hooks/useLanguage';
-import { Container, Section, SectionTitle, Grid, StatCard } from '@/components/primitives';
-import { totalPopulation, barangayCount } from '@/lib/statsData';
+import { totalPopulation, barangayCount, landAreaKm2, incomeClass } from '@/lib/statsData';
+import { financialData } from '@/lib/budgetData';
 
-const popular: { to: string; Icon: LucideIcon; titleKey: string; descKey: string }[] = [
-  { to: '/services/certificates', Icon: FileText, titleKey: 'service-certificates', descKey: 'service-certificates-desc' },
-  { to: '/services/business', Icon: Store, titleKey: 'service-business', descKey: 'service-business-desc' },
-  { to: '/services/tax-payments', Icon: Coins, titleKey: 'service-tax', descKey: 'service-tax-desc' },
-  { to: '/services/social-services', Icon: Users, titleKey: 'service-social', descKey: 'service-social-desc' },
-  { to: '/services/health', Icon: HeartPulse, titleKey: 'service-health', descKey: 'service-health-desc' },
+const FEEL_MATI_LOGO = '/assets/images/logo/feel-mati.png';
+
+// ── Content models ──────────────────────────────────────────────────────────
+
+const popular: { to: string; Icon: LucideIcon; label: string; color: string; feel?: boolean }[] = [
+  { to: '/services/certificates', Icon: FileText, label: 'Certificates', color: '#2b62ee' },
+  { to: '/services/business', Icon: Store, label: 'Business Permits', color: '#0077be' },
+  { to: '/services/tax-payments', Icon: Coins, label: 'Taxes & Fees', color: '#06a77d' },
+  { to: '/services/health', Icon: HeartPulse, label: 'Health Services', color: '#e01b24' },
+  { to: '/services/social-services', Icon: Users, label: 'Social Welfare', color: '#7c4dff' },
+  { to: '/services', Icon: Waves, label: 'Tourism', color: '#8a6200', feel: true },
 ];
 
-const history: { year: string; key: string }[] = [
-  { year: '1760', key: 'home-history-1760' },
-  { year: '1767', key: 'home-history-1767' },
-  { year: '1768', key: 'home-history-1768' },
-  { year: '1853', key: 'home-history-1853' },
-  { year: '1889', key: 'home-history-1889' },
-  { year: '1957', key: 'home-history-1957' },
+type Status = { text: string; dot: string };
+const rising: { to: string; Icon: LucideIcon; title: string; status: Status }[] = [
+  {
+    to: '/budget',
+    Icon: Signpost,
+    title: 'Dahican Coastal Road Rehabilitation',
+    status: { text: 'Finishing Stages', dot: '#0077be' },
+  },
+  {
+    to: '/budget',
+    Icon: Store,
+    title: 'Central Public Market Annex',
+    status: { text: 'Under Construction', dot: '#ffc001' },
+  },
+  {
+    to: '/budget',
+    Icon: Droplets,
+    title: 'Barangay Mayo Water System',
+    status: { text: 'Fully Operational', dot: '#06a77d' },
+  },
+  {
+    to: '/budget',
+    Icon: Building2,
+    title: 'Baywalk & Boulevard Extension',
+    status: { text: 'Under Construction', dot: '#ffc001' },
+  },
 ];
 
-const historyHighlights: { titleKey: string; descKey: string }[] = [
-  { titleKey: 'home-once-the-largest', descKey: 'home-mati-was-the-largest-municipality-in-the' },
-  { titleKey: 'home-urban-planning', descKey: 'home-the-1889-redevelopment-created-a-grid-of-100' },
+const tourism: { title: string; blurb: string; slot: string; badge?: string; large?: boolean }[] = [
+  {
+    title: 'Dahican Beach',
+    blurb:
+      'Seven kilometres of white sand on the Pacific side. Skimboarders at sunrise, surf through the amihan season, and sea-turtle nesting grounds watched by the Amihan sa Dahican volunteers.',
+    slot: 'Drop a Dahican Beach photo — skimboarder at sunrise',
+    badge: 'Surf & skimboard',
+    large: true,
+  },
+  {
+    title: 'Pujada Bay',
+    blurb:
+      'A protected seascape of coral reefs, dugongs and dolphins — with island hopping out to Pujada Island.',
+    slot: 'Drop a Pujada Bay photo',
+  },
+  {
+    title: 'Sleeping Dinosaur',
+    blurb: 'The ridge across the bay, best watched from the Baywalk and Boulevard at golden hour.',
+    slot: 'Drop a Sleeping Dinosaur / Baywalk photo',
+  },
 ];
 
-const leadership: { titleKey: string; nameKey: string; email: string; phone: string; tel: string }[] = [
-  { titleKey: 'title-mayor', nameKey: 'home-hon-philip-a-dacayo', email: 'mayor@mati.gov.ph', phone: '(087) 326-5002', tel: '0873265002' },
-  { titleKey: 'title-vice-mayor', nameKey: 'home-hon-eduardo-d-tiongson', email: 'vicemayor@mati.gov.ph', phone: '(087) 326-5003', tel: '0873265003' },
+const services: {
+  to: string;
+  Icon: LucideIcon;
+  title: string;
+  desc: string;
+  tag: string;
+  tone: 'default' | 'danger' | 'feel';
+}[] = [
+  {
+    to: '/services/certificates',
+    Icon: FileText,
+    title: 'Civil Registry',
+    desc: 'Birth, marriage and death certificates from the City Civil Registrar.',
+    tag: 'Services',
+    tone: 'default',
+  },
+  {
+    to: '/services/business',
+    Icon: Store,
+    title: 'Business & Livelihood',
+    desc: 'Permits, renewals, market stalls and trade support through the BPLO.',
+    tag: 'Services',
+    tone: 'default',
+  },
+  {
+    to: '/services/tax-payments',
+    Icon: Coins,
+    title: 'Taxes & Payments',
+    desc: "Real property and business tax assessment at the Treasurer's Office.",
+    tag: 'Services',
+    tone: 'default',
+  },
+  {
+    to: '/services/health',
+    Icon: HeartPulse,
+    title: 'Health Services',
+    desc: 'Check-ups, vaccines and medicines through the City Health Office.',
+    tag: 'Services',
+    tone: 'default',
+  },
+  {
+    to: '/services/social-services',
+    Icon: Users,
+    title: 'Social Welfare',
+    desc: 'Assistance for seniors, PWDs, solo parents and indigent families.',
+    tag: 'Services',
+    tone: 'default',
+  },
+  {
+    to: '/services/agriculture',
+    Icon: Sprout,
+    title: 'Agriculture & Fisheries',
+    desc: 'Seedlings, coconut and fishery support from the City Agriculture Office.',
+    tag: 'Services',
+    tone: 'default',
+  },
+  {
+    to: '/services/public-safety',
+    Icon: ShieldAlert,
+    title: 'Disaster Preparedness',
+    desc: 'Evacuation routes, typhoon advisories and MDRRMO programs.',
+    tag: 'Services',
+    tone: 'danger',
+  },
+  {
+    to: '/services',
+    Icon: Waves,
+    title: 'Tourism',
+    desc: 'Dahican, Pujada Bay, Sambuokan Festival, accredited guides and homestays.',
+    tag: 'Feel Mati',
+    tone: 'feel',
+  },
 ];
+
+// ── Public funds, derived from the real FY2025 SRE (budgetData) ──────────────
+
+function useFunds() {
+  const { q1, q2 } = financialData;
+  const sum = (a: number, b: number) => a + b;
+  const incomeTotal = sum(q1.income.total, q2.income.total);
+  const local = sum(q1.income.local, q2.income.local);
+  const external = sum(q1.income.external, q2.income.external);
+  const spendTotal = sum(q1.expenditures.total, q2.expenditures.total);
+  const per100 = (v: number) => (v / spendTotal) * 100;
+  const rows = [
+    { label: 'General public services', v: sum(q1.expenditures.gps, q2.expenditures.gps), color: '#2b62ee' },
+    { label: 'Social services', v: sum(q1.expenditures.social, q2.expenditures.social), color: '#0077be' },
+    { label: 'Economic services', v: sum(q1.expenditures.economic, q2.expenditures.economic), color: '#06a77d' },
+    { label: 'Debt service', v: sum(q1.expenditures.debt, q2.expenditures.debt), color: '#e01b24' },
+  ].map((r) => ({ ...r, per100: per100(r.v) }));
+  return {
+    incomeTotal,
+    local,
+    external,
+    spendTotal,
+    rows,
+    net: sum(q1.netIncome, q2.netIncome),
+    balance: q2.fundBalance,
+  };
+}
+
+const M = (n: number) => `₱${n.toFixed(2)}M`;
 
 function useMatiWeather() {
   const [temp, setTemp] = useState<string | null>(null);
@@ -72,293 +209,489 @@ function useMatiWeather() {
   return temp;
 }
 
+// Small shared eyebrow: mono kicker with a short royal rule.
+function Eyebrow({ children, icon: Icon }: { children: React.ReactNode; icon?: LucideIcon }) {
+  return (
+    <div className="flex items-center gap-3">
+      <span className="h-0.5 w-6 bg-[#2b62ee]" aria-hidden="true" />
+      <span className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold tracking-[0.08em] text-[#2b62ee]">
+        {Icon ? <Icon className="size-3.5" aria-hidden="true" /> : null}
+        {children}
+      </span>
+    </div>
+  );
+}
+
 export default function Home() {
-  const { t } = useLanguage();
   const temp = useMatiWeather();
+  const funds = useFunds();
 
   return (
     <>
-      <Seo description="Access government services, information, and resources for the people of Mati, Davao Oriental." />
+      <Seo description="Everything the City of Mati does, in one place — government services, public funds, and the coast that makes this place worth the trip." />
 
-      {/* Hero */}
-      <section className="bg-[linear-gradient(135deg,var(--primary)_0%,var(--brand-secondary)_100%)] py-16 text-white">
+      {/* ── Hero ─────────────────────────────────────────────────────────── */}
+      <section className="relative isolate overflow-hidden bg-[#123c7a]">
+        <div className="absolute inset-0 -z-10">
+          <ImageSlot label="Dahican / coastline photo" />
+        </div>
+        <div
+          className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(18,60,122,0.95)_0%,rgba(18,60,122,0.82)_46%,rgba(18,60,122,0.55)_78%,rgba(18,60,122,0.42)_100%)]"
+          aria-hidden="true"
+        />
         <Container>
-          <div className="grid items-center gap-10 lg:grid-cols-2">
-            <div>
-              <h1 className="mb-4 text-[2.5rem] leading-tight font-bold">{t('hero-welcome')}</h1>
-              <p className="mb-6 text-lg text-white/90">{t('hero-subtitle')}</p>
-              <div className="flex flex-wrap gap-3">
-                <AppLink to="/services" className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-primary transition hover:-translate-y-0.5">
-                  {t('home-browse-services')}
-                  <ArrowRight className="size-4" aria-hidden="true" />
+          <div className="grid items-stretch gap-8 py-12 lg:grid-cols-2 lg:gap-10 lg:py-16">
+            {/* Left */}
+            <div className="flex flex-col justify-center text-white">
+              <img src={FEEL_MATI_LOGO} alt="Feel Mati" className="mb-6 h-auto w-52 sm:w-64" />
+              <h1 className="mb-3.5 font-display text-4xl leading-[1.08] font-extrabold tracking-[-0.03em] text-white sm:text-[2.75rem]">
+                Everything the city does,
+                <br />
+                in one place.
+              </h1>
+              <p className="mb-6 max-w-[440px] text-base leading-relaxed text-white/75">
+                A community-powered portal for the City of Mati, Davao Oriental — government services,
+                public funds, and the coast that makes this place worth the trip.
+              </p>
+              <div className="flex flex-wrap gap-2.5">
+                <AppLink
+                  to="/services"
+                  className="inline-flex h-11 items-center gap-2 rounded-lg bg-[#ffc001] px-5 font-display text-[0.9375rem] font-bold text-[#123c7a] transition hover:brightness-105"
+                >
+                  Browse Services <ArrowRight className="size-3.5" aria-hidden="true" />
                 </AppLink>
-                <AppLink to="/contact" className="inline-flex items-center gap-2 rounded-lg border border-white/40 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
-                  {t('home-contact-us')}
+                <AppLink
+                  to="/services/environment"
+                  className="inline-flex h-11 items-center gap-2 rounded-lg px-5 font-display text-[0.9375rem] font-semibold text-white ring-1 ring-white/35 transition hover:bg-white/10"
+                >
+                  <Compass className="size-3.5" aria-hidden="true" /> Plan a visit
                 </AppLink>
               </div>
             </div>
-            <div className="rounded-xl bg-white p-6 shadow-lg">
-              <h2 className="mb-3 text-base font-semibold text-foreground">{t('home-find-a-service')}</h2>
-              <ServiceSearch />
-              <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                <span>{t('home-popular')}:</span>
-                <AppLink to="/service-details/birth-certificate" className="rounded-full bg-muted px-3 py-1 text-primary">{t('home-birth-certificate')}</AppLink>
-                <AppLink to="/service-details/business-permits-licensing" className="rounded-full bg-muted px-3 py-1 text-primary">{t('home-business-permit')}</AppLink>
-                <AppLink to="/service-details/municipal-treasurer" className="rounded-full bg-muted px-3 py-1 text-primary">{t('home-real-property-tax')}</AppLink>
+
+            {/* Right — search card */}
+            <div className="flex items-center">
+              <div className="w-full overflow-hidden rounded-xl border-t-[3px] border-[#2b62ee] bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.08),0_18px_44px_rgba(3,10,30,0.34)]">
+                <div className="p-5 pb-0">
+                  <div className="font-display text-[1.0625rem] font-bold text-[#123c7a]">Search Services</div>
+                </div>
+                <div className="p-5 pt-3.5">
+                  <ServiceSearch placeholder="Search for a service…" />
+                  <div className="mt-4 mb-2.5 font-mono text-[0.6875rem] tracking-[0.06em] text-[#4c5c78]">
+                    POPULAR SERVICES
+                  </div>
+                  <div className="grid grid-cols-3 gap-2.5">
+                    {popular.map(({ to, Icon, label, color, feel }) => (
+                      <AppLink
+                        key={label}
+                        to={to}
+                        className={`flex flex-col items-center gap-2 rounded-[10px] p-4 text-center text-[#123c7a] transition ${
+                          feel
+                            ? 'bg-[#fffbef] ring-1 ring-[#ffc001]'
+                            : 'ring-1 ring-[#e3e8ef] hover:ring-[#2b62ee]'
+                        }`}
+                      >
+                        <Icon className="size-5" style={{ color }} aria-hidden="true" />
+                        <span className="text-[0.8125rem] leading-tight font-medium">{label}</span>
+                      </AppLink>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* Appointment CTA */}
-      <Section compact altBg>
+      {/* ── Rising in Mati ───────────────────────────────────────────────── */}
+      <section className="bg-white py-12">
         <Container>
-          <div className="flex flex-col items-center gap-4 rounded-xl border border-border bg-card p-8 text-center md:flex-row md:justify-between md:text-left">
-            <div>
-              <h2 className="mb-1 text-xl font-bold text-foreground">{t('appointment-cta-heading')}</h2>
-              <p className="m-0 text-sm text-muted-foreground">{t('appointment-cta-subtitle')}</p>
-            </div>
-            <div className="flex shrink-0 flex-wrap gap-3">
-              <a href="https://matimayorsoffice-oasys.com/user/auth/login.php" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-dark">
-                <CalendarCheck className="size-4" aria-hidden="true" /> {t('home-schedule-appointment')}
-              </a>
-              <a href="https://matimayorsoffice-oasys.com/user/auth/register.php" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition hover:border-primary">
-                <UserPlus className="size-4" aria-hidden="true" /> {t('home-create-account')}
-              </a>
-            </div>
+          <div className="mb-5 flex items-center justify-between">
+            <Eyebrow icon={TrendingUp}>RISING IN MATI</Eyebrow>
+            <AppLink
+              to="/budget"
+              className="inline-flex items-center gap-1.5 font-display text-sm font-semibold text-[#2b62ee]"
+            >
+              View all <ArrowRight className="size-3.5" aria-hidden="true" />
+            </AppLink>
           </div>
-        </Container>
-      </Section>
-
-      {/* Popular services */}
-      <Section>
-        <Container>
-          <SectionTitle>{t('section-popular')}</SectionTitle>
-          <Grid min={250}>
-            {popular.map(({ to, Icon, titleKey, descKey }) => (
-              <AppLink key={to} to={to} className="group flex flex-col rounded-[10px] border border-border bg-card p-6 no-underline transition hover:-translate-y-0.5 hover:border-primary hover:shadow-md">
-                <div className="mb-3 flex size-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  <Icon className="size-5" aria-hidden="true" />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {rising.map(({ to, Icon, title, status }) => (
+              <AppLink
+                key={title}
+                to={to}
+                className="flex min-h-[150px] flex-col justify-between rounded-xl p-[18px] text-[#123c7a] ring-1 ring-[#e3e8ef] transition hover:ring-[#2b62ee]"
+              >
+                <div>
+                  <Icon className="size-[18px] text-[#2b62ee]" aria-hidden="true" />
+                  <div className="mt-3 font-display text-[0.9375rem] leading-[1.35] font-bold">{title}</div>
                 </div>
-                <h3 className="mb-1 text-base font-semibold text-foreground">{t(titleKey)}</h3>
-                <p className="m-0 text-sm text-muted-foreground">{t(descKey)}</p>
+                <span className="inline-flex items-center gap-1.5 text-xs text-[#4c5c78]">
+                  <span className="size-[7px] rounded-full" style={{ background: status.dot }} aria-hidden="true" />
+                  {status.text}
+                </span>
               </AppLink>
             ))}
-            <AppLink to="/services" className="group flex flex-col items-start justify-center rounded-[10px] border border-dashed border-border bg-card p-6 no-underline transition hover:border-primary">
-              <LayoutGrid className="mb-3 size-6 text-primary" aria-hidden="true" />
-              <h3 className="mb-1 text-base font-semibold text-primary">{t('btn-view-all-services')}</h3>
-              <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
-                {t('home-browse-complete-directory')}
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-              </span>
-            </AppLink>
-          </Grid>
-        </Container>
-      </Section>
-
-      {/* Quick stats */}
-      <Section compact altBg>
-        <Container>
-          <div className="mb-6 flex items-center justify-between">
-            <SectionTitle className="mb-0">{t('home-mati-at-a-glance')}</SectionTitle>
-            <AppLink to="/statistics" className="inline-flex items-center gap-1.5 text-sm font-medium text-primary">
-              {t('home-view-statistics')}
-              <ArrowRight className="size-4" aria-hidden="true" />
-            </AppLink>
-          </div>
-          <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-            <StatCard value={totalPopulation.toLocaleString()} label={<><Users className="mr-1 inline size-3.5 text-primary" />{t('home-population')}</>} />
-            <StatCard value={barangayCount} label={<><MapPin className="mr-1 inline size-3.5 text-primary" />{t('home-barangays')}</>} />
-            <StatCard value={t('home-1st-class')} label={<><Award className="mr-1 inline size-3.5 text-primary" />{t('home-income-classification')}</>} />
-            <StatCard value={t('home-16270-km')} label={<><Ruler className="mr-1 inline size-3.5 text-primary" />{t('home-land-area')}</>} />
           </div>
         </Container>
-      </Section>
+      </section>
 
-      {/* Weather + map */}
-      <Section compact>
+      {/* ── Mati at a Glance ─────────────────────────────────────────────── */}
+      <section className="bg-[#f1f6fc] py-12">
         <Container>
-          <SectionTitle>{t('home-weather-and-map-of-mati')}</SectionTitle>
-          <div className="grid gap-6 lg:grid-cols-3">
-            <div className="flex flex-col items-center justify-center rounded-xl border border-border bg-card p-8 text-center">
-              <Thermometer className="mb-2 size-8 text-primary" aria-hidden="true" />
-              <span className="text-3xl font-bold text-foreground">{temp ?? '—'}</span>
-              <span className="mt-1 text-sm text-muted-foreground">Mati City Hall, Davao Oriental 8200</span>
-            </div>
-            <div className="overflow-hidden rounded-xl border border-border lg:col-span-2">
-              <iframe
-                title="Map of Mati"
-                className="h-64 w-full"
-                loading="lazy"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=126.1894%2C6.9297%2C126.2294%2C6.9697&layer=mapnik&marker=6.9497%2C126.2094"
-              />
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* History */}
-      <Section compact altBg>
-        <Container>
-          <SectionTitle>
-            <Landmark className="size-5 text-primary" aria-hidden="true" />
-            {t('home-brief-history-of-mati')}
-          </SectionTitle>
-          <ol className="relative ml-3 border-l-2 border-border">
-            {history.map((h) => (
-              <li key={h.year} className="mb-6 ml-6">
-                <span className="absolute -left-[9px] flex size-4 items-center justify-center rounded-full bg-primary" aria-hidden="true" />
-                <span className="text-sm font-bold text-primary">{h.year}</span>
-                <p className="m-0 mt-1 text-sm text-muted-foreground">{t(h.key)}</p>
-              </li>
-            ))}
-          </ol>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {historyHighlights.map((h) => (
-              <div key={h.titleKey} className="rounded-xl border border-border bg-card p-5">
-                <h3 className="mb-1 text-base font-semibold text-foreground">{t(h.titleKey)}</h3>
-                <p className="m-0 text-sm text-muted-foreground">{t(h.descKey)}</p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* Latest Updates — Facebook feed */}
-      <Section compact>
-        <Container>
-          <div className="mb-6 flex items-center justify-between">
-            <SectionTitle className="mb-0">{t('section-updates')}</SectionTitle>
-            <AppLink to="/news" className="inline-flex items-center gap-1.5 text-sm font-medium text-primary">
-              {t('home-view-all')}
-              <ArrowRight className="size-4" aria-hidden="true" />
-            </AppLink>
-          </div>
-          <div className="grid items-start gap-6 lg:grid-cols-2">
+          <div className="mb-6 flex items-end justify-between gap-4">
             <div>
-              <span className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                <FaFacebookF className="size-3" aria-hidden="true" />
-                Official Facebook Page
-              </span>
-              <h3 className="mb-2 text-xl font-bold text-foreground">
-                Real-time updates, straight from our page
-              </h3>
-              <p className="mb-4 text-sm text-muted-foreground">
-                Follow the Official LGU Mati Facebook Page for the latest announcements, advisories,
-                events, and community updates as they happen.
-              </p>
-              <ul className="mb-5 space-y-2 text-sm text-muted-foreground">
-                <li className="flex items-center gap-2"><Megaphone className="size-4 text-primary" aria-hidden="true" /> Official announcements &amp; advisories</li>
-                <li className="flex items-center gap-2"><CalendarDays className="size-4 text-primary" aria-hidden="true" /> Events &amp; community programs</li>
-                <li className="flex items-center gap-2"><Radio className="size-4 text-primary" aria-hidden="true" /> Posted in real time, as it happens</li>
-              </ul>
-              <a
-                href="https://www.facebook.com/OfficialLGUMati"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground no-underline transition hover:opacity-90"
-              >
-                <FaFacebookF className="size-4" aria-hidden="true" /> Visit our Facebook Page
-              </a>
+              <Eyebrow>CITY PROFILE</Eyebrow>
+              <h2 className="mt-3 font-display text-3xl font-extrabold tracking-[-0.025em] text-[#123c7a]">
+                Mati at a Glance
+              </h2>
             </div>
-            <div className="overflow-hidden rounded-xl border border-border">
-              <iframe
-                title="LGU Mati Official Facebook Page — Live Updates"
-                className="h-[500px] w-full"
-                loading="lazy"
-                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FOfficialLGUMati%2F&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
-              />
-            </div>
-          </div>
-          <p className="mt-3 text-xs text-muted-foreground">
-            Can't see the feed?{' '}
-            <a href="https://www.facebook.com/OfficialLGUMati/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-              Open it on Facebook
-            </a>
-          </p>
-        </Container>
-      </Section>
-
-      {/* Leadership */}
-      <Section compact altBg>
-        <Container>
-          <div className="mb-6 flex items-center justify-between">
-            <SectionTitle className="mb-0">{t('section-leadership')}</SectionTitle>
-            <AppLink to="/government/officials" className="inline-flex items-center gap-1.5 text-sm font-medium text-primary">
-              {t('home-view-all-officials')}
-              <ArrowRight className="size-4" aria-hidden="true" />
+            <AppLink
+              to="/statistics"
+              className="inline-flex items-center gap-1.5 font-display text-sm font-semibold text-[#2b62ee]"
+            >
+              View City Profile <ArrowRight className="size-3.5" aria-hidden="true" />
             </AppLink>
           </div>
-          <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
-            {leadership.map((l) => (
-              <div key={l.titleKey} className="flex items-center gap-4 rounded-xl border border-border bg-card p-6">
-                <div className="flex size-16 shrink-0 items-center justify-center rounded-full bg-muted">
-                  <UserRound className="size-8 text-muted-foreground" aria-hidden="true" />
+
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+            {[
+              { v: totalPopulation.toLocaleString(), label: 'Residents', meta: 'PSA 2024 POPCEN', amber: false },
+              { v: String(barangayCount), label: 'Barangays', meta: 'ADMINISTRATIVE VILLAGES', amber: false },
+              { v: `${incomeClass} Class`, label: 'Component City', meta: 'INCOME CLASSIFICATION', amber: false },
+              { v: landAreaKm2, label: 'km² land area', meta: 'NEEDS VERIFICATION', amber: true },
+            ].map((s) => (
+              <div
+                key={s.label}
+                className={`rounded-xl bg-white p-5 shadow-[0_0_0_1px_rgba(18,60,122,0.07)] ${
+                  s.amber ? 'border-t-[3px] border-[#ffc001]' : 'border-t-[3px] border-[#2b62ee]'
+                }`}
+              >
+                <div className="font-display text-[1.875rem] font-extrabold tracking-[-0.02em] text-[#2b62ee]">
+                  {s.v}
                 </div>
-                <div>
-                  <p className="text-xs font-semibold tracking-wide text-primary uppercase">{t(l.titleKey)}</p>
-                  <h3 className="text-base font-semibold text-foreground">{t(l.nameKey)}</h3>
-                  <a href={`mailto:${l.email}`} className="block text-sm text-muted-foreground hover:text-primary">{l.email}</a>
-                  <a href={`tel:${l.tel}`} className="block text-sm text-muted-foreground hover:text-primary">{l.phone}</a>
+                <div className="mt-1.5 text-sm font-semibold text-[#123c7a]">{s.label}</div>
+                <div className={`mt-0.5 font-mono text-[0.6875rem] ${s.amber ? 'text-[#8a6200]' : 'text-[#4c5c78]'}`}>
+                  {s.meta}
                 </div>
               </div>
             ))}
           </div>
-        </Container>
-      </Section>
 
-      {/* Contact Information */}
-      <Section compact>
+          <div className="mt-4 grid gap-4 lg:grid-cols-[1fr_1.9fr]">
+            {/* Weather card */}
+            <div className="flex flex-col justify-between rounded-xl bg-[linear-gradient(160deg,#2b62ee_0%,#7aa5ff_100%)] p-6 text-white">
+              <div>
+                <div className="flex items-center gap-2 font-display text-[0.9375rem] font-bold">
+                  <Sun className="size-4" aria-hidden="true" /> Weather
+                </div>
+                <div className="mt-3.5 text-[0.8125rem] text-white/75">
+                  City of Mati, Davao Oriental
+                  <br />
+                  6.9497° N, 126.2094° E
+                </div>
+              </div>
+              <div className="mt-6">
+                <div className="font-display text-5xl leading-none font-extrabold tracking-[-0.03em]">
+                  {temp ?? '—'}
+                </div>
+                <div className="mt-1.5 text-sm font-semibold">Current conditions</div>
+                <div className="mt-3 text-xs text-white/70">Province of Davao Oriental</div>
+              </div>
+            </div>
+            {/* Map */}
+            <div className="relative min-h-[240px] overflow-hidden rounded-xl bg-[#eef4fe] shadow-[0_0_0_1px_rgba(18,60,122,0.07)]">
+              <iframe
+                title="Map of the City of Mati"
+                className="size-full min-h-[240px]"
+                loading="lazy"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=126.1694%2C6.9097%2C126.2494%2C6.9897&layer=mapnik&marker=6.9497%2C126.2094"
+              />
+              <span className="pointer-events-none absolute bottom-2.5 left-3 rounded-md bg-white/90 px-2 py-1 font-mono text-xs text-[#4c5c78]">
+                Mati 6.9497, 126.2094
+              </span>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ── Feel Mati — tourism ──────────────────────────────────────────── */}
+      <section className="bg-[#123c7a] py-14">
         <Container>
-          <div className="mb-6 flex items-center justify-between">
-            <SectionTitle className="mb-0">{t('section-contact')}</SectionTitle>
-            <AppLink to="/contact" className="inline-flex items-center gap-1.5 text-sm font-medium text-primary">
-              {t('home-view-all')}
-              <ArrowRight className="size-4" aria-hidden="true" />
+          <div className="mb-6 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+            <div>
+              <img src={FEEL_MATI_LOGO} alt="Feel Mati" className="h-auto w-40" />
+              <h2 className="mt-4 mb-2 font-display text-3xl font-extrabold tracking-[-0.025em] text-white">
+                More adventures, truly incredible
+              </h2>
+              <p className="max-w-[560px] text-[0.9375rem] leading-relaxed text-white/70">
+                The skimboarding capital of the Philippines, a protected bay of coral and dugongs, and a
+                ridge the whole city knows by silhouette.
+              </p>
+            </div>
+            <AppLink
+              to="/services/environment"
+              className="inline-flex h-11 shrink-0 items-center gap-2 rounded-lg bg-[#ffc001] px-5 font-display text-[0.9375rem] font-bold text-[#123c7a] transition hover:brightness-105"
+            >
+              Plan your visit <ArrowRight className="size-3.5" aria-hidden="true" />
             </AppLink>
           </div>
-          <div className="grid gap-6 sm:grid-cols-3">
-            <a href="tel:0878053581" className="flex items-start gap-3 rounded-xl border border-border bg-card p-6 text-foreground no-underline transition hover:-translate-y-0.5 hover:shadow-sm">
-              <Phone className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden="true" />
+
+          <div className="grid gap-4 lg:grid-cols-[1.5fr_1fr_1fr]">
+            {tourism.map((tp) => (
+              <article
+                key={tp.title}
+                className="relative flex min-h-[320px] flex-col justify-end overflow-hidden rounded-xl bg-[#123c7a] p-[22px] text-white"
+              >
+                <div className="absolute inset-0">
+                  <ImageSlot label={tp.slot} />
+                </div>
+                <div
+                  className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,60,122,0)_32%,rgba(18,60,122,0.88)_78%,rgba(18,60,122,0.94)_100%)]"
+                  aria-hidden="true"
+                />
+                {tp.badge ? (
+                  <span className="absolute top-4 left-4 inline-flex h-[22px] items-center rounded-full bg-[#ffc001] px-2.5 text-xs font-bold text-[#123c7a]">
+                    {tp.badge}
+                  </span>
+                ) : null}
+                <div className="relative">
+                  <h3
+                    className={`mb-1.5 font-display font-extrabold tracking-[-0.02em] ${
+                      tp.large ? 'text-2xl' : 'text-xl'
+                    }`}
+                  >
+                    {tp.title}
+                  </h3>
+                  <p className="max-w-[380px] text-sm leading-relaxed text-white/85">{tp.blurb}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-4 flex flex-col items-start justify-between gap-4 rounded-xl bg-[rgba(255,192,1,0.1)] px-[22px] py-[18px] shadow-[inset_0_0_0_1px_rgba(255,192,1,0.3)] sm:flex-row sm:items-center">
+            <div className="flex items-center gap-3.5">
+              <CalendarDays className="size-5 text-[#ffc001]" aria-hidden="true" />
               <div>
-                <h3 className="text-sm font-semibold text-muted-foreground">{t('contact-phone')}</h3>
-                <p className="m-0 text-base font-semibold text-foreground">(087) 805-3581</p>
-                <span className="text-[0.8125rem] text-muted-foreground">{t('contact-hours')}</span>
+                <div className="font-display text-[0.9375rem] font-bold text-white">
+                  Sambuokan Festival · every October
+                </div>
+                <div className="text-[0.8125rem] text-white/70">
+                  The city&apos;s founding celebration — &ldquo;sambuok&rdquo;, to gather as one.
+                </div>
               </div>
-            </a>
-            <a href="mailto:lgumatinv@gmail.com" className="flex items-start gap-3 rounded-xl border border-border bg-card p-6 text-foreground no-underline transition hover:-translate-y-0.5 hover:shadow-sm">
-              <Mail className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden="true" />
-              <div>
-                <h3 className="text-sm font-semibold text-muted-foreground">{t('contact-email')}</h3>
-                <p className="m-0 text-base font-semibold text-foreground">lgumatinv@gmail.com</p>
-                <span className="text-[0.8125rem] text-muted-foreground">{t('contact-response')}</span>
+            </div>
+            <AppLink
+              to="/services/environment"
+              className="inline-flex shrink-0 items-center gap-1.5 font-display text-sm font-bold text-[#ffc001]"
+            >
+              Festival guide <ArrowRight className="size-3.5" aria-hidden="true" />
+            </AppLink>
+          </div>
+        </Container>
+      </section>
+
+      {/* ── City Services ────────────────────────────────────────────────── */}
+      <section className="bg-white py-12">
+        <Container>
+          <div className="mb-2 flex items-center gap-3.5">
+            <span className="h-[30px] w-1 rounded bg-[#2b62ee]" aria-hidden="true" />
+            <h2 className="font-display text-3xl font-extrabold tracking-[-0.025em] text-[#123c7a]">City Services</h2>
+          </div>
+          <p className="mb-6 ml-[18px] max-w-[540px] text-[0.9375rem] leading-relaxed text-[#4c5c78]">
+            Find the right service for your need — from certificates and permits to health, welfare and
+            disaster preparedness.
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {services.map(({ to, Icon, title, desc, tag, tone }) => {
+              const feel = tone === 'feel';
+              const danger = tone === 'danger';
+              return (
+                <AppLink
+                  key={title}
+                  to={to}
+                  className={`flex flex-col gap-3 rounded-xl p-5 text-[#4c5c78] transition ${
+                    feel ? 'bg-[#fffbef] ring-1 ring-[#ffc001]' : 'ring-1 ring-[#e3e8ef] hover:ring-[#2b62ee]'
+                  }`}
+                >
+                  <span
+                    className={`flex size-[38px] items-center justify-center rounded-[10px] ${
+                      danger
+                        ? 'bg-[#fdecec] text-[#e01b24]'
+                        : feel
+                          ? 'bg-[#fdf0c8] text-[#a37400]'
+                          : 'bg-[#eef4fe] text-[#2b62ee]'
+                    }`}
+                  >
+                    <Icon className="size-[17px]" aria-hidden="true" />
+                  </span>
+                  <div className="font-display text-[0.9375rem] font-bold text-[#123c7a]">{title}</div>
+                  <p className="text-[0.8125rem] leading-relaxed">{desc}</p>
+                  <span
+                    className={`inline-flex h-[22px] w-fit items-center rounded-full px-2.5 text-xs font-semibold ${
+                      danger
+                        ? 'bg-[#fdecec] text-[#b3151c]'
+                        : feel
+                          ? 'bg-[#fdf0c8] text-[#8a6200]'
+                          : 'bg-[#eef4fe] text-[#2b62ee]'
+                    }`}
+                  >
+                    {tag}
+                  </span>
+                </AppLink>
+              );
+            })}
+          </div>
+        </Container>
+      </section>
+
+      {/* ── Public Funds + City Leadership ───────────────────────────────── */}
+      <section className="bg-[#f1f6fc] py-12">
+        <Container>
+          <div className="grid items-start gap-5 lg:grid-cols-[1.15fr_1fr]">
+            {/* Public Funds */}
+            <div>
+              <div className="mb-[18px] flex items-end justify-between gap-3">
+                <div className="flex items-center gap-3.5">
+                  <span className="h-[26px] w-1 rounded bg-[#2b62ee]" aria-hidden="true" />
+                  <h2 className="font-display text-2xl font-extrabold tracking-[-0.02em] text-[#123c7a]">
+                    Public Funds
+                  </h2>
+                </div>
+                <span className="inline-flex h-6 items-center gap-1.5 rounded-full bg-white px-2.5 font-mono text-[0.6875rem] text-[#4c5c78] shadow-[0_0_0_1px_#d6dee9]">
+                  <span className="size-1.5 rounded-full bg-[#06a77d]" aria-hidden="true" /> BLGF SRE · RETRIEVED
+                  2026-09-12
+                </span>
               </div>
-            </a>
-            <div className="flex items-start gap-3 rounded-xl border border-border bg-card p-6">
-              <MapPin className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden="true" />
-              <div>
-                <h3 className="text-sm font-semibold text-muted-foreground">{t('contact-address')}</h3>
-                <p className="m-0 text-base font-semibold text-foreground">{t('contact-municipal-hall')}</p>
-                <span className="text-[0.8125rem] text-muted-foreground">Mati, Davao Oriental 8200</span>
+
+              <div className="overflow-hidden rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)]">
+                <div className="p-[22px] pb-0">
+                  <div className="text-sm text-[#4c5c78]">Income received, Jan–Jun 2025</div>
+                  <div className="mt-1.5 mb-1 font-display text-5xl leading-none font-extrabold tracking-[-0.03em] text-[#2b62ee]">
+                    {M(funds.incomeTotal)}
+                  </div>
+                  <div className="font-mono text-xs text-[#4c5c78]">
+                    LOCAL {M(funds.local)} · NATIONAL TRANSFERS {M(funds.external)}
+                  </div>
+                </div>
+                <div className="p-[22px]">
+                  <div className="font-mono text-[0.6875rem] tracking-[0.06em] text-[#4c5c78]">
+                    WHERE EVERY ₱100 OF SPENDING WENT
+                  </div>
+                  <div className="mt-3.5 grid gap-3">
+                    {funds.rows.map((r) => (
+                      <div
+                        key={r.label}
+                        className="grid grid-cols-[130px_1fr_56px] items-center gap-3 text-[0.8125rem] text-[#123c7a] sm:grid-cols-[170px_1fr_62px]"
+                      >
+                        <span>{r.label}</span>
+                        <span className="h-2.5 rounded-full bg-[#e3e8ef]">
+                          <span
+                            className="block h-2.5 rounded-full"
+                            style={{ width: `${r.per100}%`, background: r.color }}
+                          />
+                        </span>
+                        <span className="text-right font-mono">₱{r.per100.toFixed(2)}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex items-center justify-between bg-[#f7f9fc] px-[22px] py-3.5 font-mono text-[0.6875rem] text-[#4c5c78] shadow-[inset_0_1px_0_#e3e8ef]">
+                  <span>
+                    SPENT {M(funds.spendTotal)} · NET {M(funds.net)} · BALANCE {M(funds.balance)}
+                  </span>
+                  <AppLink to="/budget" className="text-[#2b62ee]">
+                    FULL SRE →
+                  </AppLink>
+                </div>
+              </div>
+            </div>
+
+            {/* City Leadership */}
+            <div>
+              <div className="mb-[18px] flex items-center gap-3.5">
+                <span className="h-[26px] w-1 rounded bg-[#2b62ee]" aria-hidden="true" />
+                <h2 className="font-display text-2xl font-extrabold tracking-[-0.02em] text-[#123c7a]">
+                  City Leadership
+                </h2>
+              </div>
+              <div className="grid gap-3">
+                {[
+                  { role: 'Elected Mayor', sub: 'City Mayor · City of Mati' },
+                  { role: 'Elected Vice Mayor', sub: 'City Vice Mayor · Sangguniang Panlungsod' },
+                ].map((l) => (
+                  <div
+                    key={l.role}
+                    className="flex items-center gap-3.5 rounded-xl border-t-[3px] border-[#2b62ee] bg-white p-[18px] shadow-[0_0_0_1px_rgba(18,60,122,0.07)]"
+                  >
+                    <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#eef4fe] font-display text-[0.9375rem] font-bold text-[#2b62ee]">
+                      —
+                    </span>
+                    <div>
+                      <span className="inline-flex h-5 items-center rounded-full bg-[#eef4fe] px-2.5 text-[0.6875rem] font-semibold text-[#2b62ee]">
+                        {l.role}
+                      </span>
+                      <div className="mt-1.5 font-display text-[0.9375rem] font-bold text-[#123c7a]">
+                        Hon. [to be confirmed]
+                      </div>
+                      <div className="text-[0.8125rem] text-[#4c5c78]">{l.sub}</div>
+                    </div>
+                  </div>
+                ))}
+
+                <div className="grid gap-2.5 rounded-xl bg-white p-[18px] shadow-[0_0_0_1px_rgba(18,60,122,0.07)]">
+                  <div className="flex items-center gap-3">
+                    <span className="flex size-[34px] items-center justify-center rounded-[9px] bg-[#eef4fe] text-[#2b62ee]">
+                      <MapPin className="size-[15px]" aria-hidden="true" />
+                    </span>
+                    <div>
+                      <div className="font-mono text-[0.625rem] tracking-[0.06em] text-[#4c5c78]">CITY HALL</div>
+                      <div className="text-sm font-semibold text-[#123c7a]">
+                        Nazareno St., City of Mati, Davao Oriental
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="flex size-[34px] items-center justify-center rounded-[9px] bg-[#eaf7f2] text-[#06a77d]">
+                      <Mail className="size-[15px]" aria-hidden="true" />
+                    </span>
+                    <div>
+                      <div className="font-mono text-[0.625rem] tracking-[0.06em] text-[#4c5c78]">EMAIL</div>
+                      <a
+                        href="mailto:cio.cityofmati@gmail.com"
+                        className="text-sm font-semibold text-[#2b62ee] hover:underline"
+                      >
+                        cio.cityofmati@gmail.com
+                      </a>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="flex size-[34px] items-center justify-center rounded-[9px] bg-[#fdf0c8] text-[#a37400]">
+                      <Briefcase className="size-[15px]" aria-hidden="true" />
+                    </span>
+                    <div>
+                      <div className="font-mono text-[0.625rem] tracking-[0.06em] text-[#4c5c78]">JOBS</div>
+                      <AppLink to="/government" className="text-sm font-semibold text-[#2b62ee] hover:underline">
+                        TrabaWho — city job openings
+                      </AppLink>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </Container>
-      </Section>
+      </section>
 
-      {/* Quiz CTA */}
-      <section className="bg-[linear-gradient(135deg,var(--primary)_0%,var(--brand-secondary)_100%)] py-12 text-white">
+      {/* ── ₱0 cost banner (signature line; site-wide Footer follows below) ─── */}
+      <section className="bg-[#123c7a] py-10">
         <Container>
-          <div className="flex flex-col items-center gap-4 text-center">
-            <Brain className="size-10" aria-hidden="true" />
-            <h2 className="m-0 text-2xl font-bold">{t('home-mati-quiz')}</h2>
-            <p className="m-0 text-lg font-semibold text-white">How well do you know Mati, Davao Oriental?</p>
-            <p className="m-0 max-w-xl text-white/90">{t('home-evaluate-your-familiarity-with-the-municipalitys')}</p>
-            <a href="https://quiz.bettermati.org/" target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-primary transition hover:-translate-y-0.5">
-              {t('home-take-the-quiz')}
-              <ArrowRight className="size-4" aria-hidden="true" />
-            </a>
+          <div className="rounded-xl bg-[rgba(43,98,238,0.16)] p-[18px] text-center text-[0.9375rem] leading-relaxed text-[#cfe0ff] shadow-[inset_0_0_0_1px_rgba(43,98,238,0.45)]">
+            Cost to build this site to date: <strong className="font-bold text-white">₱400+</strong>. Cost to
+            the People of Mati:{' '}
+            <strong className="align-[-0.08em] font-display text-[1.375rem] font-extrabold text-[#ffc001]">
+              ₱0
+            </strong>
           </div>
         </Container>
       </section>
