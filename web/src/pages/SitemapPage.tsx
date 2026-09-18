@@ -86,7 +86,7 @@ const sections: SitemapSection[] = [
       { to: '/service-details/municipal-engineering', i18n: 'sitemap-engineering-office' },
       { to: '/service-details/municipal-planning', i18n: 'sitemap-planning-office' },
       { to: '/service-details/municipal-agriculture', i18n: 'sitemap-agriculture-office' },
-      { to: '/service-details/mswdo-services', text: 'MSWDO' },
+      { to: '/service-details/mswdo-services', text: 'CSWDO' },
       { to: '/service-details/business-permits-licensing', i18n: 'sitemap-bpls-office' },
       { to: '/service-details/general-services', i18n: 'sitemap-general-services' },
       { to: '/service-details/human-resource-management', i18n: 'sitemap-hr-management' },

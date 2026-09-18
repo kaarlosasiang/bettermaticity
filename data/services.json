@@ -166,7 +166,7 @@
       "keywords": ["senior", "citizen", "elderly", "old", "60", "osca", "discount"],
       "fee": "Free",
       "processingTime": "1-2 weeks",
-      "office": "MSWDO / OSCA",
+      "office": "CSWDO / OSCA",
       "url": "social-services.html"
     },
     {
@@ -178,7 +178,7 @@
       "keywords": ["pwd", "disability", "disabled", "handicap", "special", "discount"],
       "fee": "Free",
       "processingTime": "1-2 weeks",
-      "office": "MSWDO",
+      "office": "CSWDO",
       "url": "social-services.html"
     },
     {
@@ -190,7 +190,7 @@
       "keywords": ["financial", "assistance", "aid", "help", "money", "emergency", "aics"],
       "fee": "Free",
       "processingTime": "Varies",
-      "office": "MSWDO",
+      "office": "CSWDO",
       "url": "social-services.html"
     },
     {
@@ -202,7 +202,7 @@
       "keywords": ["burial", "funeral", "death", "assistance", "aid"],
       "fee": "Free",
       "processingTime": "1-3 days",
-      "office": "MSWDO",
+      "office": "CSWDO",
       "url": "social-services.html"
     },
     {
@@ -214,7 +214,7 @@
       "keywords": ["solo", "parent", "single", "mother", "father"],
       "fee": "Free",
       "processingTime": "1-2 weeks",
-      "office": "MSWDO",
+      "office": "CSWDO",
       "url": "social-services.html"
     },
     {
@@ -250,7 +250,7 @@
       "keywords": ["medical", "assistance", "hospital", "medicine", "health", "sick"],
       "fee": "Free",
       "processingTime": "1-3 days",
-      "office": "City Health Office / MSWDO",
+      "office": "City Health Office / CSWDO",
       "url": "health.html"
     },
     {
@@ -394,7 +394,7 @@
       "keywords": ["student", "assistance", "education", "allowance", "grant"],
       "fee": "Free",
       "processingTime": "Varies",
-      "office": "MSWDO",
+      "office": "CSWDO",
       "url": "education.html"
     },
     {
@@ -470,12 +470,12 @@
     },
     {
       "id": "mswdo-services",
-      "title": "MSWDO Services",
+      "title": "CSWDO Services",
       "category": "Social Services & Assistance",
       "categoryId": "social-services",
       "description": "Social case studies, indigency certificates, AICS, PWD and senior citizen assistance",
       "keywords": [
-        "MSWDO",
+        "CSWDO",
         "social welfare",
         "indigency",
         "certificate",
@@ -488,7 +488,7 @@
       ],
       "fee": "Free",
       "processingTime": "28 min - 1.5 hrs",
-      "office": "MSWDO",
+      "office": "CSWDO",
       "url": "../service-details/mswdo-services.html"
     },
     {

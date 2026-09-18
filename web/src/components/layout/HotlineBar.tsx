@@ -1,24 +1,49 @@
 import type { LucideIcon } from 'lucide-react';
-import { Shield, Heart, Flame, Building2, TriangleAlert, Truck } from 'lucide-react';
 import { Container } from '@/components/primitives';
+import { useLanguage } from '@/hooks/useLanguage';
+import {
+  hotlineIcon,
+  nationalHotline,
+  primaryNumber,
+  priorityHotlines,
+  type Hotline,
+} from '@/lib/hotlines';
 
-interface Hotline {
-  Icon: LucideIcon;
+interface BarItem {
+  id: string;
   label: string;
+  labelKey?: string;
   number: string;
   tel: string;
+  Icon: LucideIcon;
 }
 
-const hotlines: Hotline[] = [
-  { Icon: Shield, label: 'Police', number: '0927 400 8033', tel: '09274008033' },
-  { Icon: Heart, label: 'MSWDO', number: '0916 284 0885', tel: '09162840885' },
-  { Icon: Flame, label: 'Fire', number: '0936 062 0305', tel: '09360620305' },
-  { Icon: Building2, label: 'DILG', number: '0906 188 086', tel: '0906188086' },
-  { Icon: TriangleAlert, label: 'MDRRMO', number: '0926 383 3744', tel: '09263833744' },
-  { Icon: Truck, label: 'R2TMC', number: '0906 819 5569', tel: '09068195569' },
-];
+const toItem = (h: Hotline | Omit<Hotline, 'category'>): BarItem => {
+  const n = primaryNumber(h);
+  return {
+    id: h.id,
+    label: h.short,
+    labelKey: h.shortKey,
+    number: n.display,
+    tel: n.tel,
+    Icon: hotlineIcon(h.icon),
+  };
+};
 
-function HotlineItem({ Icon, label, number, tel, hidden }: Hotline & { hidden?: boolean }) {
+// 911 first, then the flagged offices in priority order. Sourced from
+// data/emergency-hotlines.json — never hard-code a number here.
+const items: BarItem[] = [toItem(nationalHotline), ...priorityHotlines.map(toItem)];
+
+function HotlineItem({
+  label,
+  labelKey,
+  number,
+  tel,
+  Icon,
+  hidden,
+}: BarItem & { hidden?: boolean }) {
+  const { t } = useLanguage();
+  const text = labelKey ? t(labelKey, { defaultValue: label }) : label;
   return (
     <a
       href={`tel:${tel}`}
@@ -28,7 +53,7 @@ function HotlineItem({ Icon, label, number, tel, hidden }: Hotline & { hidden?: 
     >
       <Icon className="size-3" aria-hidden="true" />
       <span>
-        {label}: {number}
+        {text}: {number}
       </span>
     </a>
   );
@@ -42,19 +67,19 @@ export default function HotlineBar() {
       {/* Desktop */}
       <Container className="hidden py-2 lg:block">
         <div className="flex flex-wrap items-center justify-center gap-4">
-          {hotlines.map((h) => (
-            <HotlineItem key={h.tel} {...h} />
+          {items.map((h) => (
+            <HotlineItem key={h.id} {...h} />
           ))}
         </div>
       </Container>
       {/* Tablet / mobile marquee */}
       <div className="overflow-hidden lg:hidden" aria-label="Emergency contacts">
         <div className="flex w-max animate-hotline-scroll gap-4 py-2 text-xs hover:[animation-play-state:paused]">
-          {hotlines.map((h) => (
-            <HotlineItem key={h.tel} {...h} />
+          {items.map((h) => (
+            <HotlineItem key={h.id} {...h} />
           ))}
-          {hotlines.map((h) => (
-            <HotlineItem key={`clone-${h.tel}`} {...h} hidden />
+          {items.map((h) => (
+            <HotlineItem key={`clone-${h.id}`} {...h} hidden />
           ))}
         </div>
       </div>

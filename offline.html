@@ -81,7 +81,8 @@
       .hotline-list li {
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: baseline;
+        gap: 1rem;
         padding: 0.6rem 0;
         border-bottom: 1px solid #eee;
       }
@@ -91,6 +92,21 @@
       .hotline-label {
         font-weight: 600;
         color: #333;
+      }
+      /* An office can publish several lines; stack them so a caller can try the
+         next one when the first is busy. */
+      .hotline-numbers {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.15rem;
+        text-align: right;
+      }
+      .hotline-source {
+        margin-top: 1rem;
+        font-size: 0.75rem;
+        line-height: 1.4;
+        color: #666;
       }
       .hotline-number {
         color: #0032a0;
@@ -125,6 +141,10 @@
           align-items: flex-start;
           gap: 0.25rem;
         }
+        .hotline-numbers {
+          align-items: flex-start;
+          text-align: left;
+        }
       }
     </style>
   </head>
@@ -156,39 +176,60 @@
       </p>
 
       <div class="hotlines">
-        <h2 data-i18n="offline-emergency-hotlines-mati-nueva-vizcaya">
-          Emergency Hotlines - Mati, Davao Oriental
-        </h2>
+        <h2>Emergency Hotlines &mdash; City of Mati, Davao Oriental</h2>
         <ul class="hotline-list" aria-label="Emergency contact numbers">
           <li>
-            <span class="hotline-label" data-i18n="offline-police-pnp">Police (PNP)</span>
-            <a href="tel:09274008033" class="hotline-number">0927 400 8033</a>
+            <span class="hotline-label">National Emergency Hotline</span>
+            <a href="tel:911" class="hotline-number">911</a>
           </li>
           <li>
-            <span class="hotline-label">MSWDO</span>
-            <a href="tel:09162840885" class="hotline-number">0916 284 0885</a>
+            <span class="hotline-label">Disaster Risk Reduction and Management Office</span>
+            <span class="hotline-numbers">
+              <a href="tel:+63873883426" class="hotline-number">(087) 388-3426</a>
+              <a href="tel:+639123454666" class="hotline-number">0912-345-4666</a>
+            </span>
           </li>
           <li>
-            <span class="hotline-label" data-i18n="offline-fire-bfp">Fire (BFP)</span>
-            <a href="tel:09360620305" class="hotline-number">0936 062 0305</a>
+            <span class="hotline-label">Mati City Police Station</span>
+            <span class="hotline-numbers">
+              <a href="tel:+639985987122" class="hotline-number">0998-598-7122</a>
+            </span>
           </li>
           <li>
-            <span class="hotline-label">DILG</span>
-            <a href="tel:0906188086" class="hotline-number">0906 188 086</a>
+            <span class="hotline-label">Mati Fire Station</span>
+            <span class="hotline-numbers">
+              <a href="tel:160" class="hotline-number">160</a>
+              <a href="tel:+639518126593" class="hotline-number">0951-812-6593</a>
+              <a href="tel:+639657828090" class="hotline-number">0965-782-8090</a>
+            </span>
           </li>
           <li>
-            <span class="hotline-label">MDRRMO</span>
-            <a href="tel:09263833744" class="hotline-number">0926 383 3744</a>
+            <span class="hotline-label">CHO - EMS Emergency Medical Service</span>
+            <span class="hotline-numbers">
+              <a href="tel:+639518409073" class="hotline-number">0951-840-9073</a>
+              <a href="tel:+639532131206" class="hotline-number">0953-213-1206</a>
+            </span>
           </li>
           <li>
-            <span class="hotline-label" data-i18n="offline-r2tmc">R2TMC</span>
-            <a href="tel:09068195569" class="hotline-number">0906 819 5569</a>
+            <span class="hotline-label">City Health Office</span>
+            <span class="hotline-numbers">
+              <a href="tel:+63873884428" class="hotline-number">(087) 388-4428</a>
+              <a href="tel:+63873884429" class="hotline-number">(087) 388-4429</a>
+              <a href="tel:+639813391408" class="hotline-number">0981-339-1408</a>
+            </span>
           </li>
           <li>
-            <span class="hotline-label" data-i18n="offline-municipal-hall">City Hall</span>
-            <a href="tel:0878053581" class="hotline-number">(087) 805-3581</a>
+            <span class="hotline-label">City Social Welfare and Development Office</span>
+            <span class="hotline-numbers">
+              <a href="tel:+63873883326" class="hotline-number">(087) 388-3326</a>
+              <a href="tel:+639753582876" class="hotline-number">0975-358-2876</a>
+            </span>
           </li>
         </ul>
+        <p class="hotline-source">
+          Source: City Disaster Risk Reduction and Management Office - City of Mati (official
+          Facebook page). Checked 2026-09-18.
+        </p>
       </div>
 
       <button class="retry-btn" onclick="window.location.reload()">Try Again</button>

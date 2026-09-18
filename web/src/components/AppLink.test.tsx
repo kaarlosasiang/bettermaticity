@@ -25,6 +25,6 @@ describe('isMigratedRoute', () => {
   it('is false for external and protocol links', () => {
     expect(isMigratedRoute('https://mati.gov.ph/')).toBe(false);
     expect(isMigratedRoute('mailto:volunteer@bettermati.org')).toBe(false);
-    expect(isMigratedRoute('tel:09274008033')).toBe(false);
+    expect(isMigratedRoute('tel:+639985987122')).toBe(false);
   });
 });

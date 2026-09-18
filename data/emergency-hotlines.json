@@ -1,0 +1,211 @@
+{
+  "_status": "sourced",
+  "_status_note": "\"sourced\" = every number below was transcribed from the named official source on _verified_on and matches it digit-for-digit. It is NOT yet \"verified\": no City of Mati content approver has signed off (see _approved_by) and no number has been test-dialled. Do not promote to \"verified\" without both.",
+  "_source": "City Disaster Risk Reduction and Management Office - City of Mati (official Facebook page)",
+  "_source_title": "City Government of Mati — Emergency Hotline Numbers",
+  "_source_url": "https://www.facebook.com/photo/?fbid=994546650191399&set=a.211377321841673",
+  "_source_published": null,
+  "_source_published_todo": "Fill with the publication date of the Facebook post above before promoting _status to \"verified\".",
+  "_verified_on": "2026-09-18",
+  "_approved_by": null,
+  "_approved_on": null,
+  "_refresh_cadence": "Re-check against the CDRRMO page every 6 months, and immediately after any LGU reorganisation or telco renumbering.",
+  "_note": "Single source of truth for every emergency number on the site (hotline bar, /contact, /services/public-safety, offline.html). Do not hard-code emergency numbers anywhere else. Landlines are Davao Oriental area code 087; `source_display` preserves the exact grouping printed on the source graphic so an approver can diff against it.",
+  "_area_code": "087",
+  "_country_code": "+63",
+
+  "national": {
+    "id": "national-emergency",
+    "nameKey": "hotline-national-emergency",
+    "name": "National Emergency Hotline",
+    "short": "Emergency",
+    "shortKey": "hotline-emergency",
+    "icon": "siren",
+    "numbers": [{ "display": "911", "tel": "911", "type": "shortcode" }]
+  },
+
+  "hotlines": [
+    {
+      "id": "cdrrmo",
+      "nameKey": "hotline-cdrrmo",
+      "name": "Disaster Risk Reduction and Management Office",
+      "short": "CDRRMO",
+      "category": "emergency",
+      "icon": "triangle-alert",
+      "priority": 1,
+      "numbers": [
+        {
+          "display": "(087) 388-3426",
+          "tel": "+63873883426",
+          "type": "landline",
+          "source_display": "3883-426"
+        },
+        { "display": "0912-345-4666", "tel": "+639123454666", "type": "mobile" }
+      ]
+    },
+    {
+      "id": "pnp-mati",
+      "nameKey": "hotline-pnp-mati",
+      "name": "Mati City Police Station",
+      "short": "Police",
+      "shortKey": "hotline-police",
+      "category": "emergency",
+      "icon": "shield",
+      "priority": 2,
+      "numbers": [{ "display": "0998-598-7122", "tel": "+639985987122", "type": "mobile" }]
+    },
+    {
+      "id": "bfp-mati",
+      "nameKey": "hotline-bfp-mati",
+      "name": "Mati Fire Station",
+      "short": "Fire",
+      "shortKey": "hotline-fire",
+      "category": "emergency",
+      "icon": "flame",
+      "priority": 3,
+      "numbers": [
+        { "display": "160", "tel": "160", "type": "shortcode" },
+        { "display": "0951-812-6593", "tel": "+639518126593", "type": "mobile" },
+        { "display": "0965-782-8090", "tel": "+639657828090", "type": "mobile" }
+      ]
+    },
+    {
+      "id": "cho-ems",
+      "nameKey": "hotline-cho-ems",
+      "name": "CHO - EMS Emergency Medical Service",
+      "short": "EMS",
+      "category": "medical",
+      "icon": "ambulance",
+      "priority": 4,
+      "numbers": [
+        { "display": "0951-840-9073", "tel": "+639518409073", "type": "mobile" },
+        { "display": "0953-213-1206", "tel": "+639532131206", "type": "mobile" }
+      ]
+    },
+    {
+      "id": "cho",
+      "nameKey": "hotline-cho",
+      "name": "City Health Office",
+      "short": "Health",
+      "category": "medical",
+      "icon": "hospital",
+      "numbers": [
+        {
+          "display": "(087) 388-4428",
+          "tel": "+63873884428",
+          "type": "landline",
+          "source_display": "3884-428"
+        },
+        {
+          "display": "(087) 388-4429",
+          "tel": "+63873884429",
+          "type": "landline",
+          "source_display": "3884-429"
+        },
+        { "display": "0981-339-1408", "tel": "+639813391408", "type": "mobile" }
+      ]
+    },
+    {
+      "id": "cswdo",
+      "nameKey": "hotline-cswdo",
+      "name": "City Social Welfare and Development Office",
+      "short": "CSWDO",
+      "category": "emergency",
+      "icon": "heart",
+      "priority": 5,
+      "numbers": [
+        {
+          "display": "(087) 388-3326",
+          "tel": "+63873883326",
+          "type": "landline",
+          "source_display": "3883-326"
+        },
+        { "display": "0975-358-2876", "tel": "+639753582876", "type": "mobile" }
+      ]
+    },
+    {
+      "id": "red-cross-davor",
+      "nameKey": "hotline-red-cross-davor",
+      "name": "Philippine Red Cross - Davao Oriental Chapter",
+      "short": "Red Cross",
+      "category": "medical",
+      "icon": "circle-plus",
+      "numbers": [
+        {
+          "display": "(087) 388-4022",
+          "tel": "+63873884022",
+          "type": "landline",
+          "source_display": "3884-022"
+        },
+        { "display": "0965-084-9924", "tel": "+639650849924", "type": "mobile" },
+        { "display": "0905-277-5186", "tel": "+639052775186", "type": "mobile" }
+      ]
+    },
+    {
+      "id": "pcg-davor",
+      "nameKey": "hotline-pcg-davor",
+      "name": "Philippine Coast Guard - Davao Oriental Station",
+      "short": "Coast Guard",
+      "category": "emergency",
+      "icon": "anchor",
+      "numbers": [{ "display": "0966-837-0536", "tel": "+639668370536", "type": "mobile" }]
+    },
+    {
+      "id": "army-66ib",
+      "nameKey": "hotline-army-66ib",
+      "name": "66th Infantry Battalion, Philippine Army",
+      "short": "66th IB",
+      "category": "emergency",
+      "icon": "shield-check",
+      "numbers": [{ "display": "0917-156-9461", "tel": "+639171569461", "type": "mobile" }]
+    },
+    {
+      "id": "eod-k9",
+      "nameKey": "hotline-eod-k9",
+      "name": "EOD K9 Unit, PNP PECU Davao Oriental",
+      "short": "EOD K9",
+      "category": "emergency",
+      "icon": "bomb",
+      "numbers": [{ "display": "0969-118-4775", "tel": "+639691184775", "type": "mobile" }]
+    },
+    {
+      "id": "ctmo",
+      "nameKey": "hotline-ctmo",
+      "name": "City Traffic Management Office (CTMO)",
+      "short": "CTMO",
+      "category": "emergency",
+      "icon": "traffic-cone",
+      "numbers": [{ "display": "0962-776-8980", "tel": "+639627768980", "type": "mobile" }]
+    },
+    {
+      "id": "cpsso",
+      "nameKey": "hotline-cpsso",
+      "name": "City Public Safety and Security Office (CPSSO)",
+      "short": "CPSSO",
+      "category": "emergency",
+      "icon": "shield-alert",
+      "_source_spelling": "The source graphic prints \"City Publics Safety & Security Office\"; \"Publics\" is a typo in the graphic and is corrected here. Confirm the office's registered name with the approver.",
+      "numbers": [
+        {
+          "display": "(087) 388-4095",
+          "tel": "+63873884095",
+          "type": "landline",
+          "source_display": "3884-095"
+        },
+        { "display": "0962-178-9893", "tel": "+639621789893", "type": "mobile" }
+      ]
+    },
+    {
+      "id": "ccsu",
+      "nameKey": "hotline-ccsu",
+      "name": "City Civil Security Unit (CCSU)",
+      "short": "CCSU",
+      "category": "emergency",
+      "icon": "shield-half",
+      "numbers": [
+        { "display": "0975-123-9194", "tel": "+639751239194", "type": "mobile" },
+        { "display": "0970-451-0796", "tel": "+639704510796", "type": "mobile" }
+      ]
+    }
+  ]
+}

@@ -167,7 +167,7 @@ const services: {
     to: '/services/public-safety',
     Icon: ShieldAlert,
     title: 'Disaster Preparedness',
-    desc: 'Evacuation routes, typhoon advisories and MDRRMO programs.',
+    desc: 'Evacuation routes, typhoon advisories and CDRRMO programs.',
     tag: 'Services',
     tone: 'danger',
   },
