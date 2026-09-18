@@ -3,7 +3,10 @@
  * Enterprise-grade PWA with versioned caching, runtime strategies, and offline resilience.
  */
 
-var CACHE_VERSION = 'v6';
+// Bump whenever a precached file's contents change — activate deletes caches whose
+// names no longer match, so returning visitors stop being served the old copy.
+// v7: corrected emergency hotline numbers in /offline.html.
+var CACHE_VERSION = 'v7';
 var STATIC_CACHE = 'bettermati-static-' + CACHE_VERSION;
 var RUNTIME_CACHE = 'bettermati-runtime-' + CACHE_VERSION;
 var OFFLINE_URL = '/offline.html';

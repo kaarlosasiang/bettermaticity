@@ -15,24 +15,13 @@ import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Container, Section, PageHeader } from '@/components/primitives';
 import { emergencyHotlines as emergency, medicalHotlines as medical } from '@/lib/hotlines';
+import { HotlineGrid, NationalHotlineBanner, HotlineSourceNote } from '@/components/HotlineDirectory';
 
 const contactCards: { Icon: LucideIcon; href: string; titleKey: string; value: string; noteKey: string }[] = [
   { Icon: Mail, href: 'mailto:lgumatinv@gmail.com', titleKey: 'contact-email', value: 'lgumatinv@gmail.com', noteKey: 'contact-response' },
   { Icon: Smartphone, href: 'tel:09175951931', titleKey: 'contact-mobile', value: '0917-595-1931', noteKey: 'contact-hours' },
   { Icon: Phone, href: 'tel:0878053581', titleKey: 'contact-phone', value: '(087) 805-3581', noteKey: 'contact-hours' },
 ];
-
-function HotlineCard({ Icon, tel, label, medical: isMedical }: { Icon: LucideIcon; tel: string; label: string; medical?: boolean }) {
-  return (
-    <a
-      href={`tel:${tel}`}
-      className="flex items-center gap-4 rounded-lg border border-muted bg-card p-6 text-foreground no-underline transition hover:-translate-y-0.5 hover:border-primary hover:shadow-sm"
-    >
-      <Icon className={isMedical ? 'size-5 shrink-0 text-brand-accent' : 'size-5 shrink-0 text-primary'} aria-hidden="true" />
-      <span className="text-sm font-medium">{label}</span>
-    </a>
-  );
-}
 
 export default function Contact() {
   const { t } = useLanguage();
@@ -132,11 +121,9 @@ export default function Contact() {
             </div>
             <p className="m-0 text-sm text-muted-foreground">{t('contact-hotlines-desc')}</p>
           </div>
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6">
-            {emergency.map((h) => (
-              <HotlineCard key={h.tel} Icon={h.Icon} tel={h.tel} label={t(h.key) || h.fallback} />
-            ))}
-          </div>
+          <NationalHotlineBanner />
+          <HotlineGrid hotlines={emergency} tone="emergency" />
+          <HotlineSourceNote />
         </Container>
       </Section>
 
@@ -157,11 +144,7 @@ export default function Contact() {
               {t('contact-for-medical-emergencies-and-hospital-inquiries')}
             </p>
           </div>
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6">
-            {medical.map((h) => (
-              <HotlineCard key={h.tel} Icon={h.Icon} tel={h.tel} label={t(h.key) || h.fallback} medical />
-            ))}
-          </div>
+          <HotlineGrid hotlines={medical} tone="medical" />
         </Container>
       </Section>
     </>

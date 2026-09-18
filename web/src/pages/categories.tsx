@@ -32,6 +32,7 @@ import {
 import { Section, Container, SectionTitle } from '@/components/primitives';
 import { useLanguage } from '@/hooks/useLanguage';
 import { emergencyHotlines, medicalHotlines } from '@/lib/hotlines';
+import { HotlineGrid, NationalHotlineBanner, HotlineSourceNote } from '@/components/HotlineDirectory';
 
 /* ── Public Safety hotline directories (rendered as category page children) ── */
 function PublicSafetyHotlines() {
@@ -44,18 +45,9 @@ function PublicSafetyHotlines() {
             <TriangleAlert className="size-5 text-primary" aria-hidden="true" />
             {t('contact-hotlines')}
           </SectionTitle>
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-4">
-            {emergencyHotlines.map((h) => (
-              <a
-                key={h.tel}
-                href={`tel:${h.tel}`}
-                className="flex items-center gap-3 rounded-lg border border-border bg-card p-4 text-foreground no-underline transition hover:-translate-y-0.5 hover:border-primary hover:shadow-sm"
-              >
-                <h.Icon className="size-5 shrink-0 text-primary" aria-hidden="true" />
-                <span className="text-sm font-medium">{t(h.key) || h.fallback}</span>
-              </a>
-            ))}
-          </div>
+          <NationalHotlineBanner />
+          <HotlineGrid hotlines={emergencyHotlines} tone="emergency" compact />
+          <HotlineSourceNote />
         </Container>
       </Section>
       <Section compact altBg>
@@ -64,18 +56,7 @@ function PublicSafetyHotlines() {
             <HeartPulse className="size-5 text-primary" aria-hidden="true" />
             {t('contact-medical-emergency-hotlines')}
           </SectionTitle>
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-4">
-            {medicalHotlines.map((h) => (
-              <a
-                key={h.tel}
-                href={`tel:${h.tel}`}
-                className="flex items-center gap-3 rounded-lg border border-border bg-card p-4 text-foreground no-underline transition hover:-translate-y-0.5 hover:border-primary hover:shadow-sm"
-              >
-                <h.Icon className="size-5 shrink-0 text-brand-accent" aria-hidden="true" />
-                <span className="text-sm font-medium">{t(h.key) || h.fallback}</span>
-              </a>
-            ))}
-          </div>
+          <HotlineGrid hotlines={medicalHotlines} tone="medical" compact />
         </Container>
       </Section>
     </>
@@ -234,8 +215,8 @@ export function ServicesInfrastructure() {
 /* ── Public Safety ────────────────────────────────────────────────────────── */
 const safetyServices: CategoryService[] = [
   { Icon: TriangleAlert, titleKey: 'safety-disaster', descKey: 'safety-disaster-desc', time: '24/7' },
-  { Icon: CloudRain, titleKey: 'safety-disaster-assistance', descKey: 'safety-relief-goods-and-evacuation-support', fee: 'Free', time: 'MDRRMO' },
-  { Icon: Megaphone, titleKey: 'safety-disaster-preparedness', descKey: 'safety-training-and-resources-for-disaster-readiness', fee: 'Free', time: 'MDRRMO' },
+  { Icon: CloudRain, titleKey: 'safety-disaster-assistance', descKey: 'safety-relief-goods-and-evacuation-support', fee: 'Free', time: 'CDRRMO' },
+  { Icon: Megaphone, titleKey: 'safety-disaster-preparedness', descKey: 'safety-training-and-resources-for-disaster-readiness', fee: 'Free', time: 'CDRRMO' },
 ];
 
 export function ServicesPublicSafety() {
