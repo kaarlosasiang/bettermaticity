@@ -43,6 +43,10 @@ import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Container, Section, PageHeader } from '@/components/primitives';
+import { hotlineById, primaryNumber } from '@/lib/hotlines';
+
+// Social-welfare hotline comes from the verified emergency-hotline dataset.
+const cswdo = hotlineById('cswdo');
 
 type TFn = (key: string) => string;
 
@@ -363,7 +367,7 @@ const quickStats: { Icon: LucideIcon; label: string; value: Item }[] = [
   { Icon: Users, label: 'mswdo-programs', value: 'mswdo-8-services' },
   { Icon: Clock, label: 'mswdo-office-hours', value: 'mswdo-8am-5pm' },
   { Icon: CalendarCheck, label: 'mswdo-availability', value: { lit: 'Mon - Fri' } },
-  { Icon: Phone, label: 'mswdo-hotline', value: { lit: '0916 284 0885' } },
+  { Icon: Phone, label: 'mswdo-hotline', value: { lit: primaryNumber(cswdo).display } },
 ];
 
 const quickNav: { href: string; Icon: LucideIcon; label: Item }[] = [
@@ -451,7 +455,7 @@ export default function Mswdo() {
     <>
       <Seo
         title={t('mswdo-municipal-social-welfare-and-development-office')}
-        description="City Social Welfare and Development Office (MSWDO) services in Mati, Davao Oriental — protective services, rehabilitation, day care, social pension, livelihood programs, and assistance for vulnerable sectors."
+        description="City Social Welfare and Development Office (CSWDO) services in Mati, Davao Oriental — protective services, rehabilitation, day care, social pension, livelihood programs, and assistance for vulnerable sectors."
         canonicalPath="/service-details/mswdo"
       />
 
@@ -473,7 +477,7 @@ export default function Mswdo() {
             {t('mswdo-social-services')}
           </AppLink>
           <span>/</span>
-          <span aria-current="page">MSWDO</span>
+          <span aria-current="page">CSWDO</span>
         </nav>
       </Container>
 
@@ -481,7 +485,7 @@ export default function Mswdo() {
         badge={
           <>
             <Heart className="size-4" aria-hidden="true" />
-            MSWDO
+            CSWDO
           </>
         }
         title={t('mswdo-municipal-social-welfare-and-development-office')}
@@ -508,7 +512,7 @@ export default function Mswdo() {
 
           <nav
             className="mt-6 flex flex-wrap justify-center gap-2 rounded-xl border border-border bg-card p-4"
-            aria-label="MSWDO Services Navigation"
+            aria-label="CSWDO Services Navigation"
           >
             {quickNav.map((n) => (
               <a
@@ -578,7 +582,7 @@ export default function Mswdo() {
             <aside className="rounded-xl border border-border bg-card p-6 lg:sticky lg:top-24">
               <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
                 <Building2 className="size-5 text-primary" aria-hidden="true" />
-                MSWDO
+                CSWDO
               </h3>
 
               <div className="flex items-start gap-3 border-b border-border py-3">
@@ -611,12 +615,15 @@ export default function Mswdo() {
                   <strong className="block text-sm text-foreground">
                     {t('mswdo-phonehotline')}
                   </strong>
-                  <a
-                    href="tel:09162840885"
-                    className="text-[0.8125rem] text-muted-foreground hover:text-primary"
-                  >
-                    0916 284 0885
-                  </a>
+                  {cswdo.numbers.map((n) => (
+                    <a
+                      key={n.tel}
+                      href={`tel:${n.tel}`}
+                      className="block text-[0.8125rem] text-muted-foreground hover:text-primary"
+                    >
+                      {n.display}
+                    </a>
+                  ))}
                 </div>
               </div>
 

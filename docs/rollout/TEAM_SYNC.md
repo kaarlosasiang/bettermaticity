@@ -25,19 +25,40 @@
 
 ## Emergency Information Verification
 
-The following hotlines must be verified monthly against official LGU records:
+Hotlines are **not** maintained in this document. The single source of truth is
+[`data/emergency-hotlines.json`](../../data/emergency-hotlines.json); every surface
+(hotline bar, /contact, /services/public-safety, offline.html) renders from it, and
+`web/src/lib/hotlines.data.test.ts` fails the build if any of them drift.
 
-| Service                 | Number         | Source                    |
-| ----------------------- | -------------- | ------------------------- |
-| Police (PNP)            | 0927 400 8033  | LGU Mati City Hall |
-| MSWDO                   | 0916 284 0885  | LGU Mati City Hall |
-| Fire (BFP)              | 0936 062 0305  | LGU Mati City Hall |
-| DILG                    | 0906 188 086   | LGU Mati City Hall |
-| MDRRMO                  | 0926 383 3744  | LGU Mati City Hall |
-| R2TMC                   | 0906 819 5569  | LGU Mati City Hall |
-| City Hall Landline | (078) 805-3581 | Official records          |
+To change a number, edit that JSON, update `_verified_on`, and run `npm test` in `web/`.
 
-**Last Verified:** [DATE]
+**Current source:** City Disaster Risk Reduction and Management Office - City of Mati (official Facebook page) — <https://www.facebook.com/photo/?fbid=994546650191399&set=a.211377321841673>
+**Last checked:** 2026-09-18
+**Approver sign-off:** _pending_
+**Re-check cadence:** Re-check against the CDRRMO page every 6 months, and immediately after any LGU reorganisation or telco renumbering.
+
+Snapshot at the last check (for offline cross-reference only), in the order the
+source graphic prints them:
+
+| Office                                          | Number(s)                                       |
+| ----------------------------------------------- | ----------------------------------------------- |
+| National Emergency Hotline                      | 911                                             |
+| Disaster Risk Reduction and Management Office   | (087) 388-3426 / 0912-345-4666                  |
+| Mati City Police Station                        | 0998-598-7122                                   |
+| Mati Fire Station                               | 160 / 0951-812-6593 / 0965-782-8090             |
+| CHO - EMS Emergency Medical Service             | 0951-840-9073 / 0953-213-1206                   |
+| City Health Office                              | (087) 388-4428 / (087) 388-4429 / 0981-339-1408 |
+| City Social Welfare and Development Office      | (087) 388-3326 / 0975-358-2876                  |
+| Philippine Red Cross - Davao Oriental Chapter   | (087) 388-4022 / 0965-084-9924 / 0905-277-5186  |
+| Philippine Coast Guard - Davao Oriental Station | 0966-837-0536                                   |
+| 66th Infantry Battalion, Philippine Army        | 0917-156-9461                                   |
+| EOD K9 Unit, PNP PECU Davao Oriental            | 0969-118-4775                                   |
+| City Traffic Management Office (CTMO)           | 0962-776-8980                                   |
+| City Public Safety and Security Office (CPSSO)  | (087) 388-4095 / 0962-178-9893                  |
+| City Civil Security Unit (CCSU)                 | 0975-123-9194 / 0970-451-0796                   |
+
+The City Hall landline and per-office numbers are service contacts, not emergency
+lines, and are verified separately against the Citizen's Charter.
 
 ---
 

@@ -30,6 +30,10 @@ import {
   SectionSubtitle,
   PageHeader,
 } from '@/components/primitives';
+import { hotlineById } from '@/lib/hotlines';
+
+// Social-welfare hotline comes from the verified emergency-hotline dataset.
+const cswdo = hotlineById('cswdo');
 
 type TabId = 'case-study' | 'indigency' | 'aics' | 'pwd' | 'senior' | 'women' | 'children';
 
@@ -174,7 +178,7 @@ export default function MswdoServices() {
     <>
       <Seo
         title={t('mswdosvc-municipal-social-welfare-development-office')}
-        description="City Social Welfare and Development Office (MSWDO) Services - Social case studies, indigency certificates, AICS, PWD assistance, senior citizen services, and welfare programs in Mati, Davao Oriental."
+        description="City Social Welfare and Development Office (CSWDO) Services - Social case studies, indigency certificates, AICS, PWD assistance, senior citizen services, and welfare programs in Mati, Davao Oriental."
         canonicalPath="/service-details/mswdo-services"
       />
 
@@ -196,7 +200,7 @@ export default function MswdoServices() {
             {t('mswdosvc-social-services')}
           </AppLink>
           <span>/</span>
-          <span aria-current="page">MSWDO Services</span>
+          <span aria-current="page">CSWDO Services</span>
         </nav>
       </Container>
 
@@ -204,7 +208,7 @@ export default function MswdoServices() {
         badge={
           <>
             <Heart className="size-4" aria-hidden="true" />
-            MSWDO
+            CSWDO
           </>
         }
         title={t('mswdosvc-municipal-social-welfare-development-office')}
@@ -220,7 +224,7 @@ export default function MswdoServices() {
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('mswdosvc-office')}
               </h3>
-              <p className="m-0 text-[0.8125rem] font-semibold text-foreground">MSWDO</p>
+              <p className="m-0 text-[0.8125rem] font-semibold text-foreground">CSWDO</p>
             </div>
             <div className="rounded-lg border border-border bg-card p-3 text-center">
               <MapPin className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
@@ -878,7 +882,7 @@ export default function MswdoServices() {
               items={[
                 { Icon: MapPin, content: t('mswdosvc-mswdo-office-2nd-floor-municipal-hall-mati') },
                 { Icon: Clock, content: 'Monday - Friday: 8:00 AM - 5:00 PM' },
-                { Icon: Phone, content: '0916 284 0885' },
+                { Icon: Phone, content: cswdo.numbers.map((n) => n.display).join(' · ') },
               ]}
             />
             <InfoBox
