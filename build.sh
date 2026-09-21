@@ -98,10 +98,13 @@ node -e '
 '
 
 # 4c. Static passthrough (things the React app needs at runtime + server config).
+# The web build now also copies these into web/dist (see web/scripts/copy-legacy-static.mjs),
+# so 4a may have already placed them here — use copy-into-dir (`src/.` → `dest/`) so a
+# re-copy overwrites in place instead of nesting (dist/assets/assets).
 echo "  Static passthrough (assets/images, data, admin, error pages, config)..."
-cp -r assets dist/assets
+mkdir -p dist/assets && cp -r assets/. dist/assets/
 mkdir -p dist/data && cp -r data/. dist/data/
-[ -d admin ] && cp -r admin dist/admin
+[ -d admin ] && { mkdir -p dist/admin && cp -r admin/. dist/admin/; }
 cp 403.html 404.html 500.html offline.html dist/ 2>/dev/null || true
 cp .htaccess sw.js manifest.webmanifest robots.txt version.json dist/ 2>/dev/null || true
 

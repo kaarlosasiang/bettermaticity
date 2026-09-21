@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite-react-ssg build",
+    "build": "vite-react-ssg build && node scripts/copy-legacy-static.mjs",
     "preview": "vite preview",
     "typecheck": "tsc -b",
     "lint": "oxlint",
