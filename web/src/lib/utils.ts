@@ -1,1 +1,14 @@
-export { cn } from "cn"
+export { cn } from 'cn';
+
+/** Initials for an avatar, e.g. 'Hon. Joel Mayo Z. Almario' -> 'JA'. */
+export function officialInitials(name: string): string {
+  const parts = name
+    .replace(/^Hon\.\s*/i, '')
+    .replace(/["'.]/g, '')
+    .split(/\s+/)
+    .filter(Boolean);
+  if (parts.length === 0) return '—';
+  const first = parts[0][0] ?? '';
+  const last = parts.length > 1 ? (parts[parts.length - 1][0] ?? '') : '';
+  return (first + last).toUpperCase() || '—';
+}
