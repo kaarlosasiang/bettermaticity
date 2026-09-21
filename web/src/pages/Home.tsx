@@ -39,8 +39,22 @@ import {
 } from '@/components/motion';
 import { totalPopulation, barangayCount, landAreaKm2, incomeClass } from '@/lib/statsData';
 import { financialData } from '@/lib/budgetData';
+import { officials } from '@/lib/govData';
 
 const FEEL_MATI_LOGO = '/assets/images/logo/feel-mati.png';
+
+// Initials for the leadership avatar, e.g. "Hon. Joel Mayo Z. Almario" -> "JA".
+function officialInitials(name: string): string {
+  const parts = name
+    .replace(/^Hon\.\s*/i, '')
+    .replace(/["'.]/g, '')
+    .split(/\s+/)
+    .filter(Boolean);
+  if (parts.length === 0) return '—';
+  const first = parts[0][0] ?? '';
+  const last = parts.length > 1 ? (parts[parts.length - 1][0] ?? '') : '';
+  return (first + last).toUpperCase() || '—';
+}
 
 // Easing for the funds-bar width fill (width isn't a transform, so it needs its own
 // transition — reducedMotion is handled by rendering a static bar instead).
@@ -731,8 +745,16 @@ export default function Home() {
                   viewport={revealViewport}
                 >
                   {[
-                    { role: 'Elected Mayor', sub: 'City Mayor · City of Mati' },
-                    { role: 'Elected Vice Mayor', sub: 'City Vice Mayor · Sangguniang Panlungsod' },
+                    {
+                      role: 'Elected Mayor',
+                      name: officials.mayor?.name ?? 'Hon. [to be confirmed]',
+                      sub: 'City Mayor · City of Mati',
+                    },
+                    {
+                      role: 'Elected Vice Mayor',
+                      name: officials.vice_mayor?.name ?? 'Hon. [to be confirmed]',
+                      sub: 'City Vice Mayor · Sangguniang Panlungsod',
+                    },
                   ].map((l) => (
                     <m.div
                       key={l.role}
@@ -740,19 +762,55 @@ export default function Home() {
                       className="flex items-center gap-3.5 rounded-xl border-t-[3px] border-[#2b62ee] bg-white p-[18px] shadow-[0_0_0_1px_rgba(18,60,122,0.07)]"
                     >
                       <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#eef4fe] font-display text-[0.9375rem] font-bold text-[#2b62ee]">
-                        —
+                        {officialInitials(l.name)}
                       </span>
                       <div>
                         <span className="inline-flex h-5 items-center rounded-full bg-[#eef4fe] px-2.5 text-[0.6875rem] font-semibold text-[#2b62ee]">
                           {l.role}
                         </span>
                         <div className="mt-1.5 font-display text-[0.9375rem] font-bold text-[#123c7a]">
-                          Hon. [to be confirmed]
+                          {l.name}
                         </div>
                         <div className="text-[0.8125rem] text-[#4c5c78]">{l.sub}</div>
                       </div>
                     </m.div>
                   ))}
+
+                  {officials.councilors && officials.councilors.length > 0 && (
+                    <m.div
+                      variants={fadeUp}
+                      className="rounded-xl bg-white p-[18px] shadow-[0_0_0_1px_rgba(18,60,122,0.07)]"
+                    >
+                      <div className="mb-3 flex items-center justify-between gap-2">
+                        <span className="inline-flex h-5 items-center rounded-full bg-[#eef4fe] px-2.5 text-[0.6875rem] font-semibold text-[#2b62ee]">
+                          Sangguniang Panlungsod
+                        </span>
+                        <span className="text-[0.6875rem] font-medium text-[#4c5c78]">
+                          {officials.councilors.length} Councilors
+                        </span>
+                      </div>
+                      <ul className="grid gap-x-4 gap-y-1.5 sm:grid-cols-2">
+                        {officials.councilors.map((c) => (
+                          <li
+                            key={c.name}
+                            className="flex items-center gap-2 text-[0.8125rem] text-[#123c7a]"
+                          >
+                            <span
+                              className="size-1.5 shrink-0 rounded-full bg-[#2b62ee]"
+                              aria-hidden="true"
+                            />
+                            {c.name.replace(/^Hon\.\s*/i, '')}
+                          </li>
+                        ))}
+                      </ul>
+                      <AppLink
+                        to="/government/officials"
+                        className="mt-3 inline-flex items-center gap-1.5 text-[0.8125rem] font-semibold text-[#2b62ee] hover:underline"
+                      >
+                        Meet the full council <ArrowRight className="size-3.5" aria-hidden="true" />
+                      </AppLink>
+                    </m.div>
+                  )}
 
                   <m.div
                     variants={fadeUp}
