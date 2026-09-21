@@ -1,37 +1,35 @@
-import { UserRound, Mail, Phone } from 'lucide-react';
+import type { ReactNode } from 'react';
+import { Landmark } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Container, Section, PageHeader } from '@/components/primitives';
-import { officials, officialsAreDraft, type Official } from '@/lib/govData';
+import { Container } from '@/components/primitives';
+import {
+  LazyMotion,
+  domAnimation,
+  m,
+  MotionConfig,
+  fadeUp,
+  staggerContainer,
+  revealViewport,
+} from '@/components/motion';
+import { OfficialCard } from '@/components/OfficialCard';
+import { officials, officialsAreDraft } from '@/lib/govData';
 
-function OfficialCard({ official, role }: { official: Official; role: string }) {
+function SectionHead({ children }: { children: ReactNode }) {
   return (
-    <div className="rounded-xl border border-border bg-card p-6 text-center transition hover:shadow-sm">
-      <div className="mx-auto mb-4 flex size-24 items-center justify-center overflow-hidden rounded-full bg-muted">
-        {official.image ? (
-          <img src={`/${official.image.replace(/^\/+/, '')}`} alt={official.name} className="size-full object-cover" loading="lazy" />
-        ) : (
-          <UserRound className="size-12 text-muted-foreground" aria-hidden="true" />
-        )}
-      </div>
-      <h3 className="text-base font-semibold text-foreground">{official.name}</h3>
-      <p className="font-semibold text-primary">{official.title || role}</p>
-      {(official.email || official.phone) && (
-        <div className="mt-3 flex flex-col items-center gap-1 text-sm text-muted-foreground">
-          {official.email && (
-            <a href={`mailto:${official.email}`} className="inline-flex items-center gap-1.5 hover:text-primary">
-              <Mail className="size-3.5" aria-hidden="true" /> {official.email}
-            </a>
-          )}
-          {official.phone && (
-            <a href={`tel:${official.tel ?? official.phone}`} className="inline-flex items-center gap-1.5 hover:text-primary">
-              <Phone className="size-3.5" aria-hidden="true" /> {official.phone}
-            </a>
-          )}
-        </div>
-      )}
-    </div>
+    <m.div
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="show"
+      viewport={revealViewport}
+      className="mb-[18px] flex items-center gap-3.5"
+    >
+      <span className="h-[26px] w-1 rounded bg-[#2b62ee]" aria-hidden="true" />
+      <h2 className="font-display text-2xl font-extrabold tracking-[-0.02em] text-[#123c7a]">
+        {children}
+      </h2>
+    </m.div>
   );
 }
 
@@ -39,58 +37,93 @@ export default function GovernmentOfficials() {
   const { t } = useLanguage();
 
   return (
-    <>
-      <Seo
-        title="Elected Officials"
-        description="The elected officials of the City of Mati, Davao Oriental."
-        canonicalPath="/government/officials"
-      />
+    <LazyMotion features={domAnimation}>
+      <MotionConfig reducedMotion="user">
+        <Seo
+          title={t('officials-elected-officials')}
+          description="The elected officials of the City of Mati, Davao Oriental."
+          canonicalPath="/government/officials"
+        />
 
-      <Container>
-        <nav className="flex items-center gap-2 py-4 text-sm text-muted-foreground" aria-label="Breadcrumb">
-          <AppLink to="/" className="hover:text-primary">{t('nav-home')}</AppLink>
-          <span>/</span>
-          <AppLink to="/government" className="hover:text-primary">{t('nav-government')}</AppLink>
-          <span>/</span>
-          <span aria-current="page">{t('officials-elected-officials')}</span>
-        </nav>
-      </Container>
+        {/* ── Hero ─────────────────────────────────────────────────────────── */}
+        <section className="bg-[#123c7a] py-12 lg:py-16">
+          <Container>
+            <m.div variants={staggerContainer} initial="hidden" animate="show" className="max-w-2xl">
+              <m.span
+                variants={fadeUp}
+                className="inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-[0.08em] text-[#9dc0ff]"
+              >
+                <Landmark className="size-3.5" aria-hidden="true" />
+                {t('gov-government')}
+              </m.span>
+              <m.h1
+                variants={fadeUp}
+                className="mt-3 font-display text-4xl font-extrabold leading-[1.08] tracking-[-0.03em] text-white sm:text-[2.75rem]"
+              >
+                {t('officials-elected-officials')}
+              </m.h1>
+              <m.p variants={fadeUp} className="mt-3 text-base leading-relaxed text-white/75">
+                {t('gov-subtitle')}
+              </m.p>
+            </m.div>
+          </Container>
+        </section>
 
-      <PageHeader
-        title={t('officials-elected-officials')}
-        description="The elected leadership of the City of Mati, Davao Oriental."
-      />
+        {/* ── Executive Branch ─────────────────────────────────────────────── */}
+        <section className="bg-white py-12">
+          <Container>
+            {officialsAreDraft && (
+              <p
+                role="note"
+                className="mb-6 rounded-xl border-l-[3px] border-[#ffc001] bg-[#fffbef] px-4 py-3 text-sm text-[#8a6200]"
+              >
+                {t('gov-officials-note')}
+              </p>
+            )}
+            <SectionHead>{t('gov-executive-branch')}</SectionHead>
+            <m.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="show"
+              viewport={revealViewport}
+              className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2"
+            >
+              {officials.mayor && <OfficialCard official={officials.mayor} role="City Mayor" />}
+              {officials.vice_mayor && (
+                <OfficialCard official={officials.vice_mayor} role="City Vice Mayor" />
+              )}
+            </m.div>
+          </Container>
+        </section>
 
-      <Section>
-        <Container>
-          {officialsAreDraft && (
-            <p className="mb-6 rounded-md border border-brand-accent/30 bg-brand-accent/5 px-4 py-3 text-sm text-muted-foreground">
-              Placeholder data — to be replaced with the current elected officials of the City of Mati.
-            </p>
-          )}
-
-          <h2 className="mb-6 text-center text-[1.375rem] font-semibold text-foreground">
-            {t('gov-executive-branch')}
-          </h2>
-          <div className="mx-auto mb-10 grid max-w-3xl gap-6 sm:grid-cols-2">
-            {officials.mayor && <OfficialCard official={officials.mayor} role="City Mayor" />}
-            {officials.vice_mayor && <OfficialCard official={officials.vice_mayor} role="City Vice Mayor" />}
-          </div>
-
-          {officials.councilors && officials.councilors.length > 0 && (
-            <>
-              <h2 className="mb-6 text-center text-[1.375rem] font-semibold text-foreground">
-                Sangguniang Panlungsod Members
-              </h2>
-              <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-6">
+        {/* ── Sangguniang Panlungsod ───────────────────────────────────────── */}
+        {officials.councilors && officials.councilors.length > 0 && (
+          <section className="bg-[#f1f6fc] py-12">
+            <Container>
+              <SectionHead>{t('gov-sb-members')}</SectionHead>
+              <m.div
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="show"
+                viewport={revealViewport}
+                className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4"
+              >
                 {officials.councilors.map((c, i) => (
-                  <OfficialCard key={`${c.name}-${i}`} official={c} role="SP Member" />
+                  <OfficialCard key={`${c.name}-${i}`} official={c} role="City Councilor" />
                 ))}
+              </m.div>
+              <div className="mt-6">
+                <AppLink
+                  to="/government"
+                  className="text-sm font-semibold text-[#2b62ee] hover:underline"
+                >
+                  ← {t('nav-government')}
+                </AppLink>
               </div>
-            </>
-          )}
-        </Container>
-      </Section>
-    </>
+            </Container>
+          </section>
+        )}
+      </MotionConfig>
+    </LazyMotion>
   );
 }

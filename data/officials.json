@@ -1,8 +1,8 @@
 {
   "_status": "draft",
-  "_note": "PLACEHOLDER — replace with the current elected officials of the City of Mati, Davao Oriental.",
+  "_note": "Names verified from the May 2025 Philippine local elections (term 2025–2028): mayor Joel Mayo Z. Almario, vice mayor Lorenzo \"Enzo\" Rabat, and the 10 elected Sangguniang Panlungsod members (by vote rank). Official photos and contact details (email/phone/tel/hours) are still PLACEHOLDERS pending verification. Councilor #1 \"Pang Jr.\" is the ballot-form name; full first name unconfirmed.",
   "mayor": {
-    "name": "Hon. [City Mayor Name]",
+    "name": "Hon. Joel Mayo Z. Almario",
     "title": "City Mayor",
     "image": "assets/images/officials/mayor.jpg",
     "email": "mayor@mati.gov.ph",
@@ -11,7 +11,7 @@
     "hours": "Mon-Fri: 8:00 AM - 5:00 PM"
   },
   "vice_mayor": {
-    "name": "Hon. [City Vice Mayor Name]",
+    "name": "Hon. Lorenzo \"Enzo\" Rabat",
     "title": "City Vice Mayor",
     "image": "assets/images/officials/vice-mayor.jpg",
     "email": "vicemayor@mati.gov.ph",
@@ -21,44 +21,54 @@
   },
   "councilors": [
     {
-      "name": "Hon. Councilor One",
-      "title": "SP Member",
+      "name": "Hon. Pang Jr.",
+      "title": "City Councilor",
       "image": "assets/images/officials/sb1.jpg"
     },
     {
-      "name": "Hon. Councilor Two",
-      "title": "SP Member",
+      "name": "Hon. Roger Pabio",
+      "title": "City Councilor",
       "image": "assets/images/officials/sb2.jpg"
     },
     {
-      "name": "Hon. Councilor Three",
-      "title": "SP Member",
+      "name": "Hon. Xenna All Campos",
+      "title": "City Councilor",
       "image": "assets/images/officials/sb3.jpg"
     },
     {
-      "name": "Hon. Councilor Four",
-      "title": "SP Member",
+      "name": "Hon. Tara Gayta",
+      "title": "City Councilor",
       "image": "assets/images/officials/sb4.jpg"
     },
     {
-      "name": "Hon. Councilor Five",
-      "title": "SP Member",
+      "name": "Hon. Paolo Rabat",
+      "title": "City Councilor",
       "image": "assets/images/officials/sb5.jpg"
     },
     {
-      "name": "Hon. Councilor Six",
-      "title": "SP Member",
+      "name": "Hon. Raul Antopuesto",
+      "title": "City Councilor",
       "image": "assets/images/officials/sb6.jpg"
     },
     {
-      "name": "Hon. Councilor Seven",
-      "title": "SP Member",
+      "name": "Hon. Jerome Dayanghirang",
+      "title": "City Councilor",
       "image": "assets/images/officials/sb7.jpg"
     },
     {
-      "name": "Hon. Councilor Eight",
-      "title": "SP Member",
+      "name": "Hon. Junie Bardon",
+      "title": "City Councilor",
       "image": "assets/images/officials/sb8.jpg"
+    },
+    {
+      "name": "Hon. Xander Bong Alcantara",
+      "title": "City Councilor",
+      "image": "assets/images/officials/sb9.jpg"
+    },
+    {
+      "name": "Hon. Edgar Valera",
+      "title": "City Councilor",
+      "image": "assets/images/officials/sb10.jpg"
     }
   ]
 }

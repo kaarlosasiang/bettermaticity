@@ -26,10 +26,10 @@ ChartJS.register(
   Filler
 );
 
-// Categorical chart palette — validated (light surface) via the dataviz skill's
-// validator: passes lightness band, chroma, CVD separation, and normal-vision floor.
-// Contrast WARN on green/orange is relieved by direct labels + legends + data tables.
-export const CHART_COLORS = ['#2563eb', '#06a77d', '#f77f00', '#d62828', '#7c3aed'];
+// Categorical chart palette — series-1 is the brand royal (#2b62ee) so charts match
+// the site's navy/royal identity; the remaining hues stay CVD-separated (green/orange/
+// red/violet). Contrast WARN on green/orange is relieved by direct labels + data tables.
+export const CHART_COLORS = ['#2b62ee', '#06a77d', '#f77f00', '#e01b24', '#7c4dff'];
 
 export const chartFont = {
   family: "'Inter Variable', sans-serif",
