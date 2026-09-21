@@ -1,8 +1,15 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { ChevronDown, Globe, Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { AppLink } from '@/components/AppLink';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { useLanguage } from '@/hooks/useLanguage';
 import type { Language } from '@/i18n';
 
@@ -169,7 +176,7 @@ export default function Header() {
     <header className="sticky top-0 z-[1000] bg-white py-1.5 shadow-sm">
       <div className="mx-auto flex min-h-12 w-full max-w-[1200px] flex-wrap items-center justify-between px-6">
         {/* Logo */}
-        <AppLink to="/" className="order-first flex items-center" aria-label="Better Mati home">
+        <AppLink to="/" className="flex items-center" aria-label="Better Mati home">
           <img
             src="/assets/images/logo/better-mati-logo.png"
             alt="Better Mati Logo"
@@ -182,7 +189,7 @@ export default function Header() {
           ref={navRef}
           aria-label="Main Navigation"
           className={cn(
-            'order-4 w-full overflow-hidden transition-all duration-300',
+            'order-last w-full overflow-hidden transition-all duration-300',
             mobileMenuOpen
               ? 'visible mt-4 max-h-[80vh] overflow-y-auto border-t border-border pt-4 opacity-100'
               : 'invisible max-h-0 opacity-0',
@@ -256,49 +263,76 @@ export default function Header() {
           </ul>
         </nav>
 
-        {/* Language selector */}
-        <div className="order-3 flex items-center gap-1 lg:order-none">
-          {LANGS.map((l) => (
-            <button
-              key={l.code}
-              type="button"
-              onClick={() => void setLanguage(l.code)}
-              aria-label={`Switch to ${l.name}`}
-              className={cn(
-                'rounded-md border px-2.5 py-1.5 text-xs font-semibold transition',
-                language === l.code
-                  ? 'border-primary bg-primary text-white'
-                  : 'border-border text-foreground opacity-70 hover:opacity-100'
-              )}
-            >
-              {l.label}
-            </button>
-          ))}
-        </div>
+        {/* Right cluster: language control + mobile menu toggle */}
+        <div className="flex items-center gap-2 lg:gap-1">
+          {/* Desktop language pills */}
+          <div className="hidden items-center gap-1 lg:flex">
+            {LANGS.map((l) => (
+              <button
+                key={l.code}
+                type="button"
+                onClick={() => void setLanguage(l.code)}
+                aria-label={`Switch to ${l.name}`}
+                className={cn(
+                  'rounded-md border px-2.5 py-1.5 text-xs font-semibold transition',
+                  language === l.code
+                    ? 'border-primary bg-primary text-white'
+                    : 'border-border text-foreground opacity-70 hover:opacity-100'
+                )}
+              >
+                {l.label}
+              </button>
+            ))}
+          </div>
 
-        {/* Mobile toggle */}
-        <button
-          ref={toggleRef}
-          type="button"
-          onClick={() => {
-            if (isAnimatingRef.current) return;
-            if (mobileMenuOpen) {
-              closeMenu();
-            } else {
-              isAnimatingRef.current = true;
-              setMobileMenuOpen(true);
-              lockBodyScroll();
-              setTimeout(() => {
-                isAnimatingRef.current = false;
-              }, 320);
-            }
-          }}
-          aria-label="Toggle Navigation"
-          aria-expanded={mobileMenuOpen}
-          className="order-2 mx-auto flex size-9 items-center justify-center text-primary lg:hidden"
-        >
-          {mobileMenuOpen ? <X className="size-6" /> : <Menu className="size-6" />}
-        </button>
+          {/* Mobile compact language dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              aria-label="Change language"
+              className="flex h-11 items-center gap-1 rounded-md px-2.5 text-xs font-semibold text-foreground transition hover:bg-muted lg:hidden"
+            >
+              <Globe className="size-4" aria-hidden="true" />
+              {language.toUpperCase()}
+              <ChevronDown className="size-3.5" aria-hidden="true" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-auto min-w-[10rem]">
+              <DropdownMenuRadioGroup
+                value={language}
+                onValueChange={(v) => void setLanguage(v as Language)}
+              >
+                {LANGS.map((l) => (
+                  <DropdownMenuRadioItem key={l.code} value={l.code} className="py-2 pl-2">
+                    {l.name}
+                  </DropdownMenuRadioItem>
+                ))}
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          {/* Mobile toggle */}
+          <button
+            ref={toggleRef}
+            type="button"
+            onClick={() => {
+              if (isAnimatingRef.current) return;
+              if (mobileMenuOpen) {
+                closeMenu();
+              } else {
+                isAnimatingRef.current = true;
+                setMobileMenuOpen(true);
+                lockBodyScroll();
+                setTimeout(() => {
+                  isAnimatingRef.current = false;
+                }, 320);
+              }
+            }}
+            aria-label="Toggle Navigation"
+            aria-expanded={mobileMenuOpen}
+            className="flex size-11 items-center justify-center text-primary lg:hidden"
+          >
+            {mobileMenuOpen ? <X className="size-6" /> : <Menu className="size-6" />}
+          </button>
+        </div>
       </div>
     </header>
   );
