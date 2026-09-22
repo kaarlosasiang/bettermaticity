@@ -78,9 +78,9 @@ export default function Footer() {
           {/* Brand */}
           <div className="max-w-[320px]">
             <img
-              src="/assets/images/logo/better-mati-logo-white.svg"
+              src="/assets/images/logo/better-mati-logo-white.png"
               alt="Better Mati logo"
-              className="mb-4 h-14 w-auto"
+              className="mb-4 h-18 w-auto"
             />
             <p className="mb-6 text-sm/[1.6] text-white/70">{t('footer-tagline')}</p>
             <div className="flex gap-3">
