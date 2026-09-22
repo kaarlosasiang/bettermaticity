@@ -42,7 +42,7 @@ export default function CivilRegistrar() {
     value: ReactNode;
     sub: ReactNode;
   }) => (
-    <div className="rounded-xl border border-border bg-card p-5 text-center">
+    <div className="rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-5 text-center">
       <div className="mb-2 flex justify-center text-primary">{icon}</div>
       <h4 className="mb-1 text-[0.7rem] font-medium tracking-wide text-muted-foreground uppercase">
         {label}
@@ -178,7 +178,7 @@ export default function CivilRegistrar() {
       <Section compact>
         <Container>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:grid-cols-4">
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <FileText className="mx-auto mb-1 size-5 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('cr-services')}
@@ -187,21 +187,23 @@ export default function CivilRegistrar() {
                 {t('cr-8-services')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <Clock className="mx-auto mb-1 size-5 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('cr-office-hours')}
               </h3>
-              <p className="m-0 text-[0.8125rem] font-semibold text-foreground">{t('cr-8am-5pm')}</p>
+              <p className="m-0 text-[0.8125rem] font-semibold text-foreground">
+                {t('cr-8am-5pm')}
+              </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <CalendarCheck className="mx-auto mb-1 size-5 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('cr-availability')}
               </h3>
               <p className="m-0 text-[0.8125rem] font-semibold text-foreground">Mon - Fri</p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <Phone className="mx-auto mb-1 size-5 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('cr-hotline')}
@@ -228,7 +230,7 @@ export default function CivilRegistrar() {
               <a
                 key={href}
                 href={href}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-4 py-2.5 text-sm font-medium text-foreground hover:border-primary hover:text-primary"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] px-4 py-2.5 text-sm font-medium text-foreground hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)] hover:text-primary"
               >
                 <Icon className="size-4" aria-hidden="true" /> {t(key)}
               </a>
@@ -250,7 +252,7 @@ export default function CivilRegistrar() {
                   title={t('cr-birth-certificate-services')}
                   desc={t('cr-issuance-of-certified-true-copies-and')}
                 />
-                <div className="overflow-hidden rounded-xl border border-border bg-card">
+                <div className="overflow-hidden rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)]">
                   <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 lg:grid-cols-4">
                     <InfoBox
                       icon={infoIcon(Clock)}
@@ -332,7 +334,7 @@ export default function CivilRegistrar() {
                   title={t('cr-marriage-certificate-services')}
                   desc={t('cr-issuance-of-marriage-certificates-and-marriage')}
                 />
-                <div className="overflow-hidden rounded-xl border border-border bg-card">
+                <div className="overflow-hidden rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)]">
                   <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 lg:grid-cols-4">
                     <InfoBox
                       icon={infoIcon(Clock)}
@@ -418,7 +420,7 @@ export default function CivilRegistrar() {
                   title={t('cr-death-certificate-services')}
                   desc={t('cr-registration-and-issuance-of-death-certificates')}
                 />
-                <div className="overflow-hidden rounded-xl border border-border bg-card">
+                <div className="overflow-hidden rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)]">
                   <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 lg:grid-cols-4">
                     <InfoBox
                       icon={infoIcon(Clock)}
@@ -500,7 +502,7 @@ export default function CivilRegistrar() {
                   title={t('cr-certificate-of-no-marriage-cenomar')}
                   desc={t('cr-certification-of-no-marriage-record-on-file')}
                 />
-                <div className="overflow-hidden rounded-xl border border-border bg-card">
+                <div className="overflow-hidden rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)]">
                   <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 lg:grid-cols-4">
                     <InfoBox
                       icon={infoIcon(Clock)}
@@ -558,7 +560,7 @@ export default function CivilRegistrar() {
                   title={t('cr-corrections-and-amendments')}
                   desc={t('cr-clerical-error-corrections-and-change-of-first')}
                 />
-                <div className="overflow-hidden rounded-xl border border-border bg-card">
+                <div className="overflow-hidden rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)]">
                   <div className="p-6">
                     <h3 className="mb-2 text-lg font-semibold text-foreground">
                       {t('cr-about-corrections')}
@@ -621,9 +623,11 @@ export default function CivilRegistrar() {
                   title={t('cr-legitimation')}
                   desc={t('cr-legal-process-to-legitimize-children-born-out-of')}
                 />
-                <div className="overflow-hidden rounded-xl border border-border bg-card">
+                <div className="overflow-hidden rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)]">
                   <div className="p-6">
-                    <h3 className="mb-2 text-lg font-semibold text-foreground">About Legitimation</h3>
+                    <h3 className="mb-2 text-lg font-semibold text-foreground">
+                      About Legitimation
+                    </h3>
                     <p className="text-sm text-muted-foreground">
                       {t('cr-legitimation-is-the-legal-process-by-which')}
                     </p>
@@ -658,7 +662,7 @@ export default function CivilRegistrar() {
                   title={t('cr-delayed-registration')}
                   desc={t('cr-late-registration-of-birth-marriage-or-death')}
                 />
-                <div className="overflow-hidden rounded-xl border border-border bg-card">
+                <div className="overflow-hidden rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)]">
                   <div className="p-6">
                     <h3 className="mb-2 text-lg font-semibold text-foreground">
                       {t('cr-about-delayed-registration')}
@@ -711,7 +715,7 @@ export default function CivilRegistrar() {
 
             {/* Sidebar */}
             <aside className="lg:sticky lg:top-24 lg:self-start">
-              <div className="rounded-xl border border-border bg-card p-6">
+              <div className="rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-6">
                 <h3 className="mb-4 flex items-center gap-2 text-base font-semibold text-foreground">
                   <Building2 className="size-4 text-primary" aria-hidden="true" />
                   {t('cr-civil-registrars-office')}
@@ -720,7 +724,9 @@ export default function CivilRegistrar() {
                   <li className="flex gap-3 border-b border-border pb-3">
                     <IdCard className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
                     <span className="flex flex-col">
-                      <strong className="text-foreground">{t('cr-municipal-civil-registrar')}</strong>
+                      <strong className="text-foreground">
+                        {t('cr-municipal-civil-registrar')}
+                      </strong>
                       <span className="text-muted-foreground">{t('cr-local-civil-registrar')}</span>
                     </span>
                   </li>
@@ -776,10 +782,7 @@ export default function CivilRegistrar() {
                   </h4>
                   <ul className="m-0 list-none space-y-2 p-0 text-sm">
                     <li>
-                      <AppLink
-                        to="/services/certificates"
-                        className="text-primary hover:underline"
-                      >
+                      <AppLink to="/services/certificates" className="text-primary hover:underline">
                         {t('cr-certificates-vital-records')}
                       </AppLink>
                     </li>

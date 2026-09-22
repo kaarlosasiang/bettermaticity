@@ -83,7 +83,7 @@ function LegalCallout({
   children: ReactNode;
 }) {
   return (
-    <div className="my-6 rounded-[10px] border border-border bg-card p-5">
+    <div className="my-6 rounded-[10px] bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-5">
       <h4 className="mb-3 flex items-center gap-2 text-[0.9375rem] font-semibold text-primary">
         {icon}
         {title}
@@ -160,7 +160,7 @@ export default function Privacy() {
         <Container>
           <div className="grid items-start gap-12 lg:grid-cols-[240px_1fr]">
             {/* Table of Contents */}
-            <aside className="sticky top-[100px] hidden self-start rounded-xl border border-border bg-card p-5 shadow-sm lg:block">
+            <aside className="sticky top-[100px] hidden self-start rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-5 shadow-sm lg:block">
               <h4 className="mb-4 flex items-center gap-2 border-b border-border pb-3 text-sm font-semibold text-foreground">
                 <List className="size-4 text-primary" aria-hidden="true" />
                 {t('privacy-contents')}
@@ -185,8 +185,8 @@ export default function Privacy() {
                 <LegalP>{t('privacy-bettermatiorg-we-us-or-our-is-committed-to')}</LegalP>
                 <LegalP>
                   This policy is designed to comply with the{' '}
-                  <Label>{t('privacy-data-privacy-act-of-2012-republic-act-no-10173')}</Label> of the
-                  Philippines and its Implementing Rules and Regulations (IRR).
+                  <Label>{t('privacy-data-privacy-act-of-2012-republic-act-no-10173')}</Label> of
+                  the Philippines and its Implementing Rules and Regulations (IRR).
                 </LegalP>
                 <div className="my-5 flex items-center gap-3 rounded-r-lg border-l-4 border-emerald-500 bg-emerald-500/10 px-5 py-4">
                   <ShieldCheck className="size-5 shrink-0 text-emerald-600" aria-hidden="true" />
@@ -211,8 +211,8 @@ export default function Privacy() {
                     security, and provide better civic services
                   </LegalLi>
                   <LegalLi>
-                    <Label>{t('privacy-legal-obligation')}</Label> When required by Philippine law or
-                    government authorities
+                    <Label>{t('privacy-legal-obligation')}</Label> When required by Philippine law
+                    or government authorities
                   </LegalLi>
                   <LegalLi>
                     <Label>{t('privacy-public-interest')}</Label> To promote transparency and civic
@@ -243,8 +243,8 @@ export default function Privacy() {
                 </LegalList>
 
                 <LegalNote icon={<Info className="size-4" aria-hidden="true" />}>
-                  We do <Label>{t('privacy-not')}</Label> collect sensitive personal information such
-                  as government-issued ID numbers, financial information, health records, or
+                  We do <Label>{t('privacy-not')}</Label> collect sensitive personal information
+                  such as government-issued ID numbers, financial information, health records, or
                   biometric data through this website.
                 </LegalNote>
               </LegalSection>
@@ -258,7 +258,9 @@ export default function Privacy() {
                   <LegalLi>{t('privacy-to-analyze-website-traffic-and-usage-patterns')}</LegalLi>
                   <LegalLi>{t('privacy-to-ensure-website-security-and-prevent-abuse')}</LegalLi>
                   <LegalLi>{t('privacy-to-comply-with-legal-obligations')}</LegalLi>
-                  <LegalLi>{t('privacy-to-maintain-and-improve-civic-services-information')}</LegalLi>
+                  <LegalLi>
+                    {t('privacy-to-maintain-and-improve-civic-services-information')}
+                  </LegalLi>
                 </LegalList>
               </LegalSection>
 
@@ -292,7 +294,9 @@ export default function Privacy() {
                   title={t('privacy-managing-cookies')}
                 >
                   <ul className="space-y-2">
-                    <CalloutLi>{t('privacy-you-can-disable-cookies-through-your-browser')}</CalloutLi>
+                    <CalloutLi>
+                      {t('privacy-you-can-disable-cookies-through-your-browser')}
+                    </CalloutLi>
                     <CalloutLi>
                       You can opt out of Google Analytics by installing the{' '}
                       <a
@@ -314,9 +318,9 @@ export default function Privacy() {
                 <LegalP>{t('privacy-we-do-not-sell-trade-or-rent-your-personal')}</LegalP>
                 <LegalList>
                   <LegalLi>
-                    <Label>{t('privacy-service-providers')}</Label> With trusted third-party services
-                    (e.g., web hosting, analytics) that assist in operating our website, subject to
-                    confidentiality agreements
+                    <Label>{t('privacy-service-providers')}</Label> With trusted third-party
+                    services (e.g., web hosting, analytics) that assist in operating our website,
+                    subject to confidentiality agreements
                   </LegalLi>
                   <LegalLi>
                     <Label>{t('privacy-legal-requirements')}</Label> When required by law, court
@@ -351,12 +355,12 @@ export default function Privacy() {
                 <LegalP>{t('privacy-we-retain-personal-information-only-for-as-long')}</LegalP>
                 <LegalList>
                   <LegalLi>
-                    <Label>{t('privacy-contact-information')}</Label> Retained for the duration needed
-                    to respond to inquiries, then deleted within 1 year of last contact
+                    <Label>{t('privacy-contact-information')}</Label> Retained for the duration
+                    needed to respond to inquiries, then deleted within 1 year of last contact
                   </LegalLi>
                   <LegalLi>
-                    <Label>{t('privacy-analytics-data')}</Label> Aggregated and anonymized data may be
-                    retained indefinitely for statistical purposes
+                    <Label>{t('privacy-analytics-data')}</Label> Aggregated and anonymized data may
+                    be retained indefinitely for statistical purposes
                   </LegalLi>
                   <LegalLi>
                     <Label>{t('privacy-server-logs')}</Label> Automatically deleted after 90 days
@@ -377,12 +381,12 @@ export default function Privacy() {
                     data held by us
                   </LegalLi>
                   <LegalLi>
-                    <Label>{t('privacy-right-to-object')}</Label> To object to the processing of your
-                    personal data
+                    <Label>{t('privacy-right-to-object')}</Label> To object to the processing of
+                    your personal data
                   </LegalLi>
                   <LegalLi>
-                    <Label>{t('privacy-right-to-erasure-or-blocking')}</Label> To request deletion or
-                    blocking of your personal data
+                    <Label>{t('privacy-right-to-erasure-or-blocking')}</Label> To request deletion
+                    or blocking of your personal data
                   </LegalLi>
                   <LegalLi>
                     <Label>{t('privacy-right-to-rectification')}</Label> To request correction of
@@ -398,8 +402,8 @@ export default function Privacy() {
                   </LegalLi>
                   <LegalLi>
                     <Label>{t('privacy-right-to-damages')}</Label> To be indemnified for damages
-                    sustained due to inaccurate, incomplete, outdated, false, unlawfully obtained, or
-                    unauthorized use of personal data
+                    sustained due to inaccurate, incomplete, outdated, false, unlawfully obtained,
+                    or unauthorized use of personal data
                   </LegalLi>
                 </LegalList>
 

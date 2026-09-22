@@ -31,21 +31,47 @@ import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
 import { cn } from '@/lib/utils';
-import { Container, Section, SectionTitle, SectionSubtitle, PageHeader } from '@/components/primitives';
+import {
+  Container,
+  Section,
+  SectionTitle,
+  SectionSubtitle,
+  PageHeader,
+} from '@/components/primitives';
 
 // Legacy .stat-card: white bordered card, centered icon + uppercase label + value.
-function QuickStat({ icon: Icon, label, value }: { icon: LucideIcon; label: ReactNode; value: ReactNode }) {
+function QuickStat({
+  icon: Icon,
+  label,
+  value,
+}: {
+  icon: LucideIcon;
+  label: ReactNode;
+  value: ReactNode;
+}) {
   return (
     <div className="rounded-lg border border-black/[0.06] bg-card p-3 text-center">
       <Icon className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
-      <h4 className="mb-0.5 text-[0.625rem] font-medium uppercase text-muted-foreground">{label}</h4>
+      <h4 className="mb-0.5 text-[0.625rem] font-medium uppercase text-muted-foreground">
+        {label}
+      </h4>
       <p className="m-0 text-[0.8125rem] font-semibold text-foreground">{value}</p>
     </div>
   );
 }
 
 // Legacy .process-card: white card, numbered badge, title, description.
-function ProcessCard({ n, final, title, desc }: { n: number; final?: boolean; title: ReactNode; desc: ReactNode }) {
+function ProcessCard({
+  n,
+  final,
+  title,
+  desc,
+}: {
+  n: number;
+  final?: boolean;
+  title: ReactNode;
+  desc: ReactNode;
+}) {
   return (
     <div className="rounded-lg border border-black/[0.06] bg-card p-3.5">
       <div
@@ -73,7 +99,15 @@ function ReqItem({ children }: { children: ReactNode }) {
 }
 
 // Legacy .req-box: white bordered card with an icon heading + list.
-function ReqBox({ icon: Icon, title, children }: { icon: LucideIcon; title: ReactNode; children: ReactNode }) {
+function ReqBox({
+  icon: Icon,
+  title,
+  children,
+}: {
+  icon: LucideIcon;
+  title: ReactNode;
+  children: ReactNode;
+}) {
   return (
     <div className="rounded-lg border border-black/[0.06] bg-card p-3.5">
       <h4 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
@@ -86,7 +120,15 @@ function ReqBox({ icon: Icon, title, children }: { icon: LucideIcon; title: Reac
 }
 
 // Legacy .notice-box: soft blue gradient callout.
-function NoticeBox({ icon: Icon, title, children }: { icon: LucideIcon; title: ReactNode; children: ReactNode }) {
+function NoticeBox({
+  icon: Icon,
+  title,
+  children,
+}: {
+  icon: LucideIcon;
+  title: ReactNode;
+  children: ReactNode;
+}) {
   return (
     <div className="mb-3.5 rounded-lg border border-[rgba(0,50,160,0.15)] bg-[linear-gradient(135deg,rgba(0,50,160,0.06)_0%,rgba(0,50,160,0.02)_100%)] p-3.5">
       <h4 className="mb-2 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-primary">
@@ -99,7 +141,15 @@ function NoticeBox({ icon: Icon, title, children }: { icon: LucideIcon; title: R
 }
 
 // Legacy .sidebar-card: compact white bordered card.
-function SidebarCard({ icon: Icon, title, children }: { icon: LucideIcon; title: ReactNode; children: ReactNode }) {
+function SidebarCard({
+  icon: Icon,
+  title,
+  children,
+}: {
+  icon: LucideIcon;
+  title: ReactNode;
+  children: ReactNode;
+}) {
   return (
     <div className="mb-2.5 rounded-lg border border-black/[0.06] bg-card p-3.5">
       <h4 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
@@ -112,12 +162,22 @@ function SidebarCard({ icon: Icon, title, children }: { icon: LucideIcon; title:
 }
 
 // Legacy .license-stat: white bordered card, centered block icon + value + label.
-function LicenseStat({ icon: Icon, value, label }: { icon: LucideIcon; value: ReactNode; label: ReactNode }) {
+function LicenseStat({
+  icon: Icon,
+  value,
+  label,
+}: {
+  icon: LucideIcon;
+  value: ReactNode;
+  label: ReactNode;
+}) {
   return (
     <div className="rounded-lg border border-black/[0.06] bg-card p-3.5 text-center">
       <Icon className="mx-auto mb-1.5 block size-5 text-primary" aria-hidden="true" />
       <span className="block text-base font-bold text-foreground">{value}</span>
-      <span className="text-[0.6875rem] uppercase tracking-[0.3px] text-muted-foreground">{label}</span>
+      <span className="text-[0.6875rem] uppercase tracking-[0.3px] text-muted-foreground">
+        {label}
+      </span>
     </div>
   );
 }
@@ -179,11 +239,16 @@ function PersonnelTag({ children }: { children: ReactNode }) {
 }
 
 function DocList({ children }: { children: ReactNode }) {
-  return <ul className="m-0 list-disc pl-3.5 text-[0.6875rem] text-muted-foreground [&>li]:mb-[3px]">{children}</ul>;
+  return (
+    <ul className="m-0 list-disc pl-3.5 text-[0.6875rem] text-muted-foreground [&>li]:mb-[3px]">
+      {children}
+    </ul>
+  );
 }
 
 const TD = 'border-b border-black/[0.04] px-3.5 py-3 align-top';
-const TH = 'bg-primary px-3.5 py-3 text-left text-[0.6875rem] font-semibold uppercase tracking-[0.3px] text-white';
+const TH =
+  'bg-primary px-3.5 py-3 text-left text-[0.6875rem] font-semibold uppercase tracking-[0.3px] text-white';
 
 export default function MarriageCertificate() {
   const { t } = useLanguage();
@@ -198,7 +263,10 @@ export default function MarriageCertificate() {
 
       {/* Breadcrumbs */}
       <Container>
-        <nav className="flex flex-wrap items-center gap-2 py-4 text-sm text-muted-foreground" aria-label="Breadcrumb">
+        <nav
+          className="flex flex-wrap items-center gap-2 py-4 text-sm text-muted-foreground"
+          aria-label="Breadcrumb"
+        >
           <AppLink to="/" className="hover:text-primary">
             {t('mc-home')}
           </AppLink>
@@ -232,7 +300,11 @@ export default function MarriageCertificate() {
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:grid-cols-4">
             <QuickStat icon={Clock} label={t('mc-processing')} value={t('mc-5-minutes')} />
             <QuickStat icon={Banknote} label={t('mc-fee')} value={t('mc-free')} />
-            <QuickStat icon={UserCheck} label={t('mc-who-can-apply')} value={t('mc-contracting-parties')} />
+            <QuickStat
+              icon={UserCheck}
+              label={t('mc-who-can-apply')}
+              value={t('mc-contracting-parties')}
+            />
             <QuickStat icon={CalendarCheck} label={t('mc-appointment')} value="Walk-in" />
           </div>
         </Container>
@@ -242,10 +314,11 @@ export default function MarriageCertificate() {
       <Section altBg>
         <Container>
           <NoticeBox icon={Info} title={t('mc-important-registration-deadlines')}>
-            The Certificate of Marriage (COM) of a Civil or Church wedding with Marriage License must be registered
-            within <strong>{t('mc-fifteen-15-days')}</strong> after the solemnization of marriage. COM of a Civil or
-            Church Wedding under Art. 34 or PD 1083 must be registered within <strong>{t('mc-thirty-30-days')}</strong>{' '}
-            after the solemnization of marriage. Registration of marriage certificate is{' '}
+            The Certificate of Marriage (COM) of a Civil or Church wedding with Marriage License
+            must be registered within <strong>{t('mc-fifteen-15-days')}</strong> after the
+            solemnization of marriage. COM of a Civil or Church Wedding under Art. 34 or PD 1083
+            must be registered within <strong>{t('mc-thirty-30-days')}</strong> after the
+            solemnization of marriage. Registration of marriage certificate is{' '}
             <strong>{t('mc-free-of-charge')}</strong>, pursuant to Section 6 of P.D. No. 651.
           </NoticeBox>
         </Container>
@@ -284,7 +357,9 @@ export default function MarriageCertificate() {
                 <ClipboardCheck className="size-5 text-primary" aria-hidden="true" />
                 {t('mc-requirements')}
               </SectionTitle>
-              <SectionSubtitle>{t('mc-documents-needed-for-marriage-registration')}</SectionSubtitle>
+              <SectionSubtitle>
+                {t('mc-documents-needed-for-marriage-registration')}
+              </SectionSubtitle>
 
               <div className="mb-3.5">
                 <ReqBox icon={FileText} title={t('mc-for-timely-registration-within-1530-days')}>
@@ -369,7 +444,10 @@ export default function MarriageCertificate() {
               <SidebarCard icon={Link2} title={t('mc-related-services')}>
                 <ul className="m-0 list-none p-0">
                   <li className="py-1 text-xs">
-                    <AppLink to="/service-details/birth-certificate" className="text-primary hover:underline">
+                    <AppLink
+                      to="/service-details/birth-certificate"
+                      className="text-primary hover:underline"
+                    >
                       {t('mc-birth-certificate')}
                     </AppLink>
                   </li>
@@ -379,7 +457,10 @@ export default function MarriageCertificate() {
                     </AppLink>
                   </li>
                   <li className="py-1 text-xs">
-                    <AppLink to="/service-details/civil-registrar" className="text-primary hover:underline">
+                    <AppLink
+                      to="/service-details/civil-registrar"
+                      className="text-primary hover:underline"
+                    >
                       {t('mc-civil-registrar-services')}
                     </AppLink>
                   </li>
@@ -420,16 +501,21 @@ export default function MarriageCertificate() {
               <span>{t('mc-important-information')}</span>
             </h4>
             <p className="m-0 text-xs leading-relaxed text-foreground">
-              Engaged couples (either one or both of them is a resident of Mati, NV) of legal ages who are intending
-              to get married must apply for marriage license at the MCRO. The Marriage License is valid anywhere in
-              the Philippines for a period of <strong>{t('mc-120-days')}</strong> from the date of issue.
+              Engaged couples (either one or both of them is a resident of Mati, NV) of legal ages
+              who are intending to get married must apply for marriage license at the MCRO. The
+              Marriage License is valid anywhere in the Philippines for a period of{' '}
+              <strong>{t('mc-120-days')}</strong> from the date of issue.
             </p>
           </div>
 
           <div className="mb-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
             <LicenseStat icon={History} value={t('mc-10-days')} label={t('mc-total-processing')} />
             <LicenseStat icon={Coins} value="₱270.00" label={t('mc-total-fees')} />
-            <LicenseStat icon={CalendarCheck} value={t('mc-120-days')} label={t('mc-license-validity')} />
+            <LicenseStat
+              icon={CalendarCheck}
+              value={t('mc-120-days')}
+              label={t('mc-license-validity')}
+            />
             <LicenseStat icon={MapPin} value={t('mc-nationwide')} label={t('mc-valid-coverage')} />
           </div>
 
@@ -437,7 +523,9 @@ export default function MarriageCertificate() {
             <ListOrdered className="size-5 text-primary" aria-hidden="true" />
             {t('mc-stepbystep-process-for-marriage-license')}
           </SectionTitle>
-          <SectionSubtitle>{t('mc-complete-guide-to-obtaining-your-marriage-license')}</SectionSubtitle>
+          <SectionSubtitle>
+            {t('mc-complete-guide-to-obtaining-your-marriage-license')}
+          </SectionSubtitle>
 
           <div className="mb-3.5 overflow-x-auto">
             <table className="w-full min-w-[760px] border-collapse overflow-hidden rounded-lg border border-black/[0.06] bg-card text-xs">
@@ -477,7 +565,9 @@ export default function MarriageCertificate() {
                       <li>{t('mc-parental-consent-for-applicants-ages-1821-years')}</li>
                       <li>{t('mc-parental-advice-for-applicants-ages-2224-years-old')}</li>
                     </DocList>
-                    <strong className="text-[0.6875rem] text-foreground">{t('mc-others-if-applicable')}</strong>
+                    <strong className="text-[0.6875rem] text-foreground">
+                      {t('mc-others-if-applicable')}
+                    </strong>
                     <DocList>
                       <li>{t('mc-certificate-of-legal-capacity-to-contract')}</li>
                       <li>{t('mc-if-previously-married-death-certificate-of-spouse')}</li>
@@ -536,8 +626,8 @@ export default function MarriageCertificate() {
                   <td className={TD}>
                     <FeeTag>₱268.00</FeeTag>
                     <div className="mt-1 text-[0.625rem] text-muted-foreground">
-                      Note: Marriage to be solemnized by the City Mayor shall pay an additional ₱250.00 Solemnization
-                      Fee
+                      Note: Marriage to be solemnized by the City Mayor shall pay an additional
+                      ₱250.00 Solemnization Fee
                     </div>
                   </td>
                   <td className={TD}>
@@ -552,7 +642,8 @@ export default function MarriageCertificate() {
                     <StepBadge n={5} />
                   </td>
                   <td className={TD}>
-                    <strong>{t('mc-proceed-to-mswdo')}</strong> for the schedule of PMC (Pre-Marriage Counseling)
+                    <strong>{t('mc-proceed-to-mswdo')}</strong> for the schedule of PMC
+                    (Pre-Marriage Counseling)
                   </td>
                   <td className={TD}>
                     <DocList>
@@ -573,8 +664,8 @@ export default function MarriageCertificate() {
                     <StepBadge n={6} />
                   </td>
                   <td className={TD}>
-                    <strong>{t('mc-attend-the-pmc')}</strong> (every Thursday at 8:00 AM) at the Function Room or any
-                    designated room
+                    <strong>{t('mc-attend-the-pmc')}</strong> (every Thursday at 8:00 AM) at the
+                    Function Room or any designated room
                   </td>
                   <td className={TD}>
                     <DocList>
@@ -595,8 +686,8 @@ export default function MarriageCertificate() {
                     <StepBadge n={7} />
                   </td>
                   <td className={TD}>
-                    <strong>{t('mc-after-the-pmc-go-back-to-mcro')}</strong> for the schedule of the issuance of the
-                    Marriage License
+                    <strong>{t('mc-after-the-pmc-go-back-to-mcro')}</strong> for the schedule of the
+                    issuance of the Marriage License
                   </td>
                   <td className={TD}>
                     <DocList>
@@ -617,8 +708,8 @@ export default function MarriageCertificate() {
                     <StepBadge n={8} final />
                   </td>
                   <td className={TD}>
-                    <strong>{t('mc-issuance-of-the-marriage-license')}</strong> after the completion of the
-                    requirements and period of 10 days posting
+                    <strong>{t('mc-issuance-of-the-marriage-license')}</strong> after the completion
+                    of the requirements and period of 10 days posting
                   </td>
                   <td className={TD}>
                     <DocList>
@@ -630,7 +721,9 @@ export default function MarriageCertificate() {
                   </td>
                   <td className={TD}>
                     <FeeTag>₱2.00</FeeTag>
-                    <div className="mt-0.5 text-[0.625rem] text-muted-foreground">Marriage License Fee</div>
+                    <div className="mt-0.5 text-[0.625rem] text-muted-foreground">
+                      Marriage License Fee
+                    </div>
                   </td>
                   <td className={TD}>
                     <TimeTag>{t('mc-3-minutes')}</TimeTag>

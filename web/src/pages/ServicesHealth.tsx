@@ -32,10 +32,34 @@ import {
 type TFn = (key: string) => string;
 
 const services: { Icon: LucideIcon; title: string; desc: string; fee: string; time: string }[] = [
-  { Icon: Hospital, title: 'health-consultation', desc: 'health-consultation-desc', fee: 'label-free', time: 'label-walk-in' },
-  { Icon: ShieldPlus, title: 'health-vaccination', desc: 'health-vaccination-desc', fee: 'label-free', time: 'label-schedule-varies' },
-  { Icon: Heart, title: 'health-maternal', desc: 'health-maternal-desc', fee: 'label-free', time: 'label-by-appointment' },
-  { Icon: Pill, title: 'health-medicine', desc: 'health-medicine-desc', fee: 'label-free-subsidy', time: 'label-1-3-days' },
+  {
+    Icon: Hospital,
+    title: 'health-consultation',
+    desc: 'health-consultation-desc',
+    fee: 'label-free',
+    time: 'label-walk-in',
+  },
+  {
+    Icon: ShieldPlus,
+    title: 'health-vaccination',
+    desc: 'health-vaccination-desc',
+    fee: 'label-free',
+    time: 'label-schedule-varies',
+  },
+  {
+    Icon: Heart,
+    title: 'health-maternal',
+    desc: 'health-maternal-desc',
+    fee: 'label-free',
+    time: 'label-by-appointment',
+  },
+  {
+    Icon: Pill,
+    title: 'health-medicine',
+    desc: 'health-medicine-desc',
+    fee: 'label-free-subsidy',
+    time: 'label-1-3-days',
+  },
 ];
 
 const stats: [string, string][] = [
@@ -63,17 +87,45 @@ const hospitals: { badge: string; title: string; desc: string; loc: string }[] =
 ];
 
 const NHFR_URL = 'https://nhfr.doh.gov.ph/VActivefacilitiesList';
-const NHFR_RETRIEVED = '— active facilities registered in the City of Mati, retrieved 16 September 2026';
+const NHFR_RETRIEVED =
+  '— active facilities registered in the City of Mati, retrieved 16 September 2026';
 
 // 34 Barangay Health Stations (DOH NHFR). Literal names — corrected from Solano leftovers.
 const bhs: string[] = [
-  'Badas BHS', 'Bobon BHS', 'Buso BHS', 'Cabuaya BHS', 'Culian BHS', 'Dahican A BHS',
-  'Dahican B BHS', 'Dahican C BHS', 'Danao BHS', 'Dawan BHS', 'Don Enrique Lopez BHS',
-  'Don Martin Marundan BHS', 'Don Salvador Lopez, Sr. BHS', 'Langka BHS', 'Lawigan BHS',
-  'Libudon BHS', 'Luban BHS', 'Macambol BHS', 'Mamali BHS', 'Matiao A BHS', 'Matiao B BHS',
-  'Mayo BHS', 'Poblacion 1 BHS', 'Poblacion 2 BHS', 'Poblacion 3 BHS', 'Poblacion 4 BHS',
-  'Poblacion 5 BHS', 'Poblacion 6 BHS', 'Sainz BHS', 'Sanghay BHS', 'Tagabakid BHS',
-  'Tagbinonga BHS', 'Taguibo BHS', 'Tamisan BHS',
+  'Badas BHS',
+  'Bobon BHS',
+  'Buso BHS',
+  'Cabuaya BHS',
+  'Culian BHS',
+  'Dahican A BHS',
+  'Dahican B BHS',
+  'Dahican C BHS',
+  'Danao BHS',
+  'Dawan BHS',
+  'Don Enrique Lopez BHS',
+  'Don Martin Marundan BHS',
+  'Don Salvador Lopez, Sr. BHS',
+  'Langka BHS',
+  'Lawigan BHS',
+  'Libudon BHS',
+  'Luban BHS',
+  'Macambol BHS',
+  'Mamali BHS',
+  'Matiao A BHS',
+  'Matiao B BHS',
+  'Mayo BHS',
+  'Poblacion 1 BHS',
+  'Poblacion 2 BHS',
+  'Poblacion 3 BHS',
+  'Poblacion 4 BHS',
+  'Poblacion 5 BHS',
+  'Poblacion 6 BHS',
+  'Sainz BHS',
+  'Sanghay BHS',
+  'Tagabakid BHS',
+  'Tagbinonga BHS',
+  'Taguibo BHS',
+  'Tamisan BHS',
 ];
 
 const mhoServices = [
@@ -86,7 +138,12 @@ const mhoServices = [
 ];
 
 // Legacy .health-facility-card: white card with a primary left rule.
-function FacilityCard({ badge, title, description, location }: {
+function FacilityCard({
+  badge,
+  title,
+  description,
+  location,
+}: {
   badge: string;
   title: ReactNode;
   description: ReactNode;
@@ -98,7 +155,9 @@ function FacilityCard({ badge, title, description, location }: {
         {badge}
       </span>
       <h3 className="m-0 mb-2 text-base font-semibold text-foreground">{title}</h3>
-      <p className="m-0 mb-2.5 text-[0.8125rem] leading-relaxed text-muted-foreground">{description}</p>
+      <p className="m-0 mb-2.5 text-[0.8125rem] leading-relaxed text-muted-foreground">
+        {description}
+      </p>
       <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
         <span className="flex items-center gap-1.5">
           <MapPin className="size-3 text-primary" aria-hidden="true" />
@@ -135,7 +194,10 @@ export default function ServicesHealth() {
 
       {/* Breadcrumbs */}
       <Container>
-        <nav className="flex items-center gap-2 py-4 text-sm text-muted-foreground" aria-label="Breadcrumb">
+        <nav
+          className="flex items-center gap-2 py-4 text-sm text-muted-foreground"
+          aria-label="Breadcrumb"
+        >
           <AppLink to="/" className="hover:text-primary">
             {t('nav-home')}
           </AppLink>
@@ -207,7 +269,12 @@ export default function ServicesHealth() {
           </div>
           <p className="mt-3 text-xs text-muted-foreground">
             Source:{' '}
-            <a href={NHFR_URL} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+            <a
+              href={NHFR_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
               DOH National Health Facility Registry
             </a>{' '}
             {NHFR_RETRIEVED}
@@ -223,7 +290,9 @@ export default function ServicesHealth() {
             {t('health-section-mho')}
           </SectionTitle>
           <div className="rounded-r-lg border border-l-[3px] border-border border-l-primary bg-card p-5">
-            <h3 className="m-0 mb-2 text-base font-semibold text-foreground">{t('health-mho-title')}</h3>
+            <h3 className="m-0 mb-2 text-base font-semibold text-foreground">
+              {t('health-mho-title')}
+            </h3>
             <p className="m-0 mb-3.5 text-[0.8125rem] leading-relaxed text-muted-foreground">
               {t('health-mho-desc')}
             </p>
@@ -262,7 +331,12 @@ export default function ServicesHealth() {
           </div>
           <p className="mt-3 text-xs text-muted-foreground">
             Source:{' '}
-            <a href={NHFR_URL} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+            <a
+              href={NHFR_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
               DOH National Health Facility Registry
             </a>{' '}
             {NHFR_RETRIEVED}

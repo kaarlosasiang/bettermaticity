@@ -17,7 +17,14 @@ interface SeoProps {
 
 // Per-route <head> for SSG: title/description/canonical/OpenGraph/Twitter are
 // serialized into the prerendered HTML so crawlers see them without JS.
-export function Seo({ title, description, canonicalPath, image, type = 'website', children }: SeoProps) {
+export function Seo({
+  title,
+  description,
+  canonicalPath,
+  image,
+  type = 'website',
+  children,
+}: SeoProps) {
   const fullTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} | Official Portal`;
   const url = canonicalPath ? `${BASE_URL}${canonicalPath}` : undefined;
   const ogImage = image || DEFAULT_OG_IMAGE;

@@ -47,7 +47,12 @@ const infoCards: { title: string; items: Item[] }[] = [
   },
   {
     title: 'propdec-property-location',
-    items: ['propdec-barangay', 'propdec-municipality', 'propdec-province', 'propdec-octtctcloa-no'],
+    items: [
+      'propdec-barangay',
+      'propdec-municipality',
+      'propdec-province',
+      'propdec-octtctcloa-no',
+    ],
   },
   {
     title: 'propdec-assessment-details',
@@ -200,7 +205,10 @@ export default function PropertyDeclaration() {
         <Container>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:grid-cols-4">
             {quickStats.map((s) => (
-              <div key={s.label} className="rounded-lg border border-border bg-card p-3 text-center">
+              <div
+                key={s.label}
+                className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center"
+              >
                 <s.Icon className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
                 <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                   {t(s.label)}
@@ -219,10 +227,15 @@ export default function PropertyDeclaration() {
             <Info className="size-5 text-primary" aria-hidden="true" />
             {t('propdec-property-information-required')}
           </SectionTitle>
-          <SectionSubtitle>{t('propdec-details-needed-for-the-tax-declaration-form')}</SectionSubtitle>
+          <SectionSubtitle>
+            {t('propdec-details-needed-for-the-tax-declaration-form')}
+          </SectionSubtitle>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {infoCards.map((card) => (
-              <div key={card.title} className="rounded-lg border border-border bg-card p-4">
+              <div
+                key={card.title}
+                className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4"
+              >
                 <h3 className="mb-2.5 text-sm font-semibold text-foreground">{t(card.title)}</h3>
                 <ul className="m-0 list-none p-0">
                   {card.items.map((it, i) => (
@@ -230,7 +243,10 @@ export default function PropertyDeclaration() {
                       key={i}
                       className="flex items-start gap-1.5 py-1 text-[0.8125rem] text-muted-foreground"
                     >
-                      <CircleCheck className="mt-0.5 size-3 shrink-0 text-primary" aria-hidden="true" />
+                      <CircleCheck
+                        className="mt-0.5 size-3 shrink-0 text-primary"
+                        aria-hidden="true"
+                      />
                       <span>{text(it)}</span>
                     </li>
                   ))}
@@ -248,10 +264,15 @@ export default function PropertyDeclaration() {
             <Layers className="size-5 text-primary" aria-hidden="true" />
             {t('propdec-types-of-property-declaration')}
           </SectionTitle>
-          <SectionSubtitle>{t('propdec-different-categories-of-real-property-for-tax')}</SectionSubtitle>
+          <SectionSubtitle>
+            {t('propdec-different-categories-of-real-property-for-tax')}
+          </SectionSubtitle>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {declarationTypes.map((grp) => (
-              <div key={grp.title} className="rounded-lg border border-border bg-card p-4">
+              <div
+                key={grp.title}
+                className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4"
+              >
                 <h3 className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold text-foreground">
                   <grp.Icon className="size-4 text-primary" aria-hidden="true" />
                   {t(grp.title)}
@@ -262,7 +283,10 @@ export default function PropertyDeclaration() {
                       key={i}
                       className="flex items-start gap-1.5 py-1 text-[0.8125rem] text-muted-foreground"
                     >
-                      <CircleCheck className="mt-0.5 size-3 shrink-0 text-primary" aria-hidden="true" />
+                      <CircleCheck
+                        className="mt-0.5 size-3 shrink-0 text-primary"
+                        aria-hidden="true"
+                      />
                       <span>{text(it)}</span>
                     </li>
                   ))}
@@ -280,10 +304,15 @@ export default function PropertyDeclaration() {
             <ClipboardCheck className="size-5 text-primary" aria-hidden="true" />
             {t('propdec-documentary-requirements')}
           </SectionTitle>
-          <SectionSubtitle>{t('propdec-documents-needed-for-property-declaration')}</SectionSubtitle>
+          <SectionSubtitle>
+            {t('propdec-documents-needed-for-property-declaration')}
+          </SectionSubtitle>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {requirements.map((card) => (
-              <div key={card.title} className="rounded-lg border border-border bg-card p-4">
+              <div
+                key={card.title}
+                className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4"
+              >
                 <h3 className="mb-2.5 text-sm font-semibold text-foreground">{t(card.title)}</h3>
                 <ul className="m-0 list-none p-0">
                   {card.items.map((it, i) => (
@@ -291,7 +320,10 @@ export default function PropertyDeclaration() {
                       key={i}
                       className="flex items-start gap-1.5 py-1 text-[0.8125rem] text-muted-foreground"
                     >
-                      <CircleCheck className="mt-0.5 size-3 shrink-0 text-primary" aria-hidden="true" />
+                      <CircleCheck
+                        className="mt-0.5 size-3 shrink-0 text-primary"
+                        aria-hidden="true"
+                      />
                       <span>{text(it)}</span>
                     </li>
                   ))}
@@ -306,7 +338,7 @@ export default function PropertyDeclaration() {
       <Section compact>
         <Container>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div className="rounded-lg border border-border bg-card p-5">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-5">
               <h3 className="mb-3 flex items-center gap-2 text-[0.9375rem] font-semibold text-foreground">
                 <Building2 className="size-4 text-primary" aria-hidden="true" />
                 {t('propdec-municipal-assessors-office')}
@@ -325,7 +357,7 @@ export default function PropertyDeclaration() {
                 </li>
               </ul>
             </div>
-            <div className="rounded-lg border border-border bg-card p-5">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-5">
               <h3 className="mb-3 flex items-center gap-2 text-[0.9375rem] font-semibold text-foreground">
                 <Info className="size-4 text-primary" aria-hidden="true" />
                 {t('propdec-important-notes')}
@@ -333,7 +365,10 @@ export default function PropertyDeclaration() {
               <ul className="m-0 list-none p-0 text-xs text-muted-foreground">
                 {notes.map((n) => (
                   <li key={n} className="mb-1 flex items-start gap-1.5">
-                    <Check className="mt-0.5 size-3.5 shrink-0 text-brand-success" aria-hidden="true" />
+                    <Check
+                      className="mt-0.5 size-3.5 shrink-0 text-brand-success"
+                      aria-hidden="true"
+                    />
                     <span>{t(n)}</span>
                   </li>
                 ))}

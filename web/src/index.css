@@ -100,24 +100,24 @@
   --popover: #ffffff;
   --popover-foreground: #1a1a1a;
 
-  --primary: #0032a0; /* LGU blue */
+  --primary: #2b62ee; /* royal (homepage brand) */
   --primary-foreground: #ffffff;
   --secondary: #f1f3f5; /* shadcn secondary = subtle neutral */
   --secondary-foreground: #1a1a1a;
-  --muted: #f8f9fa; /* legacy --color-bg-alt */
-  --muted-foreground: #666666; /* legacy --color-text-light */
-  --accent: #f1f3f5; /* shadcn hover neutral (NOT the orange brand accent) */
-  --accent-foreground: #0032a0;
-  --destructive: #d62828; /* legacy --color-danger */
+  --muted: #f1f6fc; /* homepage pale-blue alt band */
+  --muted-foreground: #4c5c78; /* homepage muted slate */
+  --accent: #eef4fe; /* homepage light-blue tint */
+  --accent-foreground: #2b62ee;
+  --destructive: #e01b24; /* homepage red */
 
-  --border: #e5e7eb;
-  --input: #e5e7eb;
-  --ring: #0032a0; /* focus ring = brand */
+  --border: #e3e8ef; /* homepage hairline border */
+  --input: #e3e8ef;
+  --ring: #2b62ee; /* focus ring = royal */
   --radius: 0.5rem; /* 8px */
 
   /* LGU brand extras */
-  --brand-primary-dark: #002170;
-  --brand-secondary: #003d82;
+  --brand-primary-dark: #0b2a5e;
+  --brand-secondary: #123c7a; /* Pujada navy */
   --brand-accent: #f77f00; /* orange */
   --brand-success: #06a77d;
   --brand-info: #0077be;

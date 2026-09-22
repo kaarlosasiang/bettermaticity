@@ -20,7 +20,7 @@ import {
 import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Container, Section } from '@/components/primitives';
+import { Container, Section, PageHeader } from '@/components/primitives';
 
 type TabId = 'clearance' | 'entrance' | 'complaints' | 'ctc';
 
@@ -50,11 +50,15 @@ export default function SeedoPublicMarket() {
       <table className="w-full text-left text-xs">
         <thead>
           <tr className="bg-primary text-primary-foreground">
-            <th className="px-3 py-2.5 text-[0.6875rem] font-semibold uppercase">{t('market-step')}</th>
+            <th className="px-3 py-2.5 text-[0.6875rem] font-semibold uppercase">
+              {t('market-step')}
+            </th>
             <th className="px-3 py-2.5 text-[0.6875rem] font-semibold uppercase">
               {t('market-activity')}
             </th>
-            <th className="px-3 py-2.5 text-[0.6875rem] font-semibold uppercase">{t('market-fee')}</th>
+            <th className="px-3 py-2.5 text-[0.6875rem] font-semibold uppercase">
+              {t('market-fee')}
+            </th>
             <th className="px-3 py-2.5 text-[0.6875rem] font-semibold uppercase">
               {t('market-duration')}
             </th>
@@ -116,7 +120,9 @@ export default function SeedoPublicMarket() {
     items: ReactNode[];
     className?: string;
   }) => (
-    <div className={`rounded-lg border border-border bg-card p-3.5 ${className ?? ''}`}>
+    <div
+      className={`rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5 ${className ?? ''}`}
+    >
       <h3 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
         <Icon className="size-4 text-primary" aria-hidden="true" />
         {title}
@@ -188,27 +194,21 @@ export default function SeedoPublicMarket() {
       </Container>
 
       {/* Page header (kept inline to match SEEDO badge) */}
-      <section className="bg-[linear-gradient(135deg,var(--primary)_0%,var(--brand-secondary)_100%)] py-12 text-white">
-        <Container>
-          <div className="mx-auto max-w-[600px] text-center">
-            <span className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-4 py-1.5 text-[0.8125rem] font-medium text-white">
-              <Store className="size-4" aria-hidden="true" /> SEEDO
-            </span>
-            <h1 className="mb-2 text-[2rem] leading-tight font-bold text-white">
-              {t('market-economic-enterprise-development-office')}
-            </h1>
-            <p className="m-0 text-base text-white/90">
-              {t('market-public-market-services-including-clearances')}
-            </p>
-          </div>
-        </Container>
-      </section>
+      <PageHeader
+        badge={
+          <>
+            <Store className="size-3.5" aria-hidden="true" /> SEEDO
+          </>
+        }
+        title={t('market-economic-enterprise-development-office')}
+        description={t('market-public-market-services-including-clearances')}
+      />
 
       {/* Quick stats */}
       <Section compact>
         <Container>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:grid-cols-4">
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <Building2 className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('market-office')}
@@ -217,7 +217,7 @@ export default function SeedoPublicMarket() {
                 {t('market-seedo-public-market')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <MapPin className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('market-location')}
@@ -226,14 +226,16 @@ export default function SeedoPublicMarket() {
                 {t('market-public-market')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <Clock className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('market-hours')}
               </h3>
-              <p className="m-0 text-[0.8125rem] font-semibold text-foreground">{t('market-6am-6pm')}</p>
+              <p className="m-0 text-[0.8125rem] font-semibold text-foreground">
+                {t('market-6am-6pm')}
+              </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <FileText className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('market-services')}
@@ -266,7 +268,7 @@ export default function SeedoPublicMarket() {
                 className={`rounded-md border px-4 py-2 text-xs font-semibold transition-colors ${
                   tab === tb.id
                     ? 'border-primary bg-primary text-primary-foreground'
-                    : 'border-border bg-card text-foreground hover:border-primary'
+                    : 'border-border bg-card text-foreground hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)]'
                 }`}
               >
                 {t(tb.label)}
@@ -389,7 +391,10 @@ export default function SeedoPublicMarket() {
               <FeeTable
                 headers={[t('market-item-type'), t('market-fee-range')]}
                 rows={[
-                  [t('market-vegetables-fruits'), <FeeBadge>{t('market-based-on-volume')}</FeeBadge>],
+                  [
+                    t('market-vegetables-fruits'),
+                    <FeeBadge>{t('market-based-on-volume')}</FeeBadge>,
+                  ],
                   [t('market-meat-poultry'), <FeeBadge>{t('market-based-on-weight')}</FeeBadge>],
                   [t('market-fish-seafood'), <FeeBadge>{t('market-based-on-weight')}</FeeBadge>],
                   [t('market-dry-goods'), <FeeBadge>{t('market-based-on-quantity')}</FeeBadge>],
@@ -549,7 +554,10 @@ export default function SeedoPublicMarket() {
                 ['market-gate-keeper', 'market-entry-management'],
               ] as const
             ).map(([name, role]) => (
-              <div key={name} className="rounded-lg border border-border bg-card p-3">
+              <div
+                key={name}
+                className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3"
+              >
                 <h3 className="mb-0.5 text-xs font-semibold text-foreground">{t(name)}</h3>
                 <p className="m-0 text-[0.6875rem] text-muted-foreground">{t(role)}</p>
               </div>
@@ -562,7 +570,7 @@ export default function SeedoPublicMarket() {
       <Section compact altBg>
         <Container>
           <div className="grid grid-cols-1 gap-3.5 md:grid-cols-2">
-            <div className="rounded-lg border border-border bg-card p-3.5">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5">
               <h3 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
                 <Building2 className="size-4 text-primary" aria-hidden="true" />
                 {t('market-office-information')}

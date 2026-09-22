@@ -30,7 +30,12 @@ import {
   PageHeader,
 } from '@/components/primitives';
 
-type TabId = 'service-record' | 'employment-cert' | 'leave-credits' | 'no-pending' | 'leave-application';
+type TabId =
+  | 'service-record'
+  | 'employment-cert'
+  | 'leave-credits'
+  | 'no-pending'
+  | 'leave-application';
 
 export default function HumanResourceManagement() {
   const { t } = useLanguage();
@@ -118,7 +123,9 @@ export default function HumanResourceManagement() {
     items: string[];
     className?: string;
   }) => (
-    <div className={`rounded-lg border border-border bg-card p-3.5${className ? ` ${className}` : ''}`}>
+    <div
+      className={`rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5${className ? ` ${className}` : ''}`}
+    >
       <h4 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
         <Icon className="size-4 text-primary" aria-hidden="true" />
         {t(title)}
@@ -135,7 +142,7 @@ export default function HumanResourceManagement() {
   );
 
   const ProcessingInfo = ({ time, fee }: { time: string; fee: string }) => (
-    <div className="mt-3.5 rounded-lg border border-border bg-card p-3.5">
+    <div className="mt-3.5 rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5">
       <h4 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
         <Info className="size-4 text-primary" aria-hidden="true" />
         {t('hrm-processing-information')}
@@ -153,7 +160,15 @@ export default function HumanResourceManagement() {
     </div>
   );
 
-  const ContentHeader = ({ Icon, title, desc }: { Icon: LucideIcon; title: string; desc: string }) => (
+  const ContentHeader = ({
+    Icon,
+    title,
+    desc,
+  }: {
+    Icon: LucideIcon;
+    title: string;
+    desc: string;
+  }) => (
     <div className="mb-5">
       <h2 className="mb-1 flex items-center gap-2 text-lg font-semibold text-foreground">
         <Icon className="size-4 text-primary" aria-hidden="true" />
@@ -218,7 +233,7 @@ export default function HumanResourceManagement() {
       <Section compact>
         <Container>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:grid-cols-4">
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <Building2 className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('hrm-office')}
@@ -227,7 +242,7 @@ export default function HumanResourceManagement() {
                 {t('hrm-mayors-office-hrms')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <MapPin className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('hrm-location')}
@@ -236,14 +251,16 @@ export default function HumanResourceManagement() {
                 {t('hrm-municipal-hall')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <Clock className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('hrm-hours')}
               </h3>
-              <p className="m-0 text-[0.8125rem] font-semibold text-foreground">{t('hrm-8am-5pm')}</p>
+              <p className="m-0 text-[0.8125rem] font-semibold text-foreground">
+                {t('hrm-8am-5pm')}
+              </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <FileText className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('hrm-services')}
@@ -284,7 +301,7 @@ export default function HumanResourceManagement() {
                 className={`rounded-md border px-4 py-2 text-xs font-semibold transition ${
                   tab === tb.id
                     ? 'border-primary bg-primary text-primary-foreground'
-                    : 'border-border bg-card text-foreground hover:border-primary'
+                    : 'border-border bg-card text-foreground hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)]'
                 }`}
               >
                 {tb.label}
@@ -570,19 +587,23 @@ export default function HumanResourceManagement() {
             <Users className="size-5 text-primary" aria-hidden="true" />
             {t('hrm-office-personnel')}
           </SectionTitle>
-          <SectionSubtitle>{t('hrm-key-personnel-handling-human-resource-management')}</SectionSubtitle>
+          <SectionSubtitle>
+            {t('hrm-key-personnel-handling-human-resource-management')}
+          </SectionSubtitle>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="rounded-lg border border-border bg-card p-3">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3">
               <h4 className="mb-0.5 text-xs font-semibold text-foreground">{t('hrm-hrmo-head')}</h4>
               <p className="m-0 text-[0.6875rem] text-muted-foreground">{t('hrm-section-chief')}</p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3">
-              <h4 className="mb-0.5 text-xs font-semibold text-foreground">{t('hrm-hr-officer')}</h4>
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3">
+              <h4 className="mb-0.5 text-xs font-semibold text-foreground">
+                {t('hrm-hr-officer')}
+              </h4>
               <p className="m-0 text-[0.6875rem] text-muted-foreground">
                 {t('hrm-records-certifications')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3">
               <h4 className="mb-0.5 text-xs font-semibold text-foreground">
                 {t('hrm-administrative-staff')}
               </h4>
@@ -598,7 +619,7 @@ export default function HumanResourceManagement() {
       <Section compact altBg>
         <Container>
           <div className="grid grid-cols-1 gap-3.5 md:grid-cols-2">
-            <div className="rounded-lg border border-border bg-card p-3.5">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5">
               <h4 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
                 <Building2 className="size-4 text-primary" aria-hidden="true" />
                 {t('hrm-office-information')}
@@ -618,7 +639,7 @@ export default function HumanResourceManagement() {
                 </li>
               </ul>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3.5">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5">
               <h4 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
                 <Info className="size-4 text-primary" aria-hidden="true" />
                 {t('hrm-important-notes')}
@@ -631,7 +652,10 @@ export default function HumanResourceManagement() {
                   'hrm-representatives-must-have-authorization-letter',
                 ].map((k) => (
                   <li key={k} className="flex items-start gap-1.5 py-1 text-xs text-foreground">
-                    <CircleCheck className="mt-0.5 size-3 shrink-0 text-primary" aria-hidden="true" />
+                    <CircleCheck
+                      className="mt-0.5 size-3 shrink-0 text-primary"
+                      aria-hidden="true"
+                    />
                     <span>{t(k)}</span>
                   </li>
                 ))}
@@ -649,7 +673,7 @@ export default function HumanResourceManagement() {
             {t('hrm-downloadable-resources')}
           </SectionTitle>
           <SectionSubtitle>{t('hrm-forms-and-documents-for-hr-services')}</SectionSubtitle>
-          <div className="rounded-lg border border-border bg-card p-3.5">
+          <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5">
             <ul className="m-0 list-none p-0">
               <li className="flex items-start gap-1.5 py-1 text-xs text-foreground">
                 <FileText className="mt-0.5 size-3 shrink-0 text-primary" aria-hidden="true" />

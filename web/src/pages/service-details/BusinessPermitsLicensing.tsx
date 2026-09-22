@@ -27,7 +27,13 @@ import {
 import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Container, Section, SectionTitle, SectionSubtitle, PageHeader } from '@/components/primitives';
+import {
+  Container,
+  Section,
+  SectionTitle,
+  SectionSubtitle,
+  PageHeader,
+} from '@/components/primitives';
 
 type TabId = 'new' | 'renewal' | 'clearance' | 'other';
 
@@ -58,7 +64,10 @@ export default function BusinessPermitsLicensing() {
         <thead>
           <tr className="bg-primary text-primary-foreground">
             {headers.map((h, i) => (
-              <th key={i} className="px-3 py-2.5 text-[0.6875rem] font-semibold tracking-wide uppercase">
+              <th
+                key={i}
+                className="px-3 py-2.5 text-[0.6875rem] font-semibold tracking-wide uppercase"
+              >
                 {h}
               </th>
             ))}
@@ -117,7 +126,9 @@ export default function BusinessPermitsLicensing() {
     items: string[];
     className?: string;
   }) => (
-    <div className={`rounded-lg border border-border bg-card p-3.5${className ? ` ${className}` : ''}`}>
+    <div
+      className={`rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5${className ? ` ${className}` : ''}`}
+    >
       <h4 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
         <Icon className="size-4 text-primary" aria-hidden="true" />
         {t(title)}
@@ -133,7 +144,15 @@ export default function BusinessPermitsLicensing() {
     </div>
   );
 
-  const ContentHeader = ({ Icon, title, desc }: { Icon: LucideIcon; title: string; desc: string }) => (
+  const ContentHeader = ({
+    Icon,
+    title,
+    desc,
+  }: {
+    Icon: LucideIcon;
+    title: string;
+    desc: string;
+  }) => (
     <div className="mb-5">
       <h2 className="mb-1 flex items-center gap-2 text-lg font-semibold text-foreground">
         <Icon className="size-4 text-primary" aria-hidden="true" />
@@ -195,7 +214,7 @@ export default function BusinessPermitsLicensing() {
       <Section compact>
         <Container>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:grid-cols-4">
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <Building2 className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('bpl-office')}
@@ -204,7 +223,7 @@ export default function BusinessPermitsLicensing() {
                 {t('bpl-mayors-office-bpls')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <MapPin className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('bpl-location')}
@@ -213,14 +232,16 @@ export default function BusinessPermitsLicensing() {
                 {t('bpl-municipal-hall')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <Clock className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('bpl-hours')}
               </h3>
-              <p className="m-0 text-[0.8125rem] font-semibold text-foreground">{t('bpl-8am-5pm')}</p>
+              <p className="m-0 text-[0.8125rem] font-semibold text-foreground">
+                {t('bpl-8am-5pm')}
+              </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <CalendarCheck className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('bpl-renewal')}
@@ -246,7 +267,11 @@ export default function BusinessPermitsLicensing() {
             </p>
           </div>
 
-          <div className="mb-5 flex flex-wrap justify-center gap-2" role="tablist" aria-label={t('bpl-business-permit-services')}>
+          <div
+            className="mb-5 flex flex-wrap justify-center gap-2"
+            role="tablist"
+            aria-label={t('bpl-business-permit-services')}
+          >
             {tabs.map((tb) => (
               <button
                 key={tb.id}
@@ -257,7 +282,7 @@ export default function BusinessPermitsLicensing() {
                 className={`rounded-md border px-4 py-2 text-xs font-semibold transition ${
                   tab === tb.id
                     ? 'border-primary bg-primary text-primary-foreground'
-                    : 'border-border bg-card text-foreground hover:border-primary'
+                    : 'border-border bg-card text-foreground hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)]'
                 }`}
               >
                 {t(tb.label)}
@@ -338,14 +363,17 @@ export default function BusinessPermitsLicensing() {
                   ],
                 ]}
               />
-              <div className="mt-3.5 rounded-lg border border-border bg-card p-3.5">
+              <div className="mt-3.5 rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5">
                 <h4 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
                   <History className="size-4 text-primary" aria-hidden="true" />
                   {t('bpl-processing-information')}
                 </h4>
                 <ul className="m-0 list-none p-0">
                   <li className="flex items-start gap-1.5 py-1 text-xs text-foreground">
-                    <CircleCheck className="mt-0.5 size-3 shrink-0 text-primary" aria-hidden="true" />
+                    <CircleCheck
+                      className="mt-0.5 size-3 shrink-0 text-primary"
+                      aria-hidden="true"
+                    />
                     <span>{t('bpl-total-processing-time-55-minutes-to-1-hour-if')}</span>
                   </li>
                   <li className="flex items-start gap-1.5 py-1 text-xs text-foreground">
@@ -561,7 +589,11 @@ export default function BusinessPermitsLicensing() {
                     <FeeTag>₱200.00 - ₱500.00</FeeTag>,
                     t('bpl-13-days'),
                   ],
-                  [t('bpl-business-closure-certificate'), <FeeTag>₱100.00</FeeTag>, t('bpl-same-day')],
+                  [
+                    t('bpl-business-closure-certificate'),
+                    <FeeTag>₱100.00</FeeTag>,
+                    t('bpl-same-day'),
+                  ],
                   [t('bpl-transfer-of-location'), <FeeTag>₱200.00</FeeTag>, t('bpl-12-days')],
                 ]}
               />
@@ -579,11 +611,11 @@ export default function BusinessPermitsLicensing() {
           </SectionTitle>
           <SectionSubtitle>{t('bpl-key-personnel-handling-business-permits-and')}</SectionSubtitle>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="rounded-lg border border-border bg-card p-3">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3">
               <h4 className="mb-0.5 text-xs font-semibold text-foreground">{t('bpl-bpls-head')}</h4>
               <p className="m-0 text-[0.6875rem] text-muted-foreground">{t('bpl-section-chief')}</p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3">
               <h4 className="mb-0.5 text-xs font-semibold text-foreground">
                 {t('bpl-licensing-officer')}
               </h4>
@@ -591,7 +623,7 @@ export default function BusinessPermitsLicensing() {
                 {t('bpl-permit-processing')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3">
               <h4 className="mb-0.5 text-xs font-semibold text-foreground">
                 {t('bpl-administrative-staff')}
               </h4>
@@ -607,7 +639,7 @@ export default function BusinessPermitsLicensing() {
       <Section compact altBg>
         <Container>
           <div className="grid grid-cols-1 gap-3.5 md:grid-cols-2">
-            <div className="rounded-lg border border-border bg-card p-3.5">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5">
               <h4 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
                 <Building2 className="size-4 text-primary" aria-hidden="true" />
                 {t('bpl-office-information')}
@@ -627,7 +659,7 @@ export default function BusinessPermitsLicensing() {
                 </li>
               </ul>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3.5">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5">
               <h4 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
                 <Info className="size-4 text-primary" aria-hidden="true" />
                 {t('bpl-important-notes')}
@@ -640,7 +672,10 @@ export default function BusinessPermitsLicensing() {
                   'bpl-bring-original-documents-for-verification',
                 ].map((k) => (
                   <li key={k} className="flex items-start gap-1.5 py-1 text-xs text-foreground">
-                    <CircleCheck className="mt-0.5 size-3 shrink-0 text-primary" aria-hidden="true" />
+                    <CircleCheck
+                      className="mt-0.5 size-3 shrink-0 text-primary"
+                      aria-hidden="true"
+                    />
                     <span>{t(k)}</span>
                   </li>
                 ))}

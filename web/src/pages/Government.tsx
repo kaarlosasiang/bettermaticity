@@ -82,7 +82,12 @@ export default function Government() {
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
         <section className="bg-[#123c7a] py-12 lg:py-16">
           <Container>
-            <m.div variants={staggerContainer} initial="hidden" animate="show" className="max-w-2xl">
+            <m.div
+              variants={staggerContainer}
+              initial="hidden"
+              animate="show"
+              className="max-w-2xl"
+            >
               <m.span
                 variants={fadeUp}
                 className="inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-[0.08em] text-[#9dc0ff]"
@@ -181,7 +186,10 @@ export default function Government() {
                   </div>
                   <p className="mb-3 flex-1 text-[0.8125rem] text-[#4c5c78]">{t(d.descKey)}</p>
                   <div className="flex flex-col gap-1 text-[0.8125rem] text-[#4c5c78]">
-                    <a href={`tel:${d.tel}`} className="inline-flex items-center gap-1.5 hover:text-[#2b62ee]">
+                    <a
+                      href={`tel:${d.tel}`}
+                      className="inline-flex items-center gap-1.5 hover:text-[#2b62ee]"
+                    >
                       <Phone className="size-3.5" aria-hidden="true" /> {d.phone}
                     </a>
                     {d.emailKey && (

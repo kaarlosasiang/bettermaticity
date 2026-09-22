@@ -40,7 +40,7 @@ export function OnlineServices({ badgeKey, titleKey, subtitleKey, services }: On
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-start gap-4 rounded-[10px] border border-border bg-card p-5 no-underline transition hover:-translate-y-0.5 hover:border-primary hover:shadow-sm"
+              className="group flex items-start gap-4 rounded-[10px] bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-5 no-underline transition hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)]"
             >
               <div className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
                 <s.Icon className="size-5" aria-hidden="true" />

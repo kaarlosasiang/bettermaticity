@@ -17,11 +17,7 @@ import {
   ServicesPublicSafety,
   ServicesEnvironment,
 } from './pages/categories';
-import {
-  ServicesBusiness,
-  ServicesTaxPayments,
-  ServicesEducation,
-} from './pages/categories2';
+import { ServicesBusiness, ServicesTaxPayments, ServicesEducation } from './pages/categories2';
 import Government from './pages/Government';
 import GovernmentOfficials from './pages/GovernmentOfficials';
 import Legislative from './pages/Legislative';

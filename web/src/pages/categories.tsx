@@ -32,7 +32,11 @@ import {
 import { Section, Container, SectionTitle } from '@/components/primitives';
 import { useLanguage } from '@/hooks/useLanguage';
 import { emergencyHotlines, medicalHotlines } from '@/lib/hotlines';
-import { HotlineGrid, NationalHotlineBanner, HotlineSourceNote } from '@/components/HotlineDirectory';
+import {
+  HotlineGrid,
+  NationalHotlineBanner,
+  HotlineSourceNote,
+} from '@/components/HotlineDirectory';
 
 /* ── Public Safety hotline directories (rendered as category page children) ── */
 function PublicSafetyHotlines() {
@@ -65,11 +69,26 @@ function PublicSafetyHotlines() {
 
 /* ── Environment "Key Environmental Services & Initiatives" (page children) ── */
 const envInitiatives: { titleKey: string; descKey: string }[] = [
-  { titleKey: 'env-drainage-sewerage-management', descKey: 'env-developing-a-comprehensive-system-plan-to' },
-  { titleKey: 'env-solid-waste-management', descKey: 'env-implementing-the-10year-plan-including-waste' },
-  { titleKey: 'env-flood-control-mitigation', descKey: 'env-declogging-drainage-clearing-waterways-and' },
-  { titleKey: 'env-forest-land-use-programs', descKey: 'env-tree-planting-and-reforestation-programs-to' },
-  { titleKey: 'env-public-education-awareness', descKey: 'env-iec-campaigns-on-ra-9003-solid-waste-management' },
+  {
+    titleKey: 'env-drainage-sewerage-management',
+    descKey: 'env-developing-a-comprehensive-system-plan-to',
+  },
+  {
+    titleKey: 'env-solid-waste-management',
+    descKey: 'env-implementing-the-10year-plan-including-waste',
+  },
+  {
+    titleKey: 'env-flood-control-mitigation',
+    descKey: 'env-declogging-drainage-clearing-waterways-and',
+  },
+  {
+    titleKey: 'env-forest-land-use-programs',
+    descKey: 'env-tree-planting-and-reforestation-programs-to',
+  },
+  {
+    titleKey: 'env-public-education-awareness',
+    descKey: 'env-iec-campaigns-on-ra-9003-solid-waste-management',
+  },
 ];
 
 function EnvironmentInitiatives() {
@@ -83,8 +102,13 @@ function EnvironmentInitiatives() {
         </SectionTitle>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {envInitiatives.map((it, i) => (
-            <div key={it.titleKey} className="flex gap-3 rounded-xl border border-border bg-card p-5">
-              <span className="text-lg font-bold text-primary/40">{String(i + 1).padStart(2, '0')}</span>
+            <div
+              key={it.titleKey}
+              className="flex gap-3 rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-5"
+            >
+              <span className="text-lg font-bold text-primary/40">
+                {String(i + 1).padStart(2, '0')}
+              </span>
               <div>
                 <h3 className="mb-0.5 text-sm font-semibold text-foreground">{t(it.titleKey)}</h3>
                 <p className="m-0 text-[0.8125rem] text-muted-foreground">{t(it.descKey)}</p>
@@ -99,17 +123,66 @@ function EnvironmentInitiatives() {
 
 /* ── Certificates ─────────────────────────────────────────────────────────── */
 const certificateServices: CategoryService[] = [
-  { Icon: FileText, titleKey: 'cert-birth', descKey: 'cert-birth-desc', fee: '₱150', time: '15-30 mins', to: '/service-details/birth-certificate' },
-  { Icon: Heart, titleKey: 'cert-marriage', descKey: 'cert-marriage-desc', fee: 'Free (Registration)', time: '5 mins', to: '/service-details/marriage-certificate' },
-  { Icon: FileX, titleKey: 'cert-death', descKey: 'cert-death-desc', fee: '₱50-150', time: '~1.5 hrs', to: '/service-details/death-certificate' },
-  { Icon: HouseWifi, titleKey: 'cert-brgy-clearance', descKey: 'cert-brgy-clearance-desc', fee: '₱50-100', time: 'Same day' },
-  { Icon: IdCard, titleKey: 'cert-brgy-id', descKey: 'cert-brgy-id-desc', fee: 'Free', time: '1-2 days' },
-  { Icon: ShieldCheck, titleKey: 'cert-police-clearance', descKey: 'cert-police-clearance-desc', fee: 'Varies', time: '3-5 days' },
+  {
+    Icon: FileText,
+    titleKey: 'cert-birth',
+    descKey: 'cert-birth-desc',
+    fee: '₱150',
+    time: '15-30 mins',
+    to: '/service-details/birth-certificate',
+  },
+  {
+    Icon: Heart,
+    titleKey: 'cert-marriage',
+    descKey: 'cert-marriage-desc',
+    fee: 'Free (Registration)',
+    time: '5 mins',
+    to: '/service-details/marriage-certificate',
+  },
+  {
+    Icon: FileX,
+    titleKey: 'cert-death',
+    descKey: 'cert-death-desc',
+    fee: '₱50-150',
+    time: '~1.5 hrs',
+    to: '/service-details/death-certificate',
+  },
+  {
+    Icon: HouseWifi,
+    titleKey: 'cert-brgy-clearance',
+    descKey: 'cert-brgy-clearance-desc',
+    fee: '₱50-100',
+    time: 'Same day',
+  },
+  {
+    Icon: IdCard,
+    titleKey: 'cert-brgy-id',
+    descKey: 'cert-brgy-id-desc',
+    fee: 'Free',
+    time: '1-2 days',
+  },
+  {
+    Icon: ShieldCheck,
+    titleKey: 'cert-police-clearance',
+    descKey: 'cert-police-clearance-desc',
+    fee: 'Varies',
+    time: '3-5 days',
+  },
 ];
 
 const certificateOffices: CategoryOffice[] = [
-  { Icon: Building2, titleKey: 'cert-office-mcr', descKey: 'cert-office-mcr-desc', to: '/service-details/municipal-civil-registrar' },
-  { Icon: Users, titleKey: 'cert-office-hrm', descKey: 'cert-office-hrm-desc', to: '/service-details/human-resource-management' },
+  {
+    Icon: Building2,
+    titleKey: 'cert-office-mcr',
+    descKey: 'cert-office-mcr-desc',
+    to: '/service-details/municipal-civil-registrar',
+  },
+  {
+    Icon: Users,
+    titleKey: 'cert-office-hrm',
+    descKey: 'cert-office-hrm-desc',
+    to: '/service-details/human-resource-management',
+  },
 ];
 
 export function ServicesCertificates() {
@@ -133,10 +206,34 @@ export function ServicesCertificates() {
 
 /* ── Social Services ──────────────────────────────────────────────────────── */
 const socialServices: CategoryService[] = [
-  { Icon: IdCard, titleKey: 'social-senior', descKey: 'social-senior-desc', fee: 'Free', time: '1 day' },
-  { Icon: AccessibilityIcon, titleKey: 'social-pwd', descKey: 'social-pwd-desc', fee: 'Free', time: '1-2 days' },
-  { Icon: Banknote, titleKey: 'social-assistance', descKey: 'social-assistance-desc', fee: 'Free', time: '3-5 days' },
-  { Icon: Gift, titleKey: 'social-social-pension', descKey: 'social-fee', fee: 'Free', time: 'Quarterly release' },
+  {
+    Icon: IdCard,
+    titleKey: 'social-senior',
+    descKey: 'social-senior-desc',
+    fee: 'Free',
+    time: '1 day',
+  },
+  {
+    Icon: AccessibilityIcon,
+    titleKey: 'social-pwd',
+    descKey: 'social-pwd-desc',
+    fee: 'Free',
+    time: '1-2 days',
+  },
+  {
+    Icon: Banknote,
+    titleKey: 'social-assistance',
+    descKey: 'social-assistance-desc',
+    fee: 'Free',
+    time: '3-5 days',
+  },
+  {
+    Icon: Gift,
+    titleKey: 'social-social-pension',
+    descKey: 'social-fee',
+    fee: 'Free',
+    time: 'Quarterly release',
+  },
 ];
 
 export function ServicesSocial() {
@@ -152,7 +249,12 @@ export function ServicesSocial() {
       services={socialServices}
       officesTitleKey="section-responsible-offices"
       offices={[
-        { Icon: Users, titleKey: 'social-mswdo-services', descKey: 'social-social-case-studies-indigency-certificates-aics', to: '/service-details/mswdo-services' },
+        {
+          Icon: Users,
+          titleKey: 'social-mswdo-services',
+          descKey: 'social-social-case-studies-indigency-certificates-aics',
+          to: '/service-details/mswdo-services',
+        },
       ]}
     />
   );
@@ -160,9 +262,27 @@ export function ServicesSocial() {
 
 /* ── Agriculture ──────────────────────────────────────────────────────────── */
 const agricultureServices: CategoryService[] = [
-  { Icon: Flower, titleKey: 'agri-seedling', descKey: 'agri-seedling-desc', fee: 'Free', time: 'Seasonal' },
-  { Icon: Wrench, titleKey: 'agri-equipment', descKey: 'agri-equipment-desc', fee: 'Subsidized', time: 'By schedule' },
-  { Icon: TrendingUp, titleKey: 'agri-livelihood', descKey: 'agri-livelihood-desc', fee: 'Free', time: 'Varies' },
+  {
+    Icon: Flower,
+    titleKey: 'agri-seedling',
+    descKey: 'agri-seedling-desc',
+    fee: 'Free',
+    time: 'Seasonal',
+  },
+  {
+    Icon: Wrench,
+    titleKey: 'agri-equipment',
+    descKey: 'agri-equipment-desc',
+    fee: 'Subsidized',
+    time: 'By schedule',
+  },
+  {
+    Icon: TrendingUp,
+    titleKey: 'agri-livelihood',
+    descKey: 'agri-livelihood-desc',
+    fee: 'Free',
+    time: 'Varies',
+  },
 ];
 
 export function ServicesAgriculture() {
@@ -178,7 +298,12 @@ export function ServicesAgriculture() {
       services={agricultureServices}
       officesTitleKey="agri-responsible-offices"
       offices={[
-        { Icon: Trees, titleKey: 'agri-office-mao', descKey: 'agri-office-mao-desc', to: '/service-details/municipal-agriculture' },
+        {
+          Icon: Trees,
+          titleKey: 'agri-office-mao',
+          descKey: 'agri-office-mao-desc',
+          to: '/service-details/municipal-agriculture',
+        },
       ]}
     />
   );
@@ -186,9 +311,27 @@ export function ServicesAgriculture() {
 
 /* ── Infrastructure ───────────────────────────────────────────────────────── */
 const infrastructureServices: CategoryService[] = [
-  { Icon: Hammer, titleKey: 'infra-building', descKey: 'infra-building-desc', fee: 'Varies', time: '7-14 days' },
-  { Icon: House, titleKey: 'infra-occupancy-permit', descKey: 'infra-certificate-of-occupancy-for-completed-buildings', fee: 'Varies', time: '3-5 days' },
-  { Icon: Ruler, titleKey: 'infra-engineering-services', descKey: 'infra-technical-assistance-and-plan-review', fee: 'Varies', time: 'Varies' },
+  {
+    Icon: Hammer,
+    titleKey: 'infra-building',
+    descKey: 'infra-building-desc',
+    fee: 'Varies',
+    time: '7-14 days',
+  },
+  {
+    Icon: House,
+    titleKey: 'infra-occupancy-permit',
+    descKey: 'infra-certificate-of-occupancy-for-completed-buildings',
+    fee: 'Varies',
+    time: '3-5 days',
+  },
+  {
+    Icon: Ruler,
+    titleKey: 'infra-engineering-services',
+    descKey: 'infra-technical-assistance-and-plan-review',
+    fee: 'Varies',
+    time: 'Varies',
+  },
 ];
 
 export function ServicesInfrastructure() {
@@ -204,9 +347,24 @@ export function ServicesInfrastructure() {
       services={infrastructureServices}
       officesTitleKey="section-responsible-offices"
       offices={[
-        { Icon: Ruler, titleKey: 'infra-municipal-engineering-office', descKey: 'infra-building-permits-construction-permits-and', to: '/service-details/municipal-engineering' },
-        { Icon: Building2, titleKey: 'infra-municipal-planning-development', descKey: 'infra-zoning-clearance-locational-clearance-and-land', to: '/service-details/municipal-planning' },
-        { Icon: Building2, titleKey: 'infra-municipal-general-services-office', descKey: 'infra-property-custodianship-supplies-management', to: '/service-details/municipal-general-services' },
+        {
+          Icon: Ruler,
+          titleKey: 'infra-municipal-engineering-office',
+          descKey: 'infra-building-permits-construction-permits-and',
+          to: '/service-details/municipal-engineering',
+        },
+        {
+          Icon: Building2,
+          titleKey: 'infra-municipal-planning-development',
+          descKey: 'infra-zoning-clearance-locational-clearance-and-land',
+          to: '/service-details/municipal-planning',
+        },
+        {
+          Icon: Building2,
+          titleKey: 'infra-municipal-general-services-office',
+          descKey: 'infra-property-custodianship-supplies-management',
+          to: '/service-details/municipal-general-services',
+        },
       ]}
     />
   );
@@ -214,9 +372,26 @@ export function ServicesInfrastructure() {
 
 /* ── Public Safety ────────────────────────────────────────────────────────── */
 const safetyServices: CategoryService[] = [
-  { Icon: TriangleAlert, titleKey: 'safety-disaster', descKey: 'safety-disaster-desc', time: '24/7' },
-  { Icon: CloudRain, titleKey: 'safety-disaster-assistance', descKey: 'safety-relief-goods-and-evacuation-support', fee: 'Free', time: 'CDRRMO' },
-  { Icon: Megaphone, titleKey: 'safety-disaster-preparedness', descKey: 'safety-training-and-resources-for-disaster-readiness', fee: 'Free', time: 'CDRRMO' },
+  {
+    Icon: TriangleAlert,
+    titleKey: 'safety-disaster',
+    descKey: 'safety-disaster-desc',
+    time: '24/7',
+  },
+  {
+    Icon: CloudRain,
+    titleKey: 'safety-disaster-assistance',
+    descKey: 'safety-relief-goods-and-evacuation-support',
+    fee: 'Free',
+    time: 'CDRRMO',
+  },
+  {
+    Icon: Megaphone,
+    titleKey: 'safety-disaster-preparedness',
+    descKey: 'safety-training-and-resources-for-disaster-readiness',
+    fee: 'Free',
+    time: 'CDRRMO',
+  },
 ];
 
 export function ServicesPublicSafety() {
@@ -238,8 +413,20 @@ export function ServicesPublicSafety() {
 
 /* ── Environment ──────────────────────────────────────────────────────────── */
 const environmentServices: CategoryService[] = [
-  { Icon: Trash2, titleKey: 'env-waste', descKey: 'env-waste-desc', fee: 'Free', time: 'Weekly schedule' },
-  { Icon: Recycle, titleKey: 'env-recycling-program', descKey: 'env-segregation-and-recycling-initiatives', fee: 'Free', time: 'Ongoing' },
+  {
+    Icon: Trash2,
+    titleKey: 'env-waste',
+    descKey: 'env-waste-desc',
+    fee: 'Free',
+    time: 'Weekly schedule',
+  },
+  {
+    Icon: Recycle,
+    titleKey: 'env-recycling-program',
+    descKey: 'env-segregation-and-recycling-initiatives',
+    fee: 'Free',
+    time: 'Ongoing',
+  },
 ];
 
 export function ServicesEnvironment() {

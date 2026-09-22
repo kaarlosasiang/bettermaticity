@@ -47,8 +47,16 @@ export default function MunicipalAssessor() {
   const { t } = useLanguage();
   const text = (it: Item) => (typeof it === 'string' ? t(it) : it.lit);
 
-  const SectionHead = ({ Icon, title, desc }: { Icon: LucideIcon; title: string; desc: string }) => (
-    <div className="mb-4 flex items-start gap-3 rounded-lg border border-border bg-card p-4">
+  const SectionHead = ({
+    Icon,
+    title,
+    desc,
+  }: {
+    Icon: LucideIcon;
+    title: string;
+    desc: string;
+  }) => (
+    <div className="mb-4 flex items-start gap-3 rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
       <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
         <Icon className="size-5" aria-hidden="true" />
       </div>
@@ -100,7 +108,7 @@ export default function MunicipalAssessor() {
         {items.map((it) => (
           <div
             key={it}
-            className="flex items-center gap-1.5 rounded-md border border-border bg-card px-3 py-2 text-[0.8125rem] text-muted-foreground"
+            className="flex items-center gap-1.5 rounded-md bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] px-3 py-2 text-[0.8125rem] text-muted-foreground"
           >
             <CircleCheck className="size-3.5 shrink-0 text-primary" aria-hidden="true" />
             {it}
@@ -111,10 +119,20 @@ export default function MunicipalAssessor() {
   );
 
   const ServiceCardBody = ({ children }: { children: ReactNode }) => (
-    <div className="rounded-lg border border-border bg-card p-4">{children}</div>
+    <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
+      {children}
+    </div>
   );
 
-  const stdInfo = (procKey: string, procSub: string, fee: Item, feeSub: string, who: Item, whoSub: string, apptSub: string): InfoBox[] => [
+  const stdInfo = (
+    procKey: string,
+    procSub: string,
+    fee: Item,
+    feeSub: string,
+    who: Item,
+    whoSub: string,
+    apptSub: string
+  ): InfoBox[] => [
     { Icon: Clock, label: 'assessor-processing-time', value: procKey, sub: procSub },
     { Icon: Banknote, label: 'assessor-fee', value: fee, sub: feeSub },
     { Icon: UserCheck, label: 'assessor-who-can-apply', value: who, sub: whoSub },
@@ -166,7 +184,7 @@ export default function MunicipalAssessor() {
       <Section compact>
         <Container>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:grid-cols-4">
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <Clock className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('assessor-processing-time')}
@@ -175,7 +193,7 @@ export default function MunicipalAssessor() {
                 {t('assessor-15-days')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <Banknote className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('assessor-fees')}
@@ -184,14 +202,14 @@ export default function MunicipalAssessor() {
                 {t('assessor-varies-by-service')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <CalendarCheck className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('assessor-availability')}
               </h3>
               <p className="m-0 text-[0.8125rem] font-semibold text-foreground">Mon-Fri, 8AM-5PM</p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <Phone className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('assessor-hotline')}
@@ -212,7 +230,7 @@ export default function MunicipalAssessor() {
               <a
                 key={n.href}
                 href={n.href}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-3 py-2 text-[0.8125rem] font-medium text-foreground hover:border-primary hover:text-primary"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] px-3 py-2 text-[0.8125rem] font-medium text-foreground hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)] hover:text-primary"
               >
                 <n.Icon className="size-4" aria-hidden="true" /> {t(n.label)}
               </a>
@@ -253,10 +271,26 @@ export default function MunicipalAssessor() {
                   </p>
                   <ProcessSteps
                     steps={[
-                      { n: 1, title: 'assessor-submit-application', desc: 'assessor-file-application-at-the-assessors-office-with' },
-                      { n: 2, title: 'assessor-property-inspection', desc: 'assessor-assessors-staff-will-conduct-onsite-inspection' },
-                      { n: 3, title: 'assessor-valuation-assessment', desc: 'assessor-property-is-appraised-based-on-schedule-of-fair' },
-                      { n: 4, title: 'assessor-issuance-of-tax-declaration', desc: 'assessor-new-tax-declaration-is-issued-reflecting-the' },
+                      {
+                        n: 1,
+                        title: 'assessor-submit-application',
+                        desc: 'assessor-file-application-at-the-assessors-office-with',
+                      },
+                      {
+                        n: 2,
+                        title: 'assessor-property-inspection',
+                        desc: 'assessor-assessors-staff-will-conduct-onsite-inspection',
+                      },
+                      {
+                        n: 3,
+                        title: 'assessor-valuation-assessment',
+                        desc: 'assessor-property-is-appraised-based-on-schedule-of-fair',
+                      },
+                      {
+                        n: 4,
+                        title: 'assessor-issuance-of-tax-declaration',
+                        desc: 'assessor-new-tax-declaration-is-issued-reflecting-the',
+                      },
                     ]}
                   />
                   <Requirements
@@ -297,11 +331,26 @@ export default function MunicipalAssessor() {
                   </p>
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {[
-                      { Icon: PlusCircle, title: 'assessor-new-tax-declaration', desc: 'assessor-for-newly-constructed-buildings-improvements-or' },
-                      { Icon: RefreshCw, title: 'assessor-revisionupdate', desc: 'assessor-for-changes-in-property-details-corrections-or' },
-                      { Icon: Files, title: 'assessor-duplicate-copy', desc: 'assessor-replacement-for-lost-damaged-or-additional-copies' },
+                      {
+                        Icon: PlusCircle,
+                        title: 'assessor-new-tax-declaration',
+                        desc: 'assessor-for-newly-constructed-buildings-improvements-or',
+                      },
+                      {
+                        Icon: RefreshCw,
+                        title: 'assessor-revisionupdate',
+                        desc: 'assessor-for-changes-in-property-details-corrections-or',
+                      },
+                      {
+                        Icon: Files,
+                        title: 'assessor-duplicate-copy',
+                        desc: 'assessor-replacement-for-lost-damaged-or-additional-copies',
+                      },
                     ].map((c) => (
-                      <div key={c.title} className="rounded-lg border border-border bg-muted/40 p-4">
+                      <div
+                        key={c.title}
+                        className="rounded-lg border border-border bg-muted/40 p-4"
+                      >
                         <h4 className="mb-1.5 flex items-center gap-1.5 text-sm font-semibold text-foreground">
                           <c.Icon className="size-4 text-primary" aria-hidden="true" />
                           {t(c.title)}
@@ -311,7 +360,12 @@ export default function MunicipalAssessor() {
                     ))}
                   </div>
                   <Requirements
-                    items={['Application Form', 'Previous Tax Declaration', 'Title/Deed of Sale', 'Valid ID']}
+                    items={[
+                      'Application Form',
+                      'Previous Tax Declaration',
+                      'Title/Deed of Sale',
+                      'Valid ID',
+                    ]}
                   />
                 </ServiceCardBody>
               </div>
@@ -343,10 +397,26 @@ export default function MunicipalAssessor() {
                   </p>
                   <ProcessSteps
                     steps={[
-                      { n: 1, title: 'assessor-secure-tax-clearance', desc: 'assessor-obtain-tax-clearance-from-treasurers-office' },
-                      { n: 2, title: 'assessor-pay-transfer-tax', desc: 'assessor-pay-the-required-transfer-tax-at-the-treasurers' },
-                      { n: 3, title: 'assessor-submit-documents', desc: 'assessor-file-application-with-complete-documents-at-the' },
-                      { n: 4, title: 'assessor-claim-new-tax-declaration', desc: 'assessor-new-tax-declaration-under-the-new-owners-name' },
+                      {
+                        n: 1,
+                        title: 'assessor-secure-tax-clearance',
+                        desc: 'assessor-obtain-tax-clearance-from-treasurers-office',
+                      },
+                      {
+                        n: 2,
+                        title: 'assessor-pay-transfer-tax',
+                        desc: 'assessor-pay-the-required-transfer-tax-at-the-treasurers',
+                      },
+                      {
+                        n: 3,
+                        title: 'assessor-submit-documents',
+                        desc: 'assessor-file-application-with-complete-documents-at-the',
+                      },
+                      {
+                        n: 4,
+                        title: 'assessor-claim-new-tax-declaration',
+                        desc: 'assessor-new-tax-declaration-under-the-new-owners-name',
+                      },
                     ]}
                   />
                   <Requirements
@@ -372,10 +442,30 @@ export default function MunicipalAssessor() {
                 <ServiceCardBody>
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     {[
-                      { title: 'assessor-certified-true-copy-of-tax-declaration', desc: 'assessor-official-copy-of-tax-declaration-for-legal-and', fee: '₱100', time: 'Same day' },
-                      { title: 'assessor-certificate-of-no-property', desc: 'assessor-certification-that-a-person-has-no-declared', fee: '₱100', time: 'Same day' },
-                      { title: 'assessor-certificate-of-property-holdings', desc: 'assessor-list-of-all-properties-declared-under-a-persons', fee: '₱150', time: '1-2 days' },
-                      { title: 'assessor-certificate-of-land-area', desc: 'assessor-certification-of-the-total-land-area-based-on-tax', fee: '₱100', time: 'Same day' },
+                      {
+                        title: 'assessor-certified-true-copy-of-tax-declaration',
+                        desc: 'assessor-official-copy-of-tax-declaration-for-legal-and',
+                        fee: '₱100',
+                        time: 'Same day',
+                      },
+                      {
+                        title: 'assessor-certificate-of-no-property',
+                        desc: 'assessor-certification-that-a-person-has-no-declared',
+                        fee: '₱100',
+                        time: 'Same day',
+                      },
+                      {
+                        title: 'assessor-certificate-of-property-holdings',
+                        desc: 'assessor-list-of-all-properties-declared-under-a-persons',
+                        fee: '₱150',
+                        time: '1-2 days',
+                      },
+                      {
+                        title: 'assessor-certificate-of-land-area',
+                        desc: 'assessor-certification-of-the-total-land-area-based-on-tax',
+                        fee: '₱100',
+                        time: 'Same day',
+                      },
                     ].map((c) => (
                       <div
                         key={c.title}
@@ -385,10 +475,12 @@ export default function MunicipalAssessor() {
                         <p className="mb-3 text-[0.8125rem] text-muted-foreground">{t(c.desc)}</p>
                         <div className="text-xs text-muted-foreground">
                           <span className="block">
-                            <strong className="text-foreground">{t('assessor-fee')}:</strong> {c.fee}
+                            <strong className="text-foreground">{t('assessor-fee')}:</strong>{' '}
+                            {c.fee}
                           </span>
                           <span className="block">
-                            <strong className="text-foreground">{t('assessor-time')}:</strong> {c.time}
+                            <strong className="text-foreground">{t('assessor-time')}:</strong>{' '}
+                            {c.time}
                           </span>
                         </div>
                       </div>
@@ -439,7 +531,12 @@ export default function MunicipalAssessor() {
                     ))}
                   </div>
                   <Requirements
-                    items={['Request Letter', 'Supporting Documents', 'Tax Declaration Copy', 'Valid ID']}
+                    items={[
+                      'Request Letter',
+                      'Supporting Documents',
+                      'Tax Declaration Copy',
+                      'Valid ID',
+                    ]}
                   />
                 </ServiceCardBody>
               </div>
@@ -503,7 +600,7 @@ export default function MunicipalAssessor() {
 
             {/* Sidebar */}
             <aside className="lg:sticky lg:top-24 lg:self-start">
-              <div className="rounded-lg border border-border bg-card p-5">
+              <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-5">
                 <h3 className="mb-4 flex items-center gap-2 text-base font-semibold text-foreground">
                   <Building2 className="size-4 text-primary" aria-hidden="true" />
                   {t('assessor-municipal-assessors-office')}
@@ -531,7 +628,10 @@ export default function MunicipalAssessor() {
                     <Mail className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
                     <span className="flex flex-col">
                       <strong className="text-foreground">{t('assessor-email')}</strong>
-                      <a href="mailto:assessor@mati.gov.ph" className="text-primary hover:underline">
+                      <a
+                        href="mailto:assessor@mati.gov.ph"
+                        className="text-primary hover:underline"
+                      >
                         {t('assessor-assessormatigovph')}
                       </a>
                     </span>
@@ -540,7 +640,9 @@ export default function MunicipalAssessor() {
                     <Clock className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
                     <span className="flex flex-col">
                       <strong className="text-foreground">{t('assessor-office-hours')}</strong>
-                      <span className="text-muted-foreground">Monday - Friday, 8:00 AM - 5:00 PM</span>
+                      <span className="text-muted-foreground">
+                        Monday - Friday, 8:00 AM - 5:00 PM
+                      </span>
                     </span>
                   </li>
                 </ul>

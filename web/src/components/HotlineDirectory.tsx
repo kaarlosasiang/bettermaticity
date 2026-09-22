@@ -35,7 +35,7 @@ function HotlineCard({
 
   return (
     <div
-      className={`flex gap-3 rounded-lg border border-border bg-card text-foreground transition hover:-translate-y-0.5 hover:border-primary hover:shadow-sm ${
+      className={`flex gap-3 rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] text-foreground transition hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)] ${
         compact ? 'p-4' : 'p-6'
       }`}
     >

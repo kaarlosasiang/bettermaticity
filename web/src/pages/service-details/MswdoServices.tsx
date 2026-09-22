@@ -105,7 +105,9 @@ export default function MswdoServices() {
     items: string[];
     className?: string;
   }) => (
-    <div className={`rounded-lg border border-border bg-card p-3.5${className ? ` ${className}` : ''}`}>
+    <div
+      className={`rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5${className ? ` ${className}` : ''}`}
+    >
       <h4 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
         <Icon className="size-4 text-primary" aria-hidden="true" />
         {t(title)}
@@ -130,7 +132,9 @@ export default function MswdoServices() {
     items: { Icon: LucideIcon; content: ReactNode }[];
     className?: string;
   }) => (
-    <div className={`rounded-lg border border-border bg-card p-3.5${className ? ` ${className}` : ''}`}>
+    <div
+      className={`rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5${className ? ` ${className}` : ''}`}
+    >
       <h4 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
         <Info className="size-4 text-primary" aria-hidden="true" />
         {t(title)}
@@ -219,14 +223,14 @@ export default function MswdoServices() {
       <Section compact>
         <Container>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:grid-cols-4">
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <Building2 className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('mswdosvc-office')}
               </h3>
               <p className="m-0 text-[0.8125rem] font-semibold text-foreground">CSWDO</p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <MapPin className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('mswdosvc-location')}
@@ -235,7 +239,7 @@ export default function MswdoServices() {
                 {t('mswdosvc-municipal-hall-2nd-floor')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <Clock className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('mswdosvc-hours')}
@@ -244,7 +248,7 @@ export default function MswdoServices() {
                 {t('mswdosvc-8am-5pm-monfri')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <FileText className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('mswdosvc-services')}
@@ -285,7 +289,7 @@ export default function MswdoServices() {
                 className={`rounded-md border px-4 py-2 text-xs font-semibold transition ${
                   tab === tb.id
                     ? 'border-primary bg-primary text-primary-foreground'
-                    : 'border-border bg-card text-foreground hover:border-primary'
+                    : 'border-border bg-card text-foreground hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)]'
                 }`}
               >
                 {tb.label}
@@ -819,9 +823,11 @@ export default function MswdoServices() {
             <Users className="size-5 text-primary" aria-hidden="true" />
             {t('mswdosvc-office-personnel')}
           </SectionTitle>
-          <SectionSubtitle>{t('mswdosvc-key-personnel-handling-social-welfare-services')}</SectionSubtitle>
+          <SectionSubtitle>
+            {t('mswdosvc-key-personnel-handling-social-welfare-services')}
+          </SectionSubtitle>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="rounded-lg border border-border bg-card p-3">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3">
               <h4 className="mb-0.5 text-xs font-semibold text-foreground">
                 {t('mswdosvc-mswdo-head')}
               </h4>
@@ -829,7 +835,7 @@ export default function MswdoServices() {
                 {t('mswdosvc-office-head-social-welfare-officer')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3">
               <h4 className="mb-0.5 text-xs font-semibold text-foreground">
                 {t('mswdosvc-social-worker')}
               </h4>
@@ -837,7 +843,7 @@ export default function MswdoServices() {
                 {t('mswdosvc-case-management-assessment')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3">
               <h4 className="mb-0.5 text-xs font-semibold text-foreground">
                 {t('mswdosvc-social-welfare-assistant')}
               </h4>
@@ -845,7 +851,7 @@ export default function MswdoServices() {
                 {t('mswdosvc-client-services-documentation')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3">
               <h4 className="mb-0.5 text-xs font-semibold text-foreground">
                 {t('mswdosvc-osca-focal-person')}
               </h4>
@@ -853,7 +859,7 @@ export default function MswdoServices() {
                 {t('mswdosvc-senior-citizen-affairs')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3">
               <h4 className="mb-0.5 text-xs font-semibold text-foreground">
                 {t('mswdosvc-pwd-focal-person')}
               </h4>
@@ -861,7 +867,7 @@ export default function MswdoServices() {
                 {t('mswdosvc-pwd-affairs-services')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3">
               <h4 className="mb-0.5 text-xs font-semibold text-foreground">
                 {t('mswdosvc-day-care-worker')}
               </h4>

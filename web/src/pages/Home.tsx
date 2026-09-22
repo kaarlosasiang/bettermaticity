@@ -206,9 +206,21 @@ function useFunds() {
   const spendTotal = sum(q1.expenditures.total, q2.expenditures.total);
   const per100 = (v: number) => (v / spendTotal) * 100;
   const rows = [
-    { label: 'General public services', v: sum(q1.expenditures.gps, q2.expenditures.gps), color: '#2b62ee' },
-    { label: 'Social services', v: sum(q1.expenditures.social, q2.expenditures.social), color: '#0077be' },
-    { label: 'Economic services', v: sum(q1.expenditures.economic, q2.expenditures.economic), color: '#06a77d' },
+    {
+      label: 'General public services',
+      v: sum(q1.expenditures.gps, q2.expenditures.gps),
+      color: '#2b62ee',
+    },
+    {
+      label: 'Social services',
+      v: sum(q1.expenditures.social, q2.expenditures.social),
+      color: '#0077be',
+    },
+    {
+      label: 'Economic services',
+      v: sum(q1.expenditures.economic, q2.expenditures.economic),
+      color: '#06a77d',
+    },
     { label: 'Debt service', v: sum(q1.expenditures.debt, q2.expenditures.debt), color: '#e01b24' },
   ].map((r) => ({ ...r, per100: per100(r.v) }));
   return {
@@ -227,10 +239,13 @@ const M = (n: number) => `₱${n.toFixed(2)}M`;
 function useMatiWeather() {
   const [temp, setTemp] = useState<string | null>(null);
   useEffect(() => {
-    fetch('https://api.open-meteo.com/v1/forecast?latitude=6.9497&longitude=126.2094&current_weather=true')
+    fetch(
+      'https://api.open-meteo.com/v1/forecast?latitude=6.9497&longitude=126.2094&current_weather=true'
+    )
       .then((r) => r.json())
       .then((d) => {
-        if (d?.current_weather?.temperature != null) setTemp(`${Math.round(d.current_weather.temperature)}°C`);
+        if (d?.current_weather?.temperature != null)
+          setTemp(`${Math.round(d.current_weather.temperature)}°C`);
       })
       .catch(() => {});
   }, []);
@@ -265,7 +280,7 @@ export default function Home() {
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
         <section className="relative isolate overflow-hidden bg-[#123c7a]">
           <div className="absolute inset-0 -z-10">
-            <ImageSlot label="Dahican / coastline photo" />
+            <ImageSlot label="City of Mati" src="./bg-matigov_hero.jpg" />
           </div>
           <div
             className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(18,60,122,0.95)_0%,rgba(18,60,122,0.82)_46%,rgba(18,60,122,0.55)_78%,rgba(18,60,122,0.42)_100%)]"
@@ -280,7 +295,12 @@ export default function Home() {
                 initial="hidden"
                 animate="show"
               >
-                <m.img variants={fadeUp} src={FEEL_MATI_LOGO} alt="Feel Mati" className="mb-6 h-auto w-52 sm:w-64" />
+                <m.img
+                  variants={fadeUp}
+                  src={FEEL_MATI_LOGO}
+                  alt="Feel Mati"
+                  className="mb-6 h-auto w-52 sm:w-64"
+                />
                 <m.h1
                   variants={fadeUp}
                   className="mb-3.5 font-display text-4xl leading-[1.08] font-extrabold tracking-[-0.03em] text-white sm:text-[2.75rem]"
@@ -289,9 +309,12 @@ export default function Home() {
                   <br />
                   in one place.
                 </m.h1>
-                <m.p variants={fadeUp} className="mb-6 max-w-[440px] text-base leading-relaxed text-white/75">
-                  A community-powered portal for the City of Mati, Davao Oriental — government services,
-                  public funds, and the coast that makes this place worth the trip.
+                <m.p
+                  variants={fadeUp}
+                  className="mb-6 max-w-[440px] text-base leading-relaxed text-white/75"
+                >
+                  A community-powered portal for the City of Mati, Davao Oriental — government
+                  services, public funds, and the coast that makes this place worth the trip.
                 </m.p>
                 <m.div variants={fadeUp} className="flex flex-wrap gap-2.5">
                   <AppLink
@@ -318,7 +341,9 @@ export default function Home() {
                   className="w-full overflow-hidden rounded-xl border-t-[3px] border-[#2b62ee] bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.08),0_18px_44px_rgba(3,10,30,0.34)]"
                 >
                   <div className="p-5 pb-0">
-                    <div className="font-display text-[1.0625rem] font-bold text-[#123c7a]">Search Services</div>
+                    <div className="font-display text-[1.0625rem] font-bold text-[#123c7a]">
+                      Search Services
+                    </div>
                   </div>
                   <div className="p-5 pt-3.5">
                     <ServiceSearch placeholder="Search for a service…" />
@@ -342,7 +367,9 @@ export default function Home() {
                             }`}
                           >
                             <Icon className="size-5" style={{ color }} aria-hidden="true" />
-                            <span className="text-[0.8125rem] leading-tight font-medium">{label}</span>
+                            <span className="text-[0.8125rem] leading-tight font-medium">
+                              {label}
+                            </span>
                           </AppLink>
                         </m.div>
                       ))}
@@ -387,10 +414,16 @@ export default function Home() {
                   >
                     <div>
                       <Icon className="size-[18px] text-[#2b62ee]" aria-hidden="true" />
-                      <div className="mt-3 font-display text-[0.9375rem] leading-[1.35] font-bold">{title}</div>
+                      <div className="mt-3 font-display text-[0.9375rem] leading-[1.35] font-bold">
+                        {title}
+                      </div>
                     </div>
                     <span className="inline-flex items-center gap-1.5 text-xs text-[#4c5c78]">
-                      <span className="size-[7px] rounded-full" style={{ background: status.dot }} aria-hidden="true" />
+                      <span
+                        className="size-[7px] rounded-full"
+                        style={{ background: status.dot }}
+                        aria-hidden="true"
+                      />
                       {status.text}
                     </span>
                   </AppLink>
@@ -432,9 +465,24 @@ export default function Home() {
               viewport={revealViewport}
             >
               {[
-                { v: totalPopulation.toLocaleString(), label: 'Residents', meta: 'PSA 2024 POPCEN', amber: false },
-                { v: String(barangayCount), label: 'Barangays', meta: 'ADMINISTRATIVE VILLAGES', amber: false },
-                { v: `${incomeClass} Class`, label: 'Component City', meta: 'INCOME CLASSIFICATION', amber: false },
+                {
+                  v: totalPopulation.toLocaleString(),
+                  label: 'Residents',
+                  meta: 'PSA 2024 POPCEN',
+                  amber: false,
+                },
+                {
+                  v: String(barangayCount),
+                  label: 'Barangays',
+                  meta: 'ADMINISTRATIVE VILLAGES',
+                  amber: false,
+                },
+                {
+                  v: `${incomeClass} Class`,
+                  label: 'Component City',
+                  meta: 'INCOME CLASSIFICATION',
+                  amber: false,
+                },
                 { v: landAreaKm2, label: 'km² land area', meta: 'NEEDS VERIFICATION', amber: true },
               ].map((s) => (
                 <m.div
@@ -448,7 +496,9 @@ export default function Home() {
                     {s.v}
                   </div>
                   <div className="mt-1.5 text-sm font-semibold text-[#123c7a]">{s.label}</div>
-                  <div className={`mt-0.5 font-mono text-[0.6875rem] ${s.amber ? 'text-[#8a6200]' : 'text-[#4c5c78]'}`}>
+                  <div
+                    className={`mt-0.5 font-mono text-[0.6875rem] ${s.amber ? 'text-[#8a6200]' : 'text-[#4c5c78]'}`}
+                  >
                     {s.meta}
                   </div>
                 </m.div>
@@ -514,8 +564,8 @@ export default function Home() {
                   More adventures, truly incredible
                 </h2>
                 <p className="max-w-[560px] text-[0.9375rem] leading-relaxed text-white/70">
-                  The skimboarding capital of the Philippines, a protected bay of coral and dugongs, and a
-                  ridge the whole city knows by silhouette.
+                  The skimboarding capital of the Philippines, a protected bay of coral and dugongs,
+                  and a ridge the whole city knows by silhouette.
                 </p>
               </div>
               <AppLink
@@ -559,7 +609,9 @@ export default function Home() {
                     >
                       {tp.title}
                     </h3>
-                    <p className="max-w-[380px] text-sm leading-relaxed text-white/85">{tp.blurb}</p>
+                    <p className="max-w-[380px] text-sm leading-relaxed text-white/85">
+                      {tp.blurb}
+                    </p>
                   </div>
                 </m.article>
               ))}
@@ -599,11 +651,13 @@ export default function Home() {
             <m.div variants={fadeUp} initial="hidden" whileInView="show" viewport={revealViewport}>
               <div className="mb-2 flex items-center gap-3.5">
                 <span className="h-[30px] w-1 rounded bg-[#2b62ee]" aria-hidden="true" />
-                <h2 className="font-display text-3xl font-extrabold tracking-[-0.025em] text-[#123c7a]">City Services</h2>
+                <h2 className="font-display text-3xl font-extrabold tracking-[-0.025em] text-[#123c7a]">
+                  City Services
+                </h2>
               </div>
               <p className="mb-6 ml-[18px] max-w-[540px] text-[0.9375rem] leading-relaxed text-[#4c5c78]">
-                Find the right service for your need — from certificates and permits to health, welfare and
-                disaster preparedness.
+                Find the right service for your need — from certificates and permits to health,
+                welfare and disaster preparedness.
               </p>
             </m.div>
             <m.div
@@ -621,7 +675,9 @@ export default function Home() {
                     <AppLink
                       to={to}
                       className={`flex h-full flex-col gap-3 rounded-xl p-5 text-[#4c5c78] transition ${
-                        feel ? 'bg-[#fffbef] ring-1 ring-[#ffc001]' : 'ring-1 ring-[#e3e8ef] hover:ring-[#2b62ee]'
+                        feel
+                          ? 'bg-[#fffbef] ring-1 ring-[#ffc001]'
+                          : 'ring-1 ring-[#e3e8ef] hover:ring-[#2b62ee]'
                       }`}
                     >
                       <span
@@ -635,7 +691,9 @@ export default function Home() {
                       >
                         <Icon className="size-[17px]" aria-hidden="true" />
                       </span>
-                      <div className="font-display text-[0.9375rem] font-bold text-[#123c7a]">{title}</div>
+                      <div className="font-display text-[0.9375rem] font-bold text-[#123c7a]">
+                        {title}
+                      </div>
                       <p className="text-[0.8125rem] leading-relaxed">{desc}</p>
                       <span
                         className={`inline-flex h-[22px] w-fit items-center rounded-full px-2.5 text-xs font-semibold ${
@@ -661,7 +719,12 @@ export default function Home() {
           <Container>
             <div className="grid items-start gap-5 lg:grid-cols-[1.15fr_1fr]">
               {/* Public Funds */}
-              <m.div variants={fadeUp} initial="hidden" whileInView="show" viewport={revealViewport}>
+              <m.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="show"
+                viewport={revealViewport}
+              >
                 <div className="mb-[18px] flex items-end justify-between gap-3">
                   <div className="flex items-center gap-3.5">
                     <span className="h-[26px] w-1 rounded bg-[#2b62ee]" aria-hidden="true" />
@@ -670,8 +733,8 @@ export default function Home() {
                     </h2>
                   </div>
                   <span className="inline-flex h-6 items-center gap-1.5 rounded-full bg-white px-2.5 font-mono text-[0.6875rem] text-[#4c5c78] shadow-[0_0_0_1px_#d6dee9]">
-                    <span className="size-1.5 rounded-full bg-[#06a77d]" aria-hidden="true" /> BLGF SRE · RETRIEVED
-                    2026-09-12
+                    <span className="size-1.5 rounded-full bg-[#06a77d]" aria-hidden="true" /> BLGF
+                    SRE · RETRIEVED 2026-09-12
                   </span>
                 </div>
 
@@ -821,7 +884,9 @@ export default function Home() {
                         <MapPin className="size-[15px]" aria-hidden="true" />
                       </span>
                       <div>
-                        <div className="font-mono text-[0.625rem] tracking-[0.06em] text-[#4c5c78]">CITY HALL</div>
+                        <div className="font-mono text-[0.625rem] tracking-[0.06em] text-[#4c5c78]">
+                          CITY HALL
+                        </div>
                         <div className="text-sm font-semibold text-[#123c7a]">
                           Nazareno St., City of Mati, Davao Oriental
                         </div>
@@ -832,7 +897,9 @@ export default function Home() {
                         <Mail className="size-[15px]" aria-hidden="true" />
                       </span>
                       <div>
-                        <div className="font-mono text-[0.625rem] tracking-[0.06em] text-[#4c5c78]">EMAIL</div>
+                        <div className="font-mono text-[0.625rem] tracking-[0.06em] text-[#4c5c78]">
+                          EMAIL
+                        </div>
                         <a
                           href="mailto:cio.cityofmati@gmail.com"
                           className="text-sm font-semibold text-[#2b62ee] hover:underline"
@@ -846,8 +913,13 @@ export default function Home() {
                         <Briefcase className="size-[15px]" aria-hidden="true" />
                       </span>
                       <div>
-                        <div className="font-mono text-[0.625rem] tracking-[0.06em] text-[#4c5c78]">JOBS</div>
-                        <AppLink to="/government" className="text-sm font-semibold text-[#2b62ee] hover:underline">
+                        <div className="font-mono text-[0.625rem] tracking-[0.06em] text-[#4c5c78]">
+                          JOBS
+                        </div>
+                        <AppLink
+                          to="/government"
+                          className="text-sm font-semibold text-[#2b62ee] hover:underline"
+                        >
                           TrabaWho — city job openings
                         </AppLink>
                       </div>
@@ -869,8 +941,8 @@ export default function Home() {
               whileInView="show"
               viewport={revealViewport}
             >
-              Cost to build this site to date: <strong className="font-bold text-white">₱400+</strong>. Cost to
-              the People of Mati:{' '}
+              Cost to build this site to date:{' '}
+              <strong className="font-bold text-white">₱400+</strong>. Cost to the People of Mati:{' '}
               <strong className="align-[-0.08em] font-display text-[1.375rem] font-extrabold text-[#ffc001]">
                 ₱0
               </strong>

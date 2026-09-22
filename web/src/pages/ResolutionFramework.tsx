@@ -14,7 +14,8 @@ const resolutionTypes = [
   'reso-type-appropriation',
 ];
 
-const SB_RESO_URL = 'https://sangguniangbayan.mati.gov.ph/index.php?page=legislative_framework_reso';
+const SB_RESO_URL =
+  'https://sangguniangbayan.mati.gov.ph/index.php?page=legislative_framework_reso';
 
 function ResolutionTable({
   rows,
@@ -35,24 +36,34 @@ function ResolutionTable({
         <table className="w-full border-collapse text-left text-sm">
           <thead>
             <tr className="bg-muted text-foreground">
-              <th scope="col" className="px-4 py-3 font-semibold">{t('reso-table-number')}</th>
-              <th scope="col" className="px-4 py-3 font-semibold">{t('reso-table-title')}</th>
-              <th scope="col" className="px-4 py-3 font-semibold whitespace-nowrap">{t('reso-table-date')}</th>
+              <th scope="col" className="px-4 py-3 font-semibold">
+                {t('reso-table-number')}
+              </th>
+              <th scope="col" className="px-4 py-3 font-semibold">
+                {t('reso-table-title')}
+              </th>
+              <th scope="col" className="px-4 py-3 font-semibold whitespace-nowrap">
+                {t('reso-table-date')}
+              </th>
             </tr>
           </thead>
           <tbody>
             {rows.length === 0 ? (
               <tr>
                 <td colSpan={3} className="px-4 py-8 text-center text-muted-foreground">
-                  No resolutions available yet.
+                  {t('reso-no-resolutions')}
                 </td>
               </tr>
             ) : (
               rows.map((r, i) => (
                 <tr key={`${r.resolutionNo}-${i}`} className="border-t border-border">
-                  <td className="px-4 py-3 font-medium whitespace-nowrap text-foreground">{r.resolutionNo}</td>
+                  <td className="px-4 py-3 font-medium whitespace-nowrap text-foreground">
+                    {r.resolutionNo}
+                  </td>
                   <td className="px-4 py-3 text-muted-foreground">{r.title}</td>
-                  <td className="px-4 py-3 whitespace-nowrap text-muted-foreground">{formatSessionDate(r.sessionDate)}</td>
+                  <td className="px-4 py-3 whitespace-nowrap text-muted-foreground">
+                    {formatSessionDate(r.sessionDate)}
+                  </td>
                 </tr>
               ))
             )}
@@ -88,10 +99,17 @@ export default function ResolutionFramework() {
       />
 
       <Container>
-        <nav className="flex items-center gap-2 py-4 text-sm text-muted-foreground" aria-label="Breadcrumb">
-          <AppLink to="/" className="hover:text-primary">{t('nav-home')}</AppLink>
+        <nav
+          className="flex items-center gap-2 py-4 text-sm text-muted-foreground"
+          aria-label="Breadcrumb"
+        >
+          <AppLink to="/" className="hover:text-primary">
+            {t('nav-home')}
+          </AppLink>
           <span>/</span>
-          <AppLink to="/legislative" className="hover:text-primary">{t('nav-legislative')}</AppLink>
+          <AppLink to="/legislative" className="hover:text-primary">
+            {t('nav-legislative')}
+          </AppLink>
           <span>/</span>
           <span aria-current="page">{t('reso-page-title')}</span>
         </nav>
@@ -111,7 +129,7 @@ export default function ResolutionFramework() {
       {/* What is a Resolution? */}
       <Section compact>
         <Container>
-          <div className="rounded-xl border border-border bg-card p-6">
+          <div className="rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-6">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold text-foreground">
               <Info className="size-5 text-primary" aria-hidden="true" />
               {t('reso-what-is')}
@@ -128,7 +146,10 @@ export default function ResolutionFramework() {
           <SectionTitle>{t('reso-types-title')}</SectionTitle>
           <div className="flex flex-wrap gap-2">
             {resolutionTypes.map((k) => (
-              <span key={k} className="rounded-full border border-border bg-card px-3 py-1.5 text-sm font-medium text-foreground">
+              <span
+                key={k}
+                className="rounded-full bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] px-3 py-1.5 text-sm font-medium text-foreground"
+              >
                 {t(k)}
               </span>
             ))}
@@ -139,9 +160,19 @@ export default function ResolutionFramework() {
       <Section>
         <Container>
           {rows2026.length > 0 && (
-            <ResolutionTable rows={rows2026} heading={t('reso-2026-title')} subtitle={t('reso-2026-subtitle')} t={t} />
+            <ResolutionTable
+              rows={rows2026}
+              heading={t('reso-2026-title')}
+              subtitle={t('reso-2026-subtitle')}
+              t={t}
+            />
           )}
-          <ResolutionTable rows={rows2025} heading={t('reso-2025-title')} subtitle={t('reso-2025-subtitle')} t={t} />
+          <ResolutionTable
+            rows={rows2025}
+            heading={t('reso-2025-title')}
+            subtitle={t('reso-2025-subtitle')}
+            t={t}
+          />
         </Container>
       </Section>
     </>
