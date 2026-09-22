@@ -82,7 +82,10 @@
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
 
-  /* hotline marquee (mobile/tablet) — legacy @keyframes hotlineScroll */
+  /* hotline marquee (mobile/tablet) — legacy @keyframes hotlineScroll.
+     WCAG 2.2.2 needs a pause mechanism for this: hover alone does not count on a
+     touch-only variant, so HotlineBar renders an explicit pause button and falls
+     back to a manual scroll row under prefers-reduced-motion. */
   --animate-hotline-scroll: hotline-scroll 25s linear infinite;
 }
 

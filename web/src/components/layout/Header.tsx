@@ -1,6 +1,26 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
-import { ChevronDown, Globe, Menu, X } from 'lucide-react';
+import {
+  ChevronDown,
+  Globe,
+  Menu,
+  X,
+  // Dropdown icons — each one matches the icon that category's own page already
+  // uses for its PageHeader badge, so the nav and the destination agree.
+  FileText,
+  Store,
+  Coins,
+  Users,
+  HeartPulse,
+  Trees,
+  Building2,
+  GraduationCap,
+  ShieldCheck,
+  Recycle,
+  BookMarked,
+  ScrollText,
+  type LucideIcon,
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { AppLink } from '@/components/AppLink';
 import {
@@ -13,25 +33,33 @@ import {
 import { useLanguage } from '@/hooks/useLanguage';
 import type { Language } from '@/i18n';
 
-type NavEntry = { to: string; key: string; children?: [string, string][] };
+type NavChild = { to: string; key: string; Icon: LucideIcon };
+type NavEntry = { to: string; key: string; children?: NavChild[] };
 
-const SERVICES: [string, string][] = [
-  ['/services/certificates', 'dropdown-certificates'],
-  ['/services/business', 'dropdown-business'],
-  ['/services/tax-payments', 'dropdown-tax-payments'],
-  ['/services/social-services', 'dropdown-social-services'],
-  ['/services/health', 'dropdown-health'],
-  ['/services/agriculture', 'dropdown-agriculture'],
-  ['/services/infrastructure', 'dropdown-infrastructure'],
-  ['/services/education', 'dropdown-education'],
-  ['/services/public-safety', 'dropdown-public-safety'],
-  ['/services/environment', 'dropdown-environment'],
+const SERVICES: NavChild[] = [
+  { to: '/services/certificates', key: 'dropdown-certificates', Icon: FileText },
+  { to: '/services/business', key: 'dropdown-business', Icon: Store },
+  { to: '/services/tax-payments', key: 'dropdown-tax-payments', Icon: Coins },
+  { to: '/services/social-services', key: 'dropdown-social-services', Icon: Users },
+  { to: '/services/health', key: 'dropdown-health', Icon: HeartPulse },
+  { to: '/services/agriculture', key: 'dropdown-agriculture', Icon: Trees },
+  { to: '/services/infrastructure', key: 'dropdown-infrastructure', Icon: Building2 },
+  { to: '/services/education', key: 'dropdown-education', Icon: GraduationCap },
+  { to: '/services/public-safety', key: 'dropdown-public-safety', Icon: ShieldCheck },
+  { to: '/services/environment', key: 'dropdown-environment', Icon: Recycle },
 ];
 
-const LEGISLATIVE: [string, string][] = [
-  ['/legislative/ordinance-framework', 'dropdown-ordinance-framework'],
-  ['/legislative/resolution-framework', 'dropdown-resolution-framework'],
+const LEGISLATIVE: NavChild[] = [
+  { to: '/legislative/ordinance-framework', key: 'dropdown-ordinance-framework', Icon: BookMarked },
+  {
+    to: '/legislative/resolution-framework',
+    key: 'dropdown-resolution-framework',
+    Icon: ScrollText,
+  },
 ];
+
+// A long list (Services) reads better split in two; a 2-item list (Legislative) does not.
+const TWO_COL_THRESHOLD = 4;
 
 const NAV: NavEntry[] = [
   { to: '/', key: 'nav-home' },
@@ -189,11 +217,14 @@ export default function Header() {
           ref={navRef}
           aria-label="Main Navigation"
           className={cn(
-            'order-last w-full overflow-hidden transition-all duration-300',
+            // Mobile: a panel overlaid on the content, anchored under the header bar.
+            // It used to be an in-flow `w-full` flex item, which grew the sticky
+            // header and pushed the whole page down as it opened.
+            'absolute top-full left-0 z-10 w-full overflow-hidden bg-white shadow-md transition-all duration-300',
             mobileMenuOpen
-              ? 'visible mt-4 max-h-[80vh] overflow-y-auto border-t border-border pt-4 opacity-100'
+              ? 'visible max-h-[80vh] overflow-y-auto border-t border-border px-6 py-4 opacity-100'
               : 'invisible max-h-0 opacity-0',
-            'lg:visible lg:order-none lg:mt-0 lg:max-h-none lg:w-auto lg:overflow-visible lg:border-0 lg:pt-0 lg:opacity-100'
+            'lg:visible lg:static lg:z-auto lg:order-none lg:max-h-none lg:w-auto lg:overflow-visible lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 lg:opacity-100 lg:shadow-none'
           )}
         >
           <ul className="flex flex-col gap-0 lg:flex-row lg:items-center lg:gap-1">
@@ -213,6 +244,7 @@ export default function Header() {
                 );
               }
               const open = openDropdown === entry.to;
+              const twoCol = entry.children.length > TWO_COL_THRESHOLD;
               return (
                 <li key={entry.to} className="group relative">
                   <AppLink
@@ -237,21 +269,26 @@ export default function Header() {
                   </AppLink>
                   <ul
                     className={cn(
-                      'flex flex-col overflow-hidden transition-all duration-200',
-                      open ? 'max-h-[500px] py-1 pl-4' : 'max-h-0',
-                      'lg:invisible lg:absolute lg:left-0 lg:top-full lg:z-[1001] lg:min-w-[220px] lg:max-h-none lg:translate-y-2 lg:rounded-lg lg:bg-white lg:py-2 lg:pl-0 lg:opacity-0 lg:shadow-md',
+                      'overflow-hidden transition-all duration-200',
+                      twoCol ? 'grid grid-cols-2 gap-x-2' : 'flex flex-col',
+                      open ? 'max-h-[500px] py-1' : 'max-h-0',
+                      'lg:invisible lg:absolute lg:top-full lg:left-0 lg:z-[1001] lg:max-h-none lg:translate-y-2 lg:rounded-lg lg:bg-white lg:py-2 lg:pl-0 lg:opacity-0 lg:shadow-md',
+                      twoCol ? 'lg:grid lg:grid-cols-2 lg:min-w-[440px]' : 'lg:min-w-[220px]',
                       'lg:group-hover:visible lg:group-hover:translate-y-0 lg:group-hover:opacity-100',
                       open && 'lg:visible lg:translate-y-0 lg:opacity-100'
                     )}
                   >
-                    {entry.children.map(([to, key]) => (
+                    {entry.children.map(({ to, key, Icon }) => (
                       <li key={to}>
                         <AppLink
                           to={to}
                           onClick={closeMenu}
-                          className="block px-4 py-2.5 text-[0.9375rem] text-muted-foreground transition-colors hover:bg-muted hover:text-primary lg:py-2 lg:text-sm lg:whitespace-nowrap lg:text-foreground"
+                          // pl/pr not px: a base `px-*` and an `lg:pl-*` both write
+                          // padding-left, and the winner is stylesheet order, not class order.
+                          className="flex items-center gap-2.5 py-2.5 pl-3 text-[0.9375rem] text-muted-foreground transition-colors hover:bg-muted hover:text-primary lg:py-2 lg:pr-4 lg:pl-4 lg:text-sm lg:whitespace-nowrap lg:text-foreground"
                         >
-                          {t(key)}
+                          <Icon className="size-4 shrink-0 text-primary/70" aria-hidden="true" />
+                          <span>{t(key)}</span>
                         </AppLink>
                       </li>
                     ))}

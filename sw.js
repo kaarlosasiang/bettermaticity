@@ -5,8 +5,8 @@
 
 // Bump whenever a precached file's contents change — activate deletes caches whose
 // names no longer match, so returning visitors stop being served the old copy.
-// v7: corrected emergency hotline numbers in /offline.html.
-var CACHE_VERSION = 'v7';
+// v8: footer logo switched to the Mati white PNG (the old white SVG was the Solano mark).
+var CACHE_VERSION = 'v8';
 var STATIC_CACHE = 'bettermati-static-' + CACHE_VERSION;
 var RUNTIME_CACHE = 'bettermati-runtime-' + CACHE_VERSION;
 var OFFLINE_URL = '/offline.html';
@@ -19,7 +19,7 @@ var PRECACHE_URLS = [
   '/offline.html',
   '/manifest.webmanifest',
   '/assets/images/logo/better-mati-logo.png',
-  '/assets/images/logo/better-mati-logo-white.svg',
+  '/assets/images/logo/better-mati-logo-white.png',
   '/assets/images/logo/favicon.svg',
   '/assets/images/logo/favicon.ico',
 ];
