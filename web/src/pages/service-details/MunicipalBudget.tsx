@@ -150,7 +150,7 @@ export default function MunicipalBudget() {
       <Section compact>
         <Container>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:grid-cols-4">
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <Building2 className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('mbudget-office')}
@@ -159,7 +159,7 @@ export default function MunicipalBudget() {
                 {t('mbudget-mun-budget')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <MapPin className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('mbudget-location')}
@@ -168,7 +168,7 @@ export default function MunicipalBudget() {
                 {t('mbudget-municipal-hall')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <Clock className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('mbudget-hours')}
@@ -177,7 +177,7 @@ export default function MunicipalBudget() {
                 {t('mbudget-8am-5pm')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <CalendarCheck className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('mbudget-days')}
@@ -210,7 +210,7 @@ export default function MunicipalBudget() {
                 className={`rounded-md border px-4 py-2 text-xs font-semibold transition-colors ${
                   activeTab === tab.id
                     ? 'border-primary bg-primary text-primary-foreground'
-                    : 'border-border bg-card text-foreground hover:border-primary'
+                    : 'border-border bg-card text-foreground hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)]'
                 }`}
               >
                 {tab.label}
@@ -239,35 +239,50 @@ export default function MunicipalBudget() {
                     t('mbudget-submit-obligation-request'),
                     t('mbudget-obligation-request'),
                     <TimeBadge>{t('mbudget-3-minutes')}</TimeBadge>,
-                    <Person name="mbudget-darby-gold-abalos" role="mbudget-administrative-officer-ii" />,
+                    <Person
+                      name="mbudget-darby-gold-abalos"
+                      role="mbudget-administrative-officer-ii"
+                    />,
                   ],
                   [
                     <StepNum n={2} />,
                     t('mbudget-checkingvalidating-of-the-availability-of'),
                     '—',
                     <TimeBadge>{t('mbudget-3-minutes')}</TimeBadge>,
-                    <Person name="mbudget-melisa-claire-leal" role="mbudget-administrative-officer-v" />,
+                    <Person
+                      name="mbudget-melisa-claire-leal"
+                      role="mbudget-administrative-officer-v"
+                    />,
                   ],
                   [
                     <StepNum n={3} />,
                     t('mbudget-assign-account-code'),
                     t('mbudget-checkedvalidated-obligation-request-obr'),
                     <TimeBadge>{t('mbudget-2-minutes')}</TimeBadge>,
-                    <Person name="mbudget-darby-gold-abalos" role="mbudget-administrative-officer-ii" />,
+                    <Person
+                      name="mbudget-darby-gold-abalos"
+                      role="mbudget-administrative-officer-ii"
+                    />,
                   ],
                   [
                     <StepNum n={4} />,
                     t('mbudget-certification-by-the-mbo-of-the-availability-of'),
                     t('mbudget-obr-with-assigned-account-code'),
                     <TimeBadge>{t('mbudget-2-minutes')}</TimeBadge>,
-                    <Person name="mbudget-marcial-l-ramos-cpa" role="mbudget-municipal-budget-officer" />,
+                    <Person
+                      name="mbudget-marcial-l-ramos-cpa"
+                      role="mbudget-municipal-budget-officer"
+                    />,
                   ],
                   [
                     <StepNum n={5} />,
                     t('mbudget-assign-obr-number'),
                     t('mbudget-obr-duly-signed-by-the-municipal-budget-officer'),
                     <TimeBadge>{t('mbudget-3-minutes')}</TimeBadge>,
-                    <Person name="mbudget-darby-gold-abalos" role="mbudget-administrative-officer-ii" />,
+                    <Person
+                      name="mbudget-darby-gold-abalos"
+                      role="mbudget-administrative-officer-ii"
+                    />,
                   ],
                   [
                     <StepNum n={6} />,
@@ -285,14 +300,17 @@ export default function MunicipalBudget() {
                   ],
                 ]}
               />
-              <div className="mt-3.5 rounded-lg border border-border bg-card p-3.5">
+              <div className="mt-3.5 rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5">
                 <h3 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
                   <History className="size-4 text-primary" aria-hidden="true" />
                   {t('mbudget-total-processing-time')}
                 </h3>
                 <ul className="m-0 list-none p-0">
                   <li className="flex items-start gap-1.5 py-1 text-xs text-muted-foreground">
-                    <CircleCheck className="mt-0.5 size-2.5 shrink-0 text-primary" aria-hidden="true" />
+                    <CircleCheck
+                      className="mt-0.5 size-2.5 shrink-0 text-primary"
+                      aria-hidden="true"
+                    />
                     <span>{t('mbudget-approximately-15-minutes-for-complete-processing')}</span>
                   </li>
                   <li className="flex items-start gap-1.5 py-1 text-xs text-muted-foreground">
@@ -311,14 +329,17 @@ export default function MunicipalBudget() {
               title="mbudget-preparation-review-and-endorsement-of-barangay"
               desc="mbudget-the-municipal-budget-office-assists-barangays-in"
             >
-              <div className="mb-3.5 rounded-lg border border-border bg-card p-3.5">
+              <div className="mb-3.5 rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5">
                 <h3 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
                   <Info className="size-4 text-primary" aria-hidden="true" />
                   {t('mbudget-important-note')}
                 </h3>
                 <ul className="m-0 list-none p-0">
                   <li className="flex items-start gap-1.5 py-1 text-xs text-muted-foreground">
-                    <TriangleAlert className="mt-0.5 size-2.5 shrink-0 text-primary" aria-hidden="true" />
+                    <TriangleAlert
+                      className="mt-0.5 size-2.5 shrink-0 text-primary"
+                      aria-hidden="true"
+                    />
                     <span>{t('mbudget-within-ten-days-10-from-the-approval-of-the')}</span>
                   </li>
                 </ul>
@@ -337,32 +358,55 @@ export default function MunicipalBudget() {
                     t('mbudget-submit-barangay-budget-for-review-and-evaluation'),
                     <ul className="m-0 list-none p-0">
                       <li className="flex items-start gap-1.5 py-0.5 text-[0.6875rem]">
-                        <FileText className="mt-0.5 size-2.5 shrink-0 text-primary" aria-hidden="true" />
+                        <FileText
+                          className="mt-0.5 size-2.5 shrink-0 text-primary"
+                          aria-hidden="true"
+                        />
                         <span>{t('mbudget-annual-barangay-budget')}</span>
                       </li>
                       <li className="flex items-start gap-1.5 py-0.5 text-[0.6875rem]">
-                        <FileText className="mt-0.5 size-2.5 shrink-0 text-primary" aria-hidden="true" />
+                        <FileText
+                          className="mt-0.5 size-2.5 shrink-0 text-primary"
+                          aria-hidden="true"
+                        />
                         <span>{t('mbudget-transmittal-letter-of-the-barangay-secretary')}</span>
                       </li>
                       <li className="flex items-start gap-1.5 py-0.5 text-[0.6875rem]">
-                        <FileText className="mt-0.5 size-2.5 shrink-0 text-primary" aria-hidden="true" />
+                        <FileText
+                          className="mt-0.5 size-2.5 shrink-0 text-primary"
+                          aria-hidden="true"
+                        />
                         <span>{t('mbudget-budget-message-of-the-punong-barangay')}</span>
                       </li>
                       <li className="flex items-start gap-1.5 py-0.5 text-[0.6875rem]">
-                        <FileText className="mt-0.5 size-2.5 shrink-0 text-primary" aria-hidden="true" />
-                        <span>{t('mbudget-the-authorized-expenditure-program-for-the-budget')}</span>
+                        <FileText
+                          className="mt-0.5 size-2.5 shrink-0 text-primary"
+                          aria-hidden="true"
+                        />
+                        <span>
+                          {t('mbudget-the-authorized-expenditure-program-for-the-budget')}
+                        </span>
                       </li>
                       <li className="flex items-start gap-1.5 py-0.5 text-[0.6875rem]">
-                        <FileText className="mt-0.5 size-2.5 shrink-0 text-primary" aria-hidden="true" />
+                        <FileText
+                          className="mt-0.5 size-2.5 shrink-0 text-primary"
+                          aria-hidden="true"
+                        />
                         <span>{t('mbudget-budget-of-expenditures-and-sources-of-financing')}</span>
                       </li>
                       <li className="flex items-start gap-1.5 py-0.5 text-[0.6875rem]">
-                        <FileText className="mt-0.5 size-2.5 shrink-0 text-primary" aria-hidden="true" />
+                        <FileText
+                          className="mt-0.5 size-2.5 shrink-0 text-primary"
+                          aria-hidden="true"
+                        />
                         <span>{t('mbudget-barangay-development-plan-and-barangay-annual')}</span>
                       </li>
                     </ul>,
                     <TimeBadge>{t('mbudget-3-minutes')}</TimeBadge>,
-                    <Person name="mbudget-marcial-l-ramos-cpa" role="mbudget-municipal-budget-officer" />,
+                    <Person
+                      name="mbudget-marcial-l-ramos-cpa"
+                      role="mbudget-municipal-budget-officer"
+                    />,
                   ],
                   [
                     <StepNum n={2} />,
@@ -408,19 +452,31 @@ export default function MunicipalBudget() {
                     t('mbudget-submit-sef-budget-for-review-and-evaluation'),
                     <ul className="m-0 list-none p-0">
                       <li className="flex items-start gap-1.5 py-0.5 text-[0.6875rem]">
-                        <FileText className="mt-0.5 size-2.5 shrink-0 text-primary" aria-hidden="true" />
+                        <FileText
+                          className="mt-0.5 size-2.5 shrink-0 text-primary"
+                          aria-hidden="true"
+                        />
                         <span>{t('mbudget-annual-sef-budget')}</span>
                       </li>
                       <li className="flex items-start gap-1.5 py-0.5 text-[0.6875rem]">
-                        <FileText className="mt-0.5 size-2.5 shrink-0 text-primary" aria-hidden="true" />
+                        <FileText
+                          className="mt-0.5 size-2.5 shrink-0 text-primary"
+                          aria-hidden="true"
+                        />
                         <span>{t('mbudget-transmittal-letter-of-the-sef-secretary')}</span>
                       </li>
                       <li className="flex items-start gap-1.5 py-0.5 text-[0.6875rem]">
-                        <FileText className="mt-0.5 size-2.5 shrink-0 text-primary" aria-hidden="true" />
+                        <FileText
+                          className="mt-0.5 size-2.5 shrink-0 text-primary"
+                          aria-hidden="true"
+                        />
                         <span>{t('mbudget-income-and-expenditure-estimates')}</span>
                       </li>
                       <li className="flex items-start gap-1.5 py-0.5 text-[0.6875rem]">
-                        <FileText className="mt-0.5 size-2.5 shrink-0 text-primary" aria-hidden="true" />
+                        <FileText
+                          className="mt-0.5 size-2.5 shrink-0 text-primary"
+                          aria-hidden="true"
+                        />
                         <span>{t('mbudget-local-school-board-ordinance')}</span>
                       </li>
                     </ul>,
@@ -476,7 +532,7 @@ export default function MunicipalBudget() {
             </p>
           </div>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="rounded-lg border border-border bg-card p-3">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3">
               <h3 className="mb-0.5 text-[0.75rem] font-semibold text-foreground">
                 {t('mbudget-marcial-l-ramos-cpa')}
               </h3>
@@ -484,7 +540,7 @@ export default function MunicipalBudget() {
                 {t('mbudget-municipal-budget-officer')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3">
               <h3 className="mb-0.5 text-[0.75rem] font-semibold text-foreground">
                 {t('mbudget-melisa-claire-leal')}
               </h3>
@@ -492,7 +548,7 @@ export default function MunicipalBudget() {
                 {t('mbudget-administrative-officer-v')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3">
               <h3 className="mb-0.5 text-[0.75rem] font-semibold text-foreground">
                 {t('mbudget-darby-gold-abalos')}
               </h3>
@@ -508,7 +564,7 @@ export default function MunicipalBudget() {
       <Section compact altBg>
         <Container>
           <div className="grid grid-cols-1 gap-3.5 md:grid-cols-2">
-            <div className="rounded-lg border border-border bg-card p-3.5">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5">
               <h3 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
                 <Building2 className="size-4 text-primary" aria-hidden="true" />
                 {t('mbudget-office-information')}
@@ -530,26 +586,38 @@ export default function MunicipalBudget() {
                 </li>
               </ul>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3.5">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5">
               <h3 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
                 <Info className="size-4 text-primary" aria-hidden="true" />
                 {t('mbudget-important-notes')}
               </h3>
               <ul className="m-0 list-none p-0">
                 <li className="flex items-start gap-1.5 py-1 text-xs text-muted-foreground">
-                  <CircleCheck className="mt-0.5 size-2.5 shrink-0 text-primary" aria-hidden="true" />
+                  <CircleCheck
+                    className="mt-0.5 size-2.5 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />
                   <span>{t('mbudget-ensure-all-documents-are-complete-before')}</span>
                 </li>
                 <li className="flex items-start gap-1.5 py-1 text-xs text-muted-foreground">
-                  <CircleCheck className="mt-0.5 size-2.5 shrink-0 text-primary" aria-hidden="true" />
+                  <CircleCheck
+                    className="mt-0.5 size-2.5 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />
                   <span>{t('mbudget-barangay-budgets-must-be-submitted-within-10-days')}</span>
                 </li>
                 <li className="flex items-start gap-1.5 py-1 text-xs text-muted-foreground">
-                  <CircleCheck className="mt-0.5 size-2.5 shrink-0 text-primary" aria-hidden="true" />
+                  <CircleCheck
+                    className="mt-0.5 size-2.5 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />
                   <span>{t('mbudget-sef-budgets-require-municipal-school-board')}</span>
                 </li>
                 <li className="flex items-start gap-1.5 py-1 text-xs text-muted-foreground">
-                  <CircleCheck className="mt-0.5 size-2.5 shrink-0 text-primary" aria-hidden="true" />
+                  <CircleCheck
+                    className="mt-0.5 size-2.5 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />
                   <span>{t('mbudget-processing-times-may-vary-based-on-workload')}</span>
                 </li>
               </ul>

@@ -1,14 +1,6 @@
 import { useState } from 'react';
 import type { LucideIcon } from 'lucide-react';
-import {
-  Bike,
-  FileText,
-  Building2,
-  Clock,
-  ListOrdered,
-  FolderOpen,
-  MapPin,
-} from 'lucide-react';
+import { Bike, FileText, Building2, Clock, ListOrdered, FolderOpen, MapPin } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -142,7 +134,10 @@ function StepGrid({ steps, t }: { steps: typeof franchiseSteps; t: (k: string) =
   return (
     <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
       {steps.map((step) => (
-        <div key={step.num} className="rounded-lg border border-border bg-card p-3.5">
+        <div
+          key={step.num}
+          className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5"
+        >
           <div
             className={`mb-2 inline-flex size-[26px] items-center justify-center rounded-[5px] text-[0.6875rem] font-bold text-primary-foreground ${
               step.final ? 'bg-brand-success' : 'bg-primary'
@@ -208,7 +203,10 @@ export default function TricycleFranchising() {
         <Container>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:grid-cols-4">
             {quickStats.map((s) => (
-              <div key={s.label} className="rounded-lg border border-border bg-card p-3 text-center">
+              <div
+                key={s.label}
+                className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center"
+              >
                 <s.Icon className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
                 <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                   {t(s.label)}
@@ -247,7 +245,7 @@ export default function TricycleFranchising() {
               className={`inline-flex items-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-semibold transition ${
                 tab === 'franchise'
                   ? 'border-primary bg-primary text-primary-foreground'
-                  : 'border-border bg-card text-foreground hover:border-primary'
+                  : 'border-border bg-card text-foreground hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)]'
               }`}
             >
               <Bike className="size-4" aria-hidden="true" />
@@ -262,7 +260,7 @@ export default function TricycleFranchising() {
               className={`inline-flex items-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-semibold transition ${
                 tab === 'records'
                   ? 'border-primary bg-primary text-primary-foreground'
-                  : 'border-border bg-card text-foreground hover:border-primary'
+                  : 'border-border bg-card text-foreground hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)]'
               }`}
             >
               <FolderOpen className="size-4" aria-hidden="true" />
@@ -283,7 +281,7 @@ export default function TricycleFranchising() {
       <Section compact>
         <Container>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div className="rounded-lg border border-border bg-card p-6">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-6">
               <h3 className="mb-4 flex items-center gap-2 text-base font-semibold text-foreground">
                 <Building2 className="size-4 text-primary" aria-hidden="true" />
                 {t('tricycle-bpls-office')}
@@ -302,7 +300,7 @@ export default function TricycleFranchising() {
                 </li>
               </ul>
             </div>
-            <div className="rounded-lg border border-border bg-card p-6">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-6">
               <h3 className="mb-4 flex items-center gap-2 text-base font-semibold text-foreground">
                 <FolderOpen className="size-4 text-primary" aria-hidden="true" />
                 {t('tricycle-records-section')}

@@ -32,9 +32,27 @@ import { useLanguage } from '@/hooks/useLanguage';
 
 /* ── Business & Trade ─────────────────────────────────────────────────────── */
 const businessServices: CategoryService[] = [
-  { Icon: Store, titleKey: 'biz-permit-new', descKey: 'biz-permit-new-desc', fee: 'Varies', time: '3-5 days' },
-  { Icon: RefreshCw, titleKey: 'biz-permit-renew', descKey: 'biz-permit-renew-desc', fee: 'Varies', time: 'Same day' },
-  { Icon: ClipboardCheck, titleKey: 'biz-closure', descKey: 'biz-closure-desc', fee: 'Free', time: '1-2 days' },
+  {
+    Icon: Store,
+    titleKey: 'biz-permit-new',
+    descKey: 'biz-permit-new-desc',
+    fee: 'Varies',
+    time: '3-5 days',
+  },
+  {
+    Icon: RefreshCw,
+    titleKey: 'biz-permit-renew',
+    descKey: 'biz-permit-renew-desc',
+    fee: 'Varies',
+    time: 'Same day',
+  },
+  {
+    Icon: ClipboardCheck,
+    titleKey: 'biz-closure',
+    descKey: 'biz-closure-desc',
+    fee: 'Free',
+    time: '1-2 days',
+  },
   { Icon: Coins, titleKey: 'biz-cedula', descKey: 'biz-cedula-desc', fee: '₱5+', time: 'Same day' },
 ];
 
@@ -63,10 +81,30 @@ const businessOnline: OnlineService[] = [
 ];
 
 const businessOffices: CategoryOffice[] = [
-  { Icon: Building2, titleKey: 'biz-business-permits-licensing', descKey: 'biz-new-permits-renewals-mayors-clearance-and-other', to: '/service-details/business-permits-licensing' },
-  { Icon: Bike, titleKey: 'biz-tricycle-franchising-records', descKey: 'biz-apply-for-tricycle-franchise-mtof-and-request', to: '/service-details/tricycle-franchising' },
-  { Icon: Store, titleKey: 'biz-seedo-public-market', descKey: 'biz-market-clearance-entrance-fees-vendor-services', to: '/service-details/seedo-public-market' },
-  { Icon: Package, titleKey: 'biz-seedo-slaughterhouse', descKey: 'biz-hog-cattle-goat-and-carabao-slaughter-with-meat', to: '/service-details/seedo-slaughterhouse' },
+  {
+    Icon: Building2,
+    titleKey: 'biz-business-permits-licensing',
+    descKey: 'biz-new-permits-renewals-mayors-clearance-and-other',
+    to: '/service-details/business-permits-licensing',
+  },
+  {
+    Icon: Bike,
+    titleKey: 'biz-tricycle-franchising-records',
+    descKey: 'biz-apply-for-tricycle-franchise-mtof-and-request',
+    to: '/service-details/tricycle-franchising',
+  },
+  {
+    Icon: Store,
+    titleKey: 'biz-seedo-public-market',
+    descKey: 'biz-market-clearance-entrance-fees-vendor-services',
+    to: '/service-details/seedo-public-market',
+  },
+  {
+    Icon: Package,
+    titleKey: 'biz-seedo-slaughterhouse',
+    descKey: 'biz-hog-cattle-goat-and-carabao-slaughter-with-meat',
+    to: '/service-details/seedo-slaughterhouse',
+  },
 ];
 
 export function ServicesBusiness() {
@@ -95,8 +133,20 @@ export function ServicesBusiness() {
 
 /* ── Taxation & Payments ──────────────────────────────────────────────────── */
 const taxServices: CategoryService[] = [
-  { Icon: House, titleKey: 'tax-real-property', descKey: 'tax-real-property-desc', fee: 'Based on value', time: 'Same day' },
-  { Icon: Store, titleKey: 'tax-business', descKey: 'tax-business-desc', fee: 'Varies', time: 'Same day' },
+  {
+    Icon: House,
+    titleKey: 'tax-real-property',
+    descKey: 'tax-real-property-desc',
+    fee: 'Based on value',
+    time: 'Same day',
+  },
+  {
+    Icon: Store,
+    titleKey: 'tax-business',
+    descKey: 'tax-business-desc',
+    fee: 'Varies',
+    time: 'Same day',
+  },
 ];
 
 const taxOnline: OnlineService[] = [
@@ -117,10 +167,30 @@ const taxOnline: OnlineService[] = [
 ];
 
 const taxOffices: CategoryOffice[] = [
-  { Icon: Coins, titleKey: 'tax-municipal-treasurers-office', descKey: 'tax-tax-collection-cedula-clearances-and-payment', to: '/service-details/municipal-treasurer' },
-  { Icon: FileText, titleKey: 'tax-municipal-assessors-office', descKey: 'tax-property-declaration-tax-assessment-and-land', to: '/service-details/municipal-assessor' },
-  { Icon: Wallet, titleKey: 'tax-municipal-budget-office', descKey: 'tax-obligation-requests-barangay-budget-review-and', to: '/service-details/municipal-budget' },
-  { Icon: Calculator, titleKey: 'tax-municipal-accounting-office', descKey: 'tax-preaudit-of-disbursements-payroll-check-issuance', to: '/service-details/municipal-accounting' },
+  {
+    Icon: Coins,
+    titleKey: 'tax-municipal-treasurers-office',
+    descKey: 'tax-tax-collection-cedula-clearances-and-payment',
+    to: '/service-details/municipal-treasurer',
+  },
+  {
+    Icon: FileText,
+    titleKey: 'tax-municipal-assessors-office',
+    descKey: 'tax-property-declaration-tax-assessment-and-land',
+    to: '/service-details/municipal-assessor',
+  },
+  {
+    Icon: Wallet,
+    titleKey: 'tax-municipal-budget-office',
+    descKey: 'tax-obligation-requests-barangay-budget-review-and',
+    to: '/service-details/municipal-budget',
+  },
+  {
+    Icon: Calculator,
+    titleKey: 'tax-municipal-accounting-office',
+    descKey: 'tax-preaudit-of-disbursements-payroll-check-issuance',
+    to: '/service-details/municipal-accounting',
+  },
 ];
 
 export function ServicesTaxPayments() {
@@ -149,39 +219,77 @@ export function ServicesTaxPayments() {
 
 /* ── Education & Scholarship ──────────────────────────────────────────────── */
 const educationServices: CategoryService[] = [
-  { Icon: Award, titleKey: 'edu-scholarship', descKey: 'edu-scholarship-desc', fee: 'Free', time: 'Annual application' },
-  { Icon: BookOpen, titleKey: 'edu-training', descKey: 'edu-training-desc', fee: 'Free', time: 'Per semester' },
+  {
+    Icon: Award,
+    titleKey: 'edu-scholarship',
+    descKey: 'edu-scholarship-desc',
+    fee: 'Free',
+    time: 'Annual application',
+  },
+  {
+    Icon: BookOpen,
+    titleKey: 'edu-training',
+    descKey: 'edu-training-desc',
+    fee: 'Free',
+    time: 'Per semester',
+  },
 ];
 
 const elementary = [
-  'edu-aggub-elementary-school', 'edu-aldersgate-college-elementary-department',
-  'edu-bagahabag-elementary-school', 'edu-bangaan-elementary-school',
-  'edu-bangar-elementary-school', 'edu-bascaran-central-school',
-  'edu-calaoagan-elementary-school', 'edu-concepcion-elementary-school',
-  'edu-curifang-elementary-school', 'edu-dadap-elementary-school',
-  'edu-isaiah-christian-academy-of-mati-inc', 'edu-kids-workshop-learning-center',
-  'edu-lactawan-elementary-school', 'edu-pilar-d-galima-elementary-school',
-  'edu-saint-louis-school-elementary-department', 'edu-san-juan-elementary-school',
-  'edu-san-luis-elementary-school', 'edu-mati-east-central-school',
-  'edu-mati-north-elementary-school', 'edu-mati-south-central-school',
-  'edu-mati-west-elementary-school', 'edu-tucal-elementary-school',
-  'edu-uddiawan-elementary-school', 'edu-wacal-elementary-school',
+  'edu-aggub-elementary-school',
+  'edu-aldersgate-college-elementary-department',
+  'edu-bagahabag-elementary-school',
+  'edu-bangaan-elementary-school',
+  'edu-bangar-elementary-school',
+  'edu-bascaran-central-school',
+  'edu-calaoagan-elementary-school',
+  'edu-concepcion-elementary-school',
+  'edu-curifang-elementary-school',
+  'edu-dadap-elementary-school',
+  'edu-isaiah-christian-academy-of-mati-inc',
+  'edu-kids-workshop-learning-center',
+  'edu-lactawan-elementary-school',
+  'edu-pilar-d-galima-elementary-school',
+  'edu-saint-louis-school-elementary-department',
+  'edu-san-juan-elementary-school',
+  'edu-san-luis-elementary-school',
+  'edu-mati-east-central-school',
+  'edu-mati-north-elementary-school',
+  'edu-mati-south-central-school',
+  'edu-mati-west-elementary-school',
+  'edu-tucal-elementary-school',
+  'edu-uddiawan-elementary-school',
+  'edu-wacal-elementary-school',
 ];
 
 const secondary = [
-  'edu-aldersgate-college-high-school-department', 'edu-bascaran-national-high-school',
-  'edu-dalton-high-school', 'edu-mati-high-school',
-  'edu-saint-louis-school-high-school-department', 'edu-uddiawan-national-high-school',
+  'edu-aldersgate-college-high-school-department',
+  'edu-bascaran-national-high-school',
+  'edu-dalton-high-school',
+  'edu-mati-high-school',
+  'edu-saint-louis-school-high-school-department',
+  'edu-uddiawan-national-high-school',
 ];
 
 const higher = [
-  'edu-aldersgate-college', 'edu-cagayan-valley-maritime-studies',
-  'edu-fuzeko-polytechnic-college', 'edu-mati-institute-of-technology',
-  'edu-nueva-vizcaya-caregiver-academy', 'edu-nio-jesus-de-praga-learning',
+  'edu-aldersgate-college',
+  'edu-cagayan-valley-maritime-studies',
+  'edu-fuzeko-polytechnic-college',
+  'edu-mati-institute-of-technology',
+  'edu-nueva-vizcaya-caregiver-academy',
+  'edu-nio-jesus-de-praga-learning',
   'edu-saint-louis-college-of-mati-inc',
 ];
 
-function SchoolList({ titleKey, icon: Icon, items }: { titleKey: string; icon: typeof School; items: string[] }) {
+function SchoolList({
+  titleKey,
+  icon: Icon,
+  items,
+}: {
+  titleKey: string;
+  icon: typeof School;
+  items: string[];
+}) {
   const { t } = useLanguage();
   return (
     <div className="mb-8">
@@ -223,14 +331,18 @@ function EducationExtras() {
         <Container>
           <SchoolList titleKey="edu-primary-elementary" icon={School} items={elementary} />
           <SchoolList titleKey="edu-secondary-schools" icon={GraduationCap} items={secondary} />
-          <SchoolList titleKey="edu-higher-educational-institutions" icon={Landmark} items={higher} />
+          <SchoolList
+            titleKey="edu-higher-educational-institutions"
+            icon={Landmark}
+            items={higher}
+          />
         </Container>
       </Section>
 
       {/* Abakada CTA */}
       <Section compact altBg>
         <Container>
-          <div className="flex flex-col items-center gap-4 rounded-xl border border-border bg-card p-8 text-center">
+          <div className="flex flex-col items-center gap-4 rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-8 text-center">
             <img
               src="/assets/images/logo/abakada-light.svg"
               alt="Abakada.org"

@@ -48,7 +48,12 @@ export default function GovernmentOfficials() {
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
         <section className="bg-[#123c7a] py-12 lg:py-16">
           <Container>
-            <m.div variants={staggerContainer} initial="hidden" animate="show" className="max-w-2xl">
+            <m.div
+              variants={staggerContainer}
+              initial="hidden"
+              animate="show"
+              className="max-w-2xl"
+            >
               <m.span
                 variants={fadeUp}
                 className="inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-[0.08em] text-[#9dc0ff]"

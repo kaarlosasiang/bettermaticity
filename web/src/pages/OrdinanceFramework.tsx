@@ -28,10 +28,17 @@ export default function OrdinanceFramework() {
       />
 
       <Container>
-        <nav className="flex items-center gap-2 py-4 text-sm text-muted-foreground" aria-label="Breadcrumb">
-          <AppLink to="/" className="hover:text-primary">{t('nav-home')}</AppLink>
+        <nav
+          className="flex items-center gap-2 py-4 text-sm text-muted-foreground"
+          aria-label="Breadcrumb"
+        >
+          <AppLink to="/" className="hover:text-primary">
+            {t('nav-home')}
+          </AppLink>
           <span>/</span>
-          <AppLink to="/legislative" className="hover:text-primary">{t('nav-legislative')}</AppLink>
+          <AppLink to="/legislative" className="hover:text-primary">
+            {t('nav-legislative')}
+          </AppLink>
           <span>/</span>
           <span aria-current="page">{t('ord-page-title')}</span>
         </nav>
@@ -51,7 +58,7 @@ export default function OrdinanceFramework() {
       {/* What is an Ordinance? */}
       <Section compact>
         <Container>
-          <div className="rounded-xl border border-border bg-card p-6">
+          <div className="rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-6">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold text-foreground">
               <Info className="size-5 text-primary" aria-hidden="true" />
               {t('ord-what-is')}
@@ -68,7 +75,10 @@ export default function OrdinanceFramework() {
           <SectionTitle>{t('ord-categories-title')}</SectionTitle>
           <div className="flex flex-wrap gap-2">
             {ordinanceCategories.map((k) => (
-              <span key={k} className="rounded-full border border-border bg-card px-3 py-1.5 text-sm font-medium text-foreground">
+              <span
+                key={k}
+                className="rounded-full bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] px-3 py-1.5 text-sm font-medium text-foreground"
+              >
                 {t(k)}
               </span>
             ))}
@@ -79,29 +89,41 @@ export default function OrdinanceFramework() {
       <Section>
         <Container>
           <SectionTitle>{t('ord-2025-title')}</SectionTitle>
-          <p className="-mt-4 mb-5 text-[0.8125rem] text-muted-foreground">{t('ord-2025-subtitle')}</p>
+          <p className="-mt-3 mb-5 text-[0.8125rem] text-muted-foreground">
+            {t('ord-2025-subtitle')}
+          </p>
           <div className="overflow-x-auto rounded-lg border border-border">
             <table className="w-full border-collapse text-left text-sm">
               <thead>
                 <tr className="bg-muted text-foreground">
-                  <th scope="col" className="px-4 py-3 font-semibold">{t('ord-table-number')}</th>
-                  <th scope="col" className="px-4 py-3 font-semibold">{t('ord-table-title')}</th>
-                  <th scope="col" className="px-4 py-3 font-semibold whitespace-nowrap">{t('ord-table-date')}</th>
+                  <th scope="col" className="px-4 py-3 font-semibold">
+                    {t('ord-table-number')}
+                  </th>
+                  <th scope="col" className="px-4 py-3 font-semibold">
+                    {t('ord-table-title')}
+                  </th>
+                  <th scope="col" className="px-4 py-3 font-semibold whitespace-nowrap">
+                    {t('ord-table-date')}
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {ordinances.length === 0 ? (
                   <tr>
                     <td colSpan={3} className="px-4 py-8 text-center text-muted-foreground">
-                      No ordinances available yet.
+                      {t('ord-no-ordinances')}
                     </td>
                   </tr>
                 ) : (
                   ordinances.map((o, i) => (
                     <tr key={`${o.ordinanceNo}-${i}`} className="border-t border-border">
-                      <td className="px-4 py-3 font-medium whitespace-nowrap text-foreground">{o.ordinanceNo}</td>
+                      <td className="px-4 py-3 font-medium whitespace-nowrap text-foreground">
+                        {o.ordinanceNo}
+                      </td>
                       <td className="px-4 py-3 text-muted-foreground">{o.title}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-muted-foreground">{formatSessionDate(o.sessionDate)}</td>
+                      <td className="px-4 py-3 whitespace-nowrap text-muted-foreground">
+                        {formatSessionDate(o.sessionDate)}
+                      </td>
                     </tr>
                   ))
                 )}

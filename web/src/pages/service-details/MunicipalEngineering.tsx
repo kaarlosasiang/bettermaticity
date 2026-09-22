@@ -148,7 +148,7 @@ export default function MunicipalEngineering() {
   const text = (it: Item) => (typeof it === 'string' ? t(it) : it.lit);
 
   const ReqBox = ({ title, Icon, items }: { title: string; Icon: LucideIcon; items: Item[] }) => (
-    <div className="rounded-lg border border-border bg-card p-4">
+    <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
       <h3 className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold text-foreground">
         <Icon className="size-4 text-primary" aria-hidden="true" />
         {t(title)}
@@ -213,12 +213,17 @@ export default function MunicipalEngineering() {
         <Container>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:grid-cols-4">
             {quickStats.map((s) => (
-              <div key={s.label} className="rounded-lg border border-border bg-card p-3 text-center">
+              <div
+                key={s.label}
+                className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center"
+              >
                 <s.Icon className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
                 <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                   {t(s.label)}
                 </h3>
-                <p className="m-0 text-[0.8125rem] font-semibold text-foreground">{text(s.value)}</p>
+                <p className="m-0 text-[0.8125rem] font-semibold text-foreground">
+                  {text(s.value)}
+                </p>
               </div>
             ))}
           </div>
@@ -235,7 +240,10 @@ export default function MunicipalEngineering() {
           <SectionSubtitle>{t('eng-a-building-permit-is-required-prior-to')}</SectionSubtitle>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
             {steps.map((step) => (
-              <div key={step.num} className="rounded-lg border border-border bg-card p-3.5">
+              <div
+                key={step.num}
+                className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5"
+              >
                 <div
                   className={`mb-2 inline-flex size-[22px] items-center justify-center rounded-[5px] text-[0.625rem] font-bold text-primary-foreground ${
                     step.final ? 'bg-brand-success' : 'bg-primary'
@@ -270,7 +278,7 @@ export default function MunicipalEngineering() {
             {permits.map((p) => (
               <div
                 key={p.title}
-                className="flex items-center gap-2 rounded-lg border border-border bg-card p-3"
+                className="flex items-center gap-2 rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3"
               >
                 <p.Icon className="size-4 shrink-0 text-primary" aria-hidden="true" />
                 <h3 className="text-[0.8125rem] font-medium text-foreground">{t(p.title)}</h3>
@@ -287,7 +295,9 @@ export default function MunicipalEngineering() {
             <ClipboardCheck className="size-5 text-primary" aria-hidden="true" />
             {t('eng-documentary-requirements')}
           </SectionTitle>
-          <SectionSubtitle>{t('eng-complete-list-of-requirements-for-building-permit')}</SectionSubtitle>
+          <SectionSubtitle>
+            {t('eng-complete-list-of-requirements-for-building-permit')}
+          </SectionSubtitle>
           <div className="grid grid-cols-1 gap-3.5 md:grid-cols-2">
             <ReqBox title="eng-plans-documents-5-sets-each" Icon={FileText} items={plansReqs} />
             <ReqBox title="eng-supporting-documents" Icon={Folder} items={supportingReqs} />
@@ -305,7 +315,10 @@ export default function MunicipalEngineering() {
           <SectionSubtitle>{t('eng-key-personnel-handling-building-permit')}</SectionSubtitle>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             {staff.map((p) => (
-              <div key={p.name} className="rounded-lg border border-border bg-card p-4 text-center">
+              <div
+                key={p.name}
+                className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4 text-center"
+              >
                 <h3 className="text-sm font-semibold text-foreground">{t(p.name)}</h3>
                 <p className="m-0 text-xs text-muted-foreground">{t(p.role)}</p>
               </div>
@@ -318,7 +331,7 @@ export default function MunicipalEngineering() {
       <Section compact altBg>
         <Container>
           <div className="grid grid-cols-1 gap-3.5 md:grid-cols-2">
-            <div className="rounded-lg border border-border bg-card p-4">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
               <h3 className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold text-foreground">
                 <AlertTriangle className="size-4 text-primary" aria-hidden="true" />
                 {t('eng-important-notes')}
@@ -335,7 +348,7 @@ export default function MunicipalEngineering() {
                 ))}
               </ul>
             </div>
-            <div className="rounded-lg border border-border bg-card p-4">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
               <h3 className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold text-foreground">
                 <Building2 className="size-4 text-primary" aria-hidden="true" />
                 {t('eng-office-information')}

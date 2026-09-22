@@ -12,7 +12,7 @@ interface SectionProps extends ComponentProps<'section'> {
 export function Section({ className, compact, altBg, ...props }: SectionProps) {
   return (
     <section
-      className={cn(compact ? 'py-6' : 'py-12 md:py-16', altBg && 'bg-muted', className)}
+      className={cn(compact ? 'py-6' : 'py-12 md:py-16', altBg && 'bg-[#f1f6fc]', className)}
       {...props}
     />
   );

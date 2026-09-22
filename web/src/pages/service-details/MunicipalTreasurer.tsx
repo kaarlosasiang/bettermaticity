@@ -29,7 +29,13 @@ import {
 import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Container, Section, SectionTitle, SectionSubtitle, PageHeader } from '@/components/primitives';
+import {
+  Container,
+  Section,
+  SectionTitle,
+  SectionSubtitle,
+  PageHeader,
+} from '@/components/primitives';
 
 type TFn = (key: string) => string;
 
@@ -155,7 +161,7 @@ const paymentRows: {
 // Legacy .stat-card: white bordered card, centered; primary icon; uppercase label; value.
 function StatBox({ icon, label, value }: { icon: ReactNode; label: ReactNode; value: ReactNode }) {
   return (
-    <div className="rounded-lg border border-border bg-card p-3 text-center">
+    <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
       <div className="mb-1 flex justify-center text-primary">{icon}</div>
       <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
         {label}
@@ -168,7 +174,7 @@ function StatBox({ icon, label, value }: { icon: ReactNode; label: ReactNode; va
 // Legacy .info-box: white bordered card, rounded, 14px padding.
 function InfoBox({ heading, children }: { heading: ReactNode; children: ReactNode }) {
   return (
-    <div className="rounded-lg border border-border bg-card p-3.5">
+    <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5">
       <h3 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
         {heading}
       </h3>
@@ -206,7 +212,7 @@ function MetaPills({ t, entries }: { t: TFn; entries: MetaEntry[] }) {
 function ServiceItem({ t, data }: { t: TFn; data: ServiceCardData }) {
   const { Icon } = data;
   return (
-    <div className="rounded-lg border border-border bg-card p-3.5 transition hover:border-primary hover:shadow-[0_2px_10px_rgba(0,50,160,0.08)]">
+    <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5 transition hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)] hover:shadow-[0_2px_10px_rgba(0,50,160,0.08)]">
       <h3 className="mb-1.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
         <Icon className="size-4 text-primary" aria-hidden="true" />
         {t(data.title)}
@@ -317,8 +323,8 @@ export default function MunicipalTreasurer() {
                 January
               </ReqItem>
               <ReqItem icon={<Info className="size-3" aria-hidden="true" />}>
-                <strong className="font-semibold">{t('treas-penalty')}</strong> 2% per month for late
-                payment
+                <strong className="font-semibold">{t('treas-penalty')}</strong> 2% per month for
+                late payment
               </ReqItem>
               <ReqItem icon={<Info className="size-3" aria-hidden="true" />}>
                 <strong className="font-semibold">{t('treas-processing')}</strong> Same day
@@ -396,7 +402,9 @@ export default function MunicipalTreasurer() {
             <LayoutGrid className="size-5 text-primary" aria-hidden="true" />
             {t('treas-other-treasury-services')}
           </SectionTitle>
-          <SectionSubtitle>{t('treas-additional-services-offered-by-the-municipal')}</SectionSubtitle>
+          <SectionSubtitle>
+            {t('treas-additional-services-offered-by-the-municipal')}
+          </SectionSubtitle>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {otherServices.map((s) => (
               <ServiceItem key={s.title} t={t} data={s} />

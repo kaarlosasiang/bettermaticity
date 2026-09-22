@@ -15,7 +15,9 @@ interface ImageSlotProps {
 // so the LGU can see exactly where a Dahican / coastline / map image belongs.
 export function ImageSlot({ src, alt = '', label, className }: ImageSlotProps) {
   if (src) {
-    return <img src={src} alt={alt} className={cn('size-full object-cover', className)} loading="lazy" />;
+    return (
+      <img src={src} alt={alt} className={cn('size-full object-cover', className)} loading="lazy" />
+    );
   }
   return (
     <div
@@ -27,7 +29,9 @@ export function ImageSlot({ src, alt = '', label, className }: ImageSlotProps) {
       )}
     >
       <ImageIcon className="size-6 opacity-50" aria-hidden="true" />
-      {label ? <span className="max-w-[240px] text-xs leading-snug opacity-70">{label}</span> : null}
+      {label ? (
+        <span className="max-w-[240px] text-xs leading-snug opacity-70">{label}</span>
+      ) : null}
     </div>
   );
 }

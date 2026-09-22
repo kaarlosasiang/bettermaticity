@@ -37,16 +37,46 @@ const lifeEvents: { Icon: LucideIcon; key: string; to: string }[] = [
 ];
 
 const categories: { Icon: LucideIcon; key: string; descKey: string; to: string }[] = [
-  { Icon: FileText, key: 'cat-certificates', descKey: 'cat-certificates-desc', to: '/services/certificates' },
+  {
+    Icon: FileText,
+    key: 'cat-certificates',
+    descKey: 'cat-certificates-desc',
+    to: '/services/certificates',
+  },
   { Icon: Store, key: 'cat-business', descKey: 'cat-business-desc', to: '/services/business' },
   { Icon: Users, key: 'cat-social', descKey: 'cat-social-desc', to: '/services/social-services' },
   { Icon: HeartPulse, key: 'cat-health', descKey: 'cat-health-desc', to: '/services/health' },
   { Icon: Coins, key: 'cat-tax', descKey: 'cat-tax-desc', to: '/services/tax-payments' },
-  { Icon: Trees, key: 'cat-agriculture', descKey: 'cat-agriculture-desc', to: '/services/agriculture' },
-  { Icon: Building2, key: 'cat-infrastructure', descKey: 'cat-infrastructure-desc', to: '/services/infrastructure' },
-  { Icon: GraduationCap, key: 'cat-education', descKey: 'cat-education-desc', to: '/services/education' },
-  { Icon: ShieldCheck, key: 'cat-safety', descKey: 'cat-safety-desc', to: '/services/public-safety' },
-  { Icon: Globe, key: 'cat-environment', descKey: 'cat-environment-desc', to: '/services/environment' },
+  {
+    Icon: Trees,
+    key: 'cat-agriculture',
+    descKey: 'cat-agriculture-desc',
+    to: '/services/agriculture',
+  },
+  {
+    Icon: Building2,
+    key: 'cat-infrastructure',
+    descKey: 'cat-infrastructure-desc',
+    to: '/services/infrastructure',
+  },
+  {
+    Icon: GraduationCap,
+    key: 'cat-education',
+    descKey: 'cat-education-desc',
+    to: '/services/education',
+  },
+  {
+    Icon: ShieldCheck,
+    key: 'cat-safety',
+    descKey: 'cat-safety-desc',
+    to: '/services/public-safety',
+  },
+  {
+    Icon: Globe,
+    key: 'cat-environment',
+    descKey: 'cat-environment-desc',
+    to: '/services/environment',
+  },
 ];
 
 export default function Services() {
@@ -61,7 +91,10 @@ export default function Services() {
       />
 
       <Container>
-        <nav className="flex items-center gap-2 py-4 text-sm text-muted-foreground" aria-label="Breadcrumb">
+        <nav
+          className="flex items-center gap-2 py-4 text-sm text-muted-foreground"
+          aria-label="Breadcrumb"
+        >
           <AppLink to="/" className="hover:text-primary">
             {t('nav-home')}
           </AppLink>
@@ -92,7 +125,7 @@ export default function Services() {
               <AppLink
                 key={to}
                 to={to}
-                className="group flex flex-col rounded-[10px] border border-border bg-card p-6 no-underline transition hover:-translate-y-0.5 hover:border-primary hover:shadow-md"
+                className="group flex flex-col rounded-[10px] bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-6 no-underline transition hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)]"
               >
                 <div className="mb-4 flex size-12 items-center justify-center rounded-lg bg-[linear-gradient(135deg,var(--primary)_0%,var(--brand-secondary)_100%)] text-white">
                   <Icon className="size-6" aria-hidden="true" />
@@ -101,7 +134,10 @@ export default function Services() {
                 <p className="mb-4 flex-1 text-sm text-muted-foreground">{t(descKey)}</p>
                 <span className="inline-flex items-center gap-1.5 text-sm font-medium text-primary">
                   {t('svc-view-services')}
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                  <ArrowRight
+                    className="size-4 transition-transform group-hover:translate-x-1"
+                    aria-hidden="true"
+                  />
                 </span>
               </AppLink>
             ))}
@@ -113,19 +149,24 @@ export default function Services() {
       <Section compact altBg>
         <Container>
           <SectionTitle>{t('life-events-title')}</SectionTitle>
-          <p className="-mt-4 mb-5 text-[0.8125rem] text-muted-foreground">{t('life-events-subtitle')}</p>
+          <p className="-mt-4 mb-5 text-[0.8125rem] text-muted-foreground">
+            {t('life-events-subtitle')}
+          </p>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {lifeEvents.map(({ Icon, key, to }) => (
               <AppLink
                 key={key}
                 to={to}
-                className="group flex items-center gap-3 rounded-xl border border-border bg-card p-4 no-underline transition hover:-translate-y-0.5 hover:border-primary hover:shadow-sm"
+                className="group flex items-center gap-3 rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4 no-underline transition hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)]"
               >
                 <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
                   <Icon className="size-5" aria-hidden="true" />
                 </span>
                 <span className="text-sm font-medium text-foreground">{t(key)}</span>
-                <ArrowRight className="ml-auto size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" aria-hidden="true" />
+                <ArrowRight
+                  className="ml-auto size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary"
+                  aria-hidden="true"
+                />
               </AppLink>
             ))}
           </div>

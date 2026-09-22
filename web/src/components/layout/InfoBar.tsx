@@ -2,10 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { ArrowLeftRight, Thermometer, Calendar, Clock } from 'lucide-react';
 import { Container } from '@/components/primitives';
 
-const MONTHS = [
-  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
-];
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 // Legacy .info-bar: navy #00184d strip, tiny text, right-aligned, yellow icons.
 // Live USD->PHP (open.er-api.com), Mati weather (open-meteo), PHT clock.
@@ -69,11 +66,17 @@ export default function InfoBar() {
             <ArrowLeftRight className="size-3 text-[#ff0]" aria-hidden="true" />
             {rate}
           </span>
-          <span className="inline-flex shrink-0 items-center gap-1.5" aria-label="Current weather in Mati">
+          <span
+            className="inline-flex shrink-0 items-center gap-1.5"
+            aria-label="Current weather in Mati"
+          >
             <Thermometer className="size-3 text-[#ff0]" aria-hidden="true" />
             Mati {temp}
           </span>
-          <span className="inline-flex shrink-0 items-center gap-1.5" aria-label="Philippine date and time">
+          <span
+            className="inline-flex shrink-0 items-center gap-1.5"
+            aria-label="Philippine date and time"
+          >
             <Calendar className="size-3 text-[#ff0]" aria-hidden="true" />
             <span>
               {dateStr}

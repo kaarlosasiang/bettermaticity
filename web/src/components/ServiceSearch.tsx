@@ -33,7 +33,13 @@ interface ServiceSearchProps {
 export function ServiceSearch({ placeholder, className }: ServiceSearchProps) {
   const [query, setQuery] = useState('');
   const results: Service[] = useMemo(
-    () => (query.trim().length >= 2 ? fuse.search(query).slice(0, 8).map((r) => r.item) : []),
+    () =>
+      query.trim().length >= 2
+        ? fuse
+            .search(query)
+            .slice(0, 8)
+            .map((r) => r.item)
+        : [],
     [query]
   );
   const showList = query.trim().length >= 2;
@@ -41,7 +47,10 @@ export function ServiceSearch({ placeholder, className }: ServiceSearchProps) {
   return (
     <Command
       shouldFilter={false}
-      className={cn('overflow-visible rounded-lg border border-border bg-card text-left', className)}
+      className={cn(
+        'overflow-visible rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] text-left',
+        className
+      )}
     >
       <CommandInput
         value={query}

@@ -434,7 +434,7 @@ export default function MunicipalAgriculture() {
   const [activeTab, setActiveTab] = useState('rsbsa');
 
   const ReqBoxView = ({ box }: { box: ReqBox }) => (
-    <div className="rounded-lg border border-border bg-card p-4">
+    <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
       <h3 className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold text-foreground">
         <box.Icon className="size-4 text-primary" aria-hidden="true" />
         {t(box.title)}
@@ -454,7 +454,7 @@ export default function MunicipalAgriculture() {
   );
 
   const CardView = ({ card }: { card: Card }) => (
-    <div className="flex flex-col rounded-lg border border-border bg-card p-4">
+    <div className="flex flex-col rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
       <h3 className="mb-1.5 flex items-center gap-1.5 text-sm font-semibold text-foreground">
         <card.Icon className="size-4 text-primary" aria-hidden="true" />
         {t(card.title)}
@@ -521,12 +521,17 @@ export default function MunicipalAgriculture() {
         <Container>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:grid-cols-4">
             {quickStats.map((s) => (
-              <div key={s.label} className="rounded-lg border border-border bg-card p-3 text-center">
+              <div
+                key={s.label}
+                className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center"
+              >
                 <s.Icon className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
                 <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                   {t(s.label)}
                 </h3>
-                <p className="m-0 text-[0.8125rem] font-semibold text-foreground">{text(s.value)}</p>
+                <p className="m-0 text-[0.8125rem] font-semibold text-foreground">
+                  {text(s.value)}
+                </p>
               </div>
             ))}
           </div>
@@ -541,7 +546,9 @@ export default function MunicipalAgriculture() {
               <LayoutGrid className="size-5 text-primary" aria-hidden="true" />
               {t('magri-agricultural-programs-services')}
             </SectionTitle>
-            <SectionSubtitle>{t('magri-select-a-program-category-to-view-details')}</SectionSubtitle>
+            <SectionSubtitle>
+              {t('magri-select-a-program-category-to-view-details')}
+            </SectionSubtitle>
           </div>
 
           {/* Tabs */}
@@ -555,7 +562,7 @@ export default function MunicipalAgriculture() {
                 className={`rounded-md border px-4 py-2 text-xs font-semibold transition-colors ${
                   activeTab === p.id
                     ? 'border-primary bg-primary text-primary-foreground'
-                    : 'border-border bg-card text-foreground hover:border-primary'
+                    : 'border-border bg-card text-foreground hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)]'
                 }`}
               >
                 {t(p.label)}
@@ -596,7 +603,7 @@ export default function MunicipalAgriculture() {
       <Section compact>
         <Container>
           <div className="grid grid-cols-1 gap-3.5 md:grid-cols-2">
-            <div className="rounded-lg border border-border bg-card p-4">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
               <h3 className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold text-foreground">
                 <Building2 className="size-4 text-primary" aria-hidden="true" />
                 {t('magri-office-information')}
@@ -613,7 +620,7 @@ export default function MunicipalAgriculture() {
                 ))}
               </ul>
             </div>
-            <div className="rounded-lg border border-border bg-card p-4">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
               <h3 className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold text-foreground">
                 <Info className="size-4 text-primary" aria-hidden="true" />
                 {t('magri-important-notes')}
@@ -624,7 +631,10 @@ export default function MunicipalAgriculture() {
                     key={n}
                     className="flex items-start gap-1.5 py-1 text-[0.8125rem] text-muted-foreground"
                   >
-                    <Check className="mt-0.5 size-3.5 shrink-0 text-brand-success" aria-hidden="true" />
+                    <Check
+                      className="mt-0.5 size-3.5 shrink-0 text-brand-success"
+                      aria-hidden="true"
+                    />
                     <span>{n}</span>
                   </li>
                 ))}

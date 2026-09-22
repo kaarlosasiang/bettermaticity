@@ -1,16 +1,20 @@
 import type { ComponentProps } from 'react';
 import { cn } from '@/lib/utils';
 
-// Legacy .section-title: 1.375rem, weight 600, text color, mb 24px, flex+gap for icon.
-export function SectionTitle({ className, ...props }: ComponentProps<'h2'>) {
+// Homepage-style section title: royal vertical bar + navy font-display heading.
+// The `children` (any caller-passed icon + text) render after the bar.
+export function SectionTitle({ className, children, ...props }: ComponentProps<'h2'>) {
   return (
     <h2
       className={cn(
-        'mb-6 flex items-center gap-2 text-[1.375rem] font-semibold text-foreground',
+        'mb-[18px] flex items-center gap-3.5 font-display text-2xl font-extrabold tracking-[-0.02em] text-[#123c7a]',
         className
       )}
       {...props}
-    />
+    >
+      <span className="h-[26px] w-1 shrink-0 rounded bg-[#2b62ee]" aria-hidden="true" />
+      {children}
+    </h2>
   );
 }
 

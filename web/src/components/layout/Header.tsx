@@ -198,8 +198,7 @@ export default function Header() {
         >
           <ul className="flex flex-col gap-0 lg:flex-row lg:items-center lg:gap-1">
             {NAV.map((entry) => {
-              const active =
-                entry.to === '/' ? pathname === '/' : pathname.startsWith(entry.to);
+              const active = entry.to === '/' ? pathname === '/' : pathname.startsWith(entry.to);
               if (!entry.children) {
                 return (
                   <li key={entry.to}>

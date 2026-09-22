@@ -33,21 +33,21 @@ import {
   Section,
   SectionTitle,
   SectionSubtitle,
+  PageHeader,
 } from '@/components/primitives';
 
 // ---- Legacy .dc-* style helpers, expressed as Tailwind class strings ----
-const cardCls = 'rounded-lg border border-border bg-card p-3.5';
+const cardCls = 'rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5';
 const noticeCls =
   'mb-3.5 rounded-lg border border-[rgba(0,50,160,0.15)] bg-[linear-gradient(135deg,rgba(0,50,160,0.06)_0%,rgba(0,50,160,0.02)_100%)] p-3.5';
-const noticeH4Cls =
-  'mb-2 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-primary';
+const noticeH4Cls = 'mb-2 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-primary';
 const noticePCls = 'm-0 text-xs leading-relaxed text-foreground';
-const cardH4Cls =
-  'mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground';
+const cardH4Cls = 'mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground';
 const reqListCls = 'm-0 list-none p-0';
 const reqItemCls = 'flex items-start gap-1.5 py-1 text-xs text-foreground';
 const reqIconCls = 'mt-[3px] size-2.5 shrink-0 text-primary';
-const thCls = 'bg-primary px-3.5 py-3 text-left text-[0.6875rem] font-semibold uppercase text-white';
+const thCls =
+  'bg-primary px-3.5 py-3 text-left text-[0.6875rem] font-semibold uppercase text-white';
 const tdCls = 'border-b border-border px-3.5 py-3 align-top';
 const badgeCls =
   'inline-flex size-[22px] items-center justify-center rounded-[5px] bg-primary text-[0.625rem] font-bold text-white';
@@ -116,8 +116,8 @@ function SharedSteps({ t }: { t: (key: string) => string }) {
         </td>
         <td className={tdCls}>
           <strong className="font-semibold">{t('dc-pay-the-burial-permit-fee-at-the-mto')}</strong>{' '}
-          if the deceased will be buried in any Cemetery in Mati, otherwise, transfer permit shall be
-          paid. Go back to MCRO for the registration of the COD.
+          if the deceased will be buried in any Cemetery in Mati, otherwise, transfer permit shall
+          be paid. Go back to MCRO for the registration of the COD.
         </td>
         <td className={tdCls}>{t('dc-accomplished-death-certificate-and-order-of')}</td>
         <td className={tdCls}>
@@ -152,12 +152,12 @@ function TableHead({ t }: { t: (key: string) => string }) {
 }
 
 const tableCls =
-  'w-full border-collapse overflow-hidden rounded-lg border border-border bg-card text-xs text-foreground';
+  'w-full border-collapse overflow-hidden rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] text-xs text-foreground';
 const totalTdCls = 'bg-primary/[0.04] px-3.5 py-3 font-semibold';
 
 function FaqItem({ question, answer }: { question: string; answer: string }) {
   return (
-    <details className="group mb-2 overflow-hidden rounded-lg border border-border bg-card">
+    <details className="group mb-2 overflow-hidden rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)]">
       <summary className="flex cursor-pointer list-none items-center justify-between px-3.5 py-3 text-[0.8125rem] font-semibold text-foreground marker:content-none hover:bg-primary/[0.02] [&::-webkit-details-marker]:hidden">
         <span>{question}</span>
         <ChevronDown
@@ -188,7 +188,8 @@ export default function DeathCertificate() {
   const tabBase =
     'cursor-pointer rounded-lg border-2 px-[18px] py-2.5 text-[0.8125rem] font-semibold transition';
   const tabActive = 'border-primary bg-primary text-white';
-  const tabIdle = 'border-border bg-card text-foreground hover:border-primary hover:text-primary';
+  const tabIdle =
+    'border-border bg-card text-foreground hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)] hover:text-primary';
 
   return (
     <>
@@ -216,23 +217,16 @@ export default function DeathCertificate() {
         </nav>
       </Container>
 
-      {/* Page header (inline: this page's badge icon differs from ServiceCategoryPage) */}
-      <section className="bg-[linear-gradient(135deg,var(--primary)_0%,var(--brand-secondary)_100%)] py-12 text-white">
-        <Container>
-          <div className="mx-auto max-w-[600px] text-center">
-            <span className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-4 py-1.5 text-[0.8125rem] font-medium text-white">
-              <FileX className="size-4" aria-hidden="true" />
-              {t('dc-certificates')}
-            </span>
-            <h1 className="mb-2 text-[2rem] leading-tight font-bold text-white">
-              {t('dc-registration-of-death-certificate')}
-            </h1>
-            <p className="m-0 text-base text-white/90">
-              {t('dc-registration-of-certificate-of-death-at-the-local')}
-            </p>
-          </div>
-        </Container>
-      </section>
+      <PageHeader
+        badge={
+          <>
+            <FileX className="size-3.5" aria-hidden="true" />
+            {t('dc-certificates')}
+          </>
+        }
+        title={t('dc-registration-of-death-certificate')}
+        description={t('dc-registration-of-certificate-of-death-at-the-local')}
+      />
 
       {/* Quick Stats */}
       <Section className="py-10">
@@ -241,7 +235,7 @@ export default function DeathCertificate() {
             {quickStats.map((s) => (
               <div
                 key={s.label}
-                className="rounded-lg border border-border bg-card p-3 text-center"
+                className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center"
               >
                 <s.Icon className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
                 <h4 className="mb-0.5 text-[0.625rem] font-medium uppercase text-muted-foreground">
@@ -267,8 +261,8 @@ export default function DeathCertificate() {
             <p className={noticePCls}>
               The registration of Death Certificate (DC) at the MCRO within{' '}
               <strong>{t('dc-thirty-30-days')}</strong> is mandatory. Delayed registration of death
-              must be filed following the lapse of the prescribed period of 30 calendar days from the
-              death of a person. Registration of death certificate is{' '}
+              must be filed following the lapse of the prescribed period of 30 calendar days from
+              the death of a person. Registration of death certificate is{' '}
               <strong>{t('dc-free-of-charge')}</strong>, pursuant to Section 6 of P.D. No. 651.
             </p>
           </div>
@@ -319,8 +313,8 @@ export default function DeathCertificate() {
                       </strong>
                       <br />
                       <br />
-                      If delayed registration, the Affidavit for Delayed Registration of Death at the
-                      back of the document shall be accomplished.
+                      If delayed registration, the Affidavit for Delayed Registration of Death at
+                      the back of the document shall be accomplished.
                     </td>
                     <td className={tdCls}>{t('dc-certificate-of-death-duly-signed-by-the')}</td>
                     <td className={tdCls}>—</td>

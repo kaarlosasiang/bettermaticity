@@ -64,7 +64,9 @@ export default function MunicipalCivilRegistrar() {
     items: ReactNode[];
     className?: string;
   }) => (
-    <div className={`rounded-lg border border-border bg-card p-3.5 ${className ?? ''}`}>
+    <div
+      className={`rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5 ${className ?? ''}`}
+    >
       <h4 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
         <span className="text-primary">{icon}</span>
         <span>{title}</span>
@@ -140,7 +142,15 @@ export default function MunicipalCivilRegistrar() {
   );
 
   // Legacy .section-header for a service block.
-  const SectionHead = ({ icon, title, desc }: { icon: ReactNode; title: ReactNode; desc: ReactNode }) => (
+  const SectionHead = ({
+    icon,
+    title,
+    desc,
+  }: {
+    icon: ReactNode;
+    title: ReactNode;
+    desc: ReactNode;
+  }) => (
     <div className="mb-5">
       <h2 className="mb-1 flex items-center gap-2 text-lg font-semibold text-foreground">
         <span className="text-primary">{icon}</span>
@@ -232,7 +242,7 @@ export default function MunicipalCivilRegistrar() {
       <Section compact>
         <Container>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:grid-cols-4">
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <Building2 className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h4 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('mcr-office')}
@@ -241,7 +251,7 @@ export default function MunicipalCivilRegistrar() {
                 {t('mcr-civil-registrar')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <MapPin className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h4 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('mcr-location')}
@@ -250,14 +260,16 @@ export default function MunicipalCivilRegistrar() {
                 {t('mcr-municipal-hall-2f')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <Clock className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h4 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('mcr-hours')}
               </h4>
-              <p className="m-0 text-[0.8125rem] font-semibold text-foreground">{t('mcr-8am-5pm')}</p>
+              <p className="m-0 text-[0.8125rem] font-semibold text-foreground">
+                {t('mcr-8am-5pm')}
+              </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <CalendarCheck className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h4 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('mcr-days')}
@@ -290,7 +302,7 @@ export default function MunicipalCivilRegistrar() {
                 className={`inline-flex items-center justify-center gap-1.5 rounded-md border px-4 py-2 text-xs font-semibold transition-colors ${
                   activeTab === id
                     ? 'border-primary bg-primary text-primary-foreground'
-                    : 'border-border bg-card text-foreground hover:border-primary'
+                    : 'border-border bg-card text-foreground hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)]'
                 }`}
               >
                 <Icon className="size-4" aria-hidden="true" /> {t(key)}
@@ -487,28 +499,36 @@ export default function MunicipalCivilRegistrar() {
                     <StepBadge n={1} />,
                     t('mcr-fill-out-request-form-and-submit-requirements'),
                     t('mcr-valid-id-authorization-letter-if-representative'),
-                    <span className="text-[0.6875rem] text-muted-foreground">{t('mcr-5-minutes')}</span>,
+                    <span className="text-[0.6875rem] text-muted-foreground">
+                      {t('mcr-5-minutes')}
+                    </span>,
                     <PersonnelTag>{t('mcr-registration-officer')}</PersonnelTag>,
                   ],
                   [
                     <StepBadge n={2} />,
                     t('mcr-search-and-retrieve-record-from-registry-books'),
                     '—',
-                    <span className="text-[0.6875rem] text-muted-foreground">{t('mcr-510-minutes')}</span>,
+                    <span className="text-[0.6875rem] text-muted-foreground">
+                      {t('mcr-510-minutes')}
+                    </span>,
                     <PersonnelTag>{t('mcr-registration-officer')}</PersonnelTag>,
                   ],
                   [
                     <StepBadge n={3} />,
                     t('mcr-pay-the-required-fee-at-treasurers-office'),
                     t('mcr-order-of-payment'),
-                    <span className="text-[0.6875rem] text-muted-foreground">{t('mcr-5-minutes')}</span>,
+                    <span className="text-[0.6875rem] text-muted-foreground">
+                      {t('mcr-5-minutes')}
+                    </span>,
                     <PersonnelTag>{t('mcr-treasurers-office')}</PersonnelTag>,
                   ],
                   [
                     <StepBadge n={4} />,
                     t('mcr-present-official-receipt-and-claim-document'),
                     t('mcr-official-receipt'),
-                    <span className="text-[0.6875rem] text-muted-foreground">{t('mcr-510-minutes')}</span>,
+                    <span className="text-[0.6875rem] text-muted-foreground">
+                      {t('mcr-510-minutes')}
+                    </span>,
                     <PersonnelTag>{t('mcr-civil-registrar')}</PersonnelTag>,
                   ],
                 ]}
@@ -588,11 +608,7 @@ export default function MunicipalCivilRegistrar() {
                     <FeeTag>₱3,000.00</FeeTag>,
                     t('mcr-34-months'),
                   ],
-                  [
-                    t('mcr-annotation-of-court-order'),
-                    <FeeTag>₱500.00</FeeTag>,
-                    t('mcr-12-weeks'),
-                  ],
+                  [t('mcr-annotation-of-court-order'), <FeeTag>₱500.00</FeeTag>, t('mcr-12-weeks')],
                 ]}
               />
             </div>
@@ -613,13 +629,13 @@ export default function MunicipalCivilRegistrar() {
             </p>
           </div>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="rounded-lg border border-border bg-card p-3">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3">
               <h4 className="mb-0.5 text-xs font-semibold text-foreground">
                 {t('mcr-municipal-civil-registrar')}
               </h4>
               <p className="m-0 text-[0.6875rem] text-muted-foreground">{t('mcr-office-head')}</p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3">
               <h4 className="mb-0.5 text-xs font-semibold text-foreground">
                 {t('mcr-registration-officer-i')}
               </h4>
@@ -627,7 +643,7 @@ export default function MunicipalCivilRegistrar() {
                 {t('mcr-birthdeath-registration')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3">
               <h4 className="mb-0.5 text-xs font-semibold text-foreground">
                 {t('mcr-registration-officer-ii')}
               </h4>

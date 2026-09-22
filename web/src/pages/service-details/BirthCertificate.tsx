@@ -158,7 +158,7 @@ export default function BirthCertificate() {
             {quickStats.map((s) => (
               <div
                 key={s.label}
-                className="rounded-lg border border-border bg-card p-3 text-center"
+                className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center"
               >
                 <s.Icon className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
                 <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
@@ -183,7 +183,10 @@ export default function BirthCertificate() {
           <SectionSubtitle>{t('bc-follow-these-steps-to-request-your-birth')}</SectionSubtitle>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
             {steps.map((step) => (
-              <div key={step.num} className="rounded-lg border border-border bg-card p-3.5">
+              <div
+                key={step.num}
+                className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5"
+              >
                 <div
                   className={`mb-2 inline-flex size-[22px] items-center justify-center rounded-[5px] text-[0.625rem] font-bold text-primary-foreground ${
                     step.final ? 'bg-brand-success' : 'bg-primary'
@@ -218,7 +221,7 @@ export default function BirthCertificate() {
               {requirementSections.map((box) => (
                 <div
                   key={box.title}
-                  className="mb-3.5 rounded-lg border border-border bg-card p-3.5"
+                  className="mb-3.5 rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5"
                 >
                   <h3 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
                     <box.Icon className="size-4 text-primary" aria-hidden="true" />
@@ -259,7 +262,7 @@ export default function BirthCertificate() {
 
             {/* Right column: sidebar cards */}
             <div className="space-y-2.5">
-              <div className="rounded-lg border border-border bg-card p-3.5">
+              <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5">
                 <h3 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
                   <Building2 className="size-4 text-primary" aria-hidden="true" />
                   {t('bc-office-information')}
@@ -280,7 +283,7 @@ export default function BirthCertificate() {
                 </p>
               </div>
 
-              <div className="rounded-lg border border-border bg-card p-3.5">
+              <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5">
                 <h3 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
                   <Link2 className="size-4 text-primary" aria-hidden="true" />
                   {t('bc-related-services')}
@@ -313,7 +316,7 @@ export default function BirthCertificate() {
                 </ul>
               </div>
 
-              <div className="rounded-lg border border-border bg-card p-3.5">
+              <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5">
                 <h3 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
                   <Info className="size-4 text-primary" aria-hidden="true" />
                   {t('bc-need-help')}

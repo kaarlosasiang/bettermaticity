@@ -20,7 +20,7 @@ import {
 import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Container, Section } from '@/components/primitives';
+import { Container, Section, PageHeader } from '@/components/primitives';
 
 export default function MunicipalAccounting() {
   const { t } = useLanguage();
@@ -98,7 +98,7 @@ export default function MunicipalAccounting() {
   );
 
   const TotalTimeBox = ({ line1, note }: { line1: string; note: string }) => (
-    <div className="mt-3.5 rounded-lg border border-border bg-card p-3.5">
+    <div className="mt-3.5 rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5">
       <h3 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
         <History className="size-4 text-primary" aria-hidden="true" />
         {t('acct-total-processing-time')}
@@ -154,28 +154,22 @@ export default function MunicipalAccounting() {
         </nav>
       </Container>
 
-      <section className="bg-[linear-gradient(135deg,var(--primary)_0%,var(--brand-secondary)_100%)] py-12 text-white">
-        <Container>
-          <div className="mx-auto max-w-[600px] text-center">
-            <span className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-4 py-1.5 text-[0.8125rem] font-medium text-white">
-              <Calculator className="size-4" aria-hidden="true" />
-              {t('acct-accounting')}
-            </span>
-            <h1 className="mb-2 text-[2rem] leading-tight font-bold text-white">
-              {t('acct-municipal-accounting-office')}
-            </h1>
-            <p className="text-white/90">
-              {t('acct-preaudit-of-disbursements-payroll-preparation')}
-            </p>
-          </div>
-        </Container>
-      </section>
+      <PageHeader
+        badge={
+          <>
+            <Calculator className="size-3.5" aria-hidden="true" />
+            {t('acct-accounting')}
+          </>
+        }
+        title={t('acct-municipal-accounting-office')}
+        description={t('acct-preaudit-of-disbursements-payroll-preparation')}
+      />
 
       {/* Quick stats */}
       <Section compact>
         <Container>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:grid-cols-4">
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <Building2 className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('acct-office')}
@@ -184,7 +178,7 @@ export default function MunicipalAccounting() {
                 {t('acct-mun-accounting')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <MapPin className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('acct-location')}
@@ -193,14 +187,16 @@ export default function MunicipalAccounting() {
                 {t('acct-municipal-hall')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <Clock className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('acct-hours')}
               </h3>
-              <p className="m-0 text-[0.8125rem] font-semibold text-foreground">{t('acct-8am-5pm')}</p>
+              <p className="m-0 text-[0.8125rem] font-semibold text-foreground">
+                {t('acct-8am-5pm')}
+              </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <CalendarCheck className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('acct-days')}
@@ -233,7 +229,7 @@ export default function MunicipalAccounting() {
                 className={`rounded-md border px-4 py-2 text-xs font-semibold transition-colors ${
                   activeTab === tab.id
                     ? 'border-primary bg-primary text-primary-foreground'
-                    : 'border-border bg-card text-foreground hover:border-primary'
+                    : 'border-border bg-card text-foreground hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)]'
                 }`}
               >
                 {tab.label}
@@ -527,7 +523,7 @@ export default function MunicipalAccounting() {
             </p>
           </div>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="rounded-lg border border-border bg-card p-3">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3">
               <h3 className="mb-0.5 text-[0.75rem] font-semibold text-foreground">
                 {t('acct-evangeline-b-ramos')}
               </h3>
@@ -535,13 +531,15 @@ export default function MunicipalAccounting() {
                 {t('acct-municipal-accountant')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3">
               <h3 className="mb-0.5 text-[0.75rem] font-semibold text-foreground">
                 {t('acct-mary-jane-c-salvador')}
               </h3>
-              <p className="m-0 text-[0.6875rem] text-muted-foreground">{t('acct-accountant-iii')}</p>
+              <p className="m-0 text-[0.6875rem] text-muted-foreground">
+                {t('acct-accountant-iii')}
+              </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3">
               <h3 className="mb-0.5 text-[0.75rem] font-semibold text-foreground">
                 {t('acct-jocelyn-l-gatan')}
               </h3>
@@ -549,7 +547,7 @@ export default function MunicipalAccounting() {
                 {t('acct-administrative-officer-v')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3">
               <h3 className="mb-0.5 text-[0.75rem] font-semibold text-foreground">
                 {t('acct-rosalinda-m-fernandez')}
               </h3>
@@ -565,7 +563,7 @@ export default function MunicipalAccounting() {
       <Section compact altBg>
         <Container>
           <div className="grid grid-cols-1 gap-3.5 md:grid-cols-2">
-            <div className="rounded-lg border border-border bg-card p-3.5">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5">
               <h3 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
                 <Building2 className="size-4 text-primary" aria-hidden="true" />
                 {t('acct-office-information')}
@@ -587,26 +585,38 @@ export default function MunicipalAccounting() {
                 </li>
               </ul>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3.5">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3.5">
               <h3 className="mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground">
                 <Info className="size-4 text-primary" aria-hidden="true" />
                 {t('acct-important-notes')}
               </h3>
               <ul className="m-0 list-none p-0">
                 <li className="flex items-start gap-1.5 py-1 text-xs text-muted-foreground">
-                  <CircleCheck className="mt-0.5 size-2.5 shrink-0 text-primary" aria-hidden="true" />
+                  <CircleCheck
+                    className="mt-0.5 size-2.5 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />
                   <span>{t('acct-all-disbursements-require-complete-supporting')}</span>
                 </li>
                 <li className="flex items-start gap-1.5 py-1 text-xs text-muted-foreground">
-                  <CircleCheck className="mt-0.5 size-2.5 shrink-0 text-primary" aria-hidden="true" />
+                  <CircleCheck
+                    className="mt-0.5 size-2.5 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />
                   <span>{t('acct-payroll-cutoff-is-every-10th-and-25th-of-the-month')}</span>
                 </li>
                 <li className="flex items-start gap-1.5 py-1 text-xs text-muted-foreground">
-                  <CircleCheck className="mt-0.5 size-2.5 shrink-0 text-primary" aria-hidden="true" />
+                  <CircleCheck
+                    className="mt-0.5 size-2.5 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />
                   <span>{t('acct-check-releases-are-on-scheduled-dates')}</span>
                 </li>
                 <li className="flex items-start gap-1.5 py-1 text-xs text-muted-foreground">
-                  <CircleCheck className="mt-0.5 size-2.5 shrink-0 text-primary" aria-hidden="true" />
+                  <CircleCheck
+                    className="mt-0.5 size-2.5 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />
                   <span>{t('acct-financial-reports-are-submitted-monthly-to-coa')}</span>
                 </li>
               </ul>

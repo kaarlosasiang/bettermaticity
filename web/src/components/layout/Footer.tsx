@@ -37,7 +37,11 @@ const resources: [string, string][] = [
 ];
 
 const partners = [
-  { href: 'https://abakada.org', src: '/assets/images/logo/abakada-footer.svg', alt: 'Abakada.org' },
+  {
+    href: 'https://abakada.org',
+    src: '/assets/images/logo/abakada-footer.svg',
+    alt: 'Abakada.org',
+  },
   {
     href: 'https://hivcareph.org/',
     src: '/assets/images/logo/hiv-care-logo-footer.svg',

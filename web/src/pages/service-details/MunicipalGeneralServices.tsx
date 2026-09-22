@@ -87,7 +87,7 @@ export default function MunicipalGeneralServices() {
     children: ReactNode;
   }) => (
     <div id={id} className="mb-8 scroll-mt-24">
-      <div className="mb-4 flex items-start gap-3 rounded-lg border border-border bg-card p-4">
+      <div className="mb-4 flex items-start gap-3 rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
         <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
           <Icon className="size-5" aria-hidden="true" />
         </div>
@@ -96,7 +96,9 @@ export default function MunicipalGeneralServices() {
           <p className="m-0 text-sm text-muted-foreground">{t(desc)}</p>
         </div>
       </div>
-      <div className="rounded-lg border border-border bg-card p-4">{children}</div>
+      <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
+        {children}
+      </div>
     </div>
   );
 
@@ -147,7 +149,7 @@ export default function MunicipalGeneralServices() {
       <Section compact>
         <Container>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:grid-cols-4">
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <Building2 className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('mgs-office')}
@@ -156,7 +158,7 @@ export default function MunicipalGeneralServices() {
                 {t('mgs-general-services')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <MapPin className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('mgs-location')}
@@ -165,14 +167,16 @@ export default function MunicipalGeneralServices() {
                 {t('mgs-municipal-hall')}
               </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <Clock className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('mgs-hours')}
               </h3>
-              <p className="m-0 text-[0.8125rem] font-semibold text-foreground">{t('mgs-8am-5pm')}</p>
+              <p className="m-0 text-[0.8125rem] font-semibold text-foreground">
+                {t('mgs-8am-5pm')}
+              </p>
             </div>
-            <div className="rounded-lg border border-border bg-card p-3 text-center">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center">
               <CalendarCheck className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
               <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                 {t('mgs-days')}
@@ -194,25 +198,25 @@ export default function MunicipalGeneralServices() {
           <nav className="mt-3 flex flex-wrap gap-2" aria-label="GSO Services Navigation">
             <a
               href="#property"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-3 py-2 text-[0.8125rem] font-medium text-foreground hover:border-primary hover:text-primary"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] px-3 py-2 text-[0.8125rem] font-medium text-foreground hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)] hover:text-primary"
             >
               <Archive className="size-4" aria-hidden="true" /> {t('mgs-property-custodianship')}
             </a>
             <a
               href="#utility"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-3 py-2 text-[0.8125rem] font-medium text-foreground hover:border-primary hover:text-primary"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] px-3 py-2 text-[0.8125rem] font-medium text-foreground hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)] hover:text-primary"
             >
               <Zap className="size-4" aria-hidden="true" /> {t('mgs-utility-services')}
             </a>
             <a
               href="#vehicle"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-3 py-2 text-[0.8125rem] font-medium text-foreground hover:border-primary hover:text-primary"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] px-3 py-2 text-[0.8125rem] font-medium text-foreground hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)] hover:text-primary"
             >
               <Truck className="size-4" aria-hidden="true" /> {t('mgs-vehicle-equipment')}
             </a>
             <a
               href="#supplies"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-3 py-2 text-[0.8125rem] font-medium text-foreground hover:border-primary hover:text-primary"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] px-3 py-2 text-[0.8125rem] font-medium text-foreground hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)] hover:text-primary"
             >
               <Package className="size-4" aria-hidden="true" /> {t('mgs-supplies-procurement')}
             </a>
@@ -320,23 +324,27 @@ export default function MunicipalGeneralServices() {
             desc="mgs-management-and-monitoring-of-municipal-utility"
           >
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-              <div className="rounded-lg border border-border bg-card p-4">
+              <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
                 <h4 className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-foreground">
                   <Zap className="size-4 text-primary" aria-hidden="true" />
                   {t('mgs-electricity')}
                 </h4>
                 <div className="text-xs text-muted-foreground">Provider: NUVELCO</div>
-                <div className="text-sm font-medium text-foreground">City Hall &amp; Facilities</div>
+                <div className="text-sm font-medium text-foreground">
+                  City Hall &amp; Facilities
+                </div>
               </div>
-              <div className="rounded-lg border border-border bg-card p-4">
+              <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
                 <h4 className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-foreground">
                   <Droplet className="size-4 text-primary" aria-hidden="true" />
                   {t('mgs-water')}
                 </h4>
                 <div className="text-xs text-muted-foreground">Provider: Mati Water District</div>
-                <div className="text-sm font-medium text-foreground">City Hall &amp; Facilities</div>
+                <div className="text-sm font-medium text-foreground">
+                  City Hall &amp; Facilities
+                </div>
               </div>
-              <div className="rounded-lg border border-border bg-card p-4">
+              <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
                 <h4 className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-foreground">
                   <Phone className="size-4 text-primary" aria-hidden="true" />
                   {t('mgs-telephone')}
@@ -345,26 +353,38 @@ export default function MunicipalGeneralServices() {
                 <div className="text-sm font-medium text-foreground">City Hall Lines</div>
               </div>
             </div>
-            <div className="mt-4 rounded-lg border border-border bg-card p-4">
+            <div className="mt-4 rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
               <h4 className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-foreground">
                 <Info className="size-4 text-primary" aria-hidden="true" />
                 {t('mgs-utility-management-functions')}
               </h4>
               <ul className="m-0 list-none space-y-1.5 p-0 text-sm text-muted-foreground">
                 <li className="flex items-start gap-1.5">
-                  <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-primary" aria-hidden="true" />
+                  <CheckCircle2
+                    className="mt-0.5 size-3.5 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />
                   {t('mgs-processing-of-utility-bills-for-payment')}
                 </li>
                 <li className="flex items-start gap-1.5">
-                  <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-primary" aria-hidden="true" />
+                  <CheckCircle2
+                    className="mt-0.5 size-3.5 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />
                   Monitoring of utility consumption
                 </li>
                 <li className="flex items-start gap-1.5">
-                  <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-primary" aria-hidden="true" />
+                  <CheckCircle2
+                    className="mt-0.5 size-3.5 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />
                   {t('mgs-coordination-with-utility-providers')}
                 </li>
                 <li className="flex items-start gap-1.5">
-                  <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-primary" aria-hidden="true" />
+                  <CheckCircle2
+                    className="mt-0.5 size-3.5 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />
                   {t('mgs-reporting-of-utility-issues-and-concerns')}
                 </li>
               </ul>
@@ -379,7 +399,7 @@ export default function MunicipalGeneralServices() {
             desc="mgs-management-and-maintenance-of-municipal-vehicles"
           >
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-              <div className="rounded-lg border border-border bg-card p-4">
+              <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
                 <h4 className="mb-1 flex items-center gap-1.5 text-sm font-semibold text-foreground">
                   <Car className="size-4 text-primary" aria-hidden="true" />
                   {t('mgs-light-vehicles')}
@@ -388,7 +408,7 @@ export default function MunicipalGeneralServices() {
                   {t('mgs-service-vehicles-patrol-cars-and-administrative')}
                 </p>
               </div>
-              <div className="rounded-lg border border-border bg-card p-4">
+              <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
                 <h4 className="mb-1 flex items-center gap-1.5 text-sm font-semibold text-foreground">
                   <Construction className="size-4 text-primary" aria-hidden="true" />
                   {t('mgs-heavy-equipment')}
@@ -397,7 +417,7 @@ export default function MunicipalGeneralServices() {
                   {t('mgs-dump-trucks-backhoes-graders-and-construction')}
                 </p>
               </div>
-              <div className="rounded-lg border border-border bg-card p-4">
+              <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
                 <h4 className="mb-1 flex items-center gap-1.5 text-sm font-semibold text-foreground">
                   <Bike className="size-4 text-primary" aria-hidden="true" />
                   {t('mgs-motorcycles')}
@@ -406,7 +426,7 @@ export default function MunicipalGeneralServices() {
                   {t('mgs-service-motorcycles-for-field-operations')}
                 </p>
               </div>
-              <div className="rounded-lg border border-border bg-card p-4">
+              <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
                 <h4 className="mb-1 flex items-center gap-1.5 text-sm font-semibold text-foreground">
                   <Wrench className="size-4 text-primary" aria-hidden="true" />
                   {t('mgs-maintenance')}
@@ -416,26 +436,38 @@ export default function MunicipalGeneralServices() {
                 </p>
               </div>
             </div>
-            <div className="mt-4 rounded-lg border border-border bg-card p-4">
+            <div className="mt-4 rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
               <h4 className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-foreground">
                 <ClipboardCheck className="size-4 text-primary" aria-hidden="true" />
                 {t('mgs-vehicle-request-requirements')}
               </h4>
               <ul className="m-0 list-none space-y-1.5 p-0 text-sm text-muted-foreground">
                 <li className="flex items-start gap-1.5">
-                  <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-primary" aria-hidden="true" />
+                  <CheckCircle2
+                    className="mt-0.5 size-3.5 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />
                   {t('mgs-approved-trip-ticket')}
                 </li>
                 <li className="flex items-start gap-1.5">
-                  <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-primary" aria-hidden="true" />
+                  <CheckCircle2
+                    className="mt-0.5 size-3.5 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />
                   {t('mgs-purpose-of-traveluse')}
                 </li>
                 <li className="flex items-start gap-1.5">
-                  <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-primary" aria-hidden="true" />
+                  <CheckCircle2
+                    className="mt-0.5 size-3.5 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />
                   {t('mgs-destination-and-estimated-duration')}
                 </li>
                 <li className="flex items-start gap-1.5">
-                  <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-primary" aria-hidden="true" />
+                  <CheckCircle2
+                    className="mt-0.5 size-3.5 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />
                   {t('mgs-authorized-driver-assignment')}
                 </li>
               </ul>
@@ -515,25 +547,25 @@ export default function MunicipalGeneralServices() {
             desc="mgs-key-personnel-handling-general-services-operations"
           >
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              <div className="rounded-lg border border-border bg-card p-4">
+              <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
                 <h4 className="mb-0.5 text-sm font-semibold text-foreground">
                   {t('mgs-ma-theresa')}
                 </h4>
                 <p className="m-0 text-xs text-muted-foreground">{t('mgs-gso-head')}</p>
               </div>
-              <div className="rounded-lg border border-border bg-card p-4">
+              <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
                 <h4 className="mb-0.5 text-sm font-semibold text-foreground">
                   {t('mgs-light-vehicle')}
                 </h4>
                 <p className="m-0 text-xs text-muted-foreground">{t('mgs-drivers-pool')}</p>
               </div>
-              <div className="rounded-lg border border-border bg-card p-4">
+              <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
                 <h4 className="mb-0.5 text-sm font-semibold text-foreground">
                   {t('mgs-heavy-equipment')}
                 </h4>
                 <p className="m-0 text-xs text-muted-foreground">{t('mgs-operators-pool')}</p>
               </div>
-              <div className="rounded-lg border border-border bg-card p-4">
+              <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
                 <h4 className="mb-0.5 text-sm font-semibold text-foreground">
                   {t('mgs-utility-workers')}
                 </h4>
@@ -544,7 +576,7 @@ export default function MunicipalGeneralServices() {
 
           {/* Contact */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div className="rounded-lg border border-border bg-card p-4">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
               <h4 className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-foreground">
                 <Building2 className="size-4 text-primary" aria-hidden="true" />
                 {t('mgs-office-information')}
@@ -566,26 +598,38 @@ export default function MunicipalGeneralServices() {
                 </li>
               </ul>
             </div>
-            <div className="rounded-lg border border-border bg-card p-4">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
               <h4 className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-foreground">
                 <Info className="size-4 text-primary" aria-hidden="true" />
                 {t('mgs-important-notes')}
               </h4>
               <ul className="m-0 list-none space-y-1.5 p-0 text-sm text-muted-foreground">
                 <li className="flex items-start gap-1.5">
-                  <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-primary" aria-hidden="true" />
+                  <CheckCircle2
+                    className="mt-0.5 size-3.5 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />
                   {t('mgs-all-requests-must-have-approved-supporting')}
                 </li>
                 <li className="flex items-start gap-1.5">
-                  <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-primary" aria-hidden="true" />
+                  <CheckCircle2
+                    className="mt-0.5 size-3.5 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />
                   {t('mgs-vehicle-requests-require-advance-booking')}
                 </li>
                 <li className="flex items-start gap-1.5">
-                  <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-primary" aria-hidden="true" />
+                  <CheckCircle2
+                    className="mt-0.5 size-3.5 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />
                   {t('mgs-supplies-issuance-follows-fifo-method')}
                 </li>
                 <li className="flex items-start gap-1.5">
-                  <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-primary" aria-hidden="true" />
+                  <CheckCircle2
+                    className="mt-0.5 size-3.5 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />
                   {t('mgs-equipment-accountability-is-strictly-enforced')}
                 </li>
               </ul>

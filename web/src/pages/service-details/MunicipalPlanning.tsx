@@ -172,7 +172,7 @@ export default function MunicipalPlanning() {
   const text = (it: Item) => (typeof it === 'string' ? t(it) : it.lit);
 
   const ReqBox = ({ title, Icon, items }: { title: string; Icon: LucideIcon; items: string[] }) => (
-    <div className="rounded-lg border border-border bg-card p-4">
+    <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
       <h3 className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold text-foreground">
         <Icon className="size-4 text-primary" aria-hidden="true" />
         {t(title)}
@@ -192,7 +192,7 @@ export default function MunicipalPlanning() {
   );
 
   const DetailBox = ({ rows }: { rows: DetailRow[] }) => (
-    <div className="rounded-lg border border-border bg-card p-4">
+    <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
       <h3 className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold text-foreground">
         <Info className="size-4 text-primary" aria-hidden="true" />
         {t('mpdo-details')}
@@ -259,12 +259,17 @@ export default function MunicipalPlanning() {
         <Container>
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:grid-cols-4">
             {quickStats.map((s) => (
-              <div key={s.label} className="rounded-lg border border-border bg-card p-3 text-center">
+              <div
+                key={s.label}
+                className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-3 text-center"
+              >
                 <s.Icon className="mx-auto mb-1 size-4 text-primary" aria-hidden="true" />
                 <h3 className="mb-0.5 text-[0.625rem] font-medium tracking-wide text-muted-foreground uppercase">
                   {t(s.label)}
                 </h3>
-                <p className="m-0 text-[0.8125rem] font-semibold text-foreground">{text(s.value)}</p>
+                <p className="m-0 text-[0.8125rem] font-semibold text-foreground">
+                  {text(s.value)}
+                </p>
               </div>
             ))}
           </div>
@@ -278,7 +283,9 @@ export default function MunicipalPlanning() {
             <Map className="size-5 text-primary" aria-hidden="true" />
             {t('mpdo-issuance-of-zoning-clearancecertification')}
           </SectionTitle>
-          <SectionSubtitle>{t('mpdo-required-for-business-permit-applications-and')}</SectionSubtitle>
+          <SectionSubtitle>
+            {t('mpdo-required-for-business-permit-applications-and')}
+          </SectionSubtitle>
           <div className="grid grid-cols-1 gap-3.5 md:grid-cols-2">
             <ReqBox title="mpdo-requirements" Icon={FileText} items={zoningReqs} />
             <DetailBox rows={zoningDetails} />
@@ -293,7 +300,9 @@ export default function MunicipalPlanning() {
             <MapPin className="size-5 text-primary" aria-hidden="true" />
             {t('mpdo-issuance-of-locational-clearance')}
           </SectionTitle>
-          <SectionSubtitle>{t('mpdo-required-for-building-permit-applications-and')}</SectionSubtitle>
+          <SectionSubtitle>
+            {t('mpdo-required-for-building-permit-applications-and')}
+          </SectionSubtitle>
           <div className="grid grid-cols-1 gap-3.5 md:grid-cols-2">
             <ReqBox title="mpdo-requirements" Icon={FileText} items={locationalReqs} />
             <DetailBox rows={locationalDetails} />
@@ -308,10 +317,15 @@ export default function MunicipalPlanning() {
             <LayoutGrid className="size-5 text-primary" aria-hidden="true" />
             {t('mpdo-other-mpdo-services')}
           </SectionTitle>
-          <SectionSubtitle>{t('mpdo-additional-planning-and-development-services')}</SectionSubtitle>
+          <SectionSubtitle>
+            {t('mpdo-additional-planning-and-development-services')}
+          </SectionSubtitle>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {otherServices.map((s) => (
-              <div key={s.title} className="flex flex-col rounded-lg border border-border bg-card p-4">
+              <div
+                key={s.title}
+                className="flex flex-col rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4"
+              >
                 <h3 className="mb-1.5 flex items-center gap-1.5 text-sm font-semibold text-foreground">
                   <s.Icon className="size-4 text-primary" aria-hidden="true" />
                   {t(s.title)}
@@ -339,9 +353,11 @@ export default function MunicipalPlanning() {
             {feeCards.map((f) => (
               <div
                 key={f.title}
-                className="rounded-lg border border-border bg-card p-4 text-center"
+                className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4 text-center"
               >
-                <h3 className="mb-2 text-[0.8125rem] font-semibold text-foreground">{t(f.title)}</h3>
+                <h3 className="mb-2 text-[0.8125rem] font-semibold text-foreground">
+                  {t(f.title)}
+                </h3>
                 <div className="mb-1 text-lg font-bold text-primary">{f.amount}</div>
                 <p className="m-0 text-xs text-muted-foreground">{t(f.note)}</p>
               </div>
@@ -354,7 +370,7 @@ export default function MunicipalPlanning() {
       <Section compact altBg>
         <Container>
           <div className="grid grid-cols-1 gap-3.5 md:grid-cols-2">
-            <div className="rounded-lg border border-border bg-card p-4">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
               <h3 className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold text-foreground">
                 <Building2 className="size-4 text-primary" aria-hidden="true" />
                 {t('mpdo-office-information')}
@@ -371,7 +387,7 @@ export default function MunicipalPlanning() {
                 ))}
               </ul>
             </div>
-            <div className="rounded-lg border border-border bg-card p-4">
+            <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
               <h3 className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold text-foreground">
                 <Lightbulb className="size-4 text-primary" aria-hidden="true" />
                 {t('mpdo-important-notes')}
@@ -382,7 +398,10 @@ export default function MunicipalPlanning() {
                     key={n}
                     className="flex items-start gap-1.5 py-1 text-[0.8125rem] text-muted-foreground"
                   >
-                    <Check className="mt-0.5 size-3.5 shrink-0 text-brand-success" aria-hidden="true" />
+                    <Check
+                      className="mt-0.5 size-3.5 shrink-0 text-brand-success"
+                      aria-hidden="true"
+                    />
                     <span>{t(n)}</span>
                   </li>
                 ))}
@@ -399,8 +418,10 @@ export default function MunicipalPlanning() {
             <Download className="size-5 text-primary" aria-hidden="true" />
             {t('mpdo-downloadable-resources')}
           </SectionTitle>
-          <SectionSubtitle>{t('mpdo-application-forms-and-documents-for-mpdo-services')}</SectionSubtitle>
-          <div className="rounded-lg border border-border bg-card p-4">
+          <SectionSubtitle>
+            {t('mpdo-application-forms-and-documents-for-mpdo-services')}
+          </SectionSubtitle>
+          <div className="rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4">
             <ul className="m-0 list-none p-0">
               {downloads.map((d) => (
                 <li key={d.href} className="flex items-start gap-2 py-1.5 text-[0.8125rem]">

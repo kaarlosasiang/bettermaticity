@@ -165,13 +165,15 @@ export function ServiceCategoryPage({
                 <AppLink
                   key={o.to}
                   to={o.to}
-                  className="group flex items-center gap-4 rounded-[10px] border border-border bg-card p-4 no-underline transition hover:-translate-y-0.5 hover:border-primary hover:shadow-sm"
+                  className="group flex items-center gap-4 rounded-[10px] bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4 no-underline transition hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)]"
                 >
                   <div className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
                     <o.Icon className="size-5" aria-hidden="true" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h3 className="mb-0.5 text-sm font-semibold text-foreground">{t(o.titleKey)}</h3>
+                    <h3 className="mb-0.5 text-sm font-semibold text-foreground">
+                      {t(o.titleKey)}
+                    </h3>
                     <p className="m-0 text-[0.8125rem] text-muted-foreground">{t(o.descKey)}</p>
                   </div>
                   <ArrowRight

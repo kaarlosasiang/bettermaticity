@@ -81,10 +81,25 @@ const sections: ServiceSection[] = [
     title: 'mswdo-protective-services-for-individuals-and-families',
     subtitle: 'mswdo-support-and-intervention-for-vulnerable',
     infoBoxes: [
-      { Icon: Clock, label: 'mswdo-processing-time', value: 'mswdo-immediate', small: 'Emergency cases' },
+      {
+        Icon: Clock,
+        label: 'mswdo-processing-time',
+        value: 'mswdo-immediate',
+        small: 'Emergency cases',
+      },
       { Icon: Banknote, label: 'mswdo-fee', value: 'mswdo-free', small: 'No charges' },
-      { Icon: UserCheck, label: 'mswdo-who-can-apply', value: 'mswdo-anyone-in-need', small: 'Individuals/Families' },
-      { Icon: CalendarCheck, label: 'mswdo-availability', value: { lit: '24/7' }, small: 'Emergency hotline' },
+      {
+        Icon: UserCheck,
+        label: 'mswdo-who-can-apply',
+        value: 'mswdo-anyone-in-need',
+        small: 'Individuals/Families',
+      },
+      {
+        Icon: CalendarCheck,
+        label: 'mswdo-availability',
+        value: { lit: '24/7' },
+        small: 'Emergency hotline',
+      },
     ],
     body: [
       {
@@ -108,10 +123,26 @@ const sections: ServiceSection[] = [
         kind: 'cards',
         heading: 'mswdo-services-provided',
         cards: [
-          { Icon: PhoneIncoming, title: 'mswdo-crisis-intervention', desc: 'mswdo-immediate-response-and-intervention-for-emergency' },
-          { Icon: House, title: 'mswdo-temporary-shelter', desc: 'mswdo-safe-shelter-for-victims-needing-immediate' },
-          { Icon: MessageCircleHeart, title: 'mswdo-counseling-services', desc: 'mswdo-psychosocial-support-and-counseling-for-affected' },
-          { Icon: FileText, title: 'mswdo-legal-assistance', desc: 'mswdo-referral-and-coordination-for-legal-aid-services' },
+          {
+            Icon: PhoneIncoming,
+            title: 'mswdo-crisis-intervention',
+            desc: 'mswdo-immediate-response-and-intervention-for-emergency',
+          },
+          {
+            Icon: House,
+            title: 'mswdo-temporary-shelter',
+            desc: 'mswdo-safe-shelter-for-victims-needing-immediate',
+          },
+          {
+            Icon: MessageCircleHeart,
+            title: 'mswdo-counseling-services',
+            desc: 'mswdo-psychosocial-support-and-counseling-for-affected',
+          },
+          {
+            Icon: FileText,
+            title: 'mswdo-legal-assistance',
+            desc: 'mswdo-referral-and-coordination-for-legal-aid-services',
+          },
         ],
       },
     ],
@@ -123,10 +154,25 @@ const sections: ServiceSection[] = [
     title: 'mswdo-rehabilitation-services',
     subtitle: 'mswdo-recovery-and-reintegration-programs-for',
     infoBoxes: [
-      { Icon: Clock, label: 'mswdo-processing-time', value: 'mswdo-varies', small: 'Case-dependent' },
+      {
+        Icon: Clock,
+        label: 'mswdo-processing-time',
+        value: 'mswdo-varies',
+        small: 'Case-dependent',
+      },
       { Icon: Banknote, label: 'mswdo-fee', value: 'mswdo-free', small: 'No charges' },
-      { Icon: UserCheck, label: 'mswdo-who-can-apply', value: 'mswdo-referred-clients', small: 'Assessment required' },
-      { Icon: CalendarCheck, label: 'mswdo-availability', value: { lit: 'Mon-Fri' }, small: '8AM - 5PM' },
+      {
+        Icon: UserCheck,
+        label: 'mswdo-who-can-apply',
+        value: 'mswdo-referred-clients',
+        small: 'Assessment required',
+      },
+      {
+        Icon: CalendarCheck,
+        label: 'mswdo-availability',
+        value: { lit: 'Mon-Fri' },
+        small: '8AM - 5PM',
+      },
     ],
     body: [
       {
@@ -137,10 +183,26 @@ const sections: ServiceSection[] = [
       {
         kind: 'cards',
         cards: [
-          { Icon: HeartHandshake, title: 'mswdo-psychosocial-rehabilitation', desc: 'mswdo-counseling-and-therapy-sessions-for-emotional-and' },
-          { Icon: Users, title: 'mswdo-family-reintegration', desc: 'mswdo-programs-to-reunite-and-strengthen-family' },
-          { Icon: BookOpen, title: 'mswdo-skills-training', desc: 'mswdo-vocational-and-life-skills-training-for' },
-          { Icon: RefreshCw, title: 'mswdo-aftercare-services', desc: 'mswdo-followup-support-and-monitoring-after' },
+          {
+            Icon: HeartHandshake,
+            title: 'mswdo-psychosocial-rehabilitation',
+            desc: 'mswdo-counseling-and-therapy-sessions-for-emotional-and',
+          },
+          {
+            Icon: Users,
+            title: 'mswdo-family-reintegration',
+            desc: 'mswdo-programs-to-reunite-and-strengthen-family',
+          },
+          {
+            Icon: BookOpen,
+            title: 'mswdo-skills-training',
+            desc: 'mswdo-vocational-and-life-skills-training-for',
+          },
+          {
+            Icon: RefreshCw,
+            title: 'mswdo-aftercare-services',
+            desc: 'mswdo-followup-support-and-monitoring-after',
+          },
         ],
       },
     ],
@@ -154,8 +216,18 @@ const sections: ServiceSection[] = [
     infoBoxes: [
       { Icon: Clock, label: 'mswdo-duration', value: 'mswdo-120-days', small: 'Feeding cycle' },
       { Icon: Banknote, label: 'mswdo-fee', value: 'mswdo-free', small: 'No charges' },
-      { Icon: UserCheck, label: 'mswdo-beneficiaries', value: 'mswdo-children-05', small: 'Malnourished' },
-      { Icon: CalendarCheck, label: 'mswdo-schedule', value: 'mswdo-daily', small: 'During program' },
+      {
+        Icon: UserCheck,
+        label: 'mswdo-beneficiaries',
+        value: 'mswdo-children-05',
+        small: 'Malnourished',
+      },
+      {
+        Icon: CalendarCheck,
+        label: 'mswdo-schedule',
+        value: 'mswdo-daily',
+        small: 'During program',
+      },
     ],
     body: [
       {
@@ -167,15 +239,32 @@ const sections: ServiceSection[] = [
         kind: 'cards',
         heading: 'mswdo-program-components',
         cards: [
-          { Icon: EggFried, title: 'mswdo-hot-meals', desc: 'mswdo-nutritious-hot-meals-provided-daily-to' },
-          { Icon: ClipboardPlus, title: 'mswdo-growth-monitoring', desc: 'mswdo-regular-weighing-and-height-measurement-to-track' },
-          { Icon: GraduationCap, title: 'mswdo-nutrition-education', desc: 'mswdo-parent-education-on-proper-nutrition-and-child' },
+          {
+            Icon: EggFried,
+            title: 'mswdo-hot-meals',
+            desc: 'mswdo-nutritious-hot-meals-provided-daily-to',
+          },
+          {
+            Icon: ClipboardPlus,
+            title: 'mswdo-growth-monitoring',
+            desc: 'mswdo-regular-weighing-and-height-measurement-to-track',
+          },
+          {
+            Icon: GraduationCap,
+            title: 'mswdo-nutrition-education',
+            desc: 'mswdo-parent-education-on-proper-nutrition-and-child',
+          },
         ],
       },
       {
         kind: 'reqs',
         heading: 'mswdo-requirements',
-        items: ['Birth Certificate', 'Barangay Certificate', 'Nutritional Assessment', 'Parent/Guardian ID'],
+        items: [
+          'Birth Certificate',
+          'Barangay Certificate',
+          'Nutritional Assessment',
+          'Parent/Guardian ID',
+        ],
       },
     ],
   },
@@ -188,8 +277,18 @@ const sections: ServiceSection[] = [
     infoBoxes: [
       { Icon: Clock, label: 'mswdo-schedule', value: { lit: 'Mon-Fri' }, small: 'School year' },
       { Icon: Banknote, label: 'mswdo-fee', value: 'mswdo-free', small: 'No tuition' },
-      { Icon: UserCheck, label: 'mswdo-age-group', value: 'mswdo-34-years', small: 'Pre-school age' },
-      { Icon: MapPin, label: 'mswdo-centers', value: 'mswdo-22-barangays', small: 'Municipal-wide' },
+      {
+        Icon: UserCheck,
+        label: 'mswdo-age-group',
+        value: 'mswdo-34-years',
+        small: 'Pre-school age',
+      },
+      {
+        Icon: MapPin,
+        label: 'mswdo-centers',
+        value: 'mswdo-22-barangays',
+        small: 'Municipal-wide',
+      },
     ],
     body: [
       {
@@ -201,16 +300,37 @@ const sections: ServiceSection[] = [
         kind: 'cards',
         heading: 'mswdo-program-features',
         cards: [
-          { Icon: BookOpen, title: 'mswdo-early-learning', desc: 'mswdo-ageappropriate-educational-activities-and' },
-          { Icon: Users, title: 'mswdo-socialization', desc: 'mswdo-group-activities-to-develop-social-skills-and' },
-          { Icon: Heart, title: 'mswdo-health-monitoring', desc: 'mswdo-regular-health-checkups-and-growth-monitoring' },
-          { Icon: CupSoda, title: 'mswdo-feeding', desc: 'mswdo-nutritious-snacks-and-meals-during-day-care-hours' },
+          {
+            Icon: BookOpen,
+            title: 'mswdo-early-learning',
+            desc: 'mswdo-ageappropriate-educational-activities-and',
+          },
+          {
+            Icon: Users,
+            title: 'mswdo-socialization',
+            desc: 'mswdo-group-activities-to-develop-social-skills-and',
+          },
+          {
+            Icon: Heart,
+            title: 'mswdo-health-monitoring',
+            desc: 'mswdo-regular-health-checkups-and-growth-monitoring',
+          },
+          {
+            Icon: CupSoda,
+            title: 'mswdo-feeding',
+            desc: 'mswdo-nutritious-snacks-and-meals-during-day-care-hours',
+          },
         ],
       },
       {
         kind: 'reqs',
         heading: 'mswdo-enrollment-requirements',
-        items: ['Birth Certificate (PSA)', 'Immunization Record', '2x2 ID Photo', 'Parent/Guardian ID'],
+        items: [
+          'Birth Certificate (PSA)',
+          'Immunization Record',
+          '2x2 ID Photo',
+          'Parent/Guardian ID',
+        ],
       },
     ],
   },
@@ -221,10 +341,30 @@ const sections: ServiceSection[] = [
     title: 'mswdo-selfemployment-assistance-kaunlaran-seak',
     subtitle: 'mswdo-capital-assistance-for-microenterprise-development',
     infoBoxes: [
-      { Icon: Clock, label: 'mswdo-processing', value: 'mswdo-1530-days', small: 'After assessment' },
-      { Icon: Banknote, label: 'mswdo-loan-amount', value: { lit: '₱5,000-₱10,000' }, small: 'Per beneficiary' },
-      { Icon: UserCheck, label: 'mswdo-who-can-apply', value: 'mswdo-lowincome', small: 'Families/Individuals' },
-      { Icon: Percent, label: 'mswdo-interest', value: 'mswdo-low-interest', small: 'Subsidized rate' },
+      {
+        Icon: Clock,
+        label: 'mswdo-processing',
+        value: 'mswdo-1530-days',
+        small: 'After assessment',
+      },
+      {
+        Icon: Banknote,
+        label: 'mswdo-loan-amount',
+        value: { lit: '₱5,000-₱10,000' },
+        small: 'Per beneficiary',
+      },
+      {
+        Icon: UserCheck,
+        label: 'mswdo-who-can-apply',
+        value: 'mswdo-lowincome',
+        small: 'Families/Individuals',
+      },
+      {
+        Icon: Percent,
+        label: 'mswdo-interest',
+        value: 'mswdo-low-interest',
+        small: 'Subsidized rate',
+      },
     ],
     body: [
       {
@@ -246,7 +386,14 @@ const sections: ServiceSection[] = [
       {
         kind: 'reqs',
         heading: 'mswdo-requirements',
-        items: ['Application Form', 'Barangay Certificate', 'Valid ID', 'Business Plan', 'Certificate of Indigency', '1x1 ID Photo'],
+        items: [
+          'Application Form',
+          'Barangay Certificate',
+          'Valid ID',
+          'Business Plan',
+          'Certificate of Indigency',
+          '1x1 ID Photo',
+        ],
       },
     ],
   },
@@ -257,10 +404,25 @@ const sections: ServiceSection[] = [
     title: 'mswdo-social-pension-for-indigent-senior-citizens',
     subtitle: { lit: 'Monthly stipend for qualified elderly citizens' },
     infoBoxes: [
-      { Icon: Coins, label: 'mswdo-amount', value: { lit: '₱1,000/month' }, small: 'Quarterly release' },
+      {
+        Icon: Coins,
+        label: 'mswdo-amount',
+        value: { lit: '₱1,000/month' },
+        small: 'Quarterly release',
+      },
       { Icon: User, label: 'mswdo-age-requirement', value: 'mswdo-60-years', small: 'And above' },
-      { Icon: CircleCheck, label: 'mswdo-status', value: 'mswdo-indigent', small: 'DSWD validated' },
-      { Icon: CalendarDays, label: 'mswdo-payout', value: 'mswdo-quarterly', small: '₱3,000 per quarter' },
+      {
+        Icon: CircleCheck,
+        label: 'mswdo-status',
+        value: 'mswdo-indigent',
+        small: 'DSWD validated',
+      },
+      {
+        Icon: CalendarDays,
+        label: 'mswdo-payout',
+        value: 'mswdo-quarterly',
+        small: '₱3,000 per quarter',
+      },
     ],
     body: [
       {
@@ -300,9 +462,24 @@ const sections: ServiceSection[] = [
     title: 'mswdo-sustainable-livelihood-program-slp',
     subtitle: 'mswdo-communitybased-capacity-building-and-livelihood',
     infoBoxes: [
-      { Icon: Users, label: 'mswdo-target', value: 'mswdo-4ps-members', small: 'Priority beneficiaries' },
-      { Icon: Banknote, label: 'mswdo-assistance', value: { lit: '₱10,000-₱15,000' }, small: 'Seed capital' },
-      { Icon: GraduationCap, label: 'mswdo-training', value: 'mswdo-skills-devt', small: 'Included' },
+      {
+        Icon: Users,
+        label: 'mswdo-target',
+        value: 'mswdo-4ps-members',
+        small: 'Priority beneficiaries',
+      },
+      {
+        Icon: Banknote,
+        label: 'mswdo-assistance',
+        value: { lit: '₱10,000-₱15,000' },
+        small: 'Seed capital',
+      },
+      {
+        Icon: GraduationCap,
+        label: 'mswdo-training',
+        value: 'mswdo-skills-devt',
+        small: 'Included',
+      },
       { Icon: TrendingUp, label: 'mswdo-track', value: 'mswdo-2-tracks', small: 'ME or EF' },
     ],
     body: [
@@ -315,14 +492,27 @@ const sections: ServiceSection[] = [
         kind: 'cards',
         heading: 'mswdo-program-tracks',
         cards: [
-          { Icon: Store, title: 'mswdo-microenterprise-development-md', desc: 'mswdo-for-participants-who-want-to-start-or-expand' },
-          { Icon: Briefcase, title: 'mswdo-employment-facilitation-ef', desc: 'mswdo-for-participants-seeking-employment-includes' },
+          {
+            Icon: Store,
+            title: 'mswdo-microenterprise-development-md',
+            desc: 'mswdo-for-participants-who-want-to-start-or-expand',
+          },
+          {
+            Icon: Briefcase,
+            title: 'mswdo-employment-facilitation-ef',
+            desc: 'mswdo-for-participants-seeking-employment-includes',
+          },
         ],
       },
       {
         kind: 'reqs',
         heading: 'mswdo-requirements',
-        items: ['4Ps ID/Certificate', 'Valid Government ID', 'Barangay Certificate', 'Business Proposal (for MD)'],
+        items: [
+          '4Ps ID/Certificate',
+          'Valid Government ID',
+          'Barangay Certificate',
+          'Business Proposal (for MD)',
+        ],
       },
     ],
   },
@@ -335,8 +525,18 @@ const sections: ServiceSection[] = [
     infoBoxes: [
       { Icon: Clock, label: 'mswdo-processing', value: 'mswdo-13-days', small: 'Upon assessment' },
       { Icon: Banknote, label: 'mswdo-amount', value: 'mswdo-varies', small: 'Based on need' },
-      { Icon: UserCheck, label: 'mswdo-who-can-apply', value: 'mswdo-indigent', small: 'Residents' },
-      { Icon: CalendarCheck, label: 'mswdo-availability', value: { lit: 'Mon-Fri' }, small: '8AM - 5PM' },
+      {
+        Icon: UserCheck,
+        label: 'mswdo-who-can-apply',
+        value: 'mswdo-indigent',
+        small: 'Residents',
+      },
+      {
+        Icon: CalendarCheck,
+        label: 'mswdo-availability',
+        value: { lit: 'Mon-Fri' },
+        small: '8AM - 5PM',
+      },
     ],
     body: [
       {
@@ -348,16 +548,39 @@ const sections: ServiceSection[] = [
         kind: 'cards',
         heading: 'mswdo-types-of-assistance',
         cards: [
-          { Icon: Hospital, title: 'mswdo-medical-assistance', desc: 'mswdo-financial-aid-for-hospitalization-medicines' },
-          { Icon: Flower2, title: 'mswdo-burial-assistance', desc: 'mswdo-financial-support-for-funeral-and-burial-expenses' },
-          { Icon: BookOpen, title: 'mswdo-educational-assistance', desc: 'mswdo-support-for-school-fees-supplies-and-other' },
-          { Icon: Bus, title: 'mswdo-transportation-assistance', desc: 'mswdo-travel-assistance-for-medical-referrals-and' },
+          {
+            Icon: Hospital,
+            title: 'mswdo-medical-assistance',
+            desc: 'mswdo-financial-aid-for-hospitalization-medicines',
+          },
+          {
+            Icon: Flower2,
+            title: 'mswdo-burial-assistance',
+            desc: 'mswdo-financial-support-for-funeral-and-burial-expenses',
+          },
+          {
+            Icon: BookOpen,
+            title: 'mswdo-educational-assistance',
+            desc: 'mswdo-support-for-school-fees-supplies-and-other',
+          },
+          {
+            Icon: Bus,
+            title: 'mswdo-transportation-assistance',
+            desc: 'mswdo-travel-assistance-for-medical-referrals-and',
+          },
         ],
       },
       {
         kind: 'reqs',
         heading: 'mswdo-general-requirements',
-        items: ['Request Letter', 'Certificate of Indigency', 'Valid ID', 'Barangay Certificate', 'Supporting Documents', 'Medical Abstract (for medical)'],
+        items: [
+          'Request Letter',
+          'Certificate of Indigency',
+          'Valid ID',
+          'Barangay Certificate',
+          'Supporting Documents',
+          'Medical Abstract (for medical)',
+        ],
       },
     ],
   },
@@ -499,7 +722,7 @@ export default function Mswdo() {
             {quickStats.map((s) => (
               <div
                 key={s.label}
-                className="rounded-xl border border-border bg-card p-4 text-center"
+                className="rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4 text-center"
               >
                 <s.Icon className="mx-auto mb-2 size-8 text-primary" aria-hidden="true" />
                 <h4 className="mb-1 text-xs tracking-wide text-muted-foreground uppercase">
@@ -511,14 +734,14 @@ export default function Mswdo() {
           </div>
 
           <nav
-            className="mt-6 flex flex-wrap justify-center gap-2 rounded-xl border border-border bg-card p-4"
+            className="mt-6 flex flex-wrap justify-center gap-2 rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4"
             aria-label="CSWDO Services Navigation"
           >
             {quickNav.map((n) => (
               <a
                 key={n.href}
                 href={n.href}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-muted px-4 py-2.5 text-sm font-medium text-foreground transition hover:border-primary hover:bg-primary hover:text-primary-foreground"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-muted px-4 py-2.5 text-sm font-medium text-foreground transition hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)] hover:bg-primary hover:text-primary-foreground"
               >
                 <n.Icon className="size-4" aria-hidden="true" />
                 <span>{text(n.label)}</span>
@@ -550,12 +773,15 @@ export default function Mswdo() {
                   </div>
 
                   {/* Detail card */}
-                  <div className="overflow-hidden rounded-xl border border-border bg-card">
+                  <div className="overflow-hidden rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)]">
                     {/* Info boxes */}
                     <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 lg:grid-cols-4">
                       {sec.infoBoxes.map((box, i) => (
                         <div key={i} className="bg-card p-4 text-center">
-                          <box.Icon className="mx-auto mb-2 size-6 text-primary" aria-hidden="true" />
+                          <box.Icon
+                            className="mx-auto mb-2 size-6 text-primary"
+                            aria-hidden="true"
+                          />
                           <h4 className="mb-1 text-xs tracking-wide text-muted-foreground uppercase">
                             {t(box.label)}
                           </h4>
@@ -579,7 +805,7 @@ export default function Mswdo() {
             </div>
 
             {/* Sidebar */}
-            <aside className="rounded-xl border border-border bg-card p-6 lg:sticky lg:top-24">
+            <aside className="rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-6 lg:sticky lg:top-24">
               <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
                 <Building2 className="size-5 text-primary" aria-hidden="true" />
                 CSWDO
