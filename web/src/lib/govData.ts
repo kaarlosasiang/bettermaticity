@@ -5,7 +5,7 @@ import ordinancesJson from '@data/ordinances.json';
 /**
  * Build-time reference data. These JSON files are imported (not fetched), so the
  * values are baked into the prerendered HTML and are crawlable. Content is
- * currently placeholder pending verified City of Mati records — render as-is.
+ * legislative records distinguish government reporting from signed full texts.
  */
 
 export interface Official {
@@ -26,16 +26,27 @@ export interface OfficialsData {
   _note?: string;
 }
 
-export interface Resolution {
-  resolutionNo: string;
-  title: string;
-  sessionDate: string;
+export interface LegislativeRecord {
+  year: number;
+  summaryKey: string;
+  issuingBody: string;
+  officialTitle: string | null;
+  sessionDate: string | null;
+  fullTextUrl: string | null;
+  verificationStatus: 'government-report-reference';
+  sourceUrl: string;
+  sourceTitle: string;
+  sourcePublisher: string;
+  checkedOn: string;
+  historical?: boolean;
 }
 
-export interface Ordinance {
+export interface Resolution extends LegislativeRecord {
+  resolutionNo: string;
+}
+
+export interface Ordinance extends LegislativeRecord {
   ordinanceNo: string;
-  title: string;
-  sessionDate: string;
 }
 
 export const officials = officialsJson as OfficialsData;
@@ -60,8 +71,18 @@ export function formatSessionDate(iso: string): string {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
   if (!m) return iso;
   const months = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December',
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ];
   const month = months[Number(m[2]) - 1];
   return month ? `${month} ${Number(m[3])}, ${m[1]}` : iso;

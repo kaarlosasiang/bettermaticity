@@ -1,21 +1,22 @@
 {
-  "_status": "draft",
-  "_note": "PLACEHOLDER — replace with actual Resolutions passed by the Sangguniang Panlungsod of the City of Mati, Davao Oriental.",
+  "_status": "partial",
+  "_checkedOn": "2026-09-24",
+  "_note": "Selected references checked against indexed Philippine News Agency reporting. Not a complete register. Signed texts, exact titles, session dates and current legal status have not been verified.",
   "resolutions": [
     {
-      "resolutionNo": "000-2025-01",
-      "title": "[Placeholder] A Resolution of the Sangguniang Panlungsod of the City of Mati, Davao Oriental",
-      "sessionDate": "2025-01-06"
-    },
-    {
-      "resolutionNo": "000-2025-02",
-      "title": "[Placeholder] A Resolution of the Sangguniang Panlungsod of the City of Mati, Davao Oriental",
-      "sessionDate": "2025-01-13"
-    },
-    {
-      "resolutionNo": "000-2025-03",
-      "title": "[Placeholder] A Resolution of the Sangguniang Panlungsod of the City of Mati, Davao Oriental",
-      "sessionDate": "2025-01-20"
+      "resolutionNo": "365, s. 2005",
+      "year": 2005,
+      "summaryKey": "leg-record-eagle",
+      "issuingBody": "Sangguniang Bayan of Mati",
+      "sourceUrl": "https://www.pna.gov.ph/articles/1082093",
+      "sourceTitle": "Mati City, PEF revisit contract for Philippine eagle protection",
+      "historical": true,
+      "officialTitle": null,
+      "sessionDate": null,
+      "fullTextUrl": null,
+      "verificationStatus": "government-report-reference",
+      "sourcePublisher": "Philippine News Agency",
+      "checkedOn": "2026-09-24"
     }
   ]
 }

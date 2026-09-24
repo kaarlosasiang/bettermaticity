@@ -1,4 +1,4 @@
-// City of Mati statistics (real data — PSA CPH / 2024 POPCEN, DTI CMCI 2024).
+// City of Mati figures checked 2026-09-24. See docs/research/statistics-verification-2026-09-24.md.
 
 export interface BarangayPop {
   name: string;
@@ -43,151 +43,64 @@ export const historicalData = {
 export const landAreaKm2 = '588.63';
 export const incomeClass = '1st';
 
-// --- Municipal Finance (FY2023, BLGF 2023 SRE) ---
+export const statisticsCheckedOn = '2026-09-24';
+export const populationReferenceDate = '2024-07-01';
+export const statisticsSources = {
+  psgc: {
+    title: 'PSA PSGC — City of Mati, 2024 POPCEN',
+    url: 'https://psa.gov.ph/classification/psgc/barangays/1102509000',
+  },
+  history: {
+    title: 'PSA 2015 Census, Davao Oriental — Table 1, pp. 3–4',
+    url: 'https://psa.gov.ph/system/files/main-publication/11_Davao%2520Oriental.pdf#page=30',
+  },
+  census2007: {
+    title: 'PSA 2007 Census — Davao Oriental',
+    url: 'https://psa.gov.ph/statistics/population-and-housing/node/738',
+  },
+  area: {
+    title: 'PSA population density table — p. 47 (2013 land areas)',
+    url: 'https://psa.gov.ph/system/files/phcd/2022-12/2010-2015-2020%2520Population%2520Density_Table%2520A_Using%25202013%2520Land%2520Areas_12%2520July%25202021.pdf#page=47',
+  },
+  finance: {
+    title: 'DBM BESF 2027 — Table F.13, FY2025, pp. 594–595',
+    url: 'https://www.dbm.gov.ph/wp-content/uploads/BESF/BESF2027/F13.pdf#page=3',
+    publishedOn: '2026-08-11',
+  },
+  poverty: {
+    title: 'PSA 2023 city- and municipal-level poverty estimates',
+    url: 'https://psa.gov.ph/content/881-cities-and-municipalities-recorded-poverty-incidence-20-percent-or-lower-2023',
+    publishedOn: '2026-02-06',
+  },
+  povertyArchive: {
+    title: 'Archived PSA workbook — Annex 1, Mati row 1376',
+    url: 'https://archive.org/details/2-2023-sae-with-psgc-no-huc-06-feb-2026',
+  },
+  cmci: {
+    title: 'DTI CMCI — Mati profile',
+    url: 'https://cmci.dti.gov.ph/lgu-profile.php?lgu=Mati',
+  },
+};
+
+// DBM BESF 2027 F.13: FY2025 actual LIFT submissions, PHP millions.
+// NTA is included in external receipts. Non-income receipts include borrowings.
 export const municipalFinance = {
-  fiscalYear: '2023',
-  annualIncome: { display: '₱371.33M', detail: '₱371,329,918.71' },
-  iraShare: { display: '₱220.77M', detail: 'Internal Revenue Allotment' },
-  iraDependency: { display: '59.45%', detail: 'National Tax Share' },
-  // Income composition (stacked): must sum to 100.
-  composition: { ira: 59.45, local: 40.55 },
+  fiscalYear: 2025,
+  receipts: { local: 252.55, external: 1837.19, nonIncome: 289.11, total: 2378.85, nta: 1776.97 },
+  expenditures: 1672.95,
 };
+export const ntaShareOfReceipts =
+  (municipalFinance.receipts.nta / municipalFinance.receipts.total) * 100;
 
-// --- Economic Indicators (REAL — BLGF 2023) ---
-export interface EconomicSector {
-  name: string;
-  pct: number;
-}
+// PSA Annex 1, PSGC 112509, row 1376. Archived workbook inspected directly.
+// Incidence among population; percentages, not fractions. Retain source precision.
+export const povertyStats = [
+  { year: 2018, rate: 21.51, lower: 18.04, upper: 24.98 },
+  { year: 2021, rate: 21.814703, lower: 19.7209598209066, upper: 23.9084461790934 },
+  { year: 2023, rate: 30.393506, lower: 28.0017416198823, upper: 32.7852703801177 },
+];
 
-export const economicIndicators = {
-  registeredBusinesses: { value: '1,200', trend: '+8% from last year' },
-  agriculturalLand: { value: '8,500 ha', note: 'Rice & Corn Production' },
-  employmentRate: { value: '94.2%', note: 'Labor Force Participation' },
-  sectors: [
-    { name: 'Agriculture', pct: 45 },
-    { name: 'Trade & Commerce', pct: 30 },
-    { name: 'Services', pct: 20 },
-    { name: 'Industry', pct: 5 },
-  ] as EconomicSector[],
-};
-
-// --- Poverty Statistics (PSA 2021 City & Municipal-Level Poverty Estimates) ---
-export const povertyStats = {
-  y2018: { rate: '7.0', ci: '90% CI: 4.7% - 9.2%', width: 7 },
-  y2021: { rate: '6.4', ci: '90% CI: 4.7% - 8.1%', width: 6.4 },
-  change: '-0.6%',
-};
-
-// --- CMCI (DTI Cities and Municipalities Competitiveness Index, 2024) ---
-export interface CmciIndicator {
-  name: string;
-  value: string; // preserve legacy decimal formatting verbatim
-  fill: number; // bar width percentage (legacy data-value)
-}
-
-export interface CmciPillar {
-  label: string;
-  score: number;
-  // Legacy pillar-trend badge on the overview cards.
-  trend: { label: string; dir: 'up' | 'down' | 'stable' };
-  indicators: CmciIndicator[];
-}
-
-export const cmciData: {
-  year: string;
-  overall: { rank: number; score: number };
-  pillars: CmciPillar[];
-} = {
-  year: '2024',
-  overall: { rank: 55, score: 38.2894 },
-  pillars: [
-    {
-      label: 'Economic Dynamism',
-      score: 3.3009,
-      trend: { label: '+13%', dir: 'up' },
-      indicators: [
-        { name: 'Local Economy Size', value: '0.0126', fill: 0.5 },
-        { name: 'Local Economy Growth', value: '0.0018', fill: 0.07 },
-        { name: 'Active Establishments', value: '0.1895', fill: 7.58 },
-        { name: 'Safety Compliant Business', value: '0.1548', fill: 6.19 },
-        { name: 'Employment Generation', value: '0.0124', fill: 0.5 },
-        { name: 'Cost of Living', value: '0.9014', fill: 36.06 },
-        { name: 'Cost of Doing Business', value: '1.6116', fill: 64.46 },
-        { name: 'Financial Deepening', value: '0.3169', fill: 12.68 },
-        { name: 'Productivity', value: '0.0178', fill: 0.71 },
-        { name: 'Business & Professional Orgs', value: '0.0821', fill: 3.28 },
-      ],
-    },
-    {
-      label: 'Government Efficiency',
-      score: 10.6206,
-      trend: { label: '+14%', dir: 'up' },
-      indicators: [
-        { name: "Compliance to Nat'l Directives", value: '2.0000', fill: 80.0 },
-        { name: 'Investment Promotion Unit', value: '1.9048', fill: 76.19 },
-        { name: 'ARTA Citizens Charter', value: '2.0000', fill: 80.0 },
-        { name: 'Generate Local Resource', value: '0.1942', fill: 7.77 },
-        { name: 'Health Services Capacity', value: '0.1777', fill: 7.11 },
-        { name: 'School Services Capacity', value: '0.4508', fill: 18.03 },
-        { name: 'Recognition of Performance', value: '0.3582', fill: 14.33 },
-        { name: 'Getting Business Permits', value: '2.0000', fill: 80.0 },
-        { name: 'Peace and Order', value: '0.0709', fill: 2.84 },
-        { name: 'Social Protection', value: '1.4640', fill: 58.56 },
-      ],
-    },
-    {
-      label: 'Infrastructure',
-      score: 4.2019,
-      trend: { label: '-18%', dir: 'down' },
-      indicators: [
-        { name: 'Road Network', value: '0.0021', fill: 0.08 },
-        { name: 'Distance to Ports', value: '1.9369', fill: 77.48 },
-        { name: 'Basic Utilities', value: '1.2365', fill: 49.46 },
-        { name: 'Transportation Vehicles', value: '0.0442', fill: 1.77 },
-        { name: 'Education', value: '0.3035', fill: 12.14 },
-        { name: 'Health', value: '0.2061', fill: 8.24 },
-        { name: 'LGU Investment', value: '0.0214', fill: 0.86 },
-        { name: 'Accommodation Capacity', value: '0.2043', fill: 8.17 },
-        { name: 'IT Capacity', value: '0.1784', fill: 7.14 },
-        { name: 'FinTech Capacity', value: '0.0685', fill: 2.74 },
-      ],
-    },
-    {
-      label: 'Resiliency',
-      score: 11.5266,
-      trend: { label: 'Stable', dir: 'stable' },
-      indicators: [
-        { name: 'Land Use Plan', value: '1.9828', fill: 79.31 },
-        { name: 'DRR Plan', value: '1.9545', fill: 78.18 },
-        { name: 'Annual Disaster Drill', value: '1.0227', fill: 40.91 },
-        { name: 'Early Warning System', value: '1.0089', fill: 40.36 },
-        { name: 'DRRMP Budget', value: '0.0570', fill: 2.28 },
-        { name: 'Local Risk Assessments', value: '2.0000', fill: 80.0 },
-        { name: 'Emergency Infrastructure', value: '0.4062', fill: 16.25 },
-        { name: 'Utilities', value: '1.5058', fill: 60.23 },
-        { name: 'Employed Population', value: '0.0827', fill: 3.31 },
-        { name: 'Sanitary System', value: '1.5060', fill: 60.24 },
-      ],
-    },
-    {
-      label: 'Innovation',
-      score: 8.6394,
-      trend: { label: '-5%', dir: 'down' },
-      indicators: [
-        { name: 'ICT Plan', value: '2.0001', fill: 80.0 },
-        { name: 'R&D Expenditures', value: '0.0025', fill: 0.1 },
-        { name: 'E-BPLS Software', value: '2.0000', fill: 80.0 },
-        { name: 'Online Payment Facilities', value: '2.0000', fill: 80.0 },
-        { name: 'STEM Graduates', value: '0.1440', fill: 5.76 },
-        { name: 'IP Registration', value: '0.1476', fill: 5.9 },
-        { name: 'Internet Capability', value: '1.0025', fill: 40.1 },
-        { name: 'Basic Internet Service', value: '1.0407', fill: 41.63 },
-        { name: 'Startup & Innovation Facilities', value: '0.3002', fill: 12.01 },
-        { name: 'New Technology', value: '0.0018', fill: 0.07 },
-      ],
-    },
-  ],
-};
-
+// Unverified economic and CMCI values are deliberately excluded from published data.
 export const totalPopulation = historicalData.populations[historicalData.populations.length - 1];
 export const barangayCount = barangayData.length;
+export const populationDensity = totalPopulation / Number(landAreaKm2);

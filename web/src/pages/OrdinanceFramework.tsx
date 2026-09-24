@@ -1,9 +1,10 @@
-import { BookMarked, Info, ExternalLink } from 'lucide-react';
+import { BookMarked, Info } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Container, Section, SectionTitle, PageHeader } from '@/components/primitives';
-import { ordinances, formatSessionDate } from '@/lib/govData';
+import { ordinances } from '@/lib/govData';
+import { LegislativeRecords, LegislativeLegalSource } from '@/components/LegislativeRecords';
 
 const ordinanceCategories = [
   'ord-cat-revenue',
@@ -13,8 +14,6 @@ const ordinanceCategories = [
   'ord-cat-traffic',
   'ord-cat-zoning',
 ];
-
-const SB_ORD_URL = 'https://sangguniangbayan.mati.gov.ph/index.php?page=legislative_framework_ord';
 
 export default function OrdinanceFramework() {
   const { t } = useLanguage();
@@ -65,6 +64,7 @@ export default function OrdinanceFramework() {
             </h2>
             <p className="mb-3 text-sm text-muted-foreground">{t('ord-what-is-p1')}</p>
             <p className="m-0 text-sm text-muted-foreground">{t('ord-what-is-p2')}</p>
+            <LegislativeLegalSource resolution={false} />
           </div>
         </Container>
       </Section>
@@ -86,61 +86,7 @@ export default function OrdinanceFramework() {
         </Container>
       </Section>
 
-      <Section>
-        <Container>
-          <SectionTitle>{t('ord-2025-title')}</SectionTitle>
-          <p className="-mt-3 mb-5 text-[0.8125rem] text-muted-foreground">
-            {t('ord-2025-subtitle')}
-          </p>
-          <div className="overflow-x-auto rounded-lg border border-border">
-            <table className="w-full border-collapse text-left text-sm">
-              <thead>
-                <tr className="bg-muted text-foreground">
-                  <th scope="col" className="px-4 py-3 font-semibold">
-                    {t('ord-table-number')}
-                  </th>
-                  <th scope="col" className="px-4 py-3 font-semibold">
-                    {t('ord-table-title')}
-                  </th>
-                  <th scope="col" className="px-4 py-3 font-semibold whitespace-nowrap">
-                    {t('ord-table-date')}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {ordinances.length === 0 ? (
-                  <tr>
-                    <td colSpan={3} className="px-4 py-8 text-center text-muted-foreground">
-                      {t('ord-no-ordinances')}
-                    </td>
-                  </tr>
-                ) : (
-                  ordinances.map((o, i) => (
-                    <tr key={`${o.ordinanceNo}-${i}`} className="border-t border-border">
-                      <td className="px-4 py-3 font-medium whitespace-nowrap text-foreground">
-                        {o.ordinanceNo}
-                      </td>
-                      <td className="px-4 py-3 text-muted-foreground">{o.title}</td>
-                      <td className="px-4 py-3 whitespace-nowrap text-muted-foreground">
-                        {formatSessionDate(o.sessionDate)}
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
-          <a
-            href={SB_ORD_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground no-underline transition hover:opacity-90"
-          >
-            {t('ord-view-all-ordinances-on-sb-website')}
-            <ExternalLink className="size-4" aria-hidden="true" />
-          </a>
-        </Container>
-      </Section>
+      <LegislativeRecords kind="ordinances" rows={ordinances} />
     </>
   );
 }

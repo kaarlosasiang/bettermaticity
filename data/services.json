@@ -5,7 +5,7 @@
       "title": "Birth Certificate",
       "category": "Certificates & Vital Records",
       "categoryId": "certificates",
-      "description": "Get a certified copy of birth certificate registered in Mati",
+      "description": "Local civil registration and certified copies.",
       "keywords": [
         "birth",
         "certificate",
@@ -15,17 +15,16 @@
         "lcr",
         "vital records"
       ],
-      "fee": "₱150",
-      "processingTime": "15-30 minutes",
-      "office": "Local Civil Registrar",
-      "url": "../service-details/birth-certificate.html"
+      "url": "/service-details/birth-certificate",
+      "sourceIds": ["charter", "psa", "birth"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "marriage-certificate",
       "title": "Marriage Certificate",
       "category": "Certificates & Vital Records",
       "categoryId": "certificates",
-      "description": "Register or request certified true copy of marriage certificate",
+      "description": "Local civil registration and certified copies.",
       "keywords": [
         "marriage",
         "wedding",
@@ -36,17 +35,16 @@
         "COM",
         "certificate of marriage"
       ],
-      "fee": "Free (Registration)",
-      "processingTime": "5 minutes",
-      "office": "Local Civil Registrar",
-      "url": "../service-details/marriage-certificate.html"
+      "url": "/service-details/marriage-certificate",
+      "sourceIds": ["charter", "psa"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "death-certificate",
       "title": "Death Certificate",
       "category": "Certificates & Vital Records",
       "categoryId": "certificates",
-      "description": "Register death certificate and obtain burial or transfer permit",
+      "description": "Local civil registration and certified copies.",
       "keywords": [
         "death",
         "died",
@@ -56,401 +54,368 @@
         "burial permit",
         "transfer permit"
       ],
-      "fee": "₱50-150",
-      "processingTime": "1 hour 35 minutes",
-      "office": "Local Civil Registrar",
-      "url": "../service-details/death-certificate.html"
+      "url": "/service-details/death-certificate",
+      "sourceIds": ["charter", "psa"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "barangay-clearance",
       "title": "Barangay Clearance",
       "category": "Certificates & Vital Records",
       "categoryId": "certificates",
-      "description": "Certificate of residence from your barangay",
+      "description": "Ask about barangay clearance availability, eligibility and the applicable process.",
       "keywords": ["barangay", "clearance", "residence", "residency", "brgy"],
-      "fee": "₱50-100",
-      "processingTime": "Same day",
-      "office": "Barangay Hall",
-      "url": "certificates.html"
+      "url": "/services/certificates",
+      "sourceIds": ["psa", "birth", "police"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "barangay-id",
       "title": "Barangay ID",
       "category": "Certificates & Vital Records",
       "categoryId": "certificates",
-      "description": "Official barangay identification card",
+      "description": "Ask about barangay id availability, eligibility and the applicable process.",
       "keywords": ["barangay", "id", "identification", "brgy"],
-      "fee": "Free",
-      "processingTime": "1-2 days",
-      "office": "Barangay Hall",
-      "url": "certificates.html"
+      "url": "/services/certificates",
+      "sourceIds": ["psa", "birth", "police"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "police-clearance",
       "title": "Police Clearance",
       "category": "Certificates & Vital Records",
       "categoryId": "certificates",
-      "description": "Police clearance coordination through municipal office",
+      "description": "Ask about police clearance availability, eligibility and the applicable process.",
       "keywords": ["police", "clearance", "nbi", "criminal", "record"],
-      "fee": "Varies",
-      "processingTime": "3-5 days",
-      "office": "PNP Mati",
-      "url": "certificates.html"
+      "url": "/services/certificates",
+      "sourceIds": ["psa", "birth", "police"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "business-permit-new",
       "title": "Business Permit (New)",
       "category": "Business, Trade & Investment",
       "categoryId": "business",
-      "description": "Apply for a new mayor's permit to operate a business",
+      "description": "Ask about business permit (new) availability, eligibility and the applicable process.",
       "keywords": ["business", "permit", "new", "mayor", "license", "negosyo", "store", "shop"],
-      "fee": "Varies",
-      "processingTime": "3-5 days",
-      "office": "Business Permits & Licensing Office",
-      "url": "business.html"
+      "url": "/services/business",
+      "sourceIds": ["dti"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "business-permit-renewal",
       "title": "Business Permit Renewal",
       "category": "Business, Trade & Investment",
       "categoryId": "business",
-      "description": "Renew your annual business permit",
+      "description": "Ask about business permit renewal availability, eligibility and the applicable process.",
       "keywords": ["business", "permit", "renewal", "renew", "annual", "negosyo"],
-      "fee": "Varies",
-      "processingTime": "Same day",
-      "office": "Business Permits & Licensing Office",
-      "url": "business.html"
+      "url": "/services/business",
+      "sourceIds": ["dti"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "business-closure",
       "title": "Business Closure",
       "category": "Business, Trade & Investment",
       "categoryId": "business",
-      "description": "File for business closure/termination",
+      "description": "Ask about business closure availability, eligibility and the applicable process.",
       "keywords": ["business", "closure", "close", "terminate", "end"],
-      "fee": "Free",
-      "processingTime": "1-2 days",
-      "office": "Business Permits & Licensing Office",
-      "url": "business.html"
+      "url": "/services/business",
+      "sourceIds": ["dti"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "sanitary-permit",
       "title": "Sanitary Permit",
       "category": "Business, Trade & Investment",
       "categoryId": "business",
-      "description": "Health and sanitation permit for businesses",
+      "description": "Ask about sanitary permit availability, eligibility and the applicable process.",
       "keywords": ["sanitary", "permit", "health", "sanitation", "food", "restaurant"],
-      "fee": "Varies",
-      "processingTime": "1-3 days",
-      "office": "City Health Office",
-      "url": "business.html"
+      "url": "/services/business",
+      "sourceIds": ["dti"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "cedula",
       "title": "Community Tax Certificate (Cedula)",
       "category": "Business, Trade & Investment",
       "categoryId": "business",
-      "description": "Obtain cedula for individuals and businesses",
+      "description": "Ask about community tax certificate (cedula) availability, eligibility and the applicable process.",
       "keywords": ["cedula", "community", "tax", "certificate", "ctc"],
-      "fee": "₱5+",
-      "processingTime": "Same day",
-      "office": "City Treasurer's Office",
-      "url": "business.html"
+      "url": "/services/business",
+      "sourceIds": ["dti"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "senior-citizen-id",
       "title": "Senior Citizen ID",
       "category": "Social Services & Assistance",
       "categoryId": "social-services",
-      "description": "ID card and benefits for citizens 60 years and above",
+      "description": "Ask about senior citizen id availability, eligibility and the applicable process.",
       "keywords": ["senior", "citizen", "elderly", "old", "60", "osca", "discount"],
-      "fee": "Free",
-      "processingTime": "1-2 weeks",
-      "office": "CSWDO / OSCA",
-      "url": "social-services.html"
+      "url": "/services/social-services",
+      "sourceIds": ["aics", "pwd", "pension"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "pwd-id",
       "title": "PWD ID & Services",
       "category": "Social Services & Assistance",
       "categoryId": "social-services",
-      "description": "ID and benefits for persons with disabilities",
+      "description": "Ask about pwd id & services availability, eligibility and the applicable process.",
       "keywords": ["pwd", "disability", "disabled", "handicap", "special", "discount"],
-      "fee": "Free",
-      "processingTime": "1-2 weeks",
-      "office": "CSWDO",
-      "url": "social-services.html"
+      "url": "/services/social-services",
+      "sourceIds": ["aics", "pwd", "pension"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "financial-assistance",
       "title": "Financial Assistance",
       "category": "Social Services & Assistance",
       "categoryId": "social-services",
-      "description": "Emergency financial aid for qualified residents",
+      "description": "Ask about financial assistance availability, eligibility and the applicable process.",
       "keywords": ["financial", "assistance", "aid", "help", "money", "emergency", "aics"],
-      "fee": "Free",
-      "processingTime": "Varies",
-      "office": "CSWDO",
-      "url": "social-services.html"
+      "url": "/services/social-services",
+      "sourceIds": ["aics", "pwd", "pension"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "burial-assistance",
       "title": "Burial Assistance",
       "category": "Social Services & Assistance",
       "categoryId": "social-services",
-      "description": "Financial assistance for burial expenses",
+      "description": "Ask about burial assistance availability, eligibility and the applicable process.",
       "keywords": ["burial", "funeral", "death", "assistance", "aid"],
-      "fee": "Free",
-      "processingTime": "1-3 days",
-      "office": "CSWDO",
-      "url": "social-services.html"
+      "url": "/services/social-services",
+      "sourceIds": ["aics", "pwd", "pension"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "solo-parent-id",
       "title": "Solo Parent ID",
       "category": "Social Services & Assistance",
       "categoryId": "social-services",
-      "description": "ID and benefits for solo parents",
+      "description": "Ask about solo parent id availability, eligibility and the applicable process.",
       "keywords": ["solo", "parent", "single", "mother", "father"],
-      "fee": "Free",
-      "processingTime": "1-2 weeks",
-      "office": "CSWDO",
-      "url": "social-services.html"
+      "url": "/services/social-services",
+      "sourceIds": ["aics", "pwd", "pension"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "vaccination",
       "title": "Vaccination Programs",
       "category": "Health & Wellness",
       "categoryId": "health",
-      "description": "Free immunization for children and adults",
+      "description": "Ask about vaccination programs availability, eligibility and the applicable process.",
       "keywords": ["vaccine", "vaccination", "immunization", "shot", "covid", "flu"],
-      "fee": "Free",
-      "processingTime": "Same day",
-      "office": "City Health Office",
-      "url": "health.html"
+      "url": "/services/health",
+      "sourceIds": ["health", "aics"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "health-certificate",
       "title": "Health Certificate",
       "category": "Health & Wellness",
       "categoryId": "health",
-      "description": "Medical certificate for employment or business",
+      "description": "Ask about health certificate availability, eligibility and the applicable process.",
       "keywords": ["health", "certificate", "medical", "employment", "work"],
-      "fee": "₱100-200",
-      "processingTime": "Same day",
-      "office": "City Health Office",
-      "url": "health.html"
+      "url": "/services/health",
+      "sourceIds": ["health", "aics"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "medical-assistance",
       "title": "Medical Assistance",
       "category": "Health & Wellness",
       "categoryId": "health",
-      "description": "Financial aid for medical expenses and hospitalization",
+      "description": "Ask about medical assistance availability, eligibility and the applicable process.",
       "keywords": ["medical", "assistance", "hospital", "medicine", "health", "sick"],
-      "fee": "Free",
-      "processingTime": "1-3 days",
-      "office": "City Health Office / CSWDO",
-      "url": "health.html"
+      "url": "/services/health",
+      "sourceIds": ["health", "aics"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "prenatal-checkup",
       "title": "Prenatal Checkup",
       "category": "Health & Wellness",
       "categoryId": "health",
-      "description": "Free prenatal care for pregnant women",
+      "description": "Ask about prenatal checkup availability, eligibility and the applicable process.",
       "keywords": ["prenatal", "pregnant", "pregnancy", "baby", "maternal", "checkup"],
-      "fee": "Free",
-      "processingTime": "Same day",
-      "office": "City Health Office",
-      "url": "health.html"
+      "url": "/services/health",
+      "sourceIds": ["health", "aics"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "real-property-tax",
       "title": "Real Property Tax Payment",
       "category": "Taxation & Payments",
       "categoryId": "tax-payments",
-      "description": "Pay annual real property tax (amilyar)",
+      "description": "Ask about real property tax payment availability, eligibility and the applicable process.",
       "keywords": ["property", "tax", "real", "amilyar", "land", "house", "lot"],
-      "fee": "Varies",
-      "processingTime": "Same day",
-      "office": "City Treasurer's Office",
-      "url": "tax-payments.html"
+      "url": "/services/tax-payments",
+      "sourceIds": ["charter"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "business-tax",
       "title": "Business Tax Payment",
       "category": "Taxation & Payments",
       "categoryId": "tax-payments",
-      "description": "Pay quarterly or annual business taxes",
+      "description": "Ask about business tax payment availability, eligibility and the applicable process.",
       "keywords": ["business", "tax", "payment", "quarterly", "annual"],
-      "fee": "Varies",
-      "processingTime": "Same day",
-      "office": "City Treasurer's Office",
-      "url": "tax-payments.html"
+      "url": "/services/tax-payments",
+      "sourceIds": ["charter"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "tax-clearance",
       "title": "Tax Clearance",
       "category": "Taxation & Payments",
       "categoryId": "tax-payments",
-      "description": "Certificate of no tax liability",
+      "description": "Ask about tax clearance availability, eligibility and the applicable process.",
       "keywords": ["tax", "clearance", "certificate", "liability"],
-      "fee": "₱50-100",
-      "processingTime": "Same day",
-      "office": "City Treasurer's Office",
-      "url": "tax-payments.html"
+      "url": "/services/tax-payments",
+      "sourceIds": ["charter"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "agricultural-loan",
       "title": "Agricultural Loans",
       "category": "Agriculture & Economic Development",
       "categoryId": "agriculture",
-      "description": "Low-interest loans for farmers",
+      "description": "Ask about agricultural loans availability, eligibility and the applicable process.",
       "keywords": ["agricultural", "loan", "farmer", "farming", "credit", "pautang"],
-      "fee": "Varies",
-      "processingTime": "1-2 weeks",
-      "office": "City Agriculture Office",
-      "url": "agriculture.html"
+      "url": "/services/agriculture",
+      "sourceIds": ["agriculture"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "crop-insurance",
       "title": "Crop Insurance",
       "category": "Agriculture & Economic Development",
       "categoryId": "agriculture",
-      "description": "Insurance coverage for crop damage",
+      "description": "Ask about crop insurance availability, eligibility and the applicable process.",
       "keywords": ["crop", "insurance", "damage", "calamity", "pcic"],
-      "fee": "Subsidized",
-      "processingTime": "Varies",
-      "office": "City Agriculture Office",
-      "url": "agriculture.html"
+      "url": "/services/agriculture",
+      "sourceIds": ["agriculture"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "fertilizer-assistance",
       "title": "Fertilizer Assistance",
       "category": "Agriculture & Economic Development",
       "categoryId": "agriculture",
-      "description": "Free or subsidized fertilizer for registered farmers",
+      "description": "Ask about fertilizer assistance availability, eligibility and the applicable process.",
       "keywords": ["fertilizer", "assistance", "farmer", "farming", "abono"],
-      "fee": "Free/Subsidized",
-      "processingTime": "Varies",
-      "office": "City Agriculture Office",
-      "url": "agriculture.html"
+      "url": "/services/agriculture",
+      "sourceIds": ["agriculture"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "building-permit",
       "title": "Building Permit",
       "category": "Infrastructure & Public Works",
       "categoryId": "infrastructure",
-      "description": "Permit for new construction or renovation",
+      "description": "Ask about building permit availability, eligibility and the applicable process.",
       "keywords": ["building", "permit", "construction", "house", "renovation", "build"],
-      "fee": "Varies",
-      "processingTime": "5-10 days",
-      "office": "City Engineering Office",
-      "url": "infrastructure.html"
+      "url": "/services/infrastructure",
+      "sourceIds": ["building", "charter"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "occupancy-permit",
       "title": "Occupancy Permit",
       "category": "Infrastructure & Public Works",
       "categoryId": "infrastructure",
-      "description": "Certificate of completion for new buildings",
+      "description": "Ask about occupancy permit availability, eligibility and the applicable process.",
       "keywords": ["occupancy", "permit", "completion", "building", "certificate"],
-      "fee": "Varies",
-      "processingTime": "3-5 days",
-      "office": "City Engineering Office",
-      "url": "infrastructure.html"
+      "url": "/services/infrastructure",
+      "sourceIds": ["building", "charter"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "road-maintenance",
       "title": "Road Maintenance Request",
       "category": "Infrastructure & Public Works",
       "categoryId": "infrastructure",
-      "description": "Report road damage or request repairs",
+      "description": "Ask about road maintenance request availability, eligibility and the applicable process.",
       "keywords": ["road", "maintenance", "repair", "pothole", "damage", "street"],
-      "fee": "Free",
-      "processingTime": "Varies",
-      "office": "City Engineering Office",
-      "url": "infrastructure.html"
+      "url": "/services/infrastructure",
+      "sourceIds": ["building", "charter"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "scholarship",
       "title": "Scholarship Programs",
       "category": "Education & Scholarship",
       "categoryId": "education",
-      "description": "Financial assistance for students",
+      "description": "Ask about scholarship programs availability, eligibility and the applicable process.",
       "keywords": ["scholarship", "student", "education", "school", "college", "tuition"],
-      "fee": "Free",
-      "processingTime": "Varies",
-      "office": "City Mayor's Office",
-      "url": "education.html"
+      "url": "/services/education",
+      "sourceIds": ["education", "peso"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "student-assistance",
       "title": "Student Assistance",
       "category": "Education & Scholarship",
       "categoryId": "education",
-      "description": "Educational grants and allowances",
+      "description": "Ask about student assistance availability, eligibility and the applicable process.",
       "keywords": ["student", "assistance", "education", "allowance", "grant"],
-      "fee": "Free",
-      "processingTime": "Varies",
-      "office": "CSWDO",
-      "url": "education.html"
+      "url": "/services/education",
+      "sourceIds": ["education", "peso"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "emergency-response",
       "title": "Emergency Response",
       "category": "Public Safety & Security",
       "categoryId": "public-safety",
-      "description": "24/7 emergency assistance and rescue",
+      "description": "Ask about emergency response availability, eligibility and the applicable process.",
       "keywords": ["emergency", "response", "rescue", "911", "help", "disaster"],
-      "fee": "Free",
-      "processingTime": "Immediate",
-      "office": "MDRRMO",
-      "url": "public-safety.html"
+      "url": "/services/public-safety",
+      "sourceIds": ["charter"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "disaster-preparedness",
       "title": "Disaster Preparedness",
       "category": "Public Safety & Security",
       "categoryId": "public-safety",
-      "description": "Training and resources for disaster readiness",
+      "description": "Ask about disaster preparedness availability, eligibility and the applicable process.",
       "keywords": ["disaster", "preparedness", "training", "evacuation", "calamity"],
-      "fee": "Free",
-      "processingTime": "Varies",
-      "office": "MDRRMO",
-      "url": "public-safety.html"
+      "url": "/services/public-safety",
+      "sourceIds": ["charter"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "environmental-clearance",
       "title": "Environmental Clearance",
       "category": "Environment & Natural Resources",
       "categoryId": "environment",
-      "description": "Environmental compliance certificate for projects",
+      "description": "Ask about environmental clearance availability, eligibility and the applicable process.",
       "keywords": ["environmental", "clearance", "ecc", "compliance", "permit"],
-      "fee": "Varies",
-      "processingTime": "5-10 days",
-      "office": "City Environment Office",
-      "url": "environment.html"
+      "url": "/services/environment",
+      "sourceIds": ["environment"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "tree-cutting-permit",
       "title": "Tree Cutting Permit",
       "category": "Environment & Natural Resources",
       "categoryId": "environment",
-      "description": "Permit to cut or trim trees",
+      "description": "Ask about tree cutting permit availability, eligibility and the applicable process.",
       "keywords": ["tree", "cutting", "permit", "trim", "remove"],
-      "fee": "Varies",
-      "processingTime": "3-5 days",
-      "office": "City Environment Office",
-      "url": "environment.html"
+      "url": "/services/environment",
+      "sourceIds": ["environment"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "seedo-slaughterhouse",
-      "title": "SEEDO Slaughterhouse",
+      "title": "Slaughterhouse Services",
       "category": "Business, Trade & Investment",
       "categoryId": "business",
-      "description": "Hog, cattle, goat, and carabao slaughter with meat inspection services",
+      "description": "City slaughterhouse regulation.",
       "keywords": [
         "slaughterhouse",
         "slaughter",
@@ -463,17 +428,16 @@
         "butcher",
         "SEEDO"
       ],
-      "fee": "₱40-350",
-      "processingTime": "37 min - 1.5 hrs",
-      "office": "SEEDO Slaughterhouse",
-      "url": "../service-details/seedo-slaughterhouse.html"
+      "url": "/service-details/seedo-slaughterhouse",
+      "sourceIds": ["charter"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "mswdo-services",
-      "title": "CSWDO Services",
+      "title": "City Social Welfare Services",
       "category": "Social Services & Assistance",
       "categoryId": "social-services",
-      "description": "Social case studies, indigency certificates, AICS, PWD and senior citizen assistance",
+      "description": "Social welfare assistance and referrals.",
       "keywords": [
         "CSWDO",
         "social welfare",
@@ -486,29 +450,27 @@
         "social worker",
         "welfare"
       ],
-      "fee": "Free",
-      "processingTime": "28 min - 1.5 hrs",
-      "office": "CSWDO",
-      "url": "../service-details/mswdo-services.html"
+      "url": "/service-details/mswdo-services",
+      "sourceIds": ["aics", "pwd", "charter", "pension"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "waste-management",
       "title": "Waste Management Services",
       "category": "Environment & Natural Resources",
       "categoryId": "environment",
-      "description": "Garbage collection and disposal services",
+      "description": "Ask about waste management services availability, eligibility and the applicable process.",
       "keywords": ["waste", "garbage", "trash", "collection", "disposal", "basura"],
-      "fee": "Included in tax",
-      "processingTime": "Scheduled",
-      "office": "City Environment Office",
-      "url": "environment.html"
+      "url": "/services/environment",
+      "sourceIds": ["environment"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "seedo-public-market",
-      "title": "SEEDO Public Market",
+      "title": "Public Market",
       "category": "Business, Trade & Investment",
       "categoryId": "business",
-      "description": "Market clearance, entrance fees, vendor services, and CTC issuance",
+      "description": "City market regulation.",
       "keywords": [
         "public market",
         "market",
@@ -519,17 +481,16 @@
         "SEEDO",
         "palengke"
       ],
-      "fee": "₱5-50",
-      "processingTime": "Same day",
-      "office": "SEEDO Public Market",
-      "url": "../service-details/seedo-public-market.html"
+      "url": "/service-details/seedo-public-market",
+      "sourceIds": ["charter"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "business-permits-licensing",
-      "title": "Business Permits & Licensing Office",
+      "title": "Business Permits and Licensing",
       "category": "Business, Trade & Investment",
       "categoryId": "business",
-      "description": "New permits, renewals, Mayor's clearance, and other business permits",
+      "description": "City business permits.",
       "keywords": [
         "BPLS",
         "business permit",
@@ -538,65 +499,60 @@
         "renewal",
         "new business"
       ],
-      "fee": "Varies",
-      "processingTime": "1-5 days",
-      "office": "Mayor's Office - BPLS",
-      "url": "../service-details/business-permits-licensing.html"
+      "url": "/service-details/business-permits-licensing",
+      "sourceIds": ["charter", "dti"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "tricycle-franchising",
-      "title": "Tricycle Franchising & Records",
+      "title": "Tricycle Franchising",
       "category": "Business, Trade & Investment",
       "categoryId": "business",
-      "description": "Apply for tricycle franchise (MTOF) and request records",
+      "description": "Local tricycle regulation.",
       "keywords": ["tricycle", "franchise", "MTOF", "pedicab", "toda", "driver", "operator"],
-      "fee": "Varies",
-      "processingTime": "3-5 days",
-      "office": "BPLS / SBO",
-      "url": "../service-details/tricycle-franchising.html"
+      "url": "/service-details/tricycle-franchising",
+      "sourceIds": ["charter"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "municipal-treasurer",
-      "title": "City Treasurer's Office",
+      "title": "City Treasurer",
       "category": "Taxation & Payments",
       "categoryId": "tax-payments",
-      "description": "Tax collection, cedula, clearances, and payment services",
+      "description": "Local revenue collection.",
       "keywords": ["treasurer", "MTO", "tax", "payment", "cedula", "clearance", "collection"],
-      "fee": "Varies",
-      "processingTime": "Same day",
-      "office": "City Treasurer's Office",
-      "url": "../service-details/municipal-treasurer.html"
+      "url": "/service-details/municipal-treasurer",
+      "sourceIds": ["charter"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "municipal-budget",
-      "title": "City Budget Office",
+      "title": "City Budget",
       "category": "Taxation & Payments",
       "categoryId": "tax-payments",
-      "description": "Obligation requests, barangay budget review, and SEF budget preparation",
+      "description": "City budget preparation and review.",
       "keywords": ["budget", "MBO", "obligation", "appropriation", "SEF", "barangay budget"],
-      "fee": "Free",
-      "processingTime": "15 min - 1 day",
-      "office": "City Budget Office",
-      "url": "../service-details/municipal-budget.html"
+      "url": "/service-details/municipal-budget",
+      "sourceIds": ["charter"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "municipal-accounting",
-      "title": "City Accounting Office",
+      "title": "City Accounting",
       "category": "Taxation & Payments",
       "categoryId": "tax-payments",
-      "description": "Pre-audit of disbursements, payroll, check issuance, and financial reporting",
+      "description": "Government accounting and financial records.",
       "keywords": ["accounting", "MACCO", "audit", "payroll", "check", "disbursement", "voucher"],
-      "fee": "Free",
-      "processingTime": "Varies",
-      "office": "City Accounting Office",
-      "url": "../service-details/municipal-accounting.html"
+      "url": "/service-details/municipal-accounting",
+      "sourceIds": ["charter"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "property-declaration",
       "title": "Property Declaration",
       "category": "Taxation & Payments",
       "categoryId": "tax-payments",
-      "description": "Declaration of land, building and machineries for tax assessment",
+      "description": "Property assessment records.",
       "keywords": [
         "property",
         "declaration",
@@ -606,29 +562,27 @@
         "tax assessment",
         "real property"
       ],
-      "fee": "Varies",
-      "processingTime": "3-5 days",
-      "office": "City Assessor's Office",
-      "url": "../service-details/property-declaration.html"
+      "url": "/service-details/property-declaration",
+      "sourceIds": ["charter"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "municipal-assessor",
-      "title": "City Assessor's Office",
+      "title": "City Assessor",
       "category": "Taxation & Payments",
       "categoryId": "tax-payments",
-      "description": "Property assessment, tax declaration, and land records",
+      "description": "Property assessment and assessment records.",
       "keywords": ["assessor", "property", "assessment", "tax declaration", "land", "appraisal"],
-      "fee": "Varies",
-      "processingTime": "3-5 days",
-      "office": "City Assessor's Office",
-      "url": "../service-details/municipal-assessor.html"
+      "url": "/service-details/municipal-assessor",
+      "sourceIds": ["charter"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "civil-registrar",
-      "title": "Local Civil Registrar",
+      "title": "City Civil Registrar",
       "category": "Certificates & Vital Records",
       "categoryId": "certificates",
-      "description": "Birth, marriage, death certificates and civil registry services",
+      "description": "Local civil registration and certified copies.",
       "keywords": [
         "civil registrar",
         "LCR",
@@ -639,17 +593,16 @@
         "vital records",
         "CENOMAR"
       ],
-      "fee": "₱150+",
-      "processingTime": "15-30 minutes",
-      "office": "Local Civil Registrar",
-      "url": "../service-details/civil-registrar.html"
+      "url": "/service-details/civil-registrar",
+      "sourceIds": ["charter", "psa"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "municipal-engineering",
-      "title": "City Engineering Office",
+      "title": "City Engineering / Building Official",
       "category": "Infrastructure & Public Works",
       "categoryId": "infrastructure",
-      "description": "Building permits, infrastructure projects, and engineering services",
+      "description": "Public works and engineering.",
       "keywords": [
         "engineering",
         "MEO",
@@ -658,29 +611,27 @@
         "infrastructure",
         "road"
       ],
-      "fee": "Varies",
-      "processingTime": "5-10 days",
-      "office": "City Engineering Office",
-      "url": "../service-details/municipal-engineering.html"
+      "url": "/service-details/municipal-engineering",
+      "sourceIds": ["charter", "building"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "municipal-planning",
-      "title": "City Planning & Development Office",
+      "title": "City Planning and Development",
       "category": "Infrastructure & Public Works",
       "categoryId": "infrastructure",
-      "description": "Zoning, land use, development permits, and planning services",
+      "description": "Development planning.",
       "keywords": ["planning", "MPDO", "zoning", "land use", "development", "locational clearance"],
-      "fee": "Varies",
-      "processingTime": "3-7 days",
-      "office": "City Planning Office",
-      "url": "../service-details/municipal-planning.html"
+      "url": "/service-details/municipal-planning",
+      "sourceIds": ["charter", "building"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "municipal-agriculture",
-      "title": "City Agriculture Office",
+      "title": "City Agriculture",
       "category": "Agriculture & Economic Development",
       "categoryId": "agriculture",
-      "description": "Agricultural assistance, farm registration, and livelihood programs",
+      "description": "Agricultural support.",
       "keywords": [
         "agriculture",
         "MAO",
@@ -691,29 +642,27 @@
         "RSBSA",
         "livelihood"
       ],
-      "fee": "Free/Varies",
-      "processingTime": "Varies",
-      "office": "City Agriculture Office",
-      "url": "../service-details/municipal-agriculture.html"
+      "url": "/service-details/municipal-agriculture",
+      "sourceIds": ["agriculture", "charter"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "general-services",
-      "title": "General Services Office",
+      "title": "City General Services",
       "category": "Government Services",
       "categoryId": "government",
-      "description": "Property management, vehicle maintenance, and general municipal services",
+      "description": "City property and supplies management.",
       "keywords": ["general services", "MGSO", "property", "vehicle", "maintenance", "supplies"],
-      "fee": "Free",
-      "processingTime": "Varies",
-      "office": "General Services Office",
-      "url": "../service-details/general-services.html"
+      "url": "/service-details/general-services",
+      "sourceIds": ["charter"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     },
     {
       "id": "human-resource",
-      "title": "Human Resource Management Office",
+      "title": "Human Resource Management",
       "category": "Government Services",
       "categoryId": "government",
-      "description": "Employment, personnel records, and HR services",
+      "description": "Personnel forms and employee requests.",
       "keywords": [
         "human resource",
         "HRMO",
@@ -723,78 +672,11 @@
         "hiring",
         "application"
       ],
-      "fee": "Free",
-      "processingTime": "Varies",
-      "office": "Human Resource Management Office",
-      "url": "../service-details/human-resource-management.html"
-    },
-    {
-      "id": "online-business-billing",
-      "title": "Business Online Billing & Payment",
-      "category": "Online Services",
-      "categoryId": "online",
-      "description": "View and pay your business tax bills online via Filipizen",
-      "keywords": [
-        "online",
-        "billing",
-        "payment",
-        "business tax",
-        "filipizen",
-        "e-payment",
-        "digital"
-      ],
-      "fee": "Varies",
-      "processingTime": "Instant",
-      "office": "BPLS Office",
-      "url": "https://www.filipizen.com/partners/nuevavizcaya_mati/bpls/billing"
-    },
-    {
-      "id": "online-new-business",
-      "title": "New Business Application Online",
-      "category": "Online Services",
-      "categoryId": "online",
-      "description": "Apply for a new business permit online via Filipizen",
-      "keywords": ["online", "new business", "application", "permit", "filipizen", "e-services"],
-      "fee": "Varies",
-      "processingTime": "3-5 days",
-      "office": "BPLS Office",
-      "url": "https://www.filipizen.com/partners/nuevavizcaya_mati/bpls/newbusiness"
-    },
-    {
-      "id": "online-business-renewal",
-      "title": "Business Permit Renewal Online",
-      "category": "Online Services",
-      "categoryId": "online",
-      "description": "Renew your existing business permit online via Filipizen",
-      "keywords": ["online", "renewal", "business permit", "filipizen", "e-services", "renew"],
-      "fee": "Varies",
-      "processingTime": "Same day",
-      "office": "BPLS Office",
-      "url": "https://www.filipizen.com/partners/nuevavizcaya_mati/bpls/renewbusiness"
-    },
-    {
-      "id": "online-rpt-billing",
-      "title": "Real Property Tax Online Billing & Payment",
-      "category": "Online Services",
-      "categoryId": "online",
-      "description": "View and pay your real property tax (amilyar) online via Filipizen",
-      "keywords": ["online", "property tax", "amilyar", "billing", "payment", "filipizen", "RPT"],
-      "fee": "Varies",
-      "processingTime": "Instant",
-      "office": "City Treasurer's Office",
-      "url": "https://www.filipizen.com/partners/nuevavizcaya_mati/rptis/billing"
-    },
-    {
-      "id": "online-payment-order",
-      "title": "Online Payment Order",
-      "category": "Online Services",
-      "categoryId": "online",
-      "description": "Process payment orders for various municipal fees online via Filipizen",
-      "keywords": ["online", "payment order", "fees", "filipizen", "e-payment", "municipal fees"],
-      "fee": "Varies",
-      "processingTime": "Instant",
-      "office": "City Treasurer's Office",
-      "url": "https://www.filipizen.com/partners/nuevavizcaya_mati/po/billing"
+      "url": "/service-details/human-resource-management",
+      "sourceIds": ["csc", "peso"],
+      "verificationStatus": "guidance-only-local-details-unconfirmed"
     }
-  ]
+  ],
+  "reviewedOn": "2026-09-24",
+  "verificationNote": "Source-backed guidance only. Current Mati Citizen’s Charter requirements, rates, contacts and processing times remain unconfirmed."
 }

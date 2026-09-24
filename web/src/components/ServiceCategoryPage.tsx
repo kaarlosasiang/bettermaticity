@@ -1,31 +1,14 @@
+import { ServiceCards, type CategoryService } from '@/components/ServiceCards';
+import { ServiceSources } from '@/components/ServiceSources';
 import type { ReactNode } from 'react';
 import type { LucideIcon } from 'lucide-react';
 import { ArrowRight, Building2 } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
-import {
-  Container,
-  Section,
-  SectionTitle,
-  PageHeader,
-  Grid,
-  ServiceCard,
-} from '@/components/primitives';
+import { Container, Section, SectionTitle, PageHeader } from '@/components/primitives';
 
-export interface CategoryService {
-  Icon: LucideIcon;
-  titleKey: string;
-  descKey: string;
-  /**
-   * Meta row values. The legacy pages carry these as literal strings
-   * ("₱150", "15-30 mins"), not i18n keys, so they are rendered verbatim.
-   */
-  fee?: string;
-  time?: string;
-  /** When set, the card links to this internal route (legacy some cards were <a>). */
-  to?: string;
-}
+export type { CategoryService } from '@/components/ServiceCards';
 
 export interface CategoryOffice {
   Icon: LucideIcon;
@@ -110,44 +93,12 @@ export function ServiceCategoryPage({
       {services.length > 0 && (
         <Section>
           <Container>
-            <Grid min={250}>
-              {services.map((s) => {
-                const meta =
-                  s.fee || s.time ? (
-                    <>
-                      {s.fee && (
-                        <span>
-                          <strong className="font-semibold">{t('label-fee')}</strong> {s.fee}
-                        </span>
-                      )}
-                      {s.time && (
-                        <span>
-                          <strong className="font-semibold">{t('label-time')}</strong> {s.time}
-                        </span>
-                      )}
-                    </>
-                  ) : undefined;
-                const card = (
-                  <ServiceCard
-                    icon={<s.Icon className="size-5 text-primary" aria-hidden="true" />}
-                    title={t(s.titleKey)}
-                    description={t(s.descKey)}
-                    meta={meta}
-                    className={s.to ? 'h-full cursor-pointer hover:-translate-y-0.5' : undefined}
-                  />
-                );
-                return s.to ? (
-                  <AppLink key={s.titleKey} to={s.to} className="block no-underline text-inherit">
-                    {card}
-                  </AppLink>
-                ) : (
-                  <div key={s.titleKey}>{card}</div>
-                );
-              })}
-            </Grid>
+            <ServiceCards services={services} />
           </Container>
         </Section>
       )}
+
+      <ServiceSources category={path.split('/').at(-1)} />
 
       {children}
 

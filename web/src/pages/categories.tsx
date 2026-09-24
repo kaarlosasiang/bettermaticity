@@ -67,106 +67,44 @@ function PublicSafetyHotlines() {
   );
 }
 
-/* ── Environment "Key Environmental Services & Initiatives" (page children) ── */
-const envInitiatives: { titleKey: string; descKey: string }[] = [
-  {
-    titleKey: 'env-drainage-sewerage-management',
-    descKey: 'env-developing-a-comprehensive-system-plan-to',
-  },
-  {
-    titleKey: 'env-solid-waste-management',
-    descKey: 'env-implementing-the-10year-plan-including-waste',
-  },
-  {
-    titleKey: 'env-flood-control-mitigation',
-    descKey: 'env-declogging-drainage-clearing-waterways-and',
-  },
-  {
-    titleKey: 'env-forest-land-use-programs',
-    descKey: 'env-tree-planting-and-reforestation-programs-to',
-  },
-  {
-    titleKey: 'env-public-education-awareness',
-    descKey: 'env-iec-campaigns-on-ra-9003-solid-waste-management',
-  },
-];
-
-function EnvironmentInitiatives() {
-  const { t } = useLanguage();
-  return (
-    <Section compact altBg>
-      <Container>
-        <SectionTitle>
-          <Trees className="size-5 text-primary" aria-hidden="true" />
-          {t('env-key-environmental-services-and-initiatives')}
-        </SectionTitle>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {envInitiatives.map((it, i) => (
-            <div
-              key={it.titleKey}
-              className="flex gap-3 rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-5"
-            >
-              <span className="text-lg font-bold text-primary/40">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <div>
-                <h3 className="mb-0.5 text-sm font-semibold text-foreground">{t(it.titleKey)}</h3>
-                <p className="m-0 text-[0.8125rem] text-muted-foreground">{t(it.descKey)}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </Container>
-    </Section>
-  );
-}
-
 /* ── Certificates ─────────────────────────────────────────────────────────── */
 const certificateServices: CategoryService[] = [
   {
     Icon: FileText,
     titleKey: 'cert-birth',
+    onlineId: 'psa',
     descKey: 'cert-birth-desc',
-    fee: '₱150',
-    time: '15-30 mins',
     to: '/service-details/birth-certificate',
   },
   {
     Icon: Heart,
     titleKey: 'cert-marriage',
+    onlineId: 'psa',
     descKey: 'cert-marriage-desc',
-    fee: 'Free (Registration)',
-    time: '5 mins',
     to: '/service-details/marriage-certificate',
   },
   {
     Icon: FileX,
     titleKey: 'cert-death',
+    onlineId: 'psa',
     descKey: 'cert-death-desc',
-    fee: '₱50-150',
-    time: '~1.5 hrs',
     to: '/service-details/death-certificate',
   },
   {
     Icon: HouseWifi,
     titleKey: 'cert-brgy-clearance',
     descKey: 'cert-brgy-clearance-desc',
-    fee: '₱50-100',
-    time: 'Same day',
   },
   {
     Icon: IdCard,
     titleKey: 'cert-brgy-id',
     descKey: 'cert-brgy-id-desc',
-    fee: 'Free',
-    time: '1-2 days',
   },
   {
     Icon: ShieldCheck,
     titleKey: 'cert-police-clearance',
+    onlineId: 'police',
     descKey: 'cert-police-clearance-desc',
-    fee: 'Varies',
-    time: '3-5 days',
   },
 ];
 
@@ -210,29 +148,21 @@ const socialServices: CategoryService[] = [
     Icon: IdCard,
     titleKey: 'social-senior',
     descKey: 'social-senior-desc',
-    fee: 'Free',
-    time: '1 day',
   },
   {
     Icon: AccessibilityIcon,
     titleKey: 'social-pwd',
     descKey: 'social-pwd-desc',
-    fee: 'Free',
-    time: '1-2 days',
   },
   {
     Icon: Banknote,
     titleKey: 'social-assistance',
     descKey: 'social-assistance-desc',
-    fee: 'Free',
-    time: '3-5 days',
   },
   {
     Icon: Gift,
     titleKey: 'social-social-pension',
     descKey: 'social-fee',
-    fee: 'Free',
-    time: 'Quarterly release',
   },
 ];
 
@@ -266,22 +196,16 @@ const agricultureServices: CategoryService[] = [
     Icon: Flower,
     titleKey: 'agri-seedling',
     descKey: 'agri-seedling-desc',
-    fee: 'Free',
-    time: 'Seasonal',
   },
   {
     Icon: Wrench,
     titleKey: 'agri-equipment',
     descKey: 'agri-equipment-desc',
-    fee: 'Subsidized',
-    time: 'By schedule',
   },
   {
     Icon: TrendingUp,
     titleKey: 'agri-livelihood',
     descKey: 'agri-livelihood-desc',
-    fee: 'Free',
-    time: 'Varies',
   },
 ];
 
@@ -315,22 +239,16 @@ const infrastructureServices: CategoryService[] = [
     Icon: Hammer,
     titleKey: 'infra-building',
     descKey: 'infra-building-desc',
-    fee: 'Varies',
-    time: '7-14 days',
   },
   {
     Icon: House,
     titleKey: 'infra-occupancy-permit',
     descKey: 'infra-certificate-of-occupancy-for-completed-buildings',
-    fee: 'Varies',
-    time: '3-5 days',
   },
   {
     Icon: Ruler,
     titleKey: 'infra-engineering-services',
     descKey: 'infra-technical-assistance-and-plan-review',
-    fee: 'Varies',
-    time: 'Varies',
   },
 ];
 
@@ -376,21 +294,16 @@ const safetyServices: CategoryService[] = [
     Icon: TriangleAlert,
     titleKey: 'safety-disaster',
     descKey: 'safety-disaster-desc',
-    time: '24/7',
   },
   {
     Icon: CloudRain,
     titleKey: 'safety-disaster-assistance',
     descKey: 'safety-relief-goods-and-evacuation-support',
-    fee: 'Free',
-    time: 'CDRRMO',
   },
   {
     Icon: Megaphone,
     titleKey: 'safety-disaster-preparedness',
     descKey: 'safety-training-and-resources-for-disaster-readiness',
-    fee: 'Free',
-    time: 'CDRRMO',
   },
 ];
 
@@ -417,15 +330,11 @@ const environmentServices: CategoryService[] = [
     Icon: Trash2,
     titleKey: 'env-waste',
     descKey: 'env-waste-desc',
-    fee: 'Free',
-    time: 'Weekly schedule',
   },
   {
     Icon: Recycle,
     titleKey: 'env-recycling-program',
     descKey: 'env-segregation-and-recycling-initiatives',
-    fee: 'Free',
-    time: 'Ongoing',
   },
 ];
 
@@ -440,8 +349,6 @@ export function ServicesEnvironment() {
       titleKey="env-page-title"
       descKey="env-page-desc"
       services={environmentServices}
-    >
-      <EnvironmentInitiatives />
-    </ServiceCategoryPage>
+    ></ServiceCategoryPage>
   );
 }

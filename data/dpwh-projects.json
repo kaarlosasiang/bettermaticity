@@ -1,24 +1,26 @@
 {
-  "_status": "draft",
-  "_note": "PLACEHOLDER — replace with actual DPWH / infrastructure projects in the City of Mati sourced from the Davao Oriental 1st District Engineering Office and DPWH project data.",
-  "summary": {
-    "totalProjects": 0,
-    "totalCost": 0,
-    "completedProjects": 0,
-    "ongoingProjects": 0,
-    "implementingAgency": "Davao Oriental 1st District Engineering Office"
-  },
+  "_status": "selected-official-notices",
+  "checkedOn": "2026-09-24",
+  "scope": "Selected procurement notices, not a complete project inventory. ABC is a bidding ceiling, not an award amount or actual expenditure. Notice status does not establish physical completion.",
   "projects": [
     {
-      "id": "PLACEHOLDER-001",
-      "name": "[Placeholder] Infrastructure project name",
-      "location": "Brgy. [Name], Mati, Davao Oriental",
-      "category": "Roads and Bridges",
-      "contractor": "[Contractor Name]",
-      "contractorId": "00000",
-      "cost": 0,
-      "status": 0,
-      "completionDate": null
+      "id": "25LG0021",
+      "reference": "11439666",
+      "scope": "national",
+      "name": "Completion works for the cultural and sports center in Dahican",
+      "location": "Barangay Dahican, City of Mati, Davao Oriental",
+      "agency": "DPWH Davao Oriental 2nd District Engineering Office",
+      "funding": "GAA FY2025",
+      "abc": 6930000,
+      "noticeStatus": "Awarded",
+      "publishedOn": "2024-11-06",
+      "updatedOn": "2025-02-18",
+      "contractor": null,
+      "awardAmount": null,
+      "completionPercent": null,
+      "sourceUrl": "https://notices.philgeps.gov.ph/GEPSNONPILOT/Tender/PrintableBidNoticeAbstractUI.aspx?refid=11439666",
+      "sourceName": "PhilGEPS",
+      "closingOn": null
     }
   ]
 }

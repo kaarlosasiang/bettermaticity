@@ -17,14 +17,16 @@ import {
 import {
   barangayData,
   historicalData,
-  cmciData,
   totalPopulation,
   barangayCount,
   landAreaKm2,
   incomeClass,
   municipalFinance,
-  economicIndicators,
   povertyStats,
+  statisticsSources,
+  statisticsCheckedOn,
+  populationDensity,
+  ntaShareOfReceipts,
 } from '@/lib/statsData';
 import { CHART_COLORS, chartFont } from '@/lib/charts';
 
@@ -120,45 +122,19 @@ function MetricCard({
   );
 }
 
-function Meter({
-  label,
-  value,
-  pct,
-  color = '#2b62ee',
-}: {
-  label: string;
-  value: string;
-  pct: number;
-  color?: string;
-}) {
-  const width = Math.max(0, Math.min(pct, 100));
+function SourceLink({ source }: { source: { title: string; url: string } }) {
   return (
-    <div>
-      <div className="mb-1 flex items-center justify-between gap-3 text-[0.8125rem]">
-        <span className="text-[#123c7a]">{label}</span>
-        <span className="font-mono text-[0.75rem] tabular-nums text-[#4c5c78]">{value}</span>
-      </div>
-      <div
-        className="h-2.5 overflow-hidden rounded-full bg-[#e3e8ef]"
-        role="progressbar"
-        aria-label={label}
-        aria-valuenow={Math.round(pct)}
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-valuetext={`${label}: ${value}`}
-      >
-        <div
-          className="h-full rounded-full"
-          style={{ width: `${width}%`, backgroundColor: color }}
-        />
-      </div>
-    </div>
+    <a className="underline underline-offset-4 hover:text-[#2b62ee]" href={source.url}>
+      {source.title}
+    </a>
   );
 }
 
 export default function Statistics() {
   const { t } = useLanguage();
-  const top10 = barangayData.slice(0, 10);
+  const top10 = [...barangayData].sort((a, b) => b.pop - a.pop).slice(0, 10);
+  const money = (value: number) =>
+    `₱${value.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}M`;
 
   const firstYear = historicalData.years[0];
   const lastYear = historicalData.years[historicalData.years.length - 1];
@@ -208,24 +184,12 @@ export default function Statistics() {
     ],
   };
 
-  const cmciBar = {
-    labels: cmciData.pillars.map((p) => p.label),
-    datasets: [
-      {
-        label: 'Pillar Score',
-        data: cmciData.pillars.map((p) => p.score),
-        backgroundColor: cmciData.pillars.map((_, i) => CHART_COLORS[i % CHART_COLORS.length]),
-        borderRadius: 4,
-      },
-    ],
-  };
-
   return (
     <LazyMotion features={domAnimation}>
       <MotionConfig reducedMotion="user">
         <Seo
           title={t('stats-title')}
-          description="Population, demographics, and competitiveness statistics for the City of Mati."
+          description={t('stats-verified-intro')}
           canonicalPath="/statistics"
         />
 
@@ -251,8 +215,10 @@ export default function Statistics() {
                   variants={fadeUp}
                   className="mt-3 max-w-xl text-base leading-relaxed text-white/75"
                 >
-                  Population, finance, and competitiveness data for the City of Mati — sourced from
-                  the PSA, BLGF, and DTI.
+                  {t('stats-verified-intro')}
+                  <span className="mt-2 block text-sm">
+                    {t('stats-checked-on', { date: statisticsCheckedOn })}
+                  </span>
                 </m.p>
               </m.div>
 
@@ -303,14 +269,27 @@ export default function Statistics() {
               <MetricCard
                 value={totalPopulation.toLocaleString()}
                 label={t('stats-population-label')}
-                meta={t('stats-population-source')}
+                meta={<SourceLink source={statisticsSources.psgc} />}
               />
-              <MetricCard value={barangayCount} label={t('stats-barangays')} />
-              <MetricCard value={`${landAreaKm2} km²`} label={t('stats-land-area')} />
-              <MetricCard value={incomeClass} label={t('stats-income-class')} />
               <MetricCard
-                value={`#${cmciData.overall.rank}`}
-                label={`${t('stats-cmci-rank')} (${cmciData.year})`}
+                value={barangayCount}
+                label={t('stats-barangays')}
+                meta={<SourceLink source={statisticsSources.psgc} />}
+              />
+              <MetricCard
+                value={`${landAreaKm2} km²`}
+                label={t('stats-land-area')}
+                meta={<SourceLink source={statisticsSources.area} />}
+              />
+              <MetricCard
+                value={incomeClass}
+                label={t('stats-income-class')}
+                meta={<SourceLink source={statisticsSources.psgc} />}
+              />
+              <MetricCard
+                value={Math.round(populationDensity)}
+                label={t('stats-density')}
+                meta={t('stats-density-method')}
               />
             </m.div>
           </Container>
@@ -349,7 +328,10 @@ export default function Statistics() {
                 </tbody>
               </table>
               <p className="mt-3 font-mono text-[0.6875rem] text-[#4c5c78]">
-                Source: PSA Census of Population ({firstYear}–{lastYear})
+                {t('stats-source')}: <SourceLink source={statisticsSources.history} /> ·{' '}
+                <SourceLink source={statisticsSources.census2007} /> ·{' '}
+                <SourceLink source={statisticsSources.area} /> ·{' '}
+                <SourceLink source={statisticsSources.psgc} />
               </p>
             </div>
           </Container>
@@ -358,7 +340,10 @@ export default function Statistics() {
         {/* ── Population by barangay ────────────────────────────────────────── */}
         <section className="bg-white py-12">
           <Container>
-            <SectionHead>{t('stats-population-by-barangay')}</SectionHead>
+            <SectionHead>{t('stats-population-by-barangay')} (2024)</SectionHead>
+            <p className="mb-4 text-sm text-[#4c5c78]">
+              {t('stats-census-date')} · <SourceLink source={statisticsSources.psgc} />
+            </p>
             <div className={`${CARD} p-[22px]`}>
               <div
                 className="h-80"
@@ -400,110 +385,12 @@ export default function Statistics() {
           </Container>
         </section>
 
-        {/* ── City income & finance ────────────────────────────────────────── */}
         <section className="bg-[#f1f6fc] py-12">
           <Container>
             <SectionHead>
-              {t('stats-city-income-finance')} (FY {municipalFinance.fiscalYear})
+              {t('stats-finance-heading')} (FY {municipalFinance.fiscalYear})
             </SectionHead>
-            <m.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="show"
-              viewport={revealViewport}
-              className="mb-4 grid gap-4 sm:grid-cols-3"
-            >
-              <MetricCard
-                value={municipalFinance.annualIncome.display}
-                label={t('stats-annual-income')}
-                meta={municipalFinance.annualIncome.detail}
-              />
-              <MetricCard
-                value={municipalFinance.iraShare.display}
-                label={t('stats-ira-share')}
-                meta={municipalFinance.iraShare.detail}
-              />
-              <MetricCard
-                value={municipalFinance.iraDependency.display}
-                label={t('stats-ira-dependency')}
-                meta={municipalFinance.iraDependency.detail}
-              />
-            </m.div>
-            <div className={`${CARD} p-[22px]`}>
-              <span className="mb-3 block text-sm font-semibold text-[#123c7a]">
-                {t('stats-income-composition')}
-              </span>
-              <div
-                className="flex h-6 overflow-hidden rounded-full"
-                role="img"
-                aria-label={`Income composition: IRA ${municipalFinance.composition.ira}%, Local ${municipalFinance.composition.local}%`}
-              >
-                <div
-                  className="flex items-center justify-center bg-[#2b62ee] text-[10px] font-semibold text-white"
-                  style={{ width: `${municipalFinance.composition.ira}%` }}
-                >
-                  IRA {municipalFinance.composition.ira}%
-                </div>
-                <div
-                  className="flex items-center justify-center bg-[#06a77d] text-[10px] font-semibold text-white"
-                  style={{ width: `${municipalFinance.composition.local}%` }}
-                >
-                  Local {municipalFinance.composition.local}%
-                </div>
-              </div>
-              <p className="mt-3 font-mono text-[0.6875rem] text-[#4c5c78]">
-                Source: BLGF 2023 Statement of Receipts and Expenditures
-              </p>
-            </div>
-          </Container>
-        </section>
-
-        {/* ── Economic indicators ──────────────────────────────────────────── */}
-        <section className="bg-white py-12">
-          <Container>
-            <SectionHead>{t('stats-economic-indicators')}</SectionHead>
-            <m.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="show"
-              viewport={revealViewport}
-              className="mb-4 grid gap-4 sm:grid-cols-3"
-            >
-              <MetricCard
-                value={economicIndicators.registeredBusinesses.value}
-                label={t('stats-registered-businesses')}
-                meta={economicIndicators.registeredBusinesses.trend}
-                metaClass="text-[#06a77d]"
-              />
-              <MetricCard
-                value={economicIndicators.agriculturalLand.value}
-                label={t('stats-agricultural-land')}
-                meta={economicIndicators.agriculturalLand.note}
-              />
-              <MetricCard
-                value={economicIndicators.employmentRate.value}
-                label={t('stats-employment-rate')}
-                meta={economicIndicators.employmentRate.note}
-              />
-            </m.div>
-            <div className={`${CARD} p-[22px]`}>
-              <span className="mb-3 block text-sm font-semibold text-[#123c7a]">
-                {t('stats-economic-sectors')}
-              </span>
-              <div className="grid gap-3">
-                {economicIndicators.sectors.map((s) => (
-                  <Meter key={s.name} label={s.name} value={`${s.pct}%`} pct={s.pct} />
-                ))}
-              </div>
-              <p className="mt-3 font-mono text-[0.6875rem] text-[#4c5c78]">Source: BLGF 2023</p>
-            </div>
-          </Container>
-        </section>
-
-        {/* ── Poverty ──────────────────────────────────────────────────────── */}
-        <section className="bg-[#f1f6fc] py-12">
-          <Container>
-            <SectionHead>{t('stats-poverty-statistics')}</SectionHead>
+            <p className="mb-4 text-sm text-[#4c5c78]">{t('stats-finance-period')}</p>
             <m.div
               variants={staggerContainer}
               initial="hidden"
@@ -512,113 +399,101 @@ export default function Statistics() {
               className="grid gap-4 sm:grid-cols-3"
             >
               <MetricCard
-                value={`${povertyStats.y2018.rate}%`}
-                label={t('stats-2018-poverty-incidence')}
-                meta={povertyStats.y2018.ci}
+                value={money(municipalFinance.receipts.total)}
+                label={t('stats-total-receipts')}
               />
+              <MetricCard value={money(municipalFinance.receipts.nta)} label={t('stats-nta')} />
               <MetricCard
-                value={`${povertyStats.y2021.rate}%`}
-                label={t('stats-2021-poverty-incidence')}
-                meta={povertyStats.y2021.ci}
-              />
-              <MetricCard
-                value={povertyStats.change}
-                label={t('stats-change-2018-2021')}
-                meta={t('stats-improved')}
-                accent="#06a77d"
-                metaClass="text-[#06a77d]"
+                value={`${ntaShareOfReceipts.toFixed(2)}%`}
+                label={t('stats-nta-receipts-share')}
+                meta={t('stats-nta-method')}
               />
             </m.div>
-            <p className="mt-3 font-mono text-[0.6875rem] text-[#4c5c78]">
-              Source: PSA 2021 City &amp; Municipal-Level Poverty Estimates
-            </p>
-          </Container>
-        </section>
-
-        {/* ── Competitiveness (CMCI) ───────────────────────────────────────── */}
-        <section className="bg-white py-12">
-          <Container>
-            <SectionHead>
-              {t('stats-mati-competitive-index')} ({cmciData.year})
-            </SectionHead>
-            <p className="mb-4 max-w-2xl text-[0.9375rem] leading-relaxed text-[#4c5c78]">
-              DTI Cities and Municipalities Competitiveness Index {cmciData.year} — overall score{' '}
-              {cmciData.overall.score.toFixed(2)} (rank #{cmciData.overall.rank} nationwide). The
-              indicator bars below are normalized to a 0–100 scale.
-            </p>
-            <div className={`${CARD} p-[22px]`}>
-              <div
-                className="h-72"
-                role="img"
-                aria-label="Bar chart of the five CMCI pillar scores"
-              >
-                <ClientOnly fallback={<ChartFallback />}>
-                  {() => <Bar data={cmciBar} options={barOptions} />}
-                </ClientOnly>
-              </div>
-            </div>
-
-            <div className={`mt-4 overflow-x-auto ${CARD}`}>
+            <div className={`mt-4 ${CARD} overflow-x-auto`}>
               <table className="w-full text-left text-sm">
+                <caption className="px-4 py-3 text-left font-semibold text-[#123c7a]">
+                  {t('stats-receipt-breakdown')}
+                </caption>
                 <thead>
-                  <tr className="bg-[#f1f6fc] text-[#123c7a]">
-                    <th className="px-4 py-2.5 font-semibold">Pillar</th>
-                    <th className="px-4 py-2.5 font-semibold">Score</th>
-                    <th className="px-4 py-2.5 font-semibold">Trend</th>
+                  <tr className="bg-[#f1f6fc]">
+                    <th scope="col" className="px-4 py-2">
+                      {t('stats-category')}
+                    </th>
+                    <th scope="col" className="px-4 py-2">
+                      {t('stats-php-millions')}
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {cmciData.pillars.map((p) => (
-                    <tr key={p.label} className="border-t border-[#e3e8ef]">
-                      <td className="px-4 py-2 text-[#123c7a]">{p.label}</td>
-                      <td className="px-4 py-2 tabular-nums text-[#4c5c78]">
-                        {p.score.toFixed(2)}
-                      </td>
-                      <td className="px-4 py-2">
-                        <span
-                          className={
-                            p.trend.dir === 'up'
-                              ? 'text-xs font-semibold text-[#06a77d]'
-                              : p.trend.dir === 'down'
-                                ? 'text-xs font-semibold text-[#e01b24]'
-                                : 'text-xs font-semibold text-[#4c5c78]'
-                          }
-                        >
-                          {p.trend.label}
-                        </span>
+                  {(['local', 'external', 'nonIncome'] as const).map((key) => (
+                    <tr key={key} className="border-t border-[#e3e8ef]">
+                      <th scope="row" className="px-4 py-2 font-normal">
+                        {t(`stats-receipts-${key}`)}
+                      </th>
+                      <td className="px-4 py-2 tabular-nums">
+                        {money(municipalFinance.receipts[key])}
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
+              <p className="px-4 py-3 text-sm text-[#4c5c78]">{t('stats-receipts-note')}</p>
             </div>
-
-            {/* Per-pillar indicator detail */}
-            <div className="mt-6 grid gap-4 lg:grid-cols-2">
-              {cmciData.pillars.map((p) => (
-                <div key={p.label} className={`${CARD} p-5`}>
-                  <div className="mb-3 flex items-center justify-between">
-                    <h3 className="font-display text-base font-bold text-[#123c7a]">{p.label}</h3>
-                    <span className="font-display text-sm font-bold tabular-nums text-[#2b62ee]">
-                      {p.score.toFixed(2)}
-                    </span>
-                  </div>
-                  <div className="grid gap-2.5">
-                    {p.indicators.map((ind) => (
-                      <Meter
-                        key={ind.name}
-                        label={ind.name}
-                        value={String(ind.value)}
-                        pct={Math.min(ind.fill, 100)}
-                      />
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-            <p className="mt-3 font-mono text-[0.6875rem] text-[#4c5c78]">
-              Source: DTI Cities and Municipalities Competitiveness Index {cmciData.year}
+            <p className="mt-3 text-xs text-[#4c5c78]">
+              {t('stats-source')}: <SourceLink source={statisticsSources.finance} />
             </p>
+          </Container>
+        </section>
+
+        <section className="bg-white py-12">
+          <Container>
+            <SectionHead>{t('stats-poverty-statistics')}</SectionHead>
+            <p className="mb-4 max-w-3xl text-sm text-[#4c5c78]">{t('stats-poverty-definition')}</p>
+            <m.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="show"
+              viewport={revealViewport}
+              className="grid gap-4 sm:grid-cols-3"
+            >
+              {povertyStats.map((p) => (
+                <MetricCard
+                  key={p.year}
+                  value={`${p.rate.toFixed(2)}%`}
+                  label={String(p.year)}
+                  meta={t('stats-confidence-interval', {
+                    lower: p.lower.toFixed(2),
+                    upper: p.upper.toFixed(2),
+                  })}
+                />
+              ))}
+            </m.div>
+            <p className="mt-4 text-sm text-[#4c5c78]">{t('stats-poverty-release')}</p>
+            <p className="mt-3 text-xs text-[#4c5c78]">
+              {t('stats-source')}: <SourceLink source={statisticsSources.poverty} /> ·{' '}
+              <SourceLink source={statisticsSources.povertyArchive} />
+            </p>
+          </Container>
+        </section>
+
+        <section className="bg-[#f1f6fc] py-12">
+          <Container>
+            <SectionHead>{t('stats-data-availability')}</SectionHead>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className={`${CARD} p-5`}>
+                <h3 className="font-semibold text-[#123c7a]">{t('stats-economic-indicators')}</h3>
+                <p className="mt-2 text-sm text-[#4c5c78]">{t('stats-economic-unverified')}</p>
+              </div>
+              <div className={`${CARD} p-5`}>
+                <h3 className="font-semibold text-[#123c7a]">
+                  {t('stats-mati-competitive-index')}
+                </h3>
+                <p className="mt-2 text-sm text-[#4c5c78]">{t('stats-cmci-unverified')}</p>
+                <p className="mt-3 text-xs text-[#4c5c78]">
+                  <SourceLink source={statisticsSources.cmci} />
+                </p>
+              </div>
+            </div>
           </Container>
         </section>
       </MotionConfig>
