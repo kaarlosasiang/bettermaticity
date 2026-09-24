@@ -1,0 +1,73 @@
+{
+  "checkedOn": "2026-09-24",
+  "projects": [
+    {
+      "id": "mati-airport",
+      "category": "airport",
+      "titleKey": "rising-airport",
+      "scope": "national",
+      "status": "appropriated",
+      "sourceDate": "2026-01-05",
+      "amount": 700000000,
+      "amountKind": "appropriation",
+      "detailKey": "rising-airport-detail",
+      "sources": [
+        {
+          "label": "DBM \u00b7 GAA FY2026, p. 343",
+          "url": "https://www.dbm.gov.ph/wp-content/uploads/GAA/GAA2026/VolumeIB/DOTR/A.pdf#page=13"
+        }
+      ]
+    },
+    {
+      "id": "macambol-water",
+      "category": "water",
+      "titleKey": "rising-macambol",
+      "scope": "private",
+      "status": "reported-complete",
+      "sourceDate": "2026-01-20",
+      "amount": 1200000,
+      "amountKind": "reported-cost",
+      "detailKey": "rising-macambol-detail",
+      "sources": [
+        {
+          "label": "Philippine News Agency \u00b7 20 Jan 2026",
+          "url": "https://www.pna.gov.ph/articles/1267356"
+        }
+      ]
+    },
+    {
+      "id": "fish-port-phase-2",
+      "category": "port",
+      "titleKey": "rising-fishport",
+      "scope": "national",
+      "status": "announced",
+      "sourceDate": "2023-02-04",
+      "amount": 150000000,
+      "amountKind": "announced-funding",
+      "detailKey": "rising-fishport-detail",
+      "sources": [
+        {
+          "label": "Philippine News Agency \u00b7 4 Feb 2023",
+          "url": "https://www.pna.gov.ph/articles/1194397"
+        }
+      ]
+    },
+    {
+      "id": "fish-port-coastal-access",
+      "category": "road",
+      "titleKey": "rising-coastal",
+      "scope": "national",
+      "status": "announced",
+      "sourceDate": "2023-02-04",
+      "amount": 2000000000,
+      "amountKind": "announced-funding",
+      "detailKey": "rising-coastal-detail",
+      "sources": [
+        {
+          "label": "Philippine News Agency \u00b7 4 Feb 2023",
+          "url": "https://www.pna.gov.ph/articles/1194397"
+        }
+      ]
+    }
+  ]
+}

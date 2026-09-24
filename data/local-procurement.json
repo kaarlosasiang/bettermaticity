@@ -1,0 +1,43 @@
+{
+  "checkedOn": "2026-09-24",
+  "projects": [
+    {
+      "id": "CM-NP-SS-2026-001",
+      "reference": "1713",
+      "scope": "local",
+      "name": "Rice assistance for indigent individuals or families",
+      "location": "City of Mati, Davao Oriental",
+      "agency": "City Government of Mati",
+      "funding": null,
+      "abc": 23000000,
+      "noticeStatus": "Closed Expired",
+      "publishedOn": "2026-07-14",
+      "updatedOn": null,
+      "closingOn": "2026-07-20",
+      "contractor": null,
+      "awardAmount": null,
+      "completionPercent": null,
+      "sourceName": "DA FFEDIS",
+      "sourceUrl": "https://ffedis.da.gov.ph/negotiated-procurement/public/view/2628"
+    },
+    {
+      "id": "ITB No. 2024-104",
+      "reference": "11374254",
+      "scope": "local",
+      "name": "Level II potable water supply system in Barangay Badas",
+      "location": "Barangay Badas, City of Mati, Davao Oriental",
+      "agency": "City Government of Mati",
+      "funding": "Trust Fund (NTF-ELCAC)",
+      "abc": 2500000,
+      "noticeStatus": "Awarded",
+      "publishedOn": "2024-10-18",
+      "updatedOn": "2025-02-17",
+      "contractor": null,
+      "awardAmount": null,
+      "completionPercent": null,
+      "sourceUrl": "https://notices.philgeps.gov.ph/GEPSNONPILOT/Tender/PrintableBidNoticeAbstractUI.aspx?refid=11374254",
+      "sourceName": "PhilGEPS",
+      "closingOn": null
+    }
+  ]
+}

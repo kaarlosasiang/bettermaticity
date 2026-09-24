@@ -1,3 +1,4 @@
+import { ServiceSources } from '@/components/ServiceSources';
 import type { LucideIcon } from 'lucide-react';
 import {
   FileText,
@@ -172,6 +173,7 @@ export default function Services() {
           </div>
         </Container>
       </Section>
+      <ServiceSources category="services" />
     </>
   );
 }

@@ -1,16 +1,35 @@
 {
-  "_status": "draft",
-  "_note": "PLACEHOLDER — replace with actual City Ordinances enacted by the Sangguniang Panlungsod of the City of Mati, Davao Oriental.",
+  "_status": "partial",
+  "_checkedOn": "2026-09-24",
+  "_note": "Selected references checked against indexed Philippine News Agency reporting. Not a complete register. Signed texts, exact titles, session dates and current legal status have not been verified.",
   "ordinances": [
     {
-      "ordinanceNo": "0000-00-00",
-      "title": "[Placeholder] Title of City Ordinance — City of Mati, Davao Oriental",
-      "sessionDate": "2025-01-01"
+      "ordinanceNo": "500, s. 2021",
+      "year": 2021,
+      "summaryKey": "leg-record-abunda",
+      "issuingBody": "Sangguniang Panlungsod of Mati",
+      "sourceUrl": "https://www.pna.gov.ph/articles/1155041",
+      "sourceTitle": "Mati creates new festival to honor farmers, fisherfolk",
+      "officialTitle": null,
+      "sessionDate": null,
+      "fullTextUrl": null,
+      "verificationStatus": "government-report-reference",
+      "sourcePublisher": "Philippine News Agency",
+      "checkedOn": "2026-09-24"
     },
     {
-      "ordinanceNo": "0000-00-01",
-      "title": "[Placeholder] Title of City Ordinance — City of Mati, Davao Oriental",
-      "sessionDate": "2025-01-01"
+      "ordinanceNo": "71, s. 2011",
+      "year": 2011,
+      "summaryKey": "leg-record-meat",
+      "issuingBody": "Sangguniang Panlungsod of Mati",
+      "sourceUrl": "https://www.pna.gov.ph/articles/1122900",
+      "sourceTitle": "Mati City remains 'ASF-free'",
+      "officialTitle": null,
+      "sessionDate": null,
+      "fullTextUrl": null,
+      "verificationStatus": "government-report-reference",
+      "sourcePublisher": "Philippine News Agency",
+      "checkedOn": "2026-09-24"
     }
   ]
 }

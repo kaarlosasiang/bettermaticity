@@ -9,10 +9,6 @@ import {
   HeartPulse,
   Users,
   Waves,
-  Signpost,
-  Building2,
-  Droplets,
-  TrendingUp,
   Sun,
   CalendarDays,
   Sprout,
@@ -37,9 +33,16 @@ import {
   staggerContainer,
   revealViewport,
 } from '@/components/motion';
-import { totalPopulation, barangayCount, landAreaKm2, incomeClass } from '@/lib/statsData';
-import { financialData } from '@/lib/budgetData';
+import {
+  totalPopulation,
+  barangayCount,
+  landAreaKm2,
+  incomeClass,
+  statisticsSources,
+} from '@/lib/statsData';
+import { annualFinancials, fiscalSource } from '@/lib/budgetData';
 import { officials } from '@/lib/govData';
+import { RisingProjects } from '@/components/RisingProjects';
 
 const FEEL_MATI_LOGO = '/assets/images/logo/feel-mati.png';
 
@@ -69,34 +72,6 @@ const popular: { to: string; Icon: LucideIcon; label: string; color: string; fee
   { to: '/services/health', Icon: HeartPulse, label: 'Health Services', color: '#e01b24' },
   { to: '/services/social-services', Icon: Users, label: 'Social Welfare', color: '#7c4dff' },
   { to: '/services', Icon: Waves, label: 'Tourism', color: '#8a6200', feel: true },
-];
-
-type Status = { text: string; dot: string };
-const rising: { to: string; Icon: LucideIcon; title: string; status: Status }[] = [
-  {
-    to: '/budget',
-    Icon: Signpost,
-    title: 'Dahican Coastal Road Rehabilitation',
-    status: { text: 'Finishing Stages', dot: '#0077be' },
-  },
-  {
-    to: '/budget',
-    Icon: Store,
-    title: 'Central Public Market Annex',
-    status: { text: 'Under Construction', dot: '#ffc001' },
-  },
-  {
-    to: '/budget',
-    Icon: Droplets,
-    title: 'Barangay Mayo Water System',
-    status: { text: 'Fully Operational', dot: '#06a77d' },
-  },
-  {
-    to: '/budget',
-    Icon: Building2,
-    title: 'Baywalk & Boulevard Extension',
-    status: { text: 'Under Construction', dot: '#ffc001' },
-  },
 ];
 
 const tourism: { title: string; blurb: string; slot: string; badge?: string; large?: boolean }[] = [
@@ -195,42 +170,25 @@ const services: {
   },
 ];
 
-// ── Public funds, derived from the real FY2025 SRE (budgetData) ──────────────
-
+// Public funds use the same sourced annual snapshot as the transparency page.
 function useFunds() {
-  const { q1, q2 } = financialData;
-  const sum = (a: number, b: number) => a + b;
-  const incomeTotal = sum(q1.income.total, q2.income.total);
-  const local = sum(q1.income.local, q2.income.local);
-  const external = sum(q1.income.external, q2.income.external);
-  const spendTotal = sum(q1.expenditures.total, q2.expenditures.total);
-  const per100 = (v: number) => (v / spendTotal) * 100;
+  const q = annualFinancials;
   const rows = [
-    {
-      label: 'General public services',
-      v: sum(q1.expenditures.gps, q2.expenditures.gps),
-      color: '#2b62ee',
-    },
-    {
-      label: 'Social services',
-      v: sum(q1.expenditures.social, q2.expenditures.social),
-      color: '#0077be',
-    },
-    {
-      label: 'Economic services',
-      v: sum(q1.expenditures.economic, q2.expenditures.economic),
-      color: '#06a77d',
-    },
-    { label: 'Debt service', v: sum(q1.expenditures.debt, q2.expenditures.debt), color: '#e01b24' },
-  ].map((r) => ({ ...r, per100: per100(r.v) }));
+    { label: 'General public services', v: q.expenditures.gps, color: '#2b62ee' },
+    { label: 'Social services', v: q.expenditures.social, color: '#0077be' },
+    { label: 'Economic services', v: q.expenditures.economic, color: '#06a77d' },
+    { label: 'Special Education Fund (SEF)', v: q.expenditures.sef ?? 0, color: '#b45b16' },
+    { label: 'Debt services (operating)', v: q.expenditures.debt, color: '#e01b24' },
+    { label: 'Non-operating expenditures', v: q.expenditures.nonOperating, color: '#7357b6' },
+  ].map((r) => ({ ...r, per100: (r.v / q.expenditures.total) * 100 }));
   return {
-    incomeTotal,
-    local,
-    external,
-    spendTotal,
+    incomeTotal: q.receipts.total,
+    local: q.receipts.local,
+    external: q.receipts.external,
+    nonIncome: q.receipts.nonIncome,
+    spendTotal: q.expenditures.total,
     rows,
-    net: sum(q1.netIncome, q2.netIncome),
-    balance: q2.fundBalance,
+    balance: q.endingCashBalance,
   };
 }
 
@@ -381,57 +339,7 @@ export default function Home() {
           </Container>
         </section>
 
-        {/* ── Rising in Mati ───────────────────────────────────────────────── */}
-        <section className="bg-white py-12">
-          <Container>
-            <m.div
-              className="mb-5 flex items-center justify-between"
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={revealViewport}
-            >
-              <Eyebrow icon={TrendingUp}>RISING IN MATI</Eyebrow>
-              <AppLink
-                to="/budget"
-                className="inline-flex items-center gap-1.5 font-display text-sm font-semibold text-[#2b62ee]"
-              >
-                View all <ArrowRight className="size-3.5" aria-hidden="true" />
-              </AppLink>
-            </m.div>
-            <m.div
-              className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="show"
-              viewport={revealViewport}
-            >
-              {rising.map(({ to, Icon, title, status }) => (
-                <m.div key={title} variants={fadeUp} className="h-full">
-                  <AppLink
-                    to={to}
-                    className="flex h-full min-h-[150px] flex-col justify-between rounded-xl p-[18px] text-[#123c7a] ring-1 ring-[#e3e8ef] transition hover:ring-[#2b62ee]"
-                  >
-                    <div>
-                      <Icon className="size-[18px] text-[#2b62ee]" aria-hidden="true" />
-                      <div className="mt-3 font-display text-[0.9375rem] leading-[1.35] font-bold">
-                        {title}
-                      </div>
-                    </div>
-                    <span className="inline-flex items-center gap-1.5 text-xs text-[#4c5c78]">
-                      <span
-                        className="size-[7px] rounded-full"
-                        style={{ background: status.dot }}
-                        aria-hidden="true"
-                      />
-                      {status.text}
-                    </span>
-                  </AppLink>
-                </m.div>
-              ))}
-            </m.div>
-          </Container>
-        </section>
+        <RisingProjects preview />
 
         {/* ── Mati at a Glance ─────────────────────────────────────────────── */}
         <section className="bg-[#f1f6fc] py-12">
@@ -483,7 +391,19 @@ export default function Home() {
                   meta: 'INCOME CLASSIFICATION',
                   amber: false,
                 },
-                { v: landAreaKm2, label: 'km² land area', meta: 'NEEDS VERIFICATION', amber: true },
+                {
+                  v: landAreaKm2,
+                  label: 'km² land area',
+                  meta: (
+                    <a
+                      href={statisticsSources.area.url}
+                      className="underline underline-offset-4 hover:text-[#2b62ee]"
+                    >
+                      PSA · 2013 LAND-AREA BASIS
+                    </a>
+                  ),
+                  amber: false,
+                },
               ].map((s) => (
                 <m.div
                   key={s.label}
@@ -733,20 +653,29 @@ export default function Home() {
                     </h2>
                   </div>
                   <span className="inline-flex h-6 items-center gap-1.5 rounded-full bg-white px-2.5 font-mono text-[0.6875rem] text-[#4c5c78] shadow-[0_0_0_1px_#d6dee9]">
-                    <span className="size-1.5 rounded-full bg-[#06a77d]" aria-hidden="true" /> BLGF
-                    SRE · RETRIEVED 2026-09-12
+                    <span className="size-1.5 rounded-full bg-[#06a77d]" aria-hidden="true" /> DBM /
+                    BLGF · FY2025
                   </span>
                 </div>
 
                 <div className="overflow-hidden rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)]">
                   <div className="p-[22px] pb-0">
-                    <div className="text-sm text-[#4c5c78]">Income received, Jan–Jun 2025</div>
+                    <div className="text-sm text-[#4c5c78]">Total receipts, FY2025</div>
                     <div className="mt-1.5 mb-1 font-display text-5xl leading-none font-extrabold tracking-[-0.03em] text-[#2b62ee]">
                       {M(funds.incomeTotal)}
                     </div>
                     <div className="font-mono text-xs text-[#4c5c78]">
-                      LOCAL {M(funds.local)} · NATIONAL TRANSFERS {M(funds.external)}
+                      LOCAL {M(funds.local)} · EXTERNAL {M(funds.external)} · NON-INCOME{' '}
+                      {M(funds.nonIncome)}
                     </div>
+                    <a
+                      href={`${fiscalSource.url}#page=3`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-2 block text-xs text-[#2b62ee] underline underline-offset-4"
+                    >
+                      Source: {fiscalSource.label}
+                    </a>
                   </div>
                   <div className="p-[22px]">
                     <div className="font-mono text-[0.6875rem] tracking-[0.06em] text-[#4c5c78]">
@@ -783,7 +712,7 @@ export default function Home() {
                   </div>
                   <div className="flex items-center justify-between bg-[#f7f9fc] px-[22px] py-3.5 font-mono text-[0.6875rem] text-[#4c5c78] shadow-[inset_0_1px_0_#e3e8ef]">
                     <span>
-                      SPENT {M(funds.spendTotal)} · NET {M(funds.net)} · BALANCE {M(funds.balance)}
+                      SPENT {M(funds.spendTotal)} · ENDING CASH {M(funds.balance)}
                     </span>
                     <AppLink to="/budget" className="text-[#2b62ee]">
                       FULL SRE →

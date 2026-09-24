@@ -1,9 +1,119 @@
 {
-  "_schema_version": "1.0",
-  "_status": "draft",
-  "_source": "Bureau of Local Government Finance (BLGF) / LGU Mati Budget Office",
-  "_note": "Awaiting official fiscal data",
-  "municipality": "Mati",
+  "_schema_version": "3.0",
+  "_status": "verified-transcription",
+  "city": "City of Mati",
   "province": "Davao Oriental",
-  "fiscal_years": []
+  "unit": "PHP millions",
+  "source": {
+    "publisher": "Department of Budget and Management (DBM)",
+    "title": "BESF 2027, Table F.13 — Statement of Receipts and Expenditures, By Cities, 2025",
+    "url": "https://www.dbm.gov.ph/wp-content/uploads/BESF/BESF2027/F13.pdf",
+    "pages": [594, 595],
+    "pdfPages": [3, 4],
+    "checkedOn": "2026-09-24",
+    "basis": "DOF-BLGF data submitted by local treasurers through the LIFT System; see table footnotes. This is not a COA audit opinion.",
+    "publishedOn": "2026-08-11",
+    "label": "DBM BESF 2027 · Table F.13 · pp. 594–595"
+  },
+  "fiscal_years": [
+    {
+      "year": 2025,
+      "period": "FY2025",
+      "status": "reported",
+      "source": {
+        "publisher": "Department of Budget and Management (DBM)",
+        "title": "BESF 2027, Table F.13 — Statement of Receipts and Expenditures, By Cities, 2025",
+        "url": "https://www.dbm.gov.ph/wp-content/uploads/BESF/BESF2027/F13.pdf",
+        "pages": [594, 595],
+        "pdfPages": [3, 4],
+        "checkedOn": "2026-09-24",
+        "basis": "DOF-BLGF data submitted by local treasurers through the LIFT System; see table footnotes. This is not a COA audit opinion.",
+        "publishedOn": "2026-08-11",
+        "label": "DBM BESF 2027 · Table F.13 · pp. 594–595"
+      },
+      "beginningCashBalance": 3.41,
+      "receipts": {
+        "local": 252.55,
+        "external": 1837.19,
+        "nonIncome": 289.11,
+        "total": 2378.85,
+        "nta": 1776.97
+      },
+      "expenditures": {
+        "gps": 988.97,
+        "social": 93.49,
+        "economic": 65.75,
+        "sef": 18.38,
+        "debt": 116.82,
+        "nonOperating": 389.53,
+        "total": 1672.95
+      },
+      "fundCashAvailable": 709.31,
+      "priorYearPayables": 147.81,
+      "continuingAppropriation": 264.96,
+      "endingCashBalance": 296.54
+    },
+    {
+      "year": 2024,
+      "period": "FY2024",
+      "beginningCashBalance": 363.09,
+      "receipts": {
+        "local": 193.92,
+        "external": 1544.35,
+        "nonIncome": 96.02,
+        "total": 1834.29,
+        "nta": 1497.89
+      },
+      "expenditures": {
+        "gps": 989.66,
+        "social": 245.43,
+        "economic": 52.14,
+        "debt": 80.4,
+        "nonOperating": 165.7,
+        "total": 1533.33,
+        "sef": null
+      },
+      "fundCashAvailable": 664.06,
+      "priorYearPayables": 172.87,
+      "continuingAppropriation": 79.92,
+      "endingCashBalance": 411.26,
+      "source": {
+        "publisher": "Department of Budget and Management (DBM)",
+        "title": "BESF 2026, Table F.13 — Statement of Receipts and Expenditures, By Cities, 2024",
+        "url": "https://www.dbm.gov.ph/wp-content/uploads/BESF/BESF2026/F13.pdf",
+        "pages": [604, 605],
+        "pdfPages": [3, 4],
+        "checkedOn": "2026-09-24",
+        "basis": "DOF-BLGF data submitted by local treasurers through the LIFT System; see table footnotes. This is not a COA audit opinion."
+      },
+      "status": "reported"
+    }
+  ],
+  "outlook": [
+    {
+      "year": 2026,
+      "status": "planning",
+      "receipts": 2534.48,
+      "expenditures": 2242.44,
+      "nta": 2024.76,
+      "source": {
+        "url": "https://www.dbm.gov.ph/wp-content/uploads/BESF/BESF2027/F14.pdf",
+        "label": "DBM BESF 2027 · Table F.14 · pp. 598–599",
+        "pages": [598, 599]
+      }
+    },
+    {
+      "year": 2027,
+      "status": "planning",
+      "receipts": 2750.63,
+      "expenditures": 2427.1,
+      "nta": 2242.37,
+      "source": {
+        "url": "https://www.dbm.gov.ph/wp-content/uploads/BESF/BESF2027/F15.pdf",
+        "label": "DBM BESF 2027 · Table F.15 · pp. 602–603",
+        "pages": [602, 603]
+      }
+    }
+  ],
+  "outlookBasis": "Planning classification is an editorial inference from the August 2026 publication date and unfinished/future fiscal years. F.14/F.15 reuse actual-data footnotes; they do not establish completed-year actuals or an enacted city appropriation."
 }
