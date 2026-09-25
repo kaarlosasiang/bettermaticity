@@ -6,7 +6,8 @@
 // Bump whenever a precached file's contents change — activate deletes caches whose
 // names no longer match, so returning visitors stop being served the old copy.
 // v8: footer logo switched to the Mati white PNG (the old white SVG was the Solano mark).
-var CACHE_VERSION = 'v8';
+// v9: new Sleeping Dinosaur logo, favicon and PWA icons.
+var CACHE_VERSION = 'v9';
 var STATIC_CACHE = 'bettermati-static-' + CACHE_VERSION;
 var RUNTIME_CACHE = 'bettermati-runtime-' + CACHE_VERSION;
 var OFFLINE_URL = '/offline.html';
@@ -22,6 +23,7 @@ var PRECACHE_URLS = [
   '/assets/images/logo/better-mati-logo-white.png',
   '/assets/images/logo/favicon.svg',
   '/assets/images/logo/favicon.ico',
+  '/assets/images/logo/icon-192.png',
 ];
 
 // Max items in runtime cache to prevent unbounded growth
@@ -236,7 +238,7 @@ self.addEventListener('push', function (event) {
   event.waitUntil(
     self.registration.showNotification(data.title || 'BetterMati', {
       body: data.body || '',
-      icon: '/assets/images/logo/favicon.svg',
+      icon: '/assets/images/logo/icon-192.png',
       badge: '/assets/images/logo/favicon.svg',
       tag: data.tag || 'bettermati-notification',
       data: { url: data.url || '/' },

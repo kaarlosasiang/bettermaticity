@@ -80,7 +80,7 @@ export default function Footer() {
             <img
               src="/assets/images/logo/better-mati-logo-white.png"
               alt="Better Mati logo"
-              className="mb-4 h-18 w-auto"
+              className="mb-4 h-13 w-auto"
             />
             <p className="mb-6 text-sm/[1.6] text-white/70">{t('footer-tagline')}</p>
             <div className="flex gap-3">

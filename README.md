@@ -13,7 +13,7 @@ A civic-tech initiative providing transparent access to municipal services, prog
 > - **City history** — the homepage timeline (`web/src/pages/Home.tsx` + `home-history-*` keys in `web/src/locales/*.json`) is placeholdered; add verified City of Mati history.
 > - **Contact & hotlines** — phone/hotline numbers (`web/src/lib/hotlines.ts`, `web/src/components/layout/HotlineBar.tsx`) use Davao Oriental's `(087)` area code but are placeholder subscriber numbers; emails use `@mati.gov.ph` / `cityofmati` addresses; postal code `8200`. Replace with real values.
 > - **Config** — Google Analytics ID is a placeholder; set your GA4 property. Confirm the `mati.gov.ph` domain and official Facebook page.
-> - **Artwork** — `assets/images/logo/*`, `favicon.*`, and the OpenGraph banner still carry some template/Solano artwork; the footer white logo (`better-mati-logo-white.svg`) still shows "Better Solano" and needs a real white Mati mark.
+> - **Artwork** — the logo, favicon, PWA icons and OpenGraph banner now use the Mati "Sleeping Dinosaur" mark (Pujada Bay). The OpenGraph banner is a homepage screenshot, so re-capture it when the hero changes. `feel-mati.png` and the partner logos are separate artwork.
 > - **Cebuano (`ceb`)** — `web/src/locales/ceb.json` is a machine-assisted starter set only; the bulk of keys fall back to English pending a full translation + native review.
 
 ![Version](https://img.shields.io/badge/version-1.2.0-green)
