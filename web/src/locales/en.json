@@ -5751,5 +5751,9 @@
   "service-dti-desc": "Register a business name through the Department of Trade and Industry.",
   "service-health-consultation-desc": "Ask your health center about consultations and clinic schedules.",
   "service-link-details": "Details & source",
-  "rising-details": "Details and sources"
+  "rising-details": "Details and sources",
+  "rising-stage-announced": "Announced",
+  "rising-stage-budgeted": "Budgeted",
+  "rising-stage-awarded": "Awarded",
+  "rising-stage-completed": "Completed"
 }

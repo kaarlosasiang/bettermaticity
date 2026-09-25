@@ -204,11 +204,11 @@ export default function Header() {
     <header className="sticky top-0 z-[1000] bg-white py-1.5 shadow-sm">
       <div className="mx-auto flex min-h-12 w-full max-w-[1200px] flex-wrap items-center justify-between px-6">
         {/* Logo */}
-        <AppLink to="/" className="flex items-center" aria-label="Better Mati home">
+        <AppLink to="/" className="flex items-center py-1.5 lg:py-2" aria-label="Better Mati home">
           <img
             src="/assets/images/logo/better-mati-logo.png"
             alt="Better Mati Logo"
-            className="h-10 w-auto lg:h-[68px]"
+            className="h-8.5 w-auto lg:h-12"
           />
         </AppLink>
 

@@ -339,8 +339,6 @@ export default function Home() {
           </Container>
         </section>
 
-        <RisingProjects preview />
-
         {/* ── Mati at a Glance ─────────────────────────────────────────────── */}
         <section className="bg-[#f1f6fc] py-12">
           <Container>
@@ -467,6 +465,8 @@ export default function Home() {
             </m.div>
           </Container>
         </section>
+
+        <RisingProjects preview />
 
         {/* ── Feel Mati — tourism ──────────────────────────────────────────── */}
         <section className="bg-[#123c7a] py-14">

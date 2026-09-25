@@ -5751,5 +5751,9 @@
   "service-dti-desc": "Irehistro ang pangalan ng negosyo sa Department of Trade and Industry.",
   "service-health-consultation-desc": "Alamin sa health center ang konsultasyon at iskedyul ng klinika.",
   "service-link-details": "Detalye at sanggunian",
-  "rising-details": "Mga detalye at sanggunian"
+  "rising-details": "Mga detalye at sanggunian",
+  "rising-stage-announced": "Inanunsyo",
+  "rising-stage-budgeted": "May badyet",
+  "rising-stage-awarded": "Na-award",
+  "rising-stage-completed": "Natapos"
 }

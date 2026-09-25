@@ -345,5 +345,9 @@
   "service-dti-desc": "Irehistro ang ngalan sa negosyo sa Department of Trade and Industry.",
   "service-health-consultation-desc": "Pangutan-a ang health center bahin sa konsultasyon ug iskedyul sa klinika.",
   "service-link-details": "Detalye ug tinubdan",
-  "rising-details": "Mga detalye ug tinubdan"
+  "rising-details": "Mga detalye ug tinubdan",
+  "rising-stage-announced": "Gipahibalo",
+  "rising-stage-budgeted": "Nabadyetan",
+  "rising-stage-awarded": "Na-award",
+  "rising-stage-completed": "Nahuman"
 }
