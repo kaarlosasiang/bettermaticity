@@ -59,8 +59,8 @@ function officialInitials(name: string): string {
   return (first + last).toUpperCase() || '—';
 }
 
-// Easing for the funds-bar width fill (width isn't a transform, so it needs its own
-// transition — reducedMotion is handled by rendering a static bar instead).
+// Easing for the funds-bar width fill (width isn't a transform, so MotionConfig's
+// reducedMotion doesn't cover it — reduced motion sets the duration to 0 instead).
 const barEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 // ── Content models ──────────────────────────────────────────────────────────
@@ -71,7 +71,7 @@ const popular: { to: string; Icon: LucideIcon; label: string; color: string; fee
   { to: '/services/tax-payments', Icon: Coins, label: 'Taxes & Fees', color: '#06a77d' },
   { to: '/services/health', Icon: HeartPulse, label: 'Health Services', color: '#e01b24' },
   { to: '/services/social-services', Icon: Users, label: 'Social Welfare', color: '#7c4dff' },
-  { to: '/services', Icon: Waves, label: 'Tourism', color: '#8a6200', feel: true },
+  { to: '/visit-mati', Icon: Waves, label: 'Tourism', color: '#8a6200', feel: true },
 ];
 
 const tourism: { title: string; blurb: string; slot: string; badge?: string; large?: boolean }[] = [
@@ -489,7 +489,7 @@ export default function Home() {
                 </p>
               </div>
               <AppLink
-                to="/services/environment"
+                to="/visit-mati"
                 className="inline-flex h-11 shrink-0 items-center gap-2 rounded-lg bg-[#ffc001] px-5 font-display text-[0.9375rem] font-bold text-[#123c7a] transition hover:brightness-105"
               >
                 Plan your visit <ArrowRight className="size-3.5" aria-hidden="true" />
@@ -556,7 +556,7 @@ export default function Home() {
                 </div>
               </div>
               <AppLink
-                to="/services/environment"
+                to="/visit-mati"
                 className="inline-flex shrink-0 items-center gap-1.5 font-display text-sm font-bold text-[#ffc001]"
               >
                 Festival guide <ArrowRight className="size-3.5" aria-hidden="true" />
@@ -689,21 +689,18 @@ export default function Home() {
                         >
                           <span>{r.label}</span>
                           <span className="h-2.5 rounded-full bg-[#e3e8ef]">
-                            {reduce ? (
-                              <span
-                                className="block h-2.5 rounded-full"
-                                style={{ width: `${r.per100}%`, background: r.color }}
-                              />
-                            ) : (
-                              <m.span
-                                className="block h-2.5 rounded-full"
-                                style={{ background: r.color }}
-                                initial={{ width: 0 }}
-                                whileInView={{ width: `${r.per100}%` }}
-                                viewport={{ once: true, amount: 0.6 }}
-                                transition={{ duration: 0.9, ease: barEase }}
-                              />
-                            )}
+                            {/* Always render the same element so the prerendered HTML and the
+                                first client render match; reduced motion only zeroes the duration. */}
+                            <m.span
+                              className="block h-2.5 rounded-full"
+                              style={{ background: r.color }}
+                              initial={{ width: 0 }}
+                              whileInView={{ width: `${r.per100}%` }}
+                              viewport={{ once: true, amount: 0.6 }}
+                              transition={
+                                reduce ? { duration: 0 } : { duration: 0.9, ease: barEase }
+                              }
+                            />
                           </span>
                           <span className="text-right font-mono">₱{r.per100.toFixed(2)}</span>
                         </div>
