@@ -73,7 +73,6 @@ const NAV: NavEntry[] = [
 
 const LANGS: { code: Language; label: string; name: string }[] = [
   { code: 'en', label: 'EN', name: 'English' },
-  { code: 'fil', label: 'FIL', name: 'Filipino' },
   { code: 'ceb', label: 'CEB', name: 'Cebuano' },
 ];
 
@@ -85,7 +84,7 @@ function renderNavLabel(label: string, highlight?: boolean): React.ReactNode {
   return (
     <>
       <span className="text-yellow-500 font-semibold">{first}</span>
-      <span className="text-navy font-semibold">{rest.length ? ` ${rest.join(' ')}` : null}</span>  
+      <span className="text-navy font-semibold">{rest.length ? ` ${rest.join(' ')}` : null}</span>
     </>
   );
 }

@@ -255,7 +255,6 @@ describe('retired LGU Solano numbers', () => {
       repoFile('web/src/components/layout/HotlineBar.tsx'),
     ],
     ['web/src/locales/en.json', repoFile('web/src/locales/en.json')],
-    ['web/src/locales/fil.json', repoFile('web/src/locales/fil.json')],
     ['web/src/locales/ceb.json', repoFile('web/src/locales/ceb.json')],
   ];
 

@@ -3,7 +3,6 @@ import { describe, expect, it, vi } from 'vitest';
 import { LegislativeRecords } from './LegislativeRecords';
 import { ordinances, resolutions } from '@/lib/govData';
 import en from '@/locales/en.json';
-import fil from '@/locales/fil.json';
 import ceb from '@/locales/ceb.json';
 
 vi.mock('@/hooks/useLanguage', () => ({
@@ -30,7 +29,7 @@ describe('legislative reference evidence', () => {
       expect(record.officialTitle).toBeNull();
       expect(record.fullTextUrl).toBeNull();
       expect(new URL(record.sourceUrl).hostname).toBe('www.pna.gov.ph');
-      for (const locale of [en, fil, ceb]) {
+      for (const locale of [en, ceb]) {
         expect((locale as Record<string, string>)[record.summaryKey]).toBeTruthy();
       }
     }

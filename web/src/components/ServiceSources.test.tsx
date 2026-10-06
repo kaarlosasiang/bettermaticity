@@ -9,7 +9,6 @@ import {
 import serviceData from '@data/services.json';
 import migratedRoutes from '../../migrated-routes.json';
 import en from '@/locales/en.json';
-import fil from '@/locales/fil.json';
 import ceb from '@/locales/ceb.json';
 
 vi.mock('@/hooks/useLanguage', () => ({
@@ -65,15 +64,14 @@ describe('service evidence and navigation', () => {
     expect(serviceReferences.health.checkedOn).toBeNull();
   });
 
-  it('provides all new guidance and labels in three languages', () => {
+  it('provides all new guidance and labels in the supported languages', () => {
     const texts = [
       ...Object.values(serviceReferences).map((source) => source.claim),
       ...Object.values(serviceGuides).flatMap((guide) => [guide.title, guide.summary, guide.ask]),
     ];
     for (const text of texts)
-      for (const language of ['en', 'fil', 'ceb'] as const) expect(text[language]).toBeTruthy();
+      for (const language of ['en', 'ceb'] as const) expect(text[language]).toBeTruthy();
     for (const key of Object.keys(en).filter((key) => key.startsWith('service-'))) {
-      expect((fil as Record<string, string>)[key], key).toBeTruthy();
       expect((ceb as Record<string, string>)[key], key).toBeTruthy();
     }
   });

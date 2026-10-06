@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 import { annualFinancials as q, fiscalSource, financialOutlook } from './budgetData';
 import { procurementNotices } from './infrastructureData';
 import en from '../locales/en.json';
-import fil from '../locales/fil.json';
 import ceb from '../locales/ceb.json';
 
 describe('transparency data integrity', () => {
@@ -70,7 +69,7 @@ describe('transparency data integrity', () => {
 
   it('provides transparency explanations in every supported language', () => {
     for (const key of Object.keys(en).filter((key) => key.startsWith('trans-'))) {
-      for (const locale of [fil, ceb]) expect(locale).toHaveProperty(key);
+      for (const locale of [ceb]) expect(locale).toHaveProperty(key);
     }
   });
 });

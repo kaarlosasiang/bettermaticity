@@ -6,7 +6,6 @@ import { ServiceCards } from './ServiceCards';
 import { serviceOnlineActions } from '@/lib/serviceOnlineActions';
 import { serviceReferences } from '@/lib/serviceReferences';
 import en from '@/locales/en.json';
-import fil from '@/locales/fil.json';
 import ceb from '@/locales/ceb.json';
 
 vi.mock('@/hooks/useLanguage', () => ({
@@ -60,7 +59,7 @@ describe('service cards', () => {
     for (const action of Object.values(serviceOnlineActions)) {
       expect(new URL(action.href).protocol).toBe('https:');
       expect(serviceReferences[action.sourceId]).toBeTruthy();
-      for (const locale of [en, fil, ceb]) {
+      for (const locale of [en, ceb]) {
         for (const key of [action.labelKey, action.noteKey])
           expect((locale as Record<string, string>)[key]).toBeTruthy();
       }
