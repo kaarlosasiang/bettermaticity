@@ -26,6 +26,12 @@ import ResolutionFramework from './pages/ResolutionFramework';
 import News from './pages/News';
 import Budget from './pages/Budget';
 import Statistics from './pages/Statistics';
+import VisitMati from './pages/VisitMati';
+import DahicanBeach from './pages/visit-mati/DahicanBeach';
+import MountHamiguitan from './pages/visit-mati/MountHamiguitan';
+import PujadaBay from './pages/visit-mati/PujadaBay';
+import SleepingDinosaur from './pages/visit-mati/SleepingDinosaur';
+import SubanganMuseum from './pages/visit-mati/SubanganMuseum';
 import BirthCertificate from './pages/service-details/BirthCertificate';
 import DeathCertificate from './pages/service-details/DeathCertificate';
 import MarriageCertificate from './pages/service-details/MarriageCertificate';
@@ -80,6 +86,12 @@ export const routes: RouteRecord[] = [
       { path: 'news', Component: News },
       { path: 'budget', Component: Budget },
       { path: 'statistics', Component: Statistics },
+      { path: 'visit-mati', Component: VisitMati },
+      { path: 'visit-mati/dahican-beach', Component: DahicanBeach },
+      { path: 'visit-mati/mount-hamiguitan', Component: MountHamiguitan },
+      { path: 'visit-mati/pujada-bay', Component: PujadaBay },
+      { path: 'visit-mati/sleeping-dinosaur', Component: SleepingDinosaur },
+      { path: 'visit-mati/subangan-museum', Component: SubanganMuseum },
       { path: 'service-details/birth-certificate', Component: BirthCertificate },
       { path: 'service-details/death-certificate', Component: DeathCertificate },
       { path: 'service-details/marriage-certificate', Component: MarriageCertificate },

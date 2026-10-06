@@ -34,7 +34,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import type { Language } from '@/i18n';
 
 type NavChild = { to: string; key: string; Icon: LucideIcon };
-type NavEntry = { to: string; key: string; children?: NavChild[] };
+type NavEntry = { to: string; key: string; children?: NavChild[]; highlight?: boolean };
 
 const SERVICES: NavChild[] = [
   { to: '/services/certificates', key: 'dropdown-certificates', Icon: FileText },
@@ -68,7 +68,7 @@ const NAV: NavEntry[] = [
   { to: '/statistics', key: 'nav-statistics' },
   { to: '/legislative', key: 'nav-legislative', children: LEGISLATIVE },
   { to: '/budget', key: 'nav-transparency' },
-  { to: '/contact', key: 'nav-contact' },
+  { to: '/visit-mati', key: 'nav-visit-mati', highlight: true },
 ];
 
 const LANGS: { code: Language; label: string; name: string }[] = [
@@ -76,6 +76,19 @@ const LANGS: { code: Language; label: string; name: string }[] = [
   { code: 'fil', label: 'FIL', name: 'Filipino' },
   { code: 'ceb', label: 'CEB', name: 'Cebuano' },
 ];
+
+// Highlighted tabs (Visit Mati) get only their first word in Feel-Mati amber;
+// the rest of the label keeps the normal nav styling.
+function renderNavLabel(label: string, highlight?: boolean): React.ReactNode {
+  if (!highlight) return label;
+  const [first, ...rest] = label.split(' ');
+  return (
+    <>
+      <span className="text-yellow-500 font-semibold">{first}</span>
+      <span className="text-navy font-semibold">{rest.length ? ` ${rest.join(' ')}` : null}</span>  
+    </>
+  );
+}
 
 function isMobileNav(): boolean {
   return typeof window !== 'undefined' && window.matchMedia('(max-width: 1024px)').matches;
@@ -238,7 +251,7 @@ export default function Header() {
                       onClick={closeMenu}
                       className={cn(linkBase, active && linkActive)}
                     >
-                      {t(entry.key)}
+                      {renderNavLabel(t(entry.key), entry.highlight)}
                     </AppLink>
                   </li>
                 );

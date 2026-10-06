@@ -1,0 +1,382 @@
+{
+  "_status": "draft",
+  "_note": "Placeholder tourism content for the Visit Mati page. Copy and photos await verified City of Mati / tourism-office data. Specific figures in [brackets] are TODO placeholders — do not treat as verified. The 'conditions' and 'seasons' blocks are indicative sample data for layout only.",
+  "intro": "Mati sits where the Pacific meets Mindanao — a coastline of skimboard breaks and sea-turtle sands, a bay of coral and dugongs, and a mountain range the world protects. Come feel it.",
+  "hero": {
+    "tagline": "Two coasts.",
+    "taglineAccent": "One city.",
+    "subtitle": "Pacific surf on one side of Mati, a protected bay of coral and dugongs on the other — and a short ride between them."
+  },
+  "conditions": {
+    "_status": "sample",
+    "place": "Dahican today",
+    "status": "Good for skimboarding",
+    "open": true,
+    "metrics": [
+      { "label": "Waves", "value": "1.2 m" },
+      { "label": "Wind", "value": "NE 14" },
+      { "label": "Sunrise", "value": "5:38" }
+    ],
+    "source": "PAGASA · sample data",
+    "updated": "Updated 9:30 AM"
+  },
+  "coasts": [
+    {
+      "key": "pacific",
+      "badge": "Pacific side",
+      "title": "Surf, skim & sea turtles",
+      "blurb": "Dahican's seven-kilometre crescent is where Mati earned its name as the skimboarding capital of the Philippines.",
+      "tags": ["Skimboarding", "Surf lessons", "Turtle conservation", "Mangrove boardwalk"],
+      "linkLabel": "Explore the Pacific side"
+    },
+    {
+      "key": "bay",
+      "badge": "Bay side",
+      "title": "Islands, reefs & sunsets",
+      "blurb": "Pujada Bay is a protected seascape — calm water, coral gardens, and island hops you can do in a morning.",
+      "tags": ["Island hopping", "Snorkelling", "Sleeping Dinosaur view", "Baywalk food stalls"],
+      "linkLabel": "Explore the bay side"
+    }
+  ],
+  "attractions": [
+    {
+      "slug": "dahican-beach",
+      "name": "Dahican Beach",
+      "category": "Beach & surf",
+      "filter": "Beaches & surf",
+      "coast": "pacific",
+      "badge": "Skimboarding capital",
+      "tagline": "Seven kilometres of Pacific white sand",
+      "blurb": "Skimboarders at sunrise, surf through the amihan season, and sea-turtle nesting grounds watched over by the Amihan sa Dahican volunteers.",
+      "where": "Barangay Dahican · Pacific coast",
+      "note": "Open daily · best at sunrise",
+      "imageLabel": "Drop a Dahican Beach photo — skimboarder at sunrise",
+      "image": "",
+      "featured": true,
+      "highlights": [
+        "Sunrise skimboarding and longboard surf",
+        "Sea-turtle (pawikan) nesting grounds",
+        "Amihan-season swells (roughly November–March)"
+      ],
+      "sections": [
+        {
+          "heading": "Why go",
+          "body": "Dahican is the reason Mati calls itself the skimboarding capital of the Philippines. The long crescent faces the open Pacific, so mornings bring clean swell and a local scene of boards and bare feet at first light. It is also a protected nesting beach for marine turtles — the Amihan sa Dahican community group patrols the sands and helps release hatchlings."
+        },
+        {
+          "heading": "What to do",
+          "body": "Take a beginner skimboard or surf lesson from local instructors, walk the shoreline at sunrise, or simply settle in for the day. Ask the Amihan sa Dahican volunteers about turtle-conservation visits."
+        },
+        {
+          "heading": "Getting there",
+          "body": "[Placeholder] Dahican is a short ride from the Mati city centre. Add verified directions, tricycle/habal-habal fares, and travel time from the public terminal."
+        }
+      ],
+      "coords": { "lat": 6.9167, "lng": 126.2833 },
+      "_status": "draft"
+    },
+    {
+      "slug": "mount-hamiguitan",
+      "name": "Mount Hamiguitan Range Wildlife Sanctuary",
+      "category": "UNESCO World Heritage",
+      "filter": "Nature",
+      "coast": "mountain",
+      "badge": "UNESCO World Heritage",
+      "tagline": "A mountain the world agreed to protect",
+      "blurb": "Inscribed on the UNESCO World Heritage List for its extraordinary biodiversity, from a pygmy forest of century-old bonsai to the Philippine eagle's range.",
+      "where": "South of Mati · San Isidro / Governor Generoso side",
+      "note": "Permit & accredited guide required",
+      "imageLabel": "Drop a Mount Hamiguitan photo — pygmy forest / ridge",
+      "image": "",
+      "featured": true,
+      "highlights": [
+        "UNESCO World Heritage Site",
+        "Rare pygmy (bonsai) forest on ultramafic soil",
+        "Habitat of endemic and threatened wildlife"
+      ],
+      "sections": [
+        {
+          "heading": "Why go",
+          "body": "Mount Hamiguitan Range Wildlife Sanctuary is Davao Oriental's UNESCO World Heritage Site, recognised for a span of habitats packed into one mountain — including a celebrated pygmy forest where century-old trees grow only knee- to shoulder-high on mineral-rich soil. The range shelters a remarkable concentration of endemic and threatened plants and animals."
+        },
+        {
+          "heading": "Visiting responsibly",
+          "body": "[Placeholder] Access to the sanctuary is regulated to protect it. Add the current permit process, accredited guide requirements, trail options and difficulty, and the visitor centre / DENR-PAMB contact details."
+        },
+        {
+          "heading": "Getting there",
+          "body": "[Placeholder] Hamiguitan straddles municipalities south of Mati. Add verified jump-off points, travel time, and transport."
+        }
+      ],
+      "coords": { "lat": 6.7167, "lng": 126.1833 },
+      "_status": "draft"
+    },
+    {
+      "slug": "pujada-bay",
+      "name": "Pujada Bay",
+      "category": "Protected seascape",
+      "filter": "Bay & islands",
+      "coast": "bay",
+      "badge": "Marine sanctuary",
+      "tagline": "Coral, dugongs and island hopping",
+      "blurb": "A protected seascape of coral reefs, dugongs and dolphins — with island hopping out to Pujada Island and quiet swimming coves.",
+      "where": "Pujada Bay · west of the city",
+      "note": "Hire an accredited boat operator",
+      "imageLabel": "Drop a Pujada Bay photo — island hopping / clear water",
+      "image": "",
+      "featured": true,
+      "highlights": [
+        "Protected marine seascape",
+        "Island hopping to Pujada Island",
+        "Reefs, dugongs and dolphins"
+      ],
+      "sections": [
+        {
+          "heading": "Why go",
+          "body": "Pujada Bay wraps the city in calm, clear water and is regularly named among the world's most beautiful bays. Beneath the surface are coral gardens and seagrass meadows that feed dugongs; pods of dolphins pass through the deeper channels."
+        },
+        {
+          "heading": "What to do",
+          "body": "Hire a local boat for island hopping to Pujada Island and the smaller islets, snorkel the reefs, or take a sunset cruise across the bay."
+        },
+        {
+          "heading": "Getting there",
+          "body": "[Placeholder] Add verified boat-hire arrangements, launch points, rates, and typical trip durations."
+        }
+      ],
+      "coords": { "lat": 6.8667, "lng": 126.25 },
+      "_status": "draft"
+    },
+    {
+      "slug": "sleeping-dinosaur",
+      "name": "The Sleeping Dinosaur",
+      "category": "Landmark & viewpoint",
+      "filter": "Bay & islands",
+      "coast": "bay",
+      "tagline": "The ridge the whole city knows by silhouette",
+      "blurb": "The headland across the bay whose outline reads like a dinosaur at rest — best watched from the Baywalk and City Boulevard at golden hour.",
+      "where": "Best from the Baywalk & City Boulevard",
+      "note": "Golden hour · free",
+      "imageLabel": "Drop a Sleeping Dinosaur / Baywalk photo at golden hour",
+      "image": "",
+      "featured": true,
+      "highlights": [
+        "Mati's signature silhouette",
+        "Golden-hour views from the Baywalk",
+        "Easy, family-friendly stroll"
+      ],
+      "sections": [
+        {
+          "heading": "Why go",
+          "body": "Follow the line of the headland across Pujada Bay and it resolves into a dinosaur lying on its side — Mati's most-photographed silhouette. The City Boulevard and Baywalk are built to enjoy it, especially as the light turns gold in the late afternoon."
+        },
+        {
+          "heading": "What to do",
+          "body": "Walk the Baywalk, grab something to eat along the Boulevard, and stay for sunset. It pairs naturally with a Pujada Bay trip."
+        }
+      ],
+      "coords": { "lat": 6.9481, "lng": 126.2286 },
+      "_status": "draft"
+    },
+    {
+      "slug": "subangan-museum",
+      "name": "Subangan Museum",
+      "category": "Culture & heritage",
+      "filter": "Culture",
+      "coast": "city",
+      "tagline": "Davao Oriental's story under one roof",
+      "blurb": "The provincial museum in Mati — a place to meet the region's natural history, Mandaya culture, and the story of the coast before you head out to explore it.",
+      "where": "City proper, near City Hall",
+      "note": "[Hours & fees to verify]",
+      "imageLabel": "Drop a Subangan Museum photo — gallery / whale skeleton",
+      "image": "",
+      "featured": true,
+      "highlights": [
+        "Natural-history and cultural galleries",
+        "A good first stop to understand the region",
+        "Family-friendly and indoor"
+      ],
+      "sections": [
+        {
+          "heading": "Why go",
+          "body": "Subangan — from the Mandaya word for \"east\", where the sun rises — gathers Davao Oriental's natural history and living culture into one accessible museum. It is the best first stop for understanding the coast, the mountains, and the Mandaya people whose heritage shapes the province."
+        },
+        {
+          "heading": "Plan your visit",
+          "body": "[Placeholder] Add verified opening hours, entrance fees, and location within the city."
+        }
+      ],
+      "coords": { "lat": 6.9489, "lng": 126.2181 },
+      "_status": "draft"
+    },
+    {
+      "slug": "city-boulevard",
+      "name": "City Boulevard & Baywalk",
+      "category": "Landmark & viewpoint",
+      "filter": "Bay & islands",
+      "coast": "city",
+      "tagline": "The city's seaside promenade",
+      "blurb": "The seaside promenade facing Pujada Bay — food stalls, sunsets, and the Sleeping Dinosaur view, all a short walk from the city centre.",
+      "where": "Mati city proper",
+      "note": "Open daily · free",
+      "imageLabel": "Drop a City Boulevard / Baywalk photo at sunset",
+      "image": "",
+      "featured": false,
+      "highlights": [],
+      "sections": [],
+      "_status": "draft"
+    },
+    {
+      "slug": "guang-guang-mangroves",
+      "name": "Guang-guang Mangrove Boardwalk",
+      "category": "Nature & conservation",
+      "filter": "Nature",
+      "coast": "pacific",
+      "tagline": "A boardwalk through replanted mangroves",
+      "blurb": "A boardwalk through replanted mangroves beside Dahican, part of the coast's long-running conservation work.",
+      "where": "Barangay Dahican",
+      "note": "[Hours & fees to verify]",
+      "imageLabel": "Drop a Guang-guang mangrove boardwalk photo",
+      "image": "",
+      "featured": false,
+      "highlights": [],
+      "sections": [],
+      "_status": "draft"
+    },
+    {
+      "slug": "mayo-bay",
+      "name": "Mayo Bay",
+      "category": "Protected seascape",
+      "filter": "Bay & islands",
+      "coast": "bay",
+      "tagline": "A quieter bay north of the city",
+      "blurb": "[Placeholder] A quieter bay for swimming and boat trips. Add verified access, accredited operators, and highlights.",
+      "where": "North of the city",
+      "note": "Boat hire required",
+      "imageLabel": "Drop a Mayo Bay photo — calm water / boats",
+      "image": "",
+      "featured": false,
+      "highlights": [],
+      "sections": [],
+      "_status": "draft"
+    }
+  ],
+  "filters": ["All", "Beaches & surf", "Bay & islands", "Nature", "Culture"],
+  "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  "seasons": [
+    {
+      "label": "Surf & skim",
+      "icon": "waves",
+      "cells": [
+        "peak",
+        "peak",
+        "peak",
+        "on",
+        "off",
+        "off",
+        "off",
+        "off",
+        "off",
+        "on",
+        "peak",
+        "peak"
+      ]
+    },
+    {
+      "label": "Diving & snorkelling",
+      "icon": "fish",
+      "cells": ["off", "off", "on", "peak", "peak", "peak", "on", "on", "on", "off", "off", "off"]
+    },
+    {
+      "label": "Island hopping",
+      "icon": "compass",
+      "cells": ["off", "off", "on", "peak", "peak", "peak", "on", "on", "on", "on", "off", "off"]
+    },
+    {
+      "label": "Festivals",
+      "icon": "party",
+      "cells": ["off", "off", "off", "off", "off", "off", "off", "off", "off", "peak", "off", "on"]
+    }
+  ],
+  "sambuokan": {
+    "when": "Every October",
+    "title": "Sambuokan Festival",
+    "blurb": "The city's founding celebration. “Sambuok” means to gather as one — street dancing, the barangay showdown, and the whole city out on the Boulevard.",
+    "imageLabel": "Drop a Sambuokan street-dance photo"
+  },
+  "festivals": [
+    {
+      "name": "Sambuokan Festival",
+      "when": "Every October",
+      "blurb": "The city's founding celebration — \"sambuok\", to gather as one. Street dancing, food, and the whole city out together.",
+      "imageLabel": "Drop a Sambuokan Festival photo — street dancing",
+      "_status": "draft"
+    },
+    {
+      "name": "Pujada Bay Festival",
+      "when": "[Placeholder — confirm month]",
+      "blurb": "[Placeholder] A celebration of the bay and coastal life. Add verified dates, events, and description.",
+      "imageLabel": "Drop a coastal / bay festival photo",
+      "_status": "draft"
+    }
+  ],
+  "plan": [
+    {
+      "icon": "plane",
+      "title": "Getting here",
+      "body": "Fly into Davao City (Francisco Bangoy International). From there, buses and vans run to Mati — roughly 3 to 4 hours by road."
+    },
+    {
+      "icon": "signpost",
+      "title": "Getting around",
+      "body": "Tricycles and habal-habal cover the city and Dahican. For the islands, book a boat with an accredited operator — check the list before you pay."
+    },
+    {
+      "icon": "house",
+      "title": "Where to stay",
+      "body": "Beach resorts along Dahican, inns and hotels in the city proper. Only accredited establishments are listed.",
+      "linkLabel": "Accredited accommodations"
+    }
+  ],
+  "responsible": {
+    "title": "Travel responsibly",
+    "items": [
+      "Keep clear of marked turtle-nesting zones at Dahican.",
+      "Pujada Bay is protected — no taking coral or shells.",
+      "Pay environmental fees only at official booths, and ask for a receipt."
+    ]
+  },
+  "tourismOffice": {
+    "name": "City Tourism Office · Tourist assistance",
+    "hours": "Mati City Hall · Mon–Fri, 8 AM–5 PM",
+    "phoneNote": "Phone number to verify"
+  },
+  "planYourTrip": {
+    "gettingThere": "[Placeholder] Mati is the capital of Davao Oriental, on the Pacific side of Mindanao. Add verified routes — by air to the nearest airport, by land from Davao City, and the public terminal in Mati.",
+    "bestTime": "[Placeholder] Dahican's swell peaks in the amihan (northeast monsoon) season, roughly November–March. Confirm the local guidance for surf, diving, and dry-season travel.",
+    "whereToStay": [
+      "[Placeholder] Beachfront resorts and surf camps along Dahican",
+      "[Placeholder] Accredited homestays and inns in the city centre",
+      "[Placeholder] Add a link to the City Tourism Office accommodation list"
+    ],
+    "localFood": [
+      "[Placeholder] Fresh seafood from Pujada Bay",
+      "[Placeholder] Local delicacies — add verified specialties",
+      "[Placeholder] Eateries along the City Boulevard and Baywalk"
+    ],
+    "tips": [
+      "Respect the sea-turtle nesting grounds at Dahican — keep your distance and follow the volunteers' guidance.",
+      "Hire accredited local guides and boat operators.",
+      "Pack reef-safe sunscreen and take your litter home.",
+      "[Placeholder] Add the City Tourism Office contact and any registration/permit reminders."
+    ]
+  },
+  "gallery": [
+    { "imageLabel": "Dahican sunrise skimboarding", "image": "" },
+    { "imageLabel": "Pujada Bay island hopping", "image": "" },
+    { "imageLabel": "Mount Hamiguitan pygmy forest", "image": "" },
+    { "imageLabel": "Sleeping Dinosaur at golden hour", "image": "" },
+    { "imageLabel": "Sambuokan Festival street dancing", "image": "" },
+    { "imageLabel": "Sea-turtle release at Dahican", "image": "" }
+  ]
+}

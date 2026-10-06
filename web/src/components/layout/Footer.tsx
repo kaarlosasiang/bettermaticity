@@ -31,7 +31,7 @@ const resources: [string, string][] = [
   ['https://www.foi.gov.ph/', 'footer-foi'],
   ['https://mati.gov.ph/', 'footer-lgu-portal'],
   ['https://sangguniangbayan.mati.gov.ph/', 'footer-sb'],
-  ['https://www.facebook.com/OfficialLguMatiFanpage/', 'footer-lgu-facebook'],
+  ['https://web.facebook.com/maticitylgu', 'footer-lgu-facebook'],
   ['https://blgf.gov.ph/', 'footer-blgf'],
   ['https://cmci.dti.gov.ph/', 'footer-cmci'],
 ];
@@ -149,7 +149,7 @@ export default function Footer() {
               <Mail className="size-4" /> {t('footer-volunteer')}
             </a>
             <a
-              href="https://github.com/BetterMati/bettermati"
+              href="https://github.com/kaarlosasiang/bettermaticity"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/5 px-4 py-2 text-[0.8125rem] text-white/70 transition hover:bg-white/10 hover:text-white"

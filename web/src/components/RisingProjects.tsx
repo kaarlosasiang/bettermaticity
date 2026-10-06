@@ -114,7 +114,7 @@ function RisingPreview({ t }: { t: (key: string) => string }) {
               {stages.map((stage, i) => (
                 <li
                   key={stage}
-                  className={i < leadStage ? 'font-semibold text-white' : 'text-white/45'}
+                  className={i < leadStage ? 'font-semibold text-white' : 'text-white/65'}
                 >
                   {t(`rising-stage-${stage}`)}
                 </li>
