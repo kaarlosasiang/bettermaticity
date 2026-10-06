@@ -4,7 +4,6 @@ import { RisingProjects } from './RisingProjects';
 import { featuredProjects, risingProjects, projectAnchor } from '@/lib/risingProjects';
 import { procurementNotices } from '@/lib/infrastructureData';
 import en from '@/locales/en.json';
-import fil from '@/locales/fil.json';
 import ceb from '@/locales/ceb.json';
 
 vi.mock('@/hooks/useLanguage', () => ({
@@ -78,7 +77,7 @@ describe('Rising in Mati evidence and navigation', () => {
       expect(project.sources.length).toBeGreaterThan(0);
       for (const source of project.sources)
         expect(new URL(source.url).hostname).toMatch(/\.gov\.ph$/);
-      for (const locale of [en, fil, ceb]) {
+      for (const locale of [en, ceb]) {
         for (const key of [
           project.titleKey,
           project.detailKey,
@@ -91,7 +90,7 @@ describe('Rising in Mati evidence and navigation', () => {
       }
     }
     for (const key of Object.keys(en).filter((key) => key.startsWith('rising-'))) {
-      for (const locale of [fil, ceb]) expect(locale).toHaveProperty(key);
+      for (const locale of [ceb]) expect(locale).toHaveProperty(key);
     }
   });
 });

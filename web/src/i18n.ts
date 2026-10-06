@@ -2,11 +2,10 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import en from './locales/en.json';
 
-export type Language = 'en' | 'fil' | 'ceb';
-export const LANGUAGES: Language[] = ['en', 'fil', 'ceb'];
+export type Language = 'en' | 'ceb';
+export const LANGUAGES: Language[] = ['en', 'ceb'];
 export const LANGUAGE_LABELS: Record<Language, string> = {
   en: 'English',
-  fil: 'Filipino',
   ceb: 'Cebuano',
 };
 
@@ -14,10 +13,9 @@ export const LANGUAGE_LABELS: Record<Language, string> = {
 // the legacy <-> React boundary during incremental migration.
 export const STORAGE_KEY = 'selectedLang';
 
-// en is bundled (needed synchronously for SSG prerender + hydration). fil/ceb are
+// en is bundled (needed synchronously for SSG prerender + hydration). ceb is
 // code-split and fetched on first switch.
 const loaders: Record<Exclude<Language, 'en'>, () => Promise<Record<string, string>>> = {
-  fil: () => import('./locales/fil.json').then((m) => m.default),
   ceb: () => import('./locales/ceb.json').then((m) => m.default),
 };
 
