@@ -84,8 +84,8 @@ function renderNavLabel(label: string, highlight?: boolean): React.ReactNode {
   const [first, ...rest] = label.split(' ');
   return (
     <>
-      <span className="text-amber">{first}</span>
-      {rest.length ? ` ${rest.join(' ')}` : null}
+      <span className="text-yellow-500 font-semibold">{first}</span>
+      <span className="text-navy font-semibold">{rest.length ? ` ${rest.join(' ')}` : null}</span>  
     </>
   );
 }
