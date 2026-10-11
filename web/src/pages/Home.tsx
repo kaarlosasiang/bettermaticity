@@ -645,7 +645,7 @@ export default function Home() {
                 whileInView="show"
                 viewport={revealViewport}
               >
-                <div className="mb-[18px] flex items-end justify-between gap-3">
+                <div className="mb-[18px] flex flex-col items-start gap-2 sm:flex-row sm:items-end sm:justify-between sm:gap-3">
                   <div className="flex items-center gap-3.5">
                     <span className="h-[26px] w-1 rounded bg-[#2b62ee]" aria-hidden="true" />
                     <h2 className="font-display text-2xl font-extrabold tracking-[-0.02em] text-[#123c7a]">
@@ -661,7 +661,7 @@ export default function Home() {
                 <div className="overflow-hidden rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)]">
                   <div className="p-[22px] pb-0">
                     <div className="text-sm text-[#4c5c78]">Total receipts, FY2025</div>
-                    <div className="mt-1.5 mb-1 font-display text-5xl leading-none font-extrabold tracking-[-0.03em] text-[#2b62ee]">
+                    <div className="mt-1.5 mb-1 font-display text-4xl leading-none font-extrabold tracking-[-0.03em] text-[#2b62ee] sm:text-5xl">
                       {M(funds.incomeTotal)}
                     </div>
                     <div className="font-mono text-xs text-[#4c5c78]">
