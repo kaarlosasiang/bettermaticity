@@ -197,7 +197,12 @@ export default function Statistics() {
         <section className="bg-[#123c7a] py-12 lg:py-16">
           <Container>
             <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10">
-              <m.div variants={staggerContainer} initial="hidden" animate="show">
+              <m.div
+                className="min-w-0"
+                variants={staggerContainer}
+                initial="hidden"
+                animate="show"
+              >
                 <m.span
                   variants={fadeUp}
                   className="inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-[0.08em] text-[#9dc0ff]"
@@ -227,7 +232,7 @@ export default function Statistics() {
                 variants={fadeUp}
                 initial="hidden"
                 animate="show"
-                className="rounded-xl bg-white/[0.06] p-6 ring-1 ring-white/15"
+                className="min-w-0 rounded-xl bg-white/[0.06] p-6 ring-1 ring-white/15"
               >
                 <div className="font-mono text-[0.625rem] tracking-[0.08em] text-white/60">
                   {t('stats-population-label').toUpperCase()} · {t('stats-population-source')}
@@ -309,24 +314,28 @@ export default function Statistics() {
                   {() => <Line data={populationLine} options={lineOptions} />}
                 </ClientOnly>
               </div>
-              {/* Screen-reader alternative for the line chart */}
-              <table className="sr-only">
-                <caption>Population of the City of Mati by census year</caption>
-                <thead>
-                  <tr>
-                    <th>Year</th>
-                    <th>Population</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {historicalData.years.map((y, i) => (
-                    <tr key={y}>
-                      <td>{y}</td>
-                      <td>{historicalData.populations[i].toLocaleString()}</td>
+              {/* Screen-reader alternative for the line chart.
+                  sr-only on a <div> wrapper (not the <table>) so the table's
+                  intrinsic width is clipped and cannot widen the page on mobile. */}
+              <div className="sr-only">
+                <table>
+                  <caption>Population of the City of Mati by census year</caption>
+                  <thead>
+                    <tr>
+                      <th>Year</th>
+                      <th>Population</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {historicalData.years.map((y, i) => (
+                      <tr key={y}>
+                        <td>{y}</td>
+                        <td>{historicalData.populations[i].toLocaleString()}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
               <p className="mt-3 font-mono text-[0.6875rem] text-[#4c5c78]">
                 {t('stats-source')}: <SourceLink source={statisticsSources.history} /> ·{' '}
                 <SourceLink source={statisticsSources.census2007} /> ·{' '}
