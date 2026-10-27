@@ -22,7 +22,7 @@ export function ServiceCards({ services }: { services: CategoryService[] }) {
       {services.map(({ Icon, titleKey, descKey, fee, time, to, onlineId }) => (
         <article
           key={titleKey}
-          className="flex min-w-0 flex-col rounded-xl border border-border bg-card p-5"
+          className="flex min-w-0 flex-col rounded-card border border-border bg-card p-5"
         >
           <h3 className="mb-2 flex items-center gap-2 text-base font-bold text-foreground">
             <Icon className="size-5 shrink-0 text-primary" aria-hidden="true" />

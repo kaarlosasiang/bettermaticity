@@ -94,7 +94,7 @@ export default function Contact() {
               <a
                 key={c.titleKey}
                 href={c.href}
-                className="flex overflow-hidden rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] text-foreground no-underline transition hover:-translate-y-0.5 hover:shadow-sm"
+                className="flex overflow-hidden rounded-card bg-white border border-line text-foreground no-underline transition hover:shadow-sm"
               >
                 <div className="flex w-14 shrink-0 items-center justify-center bg-[linear-gradient(135deg,var(--primary)_0%,var(--brand-secondary)_100%)] text-xl text-white">
                   <c.Icon className="size-5" aria-hidden="true" />
@@ -115,7 +115,7 @@ export default function Contact() {
       {/* Office hours */}
       <Section compact>
         <Container>
-          <div className="overflow-hidden rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)]">
+          <div className="overflow-hidden rounded-card bg-white border border-line">
             <div className="flex items-center gap-4 bg-[linear-gradient(135deg,var(--primary)_0%,var(--brand-secondary)_100%)] px-8 py-6 text-white">
               <Clock className="size-5" aria-hidden="true" />
               <h2 className="m-0 text-lg font-semibold">{t('contact-office-hours')}</h2>

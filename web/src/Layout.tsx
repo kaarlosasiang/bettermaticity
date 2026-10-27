@@ -1,8 +1,9 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import HotlineBar from '@/components/layout/HotlineBar';
 import Header from '@/components/layout/Header';
 import InfoBar from '@/components/layout/InfoBar';
 import Footer from '@/components/layout/Footer';
+import ReportIssueBand from '@/components/layout/ReportIssueBand';
 import PWAManager from '@/components/PWAManager';
 import { Analytics } from '@/components/Analytics';
 import { Seo } from '@/components/Seo';
@@ -11,6 +12,9 @@ import { useSyncStoredLanguage } from '@/hooks/useLanguage';
 // Persistent chrome shared by every route.
 export default function Layout() {
   useSyncStoredLanguage();
+  // Neutral greys for page content everywhere but the homepage (see .tone-neutral in index.css).
+  const { pathname } = useLocation();
+  const tone = pathname === '/' ? undefined : 'tone-neutral';
   return (
     <>
       {/* Site-wide default metadata; pages override via their own <Seo>. */}
@@ -22,11 +26,12 @@ export default function Layout() {
         Skip to main content
       </a>
       <HotlineBar />
-      <Header />
       <InfoBar />
-      <main id="main-content">
+      <Header />
+      <main id="main-content" className={tone}>
         <Outlet />
       </main>
+      <ReportIssueBand />
       <Footer />
       <PWAManager />
       <Analytics />

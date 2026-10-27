@@ -186,7 +186,7 @@ function LinkItem({ link, t }: { link: SitemapLink; t: TFn }) {
   return (
     <AppLink
       to={link.to}
-      className="group flex items-center gap-2 rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] px-3.5 py-2.5 text-[0.8125rem] font-medium text-foreground transition hover:translate-x-0.5 hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)] hover:bg-primary/[0.04] hover:text-primary"
+      className="group flex items-center gap-2 rounded-lg bg-white border border-line px-3.5 py-2.5 text-[0.8125rem] font-medium text-foreground transition hover:translate-x-0.5 hover:border-royal hover:bg-primary/[0.04] hover:text-primary"
     >
       <ArrowRight
         className="size-3 shrink-0 text-muted-foreground transition group-hover:text-primary"

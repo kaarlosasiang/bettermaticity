@@ -1,8 +1,7 @@
 import { ServiceOnlineAction } from '@/components/ServiceOnlineAction';
 import { FileText } from 'lucide-react';
-import { AppLink } from '@/components/AppLink';
 import { Seo } from '@/components/Seo';
-import { Container, Section, PageHeader } from '@/components/primitives';
+import { Container, Section, PageHeader, TextLink } from '@/components/primitives';
 import { ServiceSources } from '@/components/ServiceSources';
 import { useLanguage } from '@/hooks/useLanguage';
 import { serviceGuides, serviceText } from '@/lib/serviceReferences';
@@ -18,18 +17,6 @@ export function ServiceGuide({ id }: { id: string }) {
         description={serviceText(guide.summary, language)}
         canonicalPath={`/service-details/${id}`}
       />
-      <Container>
-        <nav
-          aria-label={t('service-breadcrumb')}
-          className="flex flex-wrap gap-2 py-4 text-sm text-muted-foreground"
-        >
-          <AppLink to="/">{t('nav-home')}</AppLink>
-          <span aria-hidden="true">/</span>
-          <AppLink to="/services">{t('nav-services')}</AppLink>
-          <span aria-hidden="true">/</span>
-          <span aria-current="page">{title}</span>
-        </nav>
-      </Container>
       <PageHeader
         badge={
           <>
@@ -39,13 +26,20 @@ export function ServiceGuide({ id }: { id: string }) {
         }
         title={title}
         description={serviceText(guide.summary, language)}
+        breadcrumb={[
+          { label: t('nav-home'), to: '/' },
+          { label: t('nav-services'), to: '/services' },
+          { label: title },
+        ]}
       />
       <Section compact>
         <Container>
-          <div className="max-w-3xl rounded-xl border border-border bg-card p-6">
-            <h2 className="mb-3 text-xl font-semibold">{t('service-next-step')}</h2>
+          <div className="max-w-3xl rounded-card border border-line bg-white p-6">
+            <h2 className="mb-3 font-display text-xl font-extrabold tracking-[-0.02em] text-heading">
+              {t('service-next-step')}
+            </h2>
             <p className="leading-relaxed">{serviceText(guide.ask, language)}</p>
-            <p className="mt-4 text-sm text-muted-foreground">{t('service-before-visit')}</p>
+            <p className="mt-4 text-sm text-ink-muted">{t('service-before-visit')}</p>
             {[
               'birth-certificate',
               'marriage-certificate',
@@ -54,12 +48,8 @@ export function ServiceGuide({ id }: { id: string }) {
               'municipal-civil-registrar',
             ].includes(id) && <ServiceOnlineAction id="psa" />}
             <div className="mt-5 flex flex-wrap gap-5">
-              <AppLink to={`/services/${guide.category}`} className="text-primary underline">
-                {t('service-category-link')}
-              </AppLink>
-              <AppLink to="/contact" className="text-primary underline">
-                {t('service-contact-link')}
-              </AppLink>
+              <TextLink to={`/services/${guide.category}`}>{t('service-category-link')}</TextLink>
+              <TextLink to="/contact">{t('service-contact-link')}</TextLink>
             </div>
           </div>
         </Container>

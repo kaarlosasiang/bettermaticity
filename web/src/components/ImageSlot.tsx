@@ -24,7 +24,7 @@ export function ImageSlot({ src, alt = '', label, className }: ImageSlotProps) {
       role="img"
       aria-label={label || 'Image placeholder'}
       className={cn(
-        'flex size-full flex-col items-center justify-center gap-2 bg-[#eef4fe] p-6 text-center text-[#4c5c78]',
+        'flex size-full flex-col items-center justify-center gap-2 border border-line bg-surface-subtle p-6 text-center text-ink-muted',
         className
       )}
     >

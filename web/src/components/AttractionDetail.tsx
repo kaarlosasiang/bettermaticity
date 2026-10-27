@@ -25,7 +25,7 @@ export function AttractionDetail({ slug }: { slug: string }) {
       <Section>
         <Container>
           <p className="text-muted-foreground">Attraction not found.</p>
-          <AppLink to="/visit-mati" className="mt-4 inline-block text-[#2b62ee] underline">
+          <AppLink to="/visit-mati" className="mt-4 inline-block text-royal underline">
             Back to Visit Mati
           </AppLink>
         </Container>
@@ -43,7 +43,7 @@ export function AttractionDetail({ slug }: { slug: string }) {
       />
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative isolate flex min-h-[52vh] flex-col justify-end overflow-hidden bg-[#123c7a] text-white">
+      <section className="relative isolate flex min-h-[52vh] flex-col justify-end overflow-hidden bg-navy text-white">
         <div className="absolute inset-0 -z-10">
           <ImageSlot label={a.imageLabel} src={a.image || undefined} />
         </div>
@@ -54,13 +54,13 @@ export function AttractionDetail({ slug }: { slug: string }) {
         <Container>
           <div className="max-w-[720px] pt-24 pb-10">
             {a.badge ? (
-              <span className="inline-flex h-[24px] items-center rounded-full bg-[#ffc001] px-3 text-xs font-bold text-[#123c7a]">
+              <span className="inline-flex h-[24px] items-center rounded-full bg-amber px-3 text-xs font-bold text-heading">
                 {a.badge}
               </span>
             ) : (
-              <span className="text-[0.8125rem] font-semibold text-[#ffc001]">{a.category}</span>
+              <span className="text-[0.8125rem] font-semibold text-amber">{a.category}</span>
             )}
-            <h1 className="mt-3 font-display text-4xl font-extrabold leading-[1.05] tracking-[-0.03em] md:text-5xl">
+            <h1 className="mt-3 font-display text-[2.25rem] leading-[1.05] font-bold tracking-[-0.03em] text-balance sm:text-[2.75rem] lg:text-[3rem]">
               {a.name}
             </h1>
             <p className="mt-3 max-w-[52ch] text-lg leading-relaxed text-white/85">{a.tagline}</p>
@@ -88,25 +88,25 @@ export function AttractionDetail({ slug }: { slug: string }) {
           <div className="grid gap-10 lg:grid-cols-[1fr_320px]">
             {/* Prose */}
             <div className="max-w-[68ch]">
-              <p className="text-lg leading-relaxed text-[#4c5c78]">{a.blurb}</p>
+              <p className="text-lg leading-relaxed text-ink-muted">{a.blurb}</p>
               {a.sections.map((s) => (
                 <div key={s.heading} className="mt-8">
-                  <h2 className="mb-2 font-display text-2xl font-bold tracking-[-0.02em] text-[#123c7a]">
+                  <h2 className="mb-2 font-display text-2xl font-bold tracking-[-0.02em] text-heading">
                     {s.heading}
                   </h2>
-                  <p className="leading-relaxed text-[#4c5c78]">{s.body}</p>
+                  <p className="leading-relaxed text-ink-muted">{s.body}</p>
                 </div>
               ))}
             </div>
 
             {/* Aside: highlights + map */}
             <aside className="space-y-4 lg:sticky lg:top-20 lg:self-start">
-              <div className="rounded-xl border-t-2 border-[#ffc001] bg-white p-5 ring-1 ring-[#123c7a]/8">
-                <h2 className="mb-3 font-display text-lg font-bold text-[#123c7a]">Highlights</h2>
-                <ul className="space-y-2.5 text-sm leading-relaxed text-[#4c5c78]">
+              <div className="rounded-card border-t-2 border-amber bg-white p-5 ring-1 ring-navy/8">
+                <h2 className="mb-3 font-display text-lg font-bold text-heading">Highlights</h2>
+                <ul className="space-y-2.5 text-sm leading-relaxed text-ink-muted">
                   {a.highlights.map((h) => (
                     <li key={h} className="flex gap-2.5">
-                      <Check className="mt-0.5 size-4 shrink-0 text-[#2b62ee]" aria-hidden="true" />
+                      <Check className="mt-0.5 size-4 shrink-0 text-royal" aria-hidden="true" />
                       <span>{h}</span>
                     </li>
                   ))}
@@ -114,9 +114,9 @@ export function AttractionDetail({ slug }: { slug: string }) {
               </div>
 
               {a.coords ? (
-                <div className="overflow-hidden rounded-xl ring-1 ring-[#123c7a]/8">
-                  <div className="flex items-center gap-2 bg-white px-4 py-3 text-sm font-semibold text-[#123c7a]">
-                    <MapPin className="size-4 text-[#2b62ee]" aria-hidden="true" />
+                <div className="overflow-hidden rounded-card ring-1 ring-navy/8">
+                  <div className="flex items-center gap-2 bg-white px-4 py-3 text-sm font-semibold text-heading">
+                    <MapPin className="size-4 text-royal" aria-hidden="true" />
                     On the map
                   </div>
                   <iframe
@@ -134,14 +134,14 @@ export function AttractionDetail({ slug }: { slug: string }) {
           <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
             <AppLink
               to="/visit-mati"
-              className="inline-flex items-center gap-2 font-display text-sm font-bold text-[#2b62ee]"
+              className="inline-flex items-center gap-2 font-display text-sm font-bold text-royal"
             >
               <ArrowLeft className="size-4" aria-hidden="true" />
               All attractions
             </AppLink>
             <AppLink
               to="/contact"
-              className="inline-flex h-11 items-center gap-2 rounded-lg bg-[#123c7a] px-5 font-display text-sm font-bold text-white transition hover:brightness-110"
+              className="inline-flex h-11 items-center gap-2 rounded-btn bg-navy px-5 font-display text-sm font-bold text-white transition hover:brightness-110"
             >
               Plan your visit
               <ArrowRight className="size-4" aria-hidden="true" />

@@ -47,10 +47,7 @@ export function ServiceSearch({ placeholder, className }: ServiceSearchProps) {
   return (
     <Command
       shouldFilter={false}
-      className={cn(
-        'overflow-visible rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] text-left',
-        className
-      )}
+      className={cn('overflow-visible rounded-lg bg-white border border-line text-left', className)}
     >
       <CommandInput
         value={query}

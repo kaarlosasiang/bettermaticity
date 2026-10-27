@@ -55,7 +55,8 @@ const partners = [
 ];
 
 const linkClass = 'block text-[0.8125rem] text-white/80 transition-colors hover:text-white';
-const headingClass = 'mb-5 text-[0.8125rem] font-semibold tracking-[0.5px] text-white/50 uppercase';
+const headingClass =
+  'mb-5 font-mono text-[0.6875rem] font-semibold tracking-[0.14em] text-white/50 uppercase';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -72,7 +73,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="bg-[linear-gradient(180deg,#1a1a1a_0%,#111111_100%)] text-white">
+    <footer className="bg-[linear-gradient(180deg,var(--color-footer-from)_0%,var(--color-footer-to)_100%)] text-white">
       <Container>
         <div className="grid gap-8 border-b border-white/10 pt-[60px] pb-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr] lg:gap-12">
           {/* Brand */}
@@ -91,7 +92,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex size-10 items-center justify-center rounded-[10px] bg-white/8 text-lg text-white/70 transition hover:-translate-y-0.5 hover:bg-primary hover:text-white"
+                  className="flex size-10 items-center justify-center rounded-btn border border-white/15 text-lg text-white/70 transition-colors hover:bg-primary hover:text-white"
                 >
                   <Icon />
                 </a>
@@ -136,15 +137,15 @@ export default function Footer() {
           {/* Cost + contribute + partners */}
           <div>
             <div
-              className="inline-flex items-center gap-1.5 rounded-md bg-[rgba(6,167,125,0.08)] px-3 py-1.5 text-xs whitespace-nowrap text-white/80"
+              className="inline-flex items-center gap-1.5 rounded-btn border border-white/15 bg-[rgba(6,167,125,0.08)] px-3 py-1.5 text-xs whitespace-nowrap text-white/80"
               role="status"
               aria-label="Cost to the People of Mati: Zero Pesos"
             >
-              {t('footer-cost')} <span className="font-bold text-brand-success">₱0</span>
+              {t('footer-cost')} <span className="font-mono font-bold text-brand-success">₱0</span>
             </div>
             <a
               href="mailto:volunteer@bettermati.org"
-              className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/5 px-4 py-2 text-[0.8125rem] text-white/70 transition hover:bg-white/10 hover:text-white"
+              className="mt-3 inline-flex items-center gap-2 rounded-btn border border-white/15 px-4 py-2 text-[0.8125rem] text-white/70 transition-colors hover:bg-white/10 hover:text-white"
             >
               <Mail className="size-4" /> {t('footer-volunteer')}
             </a>
@@ -152,7 +153,7 @@ export default function Footer() {
               href="https://github.com/kaarlosasiang/bettermaticity"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/5 px-4 py-2 text-[0.8125rem] text-white/70 transition hover:bg-white/10 hover:text-white"
+              className="mt-3 inline-flex items-center gap-2 rounded-btn border border-white/15 px-4 py-2 text-[0.8125rem] text-white/70 transition-colors hover:bg-white/10 hover:text-white"
             >
               <FaGithub className="size-4" /> {t('footer-contribute')}
             </a>
@@ -181,7 +182,8 @@ export default function Footer() {
           <span className="text-white/45">MIT | CC BY 4.0</span>
           <span className="text-white/40">{t('footer-copyright-disclaimer')}</span>
           <span className="ml-auto inline-flex items-center gap-1.5 whitespace-nowrap">
-            <Boxes className="size-3.5" /> {version ? `Ver. ${version}` : ''}
+            <Boxes className="size-3.5" />{' '}
+            <span className="font-mono text-xs">{version ? `Ver. ${version}` : ''}</span>
           </span>
         </div>
       </Container>

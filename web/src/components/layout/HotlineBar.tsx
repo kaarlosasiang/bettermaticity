@@ -39,7 +39,7 @@ const items: BarItem[] = [toItem(nationalHotline), ...priorityHotlines.map(toIte
 // Hover/focus darkens rather than lightens: white text over the bar needs 4.5:1,
 // and lightening the pill pushes it under (bg-white/30 lands at 3.8:1).
 const pillClass =
-  'inline-flex shrink-0 items-center gap-1 rounded-full bg-white/15 px-2.5 py-1 ' +
+  'inline-flex shrink-0 items-center gap-1 rounded-btn border border-white/30 bg-white/10 px-2.5 py-1 ' +
   'whitespace-nowrap text-white no-underline transition hover:-translate-y-px hover:bg-black/20 ' +
   'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ' +
   'motion-reduce:transition-none motion-reduce:hover:translate-y-0';
@@ -63,7 +63,7 @@ function HotlineItem({
     >
       <Icon className="size-3" aria-hidden="true" />
       <span>
-        {text}: {number}
+        {text}: <span className="font-mono">{number}</span>
       </span>
     </a>
   );
@@ -81,7 +81,7 @@ export default function HotlineBar() {
   const [playing, setPlaying] = useState(true);
 
   return (
-    <div className="bg-[linear-gradient(135deg,#b91c1c_0%,#991b1b_100%)] text-[0.8125rem] text-white">
+    <div className="bg-[linear-gradient(135deg,var(--color-hotline-from)_0%,var(--color-hotline-to)_100%)] text-[0.8125rem] text-white">
       {/* Desktop: everything visible at once, no motion needed */}
       <Container className="hidden py-2 lg:block">
         <div className="flex flex-wrap items-center justify-center gap-4">

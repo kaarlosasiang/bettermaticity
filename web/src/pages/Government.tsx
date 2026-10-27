@@ -3,7 +3,7 @@ import { ArrowRight, Landmark, MapPin, Mail, Phone, ExternalLink } from 'lucide-
 import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Container } from '@/components/primitives';
+import { Breadcrumb, Container, heroClasses } from '@/components/primitives';
 import {
   LazyMotion,
   domAnimation,
@@ -19,7 +19,7 @@ import { departments } from '@/lib/govDirectory';
 import { barangayData, barangayCount, totalPopulation } from '@/lib/statsData';
 import matiBarangays from '@data/mati/dist/mati_barangays.min.json';
 
-const CARD = 'rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)]';
+const CARD = 'rounded-card bg-white border border-line';
 
 const norm = (s: string) => s.toLowerCase().replace(/[^a-z]/g, '');
 const popByName = new Map(barangayData.map((b) => [norm(b.name), b.pop]));
@@ -41,14 +41,14 @@ function SectionHead({ eyebrow, children }: { eyebrow?: ReactNode; children: Rea
       viewport={revealViewport}
       className="mb-[18px] flex items-center gap-3.5"
     >
-      <span className="h-[26px] w-1 rounded bg-[#2b62ee]" aria-hidden="true" />
+      <span className="h-[26px] w-1 rounded-none bg-royal" aria-hidden="true" />
       <div>
         {eyebrow && (
-          <span className="font-mono text-[0.6875rem] font-semibold tracking-[0.06em] text-[#2b62ee]">
+          <span className="font-mono text-[0.6875rem] font-semibold tracking-[0.06em] text-royal">
             {eyebrow}
           </span>
         )}
-        <h2 className="font-display text-2xl font-extrabold tracking-[-0.02em] text-[#123c7a]">
+        <h2 className="font-display text-2xl font-extrabold tracking-[-0.02em] text-heading">
           {children}
         </h2>
       </div>
@@ -60,7 +60,7 @@ function DraftNote({ children }: { children: ReactNode }) {
   return (
     <p
       role="note"
-      className="mb-6 rounded-xl border-l-[3px] border-[#ffc001] bg-[#fffbef] px-4 py-3 text-sm text-[#8a6200]"
+      className="mb-6 rounded-card border-l-[3px] border-amber bg-feel-bg px-4 py-3 text-sm text-feel-text"
     >
       {children}
     </p>
@@ -80,8 +80,12 @@ export default function Government() {
         />
 
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
-        <section className="bg-[#123c7a] py-12 lg:py-16">
+        <section className={heroClasses.section}>
           <Container>
+            <Breadcrumb
+              className={heroClasses.breadcrumb}
+              items={[{ label: t('nav-home'), to: '/' }, { label: t('nav-government') }]}
+            />
             <m.div
               variants={staggerContainer}
               initial="hidden"
@@ -90,18 +94,15 @@ export default function Government() {
             >
               <m.span
                 variants={fadeUp}
-                className="inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-[0.08em] text-[#9dc0ff]"
+                className="inline-flex items-center gap-2 font-mono text-[0.71875rem] font-semibold tracking-[0.14em] text-royal uppercase"
               >
                 <Landmark className="size-3.5" aria-hidden="true" />
                 {t('gov-government')}
               </m.span>
-              <m.h1
-                variants={fadeUp}
-                className="mt-3 font-display text-4xl font-extrabold leading-[1.08] tracking-[-0.03em] text-white sm:text-[2.75rem]"
-              >
+              <m.h1 variants={fadeUp} className={heroClasses.title}>
                 {t('gov-title')}
               </m.h1>
-              <m.p variants={fadeUp} className="mt-3 text-base leading-relaxed text-white/75">
+              <m.p variants={fadeUp} className={heroClasses.lede}>
                 {t('gov-subtitle')}
               </m.p>
             </m.div>
@@ -129,10 +130,10 @@ export default function Government() {
         </section>
 
         {/* ── Sangguniang Panlungsod (real councilors) ─────────────────────── */}
-        <section className="bg-[#f1f6fc] py-12">
+        <section className="bg-surface-subtle py-12">
           <Container>
             <SectionHead eyebrow={t('gov-legislative-branch')}>{t('gov-sb-members')}</SectionHead>
-            <p className="-mt-2 mb-5 text-[0.8125rem] text-[#4c5c78]">{t('gov-sb-subtitle')}</p>
+            <p className="-mt-2 mb-5 text-[0.8125rem] text-ink-muted">{t('gov-sb-subtitle')}</p>
             {officials.councilors && officials.councilors.length > 0 && (
               <m.div
                 variants={staggerContainer}
@@ -149,7 +150,7 @@ export default function Government() {
             <div className="mt-6">
               <AppLink
                 to="/government/officials"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#2b62ee] hover:underline"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-royal hover:underline"
               >
                 {t('officials-elected-officials')}
                 <ArrowRight className="size-4" aria-hidden="true" />
@@ -162,7 +163,7 @@ export default function Government() {
         <section className="bg-white py-12">
           <Container>
             <SectionHead eyebrow={t('gov-municipal-offices')}>{t('gov-departments')}</SectionHead>
-            <p className="-mt-2 mb-5 text-[0.8125rem] text-[#4c5c78]">{t('gov-dept-subtitle')}</p>
+            <p className="-mt-2 mb-5 text-[0.8125rem] text-ink-muted">{t('gov-dept-subtitle')}</p>
             <m.div
               variants={staggerContainer}
               initial="hidden"
@@ -177,34 +178,34 @@ export default function Government() {
                   className={`flex flex-col ${CARD} p-5`}
                 >
                   <div className="mb-2 flex items-center gap-3">
-                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-[#eef4fe] text-[#2b62ee]">
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-royal-tint text-royal">
                       <d.Icon className="size-5" aria-hidden="true" />
                     </div>
-                    <h3 className="font-display text-sm font-bold text-[#123c7a]">
+                    <h3 className="font-display text-sm font-bold text-heading">
                       {d.titleKey ? t(d.titleKey) : d.title}
                     </h3>
                   </div>
-                  <p className="mb-3 flex-1 text-[0.8125rem] text-[#4c5c78]">{t(d.descKey)}</p>
-                  <div className="flex flex-col gap-1 text-[0.8125rem] text-[#4c5c78]">
+                  <p className="mb-3 flex-1 text-[0.8125rem] text-ink-muted">{t(d.descKey)}</p>
+                  <div className="flex flex-col gap-1 text-[0.8125rem] text-ink-muted">
                     <a
                       href={`tel:${d.tel}`}
-                      className="inline-flex items-center gap-1.5 hover:text-[#2b62ee]"
+                      className="inline-flex items-center gap-1.5 hover:text-royal"
                     >
                       <Phone className="size-3.5" aria-hidden="true" /> {d.phone}
                     </a>
                     {d.emailKey && (
                       <a
                         href={`mailto:${t(d.emailKey)}`}
-                        className="inline-flex items-center gap-1.5 hover:text-[#2b62ee]"
+                        className="inline-flex items-center gap-1.5 hover:text-royal"
                       >
                         <Mail className="size-3.5" aria-hidden="true" /> {t(d.emailKey)}
                       </a>
                     )}
                   </div>
-                  <div className="mt-3 flex items-center gap-4 border-t border-[#e3e8ef] pt-3">
+                  <div className="mt-3 flex items-center gap-4 border-t border-line pt-3">
                     <AppLink
                       to={d.to}
-                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#2b62ee] hover:underline"
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-royal hover:underline"
                     >
                       {t('gov-view-services')}
                       <ArrowRight className="size-4" aria-hidden="true" />
@@ -214,7 +215,7 @@ export default function Government() {
                         href={d.jobUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#2b62ee] hover:underline"
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-royal hover:underline"
                       >
                         {t('gov-view-job-vacancies')}
                         <ExternalLink className="size-3.5" aria-hidden="true" />
@@ -228,10 +229,10 @@ export default function Government() {
         </section>
 
         {/* ── Barangays ────────────────────────────────────────────────────── */}
-        <section className="bg-[#f1f6fc] py-12">
+        <section className="bg-surface-subtle py-12">
           <Container>
             <SectionHead eyebrow={t('gov-barangay-units')}>{t('gov-barangays')}</SectionHead>
-            <p className="-mt-2 mb-5 text-[0.8125rem] text-[#4c5c78]">
+            <p className="-mt-2 mb-5 text-[0.8125rem] text-ink-muted">
               {barangayCount} {t('gov-barangays')} · {totalPopulation.toLocaleString()}{' '}
               {t('gov-residents')}
             </p>
@@ -246,14 +247,14 @@ export default function Government() {
                 <m.div
                   key={b.name}
                   variants={fadeUp}
-                  className="flex items-center justify-between gap-2 rounded-lg bg-white px-3 py-2.5 shadow-[0_0_0_1px_rgba(18,60,122,0.07)]"
+                  className="flex items-center justify-between gap-2 rounded-lg bg-white px-3 py-2.5 border border-line"
                 >
-                  <span className="flex items-center gap-2 text-[0.8125rem] font-medium text-[#123c7a]">
-                    <MapPin className="size-3.5 shrink-0 text-[#2b62ee]" aria-hidden="true" />
+                  <span className="flex items-center gap-2 text-[0.8125rem] font-medium text-heading">
+                    <MapPin className="size-3.5 shrink-0 text-royal" aria-hidden="true" />
                     {b.name}
                   </span>
                   {b.pop != null && (
-                    <span className="font-mono text-[0.6875rem] tabular-nums text-[#4c5c78]">
+                    <span className="font-mono text-[0.6875rem] tabular-nums text-ink-muted">
                       {b.pop.toLocaleString()}
                     </span>
                   )}

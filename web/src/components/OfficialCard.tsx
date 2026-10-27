@@ -15,23 +15,23 @@ export function OfficialCard({ official, role }: { official: Official; role: str
   return (
     <m.div
       variants={fadeUp}
-      className="rounded-xl bg-white p-6 text-center shadow-[0_0_0_1px_rgba(18,60,122,0.07)]"
+      className="rounded-card bg-white p-6 text-center border border-line"
       style={{ borderTop: '3px solid #2b62ee' }}
     >
       <div
-        className="mx-auto mb-4 flex size-20 items-center justify-center rounded-full bg-[#eef4fe] font-display text-xl font-extrabold text-[#2b62ee]"
+        className="mx-auto mb-4 flex size-20 items-center justify-center rounded-full bg-royal-tint font-display text-xl font-extrabold text-royal"
         aria-hidden="true"
       >
         {officialInitials(official.name)}
       </div>
-      <h3 className="font-display text-base font-bold text-[#123c7a]">{official.name}</h3>
-      <p className="mt-0.5 text-sm font-semibold text-[#2b62ee]">{official.title || role}</p>
+      <h3 className="font-display text-base font-bold text-heading">{official.name}</h3>
+      <p className="mt-0.5 text-sm font-semibold text-royal">{official.title || role}</p>
       {(official.email || official.phone || official.hours) && (
-        <div className="mt-3 flex flex-col items-center gap-1 text-sm text-[#4c5c78]">
+        <div className="mt-3 flex flex-col items-center gap-1 text-sm text-ink-muted">
           {official.email && (
             <a
               href={`mailto:${official.email}`}
-              className="inline-flex items-center gap-1.5 hover:text-[#2b62ee]"
+              className="inline-flex items-center gap-1.5 hover:text-royal"
             >
               <Mail className="size-3.5" aria-hidden="true" /> {official.email}
             </a>
@@ -39,7 +39,7 @@ export function OfficialCard({ official, role }: { official: Official; role: str
           {official.phone && (
             <a
               href={`tel:${official.tel ?? official.phone}`}
-              className="inline-flex items-center gap-1.5 hover:text-[#2b62ee]"
+              className="inline-flex items-center gap-1.5 hover:text-royal"
             >
               <Phone className="size-3.5" aria-hidden="true" /> {official.phone}
             </a>

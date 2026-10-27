@@ -34,3 +34,12 @@ export const CHART_COLORS = ['#2b62ee', '#06a77d', '#f77f00', '#e01b24', '#7c4df
 export const chartFont = {
   family: "'Inter Variable', sans-serif",
 };
+
+// Axis ticks use the mono label face, like the stat rows (BetterSanFernando pattern).
+export const chartMonoFont = {
+  family: "'Roboto Mono', ui-monospace, monospace",
+  size: 11,
+};
+
+// Gridlines match the site's hairline border token (--color-line).
+export const CHART_GRID = '#e6e7ea'; // neutral hairline; charts only render on non-home pages

@@ -371,7 +371,7 @@ export default function Faq() {
               </div>
               <AppLink
                 to="/contact"
-                className="inline-flex shrink-0 items-center justify-center rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-dark"
+                className="inline-flex shrink-0 items-center justify-center rounded-btn bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-dark"
               >
                 {t('faq-contact-us')}
               </AppLink>

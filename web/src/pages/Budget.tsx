@@ -5,7 +5,7 @@ import { Doughnut } from 'react-chartjs-2';
 import { Info } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Container } from '@/components/primitives';
+import { Breadcrumb, Container, heroClasses } from '@/components/primitives';
 import {
   LazyMotion,
   domAnimation,
@@ -20,7 +20,7 @@ import { DpwhProjects } from '@/components/DpwhProjects';
 import { RisingProjects } from '@/components/RisingProjects';
 import { CHART_COLORS, chartFont } from '@/lib/charts';
 
-const CARD = 'min-w-0 rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)]';
+const CARD = 'min-w-0 rounded-card bg-white border border-line';
 
 const doughnutOptions: ChartOptions<'doughnut'> = {
   responsive: true,
@@ -37,7 +37,7 @@ const doughnutOptions: ChartOptions<'doughnut'> = {
 };
 
 const ChartFallback = () => (
-  <div className="h-full animate-pulse rounded-lg bg-[#eef4fe]" aria-hidden="true" />
+  <div className="h-full animate-pulse rounded-lg bg-royal-tint" aria-hidden="true" />
 );
 
 // ── Homepage idioms (mirrors the rebuilt Statistics page) ──────────────────────
@@ -50,8 +50,8 @@ function SectionHead({ children }: { children: ReactNode }) {
       viewport={revealViewport}
       className="mb-[18px] flex items-center gap-3.5"
     >
-      <span className="h-[26px] w-1 rounded bg-[#2b62ee]" aria-hidden="true" />
-      <h2 className="font-display text-2xl font-extrabold tracking-[-0.02em] text-[#123c7a]">
+      <span className="h-[26px] w-1 rounded-none bg-royal" aria-hidden="true" />
+      <h2 className="font-display text-2xl font-extrabold tracking-[-0.02em] text-heading">
         {children}
       </h2>
     </m.div>
@@ -63,7 +63,7 @@ function MetricCard({
   label,
   meta,
   accent = '#2b62ee',
-  metaClass = 'text-[#4c5c78]',
+  metaClass = 'text-ink-muted',
 }: {
   value: ReactNode;
   label: ReactNode;
@@ -83,7 +83,7 @@ function MetricCard({
       >
         {value}
       </span>
-      <span className="mt-0.5 block text-sm font-semibold text-[#123c7a]">{label}</span>
+      <span className="mt-0.5 block text-sm font-semibold text-heading">{label}</span>
       {meta && <span className={`mt-1 block font-mono text-[0.6875rem] ${metaClass}`}>{meta}</span>}
     </m.div>
   );
@@ -104,11 +104,11 @@ function Meter({
   return (
     <div>
       <div className="mb-1 flex items-center justify-between gap-3 text-[0.8125rem]">
-        <span className="text-[#123c7a]">{label}</span>
-        <span className="font-mono text-[0.75rem] tabular-nums text-[#4c5c78]">{value}</span>
+        <span className="text-heading">{label}</span>
+        <span className="font-mono text-[0.75rem] tabular-nums text-ink-muted">{value}</span>
       </div>
       <div
-        className="h-2.5 overflow-hidden rounded-full bg-[#e3e8ef]"
+        className="h-2.5 overflow-hidden rounded-full bg-line"
         role="progressbar"
         aria-label={label}
         aria-valuenow={Math.round(pct)}
@@ -176,31 +176,28 @@ export default function Budget() {
         />
 
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
-        <section className="bg-[#123c7a] py-12 lg:py-16">
+        <section className={heroClasses.section}>
           <Container>
-            <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10">
+            <Breadcrumb
+              className={heroClasses.breadcrumb}
+              items={[{ label: t('nav-home'), to: '/' }, { label: t('nav-transparency') }]}
+            />
+            <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
               <m.div variants={staggerContainer} initial="hidden" animate="show">
                 <m.span
                   variants={fadeUp}
-                  className="inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-[0.08em] text-[#9dc0ff]"
+                  className="inline-flex items-center gap-2 font-mono text-[0.71875rem] font-semibold tracking-[0.14em] text-royal uppercase"
                 >
-                  <span className="h-0.5 w-6 bg-[#2b62ee]" aria-hidden="true" />
                   {t('nav-transparency')}
                 </m.span>
-                <m.h1
-                  variants={fadeUp}
-                  className="mt-3 font-display text-4xl font-extrabold leading-[1.08] tracking-[-0.03em] text-white sm:text-[2.75rem]"
-                >
+                <m.h1 variants={fadeUp} className={heroClasses.title}>
                   {t('budget-title')}
                 </m.h1>
-                <m.p
-                  variants={fadeUp}
-                  className="mt-3 max-w-xl text-base leading-relaxed text-white/75"
-                >
+                <m.p variants={fadeUp} className={heroClasses.lede}>
                   {t('trans-description')}
-                  <span className="mt-2 block text-sm">
-                    {t('trans-checked')} {fiscalSource.checkedOn}
-                  </span>
+                </m.p>
+                <m.p variants={fadeUp} className={heroClasses.meta}>
+                  {t('trans-checked')} {fiscalSource.checkedOn}
                 </m.p>
               </m.div>
 
@@ -209,12 +206,12 @@ export default function Budget() {
                 variants={fadeUp}
                 initial="hidden"
                 animate="show"
-                className="rounded-xl bg-white/[0.06] p-6 ring-1 ring-white/15"
+                className="rounded-card border border-line bg-surface-subtle p-6"
               >
-                <div className="font-mono text-[0.625rem] tracking-[0.08em] text-white/60">
+                <div className="font-mono text-[0.625rem] tracking-[0.08em] text-ink-muted">
                   {t('trans-total-receipts').toUpperCase()} · {q.period}
                 </div>
-                <div className="mt-1 font-display text-4xl sm:text-5xl font-extrabold leading-none tracking-[-0.03em] text-white">
+                <div className="mt-1 font-display text-4xl sm:text-5xl font-extrabold leading-none tracking-[-0.03em] text-royal tabular-nums">
                   {peso(q.receipts.total)}
                 </div>
                 <div
@@ -222,11 +219,11 @@ export default function Budget() {
                   role="img"
                   aria-label={`${t('trans-receipt-sources')}: ${localPct}% / ${externalPct}% / ${nonIncomePct}%`}
                 >
-                  <div style={{ width: `${localPct}%`, backgroundColor: '#9dc0ff' }} />
+                  <div style={{ width: `${localPct}%`, backgroundColor: '#7aa5ff' }} />
                   <div style={{ width: `${externalPct}%`, backgroundColor: '#2b62ee' }} />
                   <div style={{ width: `${nonIncomePct}%`, backgroundColor: '#06a77d' }} />
                 </div>
-                <div className="mt-2 flex flex-wrap items-center justify-between gap-2 font-mono text-[0.625rem] text-white/60">
+                <div className="mt-2 flex flex-wrap items-center justify-between gap-2 font-mono text-[0.625rem] text-ink-muted">
                   <span>
                     {t('budget-local-sources')} {localPct}%
                   </span>
@@ -280,7 +277,7 @@ export default function Budget() {
         <RisingProjects />
 
         {/* ── Money viz: income donut + expenditure meters ─────────────────── */}
-        <section className="bg-[#f1f6fc] py-12">
+        <section className="bg-surface-subtle py-12">
           <Container>
             <SectionHead>
               {t('trans-receipt-sources')} &amp; {t('budget-expenditure-allocation')} ({q.period})
@@ -288,7 +285,7 @@ export default function Budget() {
             <div className="grid gap-5 lg:grid-cols-2">
               {/* Receipts by source (donut) */}
               <div className={`${CARD} p-[22px]`}>
-                <span className="mb-3 block text-sm font-semibold text-[#123c7a]">
+                <span className="mb-3 block text-sm font-semibold text-heading">
                   {t('trans-receipt-sources')}
                 </span>
                 <div
@@ -323,7 +320,7 @@ export default function Budget() {
 
               {/* Expenditure allocation (meters) */}
               <div className={`${CARD} p-[22px]`}>
-                <span className="mb-4 block text-sm font-semibold text-[#123c7a]">
+                <span className="mb-4 block text-sm font-semibold text-heading">
                   {t('budget-expenditure-allocation')}
                 </span>
                 <div className="grid gap-3.5">
@@ -339,14 +336,14 @@ export default function Budget() {
                 </div>
               </div>
             </div>
-            <p className="mt-4 text-sm leading-relaxed text-[#4c5c78]">{t('trans-finance-note')}</p>
-            <p className="mt-3 text-sm text-[#4c5c78]">
+            <p className="mt-4 text-sm leading-relaxed text-ink-muted">{t('trans-finance-note')}</p>
+            <p className="mt-3 text-sm text-ink-muted">
               <Info className="mr-1 inline size-3.5" aria-hidden="true" />
               <a
                 href={`${fiscalSource.url}#page=3`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#2b62ee] underline underline-offset-4"
+                className="text-royal underline underline-offset-4"
               >
                 [1] {fiscalSource.label}
               </a>
@@ -361,11 +358,11 @@ export default function Budget() {
             </SectionHead>
             <div className={`overflow-x-auto ${CARD}`}>
               <table className="w-full border-collapse text-left text-sm">
-                <caption className="px-4 py-3 text-left text-[#4c5c78]">
+                <caption className="px-4 py-3 text-left text-ink-muted">
                   {t('trans-units')} · [1]
                 </caption>
                 <thead>
-                  <tr className="bg-[#f1f6fc] text-[#123c7a]">
+                  <tr className="bg-surface-subtle text-heading">
                     <th scope="col" className="px-4 py-2.5">
                       {t('budget-metric')}
                     </th>
@@ -376,11 +373,11 @@ export default function Budget() {
                 </thead>
                 <tbody>
                   {annualRows.map(([label, value]) => (
-                    <tr key={label} className="border-t border-[#e3e8ef]">
-                      <th scope="row" className="px-4 py-2.5 font-medium text-[#123c7a]">
+                    <tr key={label} className="border-t border-line">
+                      <th scope="row" className="px-4 py-2.5 font-medium text-heading">
                         {label}
                       </th>
-                      <td className="px-4 py-2.5 whitespace-nowrap tabular-nums text-[#4c5c78]">
+                      <td className="px-4 py-2.5 whitespace-nowrap tabular-nums text-ink-muted">
                         {peso(value)}
                       </td>
                     </tr>
@@ -388,20 +385,20 @@ export default function Budget() {
                 </tbody>
               </table>
             </div>
-            <p className="mt-4 text-sm leading-relaxed text-[#4c5c78]">{t('trans-cash-note')}</p>
+            <p className="mt-4 text-sm leading-relaxed text-ink-muted">{t('trans-cash-note')}</p>
           </Container>
         </section>
 
-        <section className="bg-[#f1f6fc] py-12">
+        <section className="bg-surface-subtle py-12">
           <Container>
             <SectionHead>{t('trans-outlook-title')}</SectionHead>
-            <p className="mb-5 max-w-3xl text-sm leading-relaxed text-[#4c5c78]">
+            <p className="mb-5 max-w-3xl text-sm leading-relaxed text-ink-muted">
               {t('trans-outlook-note')}
             </p>
             <div className="grid gap-5 md:grid-cols-2">
               {financialOutlook.map((record) => (
                 <article key={record.year} className={`${CARD} p-5`}>
-                  <h3 className="text-lg font-bold text-[#123c7a]">
+                  <h3 className="text-lg font-bold text-heading">
                     FY{record.year} · {t('trans-planning')}
                   </h3>
                   <dl className="my-4 space-y-3 text-sm">
@@ -411,8 +408,8 @@ export default function Budget() {
                       [t('trans-nta'), record.nta],
                     ].map(([label, value]) => (
                       <div key={label} className="flex flex-wrap justify-between gap-2">
-                        <dt className="text-[#4c5c78]">{label}</dt>
-                        <dd className="font-semibold tabular-nums text-[#123c7a]">
+                        <dt className="text-ink-muted">{label}</dt>
+                        <dd className="font-semibold tabular-nums text-heading">
                           {peso(Number(value))}
                         </dd>
                       </div>
@@ -422,7 +419,7 @@ export default function Budget() {
                     href={`${record.source.url}#page=3`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-[#2b62ee] underline underline-offset-4"
+                    className="text-sm text-royal underline underline-offset-4"
                   >
                     {record.source.label}
                   </a>
@@ -435,7 +432,7 @@ export default function Budget() {
         <section className="bg-white py-12">
           <Container>
             <SectionHead>{t('trans-sources-title')}</SectionHead>
-            <div className="space-y-4 text-sm leading-relaxed text-[#4c5c78]">
+            <div className="space-y-4 text-sm leading-relaxed text-ink-muted">
               <p>{t('trans-method')}</p>
               <p>{t('trans-gaps')}</p>
               <p>{t('trans-audit-note')}</p>
@@ -443,7 +440,7 @@ export default function Budget() {
                 href="https://www.coa.gov.ph/reports/annual-audit-reports/aar-local-government-units/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block text-[#2b62ee] underline underline-offset-4"
+                className="inline-block text-royal underline underline-offset-4"
               >
                 {t('trans-coa-directory')}
               </a>

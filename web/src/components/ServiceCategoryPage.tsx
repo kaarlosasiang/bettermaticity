@@ -62,23 +62,6 @@ export function ServiceCategoryPage({
     <>
       <Seo title={t(seoTitleKey)} description={seoDescription} canonicalPath={path} />
 
-      <Container>
-        <nav
-          className="flex items-center gap-2 py-4 text-sm text-muted-foreground"
-          aria-label="Breadcrumb"
-        >
-          <AppLink to="/" className="hover:text-primary">
-            {t(homeKey)}
-          </AppLink>
-          <span>/</span>
-          <AppLink to="/services" className="hover:text-primary">
-            {t(servicesKey)}
-          </AppLink>
-          <span>/</span>
-          <span aria-current="page">{t(titleKey)}</span>
-        </nav>
-      </Container>
-
       <PageHeader
         badge={
           <>
@@ -88,6 +71,12 @@ export function ServiceCategoryPage({
         }
         title={t(titleKey)}
         description={t(descKey)}
+        breadcrumb={[
+          { label: t(homeKey), to: '/' },
+          { label: t(servicesKey), to: '/services' },
+          { label: t(titleKey) },
+        ]}
+        meta={services.length > 0 ? [t('services-count', { count: services.length })] : undefined}
       />
 
       {services.length > 0 && (
@@ -116,7 +105,7 @@ export function ServiceCategoryPage({
                 <AppLink
                   key={o.to}
                   to={o.to}
-                  className="group flex items-center gap-4 rounded-[10px] bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4 no-underline transition hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)]"
+                  className="group flex items-center gap-4 rounded-card bg-white border border-line p-4 no-underline transition hover:border-royal"
                 >
                   <div className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
                     <o.Icon className="size-5" aria-hidden="true" />

@@ -77,7 +77,7 @@ function Callout({
   items: string[];
 }) {
   return (
-    <div className="my-6 rounded-[10px] bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-5">
+    <div className="my-6 rounded-card bg-white border border-line p-5">
       <h3 className="mb-3 flex items-center gap-2 text-[0.9375rem] font-semibold text-primary">
         {icon}
         {t(heading)}
@@ -140,7 +140,7 @@ export default function Terms() {
             {/* Table of Contents */}
             <nav
               aria-label={t('terms-contents')}
-              className="mb-10 rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-5 shadow-[0_2px_12px_rgba(0,0,0,0.04)]"
+              className="mb-10 rounded-card bg-white border border-line p-5 shadow-[0_2px_12px_rgba(0,0,0,0.04)]"
             >
               <h2 className="mb-4 flex items-center gap-2 border-b border-border pb-3 text-sm font-semibold text-foreground">
                 <List className="size-4 text-primary" aria-hidden="true" />
@@ -372,7 +372,7 @@ export default function Terms() {
                 <div className="my-6">
                   <a
                     href="mailto:volunteer@bettermati.org"
-                    className="inline-flex items-center gap-2.5 rounded-lg bg-[linear-gradient(135deg,var(--primary)_0%,var(--brand-secondary)_100%)] px-6 py-3.5 text-[0.9375rem] font-medium text-white transition hover:-translate-y-0.5 hover:shadow-[0_4px_16px_rgba(0,50,160,0.25)]"
+                    className="inline-flex items-center gap-2.5 rounded-lg bg-[linear-gradient(135deg,var(--primary)_0%,var(--brand-secondary)_100%)] px-6 py-3.5 text-[0.9375rem] font-medium text-white transition hover:shadow-[0_4px_16px_rgba(0,50,160,0.25)]"
                   >
                     <Mail className="size-[1.125rem]" aria-hidden="true" />
                     {t('terms-volunteerbettermatiorg')}

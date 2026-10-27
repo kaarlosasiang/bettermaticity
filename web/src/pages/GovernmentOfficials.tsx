@@ -3,7 +3,7 @@ import { Landmark } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Container } from '@/components/primitives';
+import { Breadcrumb, Container, heroClasses } from '@/components/primitives';
 import {
   LazyMotion,
   domAnimation,
@@ -25,8 +25,8 @@ function SectionHead({ children }: { children: ReactNode }) {
       viewport={revealViewport}
       className="mb-[18px] flex items-center gap-3.5"
     >
-      <span className="h-[26px] w-1 rounded bg-[#2b62ee]" aria-hidden="true" />
-      <h2 className="font-display text-2xl font-extrabold tracking-[-0.02em] text-[#123c7a]">
+      <span className="h-[26px] w-1 rounded-none bg-royal" aria-hidden="true" />
+      <h2 className="font-display text-2xl font-extrabold tracking-[-0.02em] text-heading">
         {children}
       </h2>
     </m.div>
@@ -46,8 +46,16 @@ export default function GovernmentOfficials() {
         />
 
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
-        <section className="bg-[#123c7a] py-12 lg:py-16">
+        <section className={heroClasses.section}>
           <Container>
+            <Breadcrumb
+              className={heroClasses.breadcrumb}
+              items={[
+                { label: t('nav-home'), to: '/' },
+                { label: t('nav-government'), to: '/government' },
+                { label: t('officials-elected-officials') },
+              ]}
+            />
             <m.div
               variants={staggerContainer}
               initial="hidden"
@@ -56,18 +64,15 @@ export default function GovernmentOfficials() {
             >
               <m.span
                 variants={fadeUp}
-                className="inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-[0.08em] text-[#9dc0ff]"
+                className="inline-flex items-center gap-2 font-mono text-[0.71875rem] font-semibold tracking-[0.14em] text-royal uppercase"
               >
                 <Landmark className="size-3.5" aria-hidden="true" />
                 {t('gov-government')}
               </m.span>
-              <m.h1
-                variants={fadeUp}
-                className="mt-3 font-display text-4xl font-extrabold leading-[1.08] tracking-[-0.03em] text-white sm:text-[2.75rem]"
-              >
+              <m.h1 variants={fadeUp} className={heroClasses.title}>
                 {t('officials-elected-officials')}
               </m.h1>
-              <m.p variants={fadeUp} className="mt-3 text-base leading-relaxed text-white/75">
+              <m.p variants={fadeUp} className={heroClasses.lede}>
                 {t('gov-subtitle')}
               </m.p>
             </m.div>
@@ -80,7 +85,7 @@ export default function GovernmentOfficials() {
             {officialsAreDraft && (
               <p
                 role="note"
-                className="mb-6 rounded-xl border-l-[3px] border-[#ffc001] bg-[#fffbef] px-4 py-3 text-sm text-[#8a6200]"
+                className="mb-6 rounded-card border-l-[3px] border-amber bg-feel-bg px-4 py-3 text-sm text-feel-text"
               >
                 {t('gov-officials-note')}
               </p>
@@ -103,7 +108,7 @@ export default function GovernmentOfficials() {
 
         {/* ── Sangguniang Panlungsod ───────────────────────────────────────── */}
         {officials.councilors && officials.councilors.length > 0 && (
-          <section className="bg-[#f1f6fc] py-12">
+          <section className="bg-surface-subtle py-12">
             <Container>
               <SectionHead>{t('gov-sb-members')}</SectionHead>
               <m.div
@@ -120,7 +125,7 @@ export default function GovernmentOfficials() {
               <div className="mt-6">
                 <AppLink
                   to="/government"
-                  className="text-sm font-semibold text-[#2b62ee] hover:underline"
+                  className="text-sm font-semibold text-royal hover:underline"
                 >
                   ← {t('nav-government')}
                 </AppLink>

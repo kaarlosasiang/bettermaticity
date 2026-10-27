@@ -106,7 +106,7 @@ export default function Accessibility() {
           <div className="mx-auto max-w-[820px]">
             {/* Conformance Badge */}
             <div className="mb-12 flex justify-center">
-              <div className="inline-flex items-center gap-3 rounded-xl bg-[linear-gradient(135deg,var(--brand-success)_0%,#05c793_100%)] px-6 py-4 text-white">
+              <div className="inline-flex items-center gap-3 rounded-card bg-[linear-gradient(135deg,var(--brand-success)_0%,#05c793_100%)] px-6 py-4 text-white">
                 <CircleCheck className="size-8" aria-hidden="true" />
                 <div>
                   <span className="block text-xs uppercase tracking-[1px] opacity-90">
@@ -206,7 +206,7 @@ export default function Accessibility() {
             </div>
 
             {/* Promise Card */}
-            <div className="mt-12 flex flex-col items-start gap-6 rounded-xl bg-[linear-gradient(135deg,var(--primary)_0%,var(--brand-secondary)_100%)] p-8 text-white md:flex-row md:text-left max-md:text-center max-md:items-center">
+            <div className="mt-12 flex flex-col items-start gap-6 rounded-card bg-[linear-gradient(135deg,var(--primary)_0%,var(--brand-secondary)_100%)] p-8 text-white md:flex-row md:text-left max-md:text-center max-md:items-center">
               <Heart className="size-6 shrink-0 opacity-80" aria-hidden="true" />
               <div>
                 <h3 className="m-0 mb-2 text-lg text-white">{t('access-promise')}</h3>

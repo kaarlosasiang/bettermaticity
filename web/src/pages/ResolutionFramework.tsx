@@ -57,7 +57,7 @@ export default function ResolutionFramework() {
       {/* What is a Resolution? */}
       <Section compact>
         <Container>
-          <div className="rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-6">
+          <div className="rounded-card bg-white border border-line p-6">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold text-foreground">
               <Info className="size-5 text-primary" aria-hidden="true" />
               {t('reso-what-is')}
@@ -77,7 +77,7 @@ export default function ResolutionFramework() {
             {resolutionTypes.map((k) => (
               <span
                 key={k}
-                className="rounded-full bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] px-3 py-1.5 text-sm font-medium text-foreground"
+                className="rounded-full bg-white border border-line px-3 py-1.5 text-sm font-medium text-foreground"
               >
                 {t(k)}
               </span>

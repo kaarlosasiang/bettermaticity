@@ -24,7 +24,9 @@ import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
 import { ServiceSearch } from '@/components/ServiceSearch';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Container, Section, SectionTitle, PageHeader, Grid } from '@/components/primitives';
+import { Container, Section, SectionHead, PageHeader, RuledGrid } from '@/components/primitives';
+import { services } from '@/lib/services';
+import servicesData from '@data/services.json';
 
 const lifeEvents: { Icon: LucideIcon; key: string; to: string }[] = [
   { Icon: Store, key: 'svc-starting-a-business', to: '/services/business' },
@@ -91,19 +93,6 @@ export default function Services() {
         canonicalPath="/services"
       />
 
-      <Container>
-        <nav
-          className="flex items-center gap-2 py-4 text-sm text-muted-foreground"
-          aria-label="Breadcrumb"
-        >
-          <AppLink to="/" className="hover:text-primary">
-            {t('nav-home')}
-          </AppLink>
-          <span>/</span>
-          <span aria-current="page">{t('services-title')}</span>
-        </nav>
-      </Container>
-
       <PageHeader
         badge={
           <>
@@ -113,64 +102,85 @@ export default function Services() {
         }
         title={t('services-title')}
         description={t('services-subtitle')}
+        breadcrumb={[{ label: t('nav-home'), to: '/' }, { label: t('services-title') }]}
+        meta={[
+          t('services-count', { count: services.length }),
+          t('services-categories-count', { count: categories.length }),
+          t('services-reviewed', { date: servicesData.reviewedOn }),
+        ]}
+        aside={{
+          label: t('services-scope-label'),
+          body: servicesData.verificationNote,
+        }}
       >
-        <div className="mx-auto max-w-[500px]">
+        <div className="max-w-[560px]">
           <ServiceSearch />
         </div>
       </PageHeader>
 
       <Section>
         <Container>
-          <Grid min={300}>
-            {categories.map(({ Icon, key, descKey, to }) => (
-              <AppLink
-                key={to}
-                to={to}
-                className="group flex flex-col rounded-[10px] bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-6 no-underline transition hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)]"
-              >
-                <div className="mb-4 flex size-12 items-center justify-center rounded-lg bg-[linear-gradient(135deg,var(--primary)_0%,var(--brand-secondary)_100%)] text-white">
-                  <Icon className="size-6" aria-hidden="true" />
-                </div>
-                <h3 className="mb-2 text-base font-semibold text-foreground">{t(key)}</h3>
-                <p className="mb-4 flex-1 text-sm text-muted-foreground">{t(descKey)}</p>
-                <span className="inline-flex items-center gap-1.5 text-sm font-medium text-primary">
-                  {t('svc-view-services')}
-                  <ArrowRight
-                    className="size-4 transition-transform group-hover:translate-x-1"
-                    aria-hidden="true"
-                  />
-                </span>
-              </AppLink>
-            ))}
-          </Grid>
+          <RuledGrid className="sm:grid-cols-2 lg:grid-cols-3">
+            {categories.map(({ Icon, key, descKey, to }) => {
+              const id = to.split('/').pop();
+              return (
+                <AppLink
+                  key={to}
+                  to={to}
+                  className="group grid min-w-0 content-start gap-2 bg-white p-6 transition-colors hover:bg-surface-subtle"
+                >
+                  <span className="mb-1 flex size-10 items-center justify-center rounded-md bg-royal-tint text-royal">
+                    <Icon className="size-5" aria-hidden="true" />
+                  </span>
+                  <h3 className="font-display text-[1.0625rem] font-bold tracking-[-0.01em] text-heading group-hover:text-royal">
+                    {t(key)}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-ink-muted">{t(descKey)}</p>
+                  <span className="font-mono text-[0.6875rem] tracking-[0.1em] text-ink-muted uppercase">
+                    {t('services-count', {
+                      count: services.filter((s) => s.categoryId === id).length,
+                    })}
+                  </span>
+                  <span className="mt-1 inline-flex items-center gap-1.5 text-sm font-semibold text-royal underline decoration-1 underline-offset-[5px] group-hover:decoration-2">
+                    {t('svc-view-services')}
+                    <ArrowRight className="size-3.5" aria-hidden="true" />
+                  </span>
+                </AppLink>
+              );
+            })}
+          </RuledGrid>
         </Container>
       </Section>
 
       {/* Browse by Life Event */}
       <Section compact altBg>
         <Container>
-          <SectionTitle>{t('life-events-title')}</SectionTitle>
-          <p className="-mt-4 mb-5 text-[0.8125rem] text-muted-foreground">
-            {t('life-events-subtitle')}
-          </p>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <SectionHead
+            eyebrow={t('nav-services')}
+            title={t('life-events-title')}
+            lede={t('life-events-subtitle')}
+            className="mt-6"
+          />
+          <RuledGrid className="mb-6 sm:grid-cols-2 lg:grid-cols-4">
             {lifeEvents.map(({ Icon, key, to }) => (
               <AppLink
                 key={key}
                 to={to}
-                className="group flex items-center gap-3 rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-4 no-underline transition hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)]"
+                className="group flex min-w-0 items-center gap-3 bg-white p-4 transition-colors hover:bg-surface-subtle"
               >
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  <Icon className="size-5" aria-hidden="true" />
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-md bg-royal-tint text-royal">
+                  <Icon className="size-[18px]" aria-hidden="true" />
                 </span>
-                <span className="text-sm font-medium text-foreground">{t(key)}</span>
+                <span className="text-sm font-semibold text-heading group-hover:text-royal">
+                  {t(key)}
+                </span>
                 <ArrowRight
-                  className="ml-auto size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary"
+                  className="ml-auto size-4 shrink-0 text-ink-muted/60 transition-transform group-hover:translate-x-0.5 group-hover:text-royal"
                   aria-hidden="true"
                 />
               </AppLink>
             ))}
-          </div>
+          </RuledGrid>
         </Container>
       </Section>
       <ServiceSources category="services" />

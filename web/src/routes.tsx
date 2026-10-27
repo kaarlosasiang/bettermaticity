@@ -116,17 +116,4 @@ export const routes: RouteRecord[] = [
       { path: 'service-details/municipal-assessor', Component: MunicipalAssessor },
     ],
   },
-  // Design prototypes: dev server only, never prerendered (not in migrated-routes.json)
-  // and dropped from the production bundle. They render their own chrome, so they sit
-  // outside Layout.
-  ...(import.meta.env.DEV
-    ? [
-        {
-          path: '/prototype/home',
-          lazy: async () => ({
-            Component: (await import('./pages/prototypes/HomeSwiss')).default,
-          }),
-        },
-      ]
-    : []),
 ];
