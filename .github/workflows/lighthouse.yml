@@ -31,13 +31,15 @@ jobs:
           sleep 3
 
       - name: Run Lighthouse CI
+        # Leaf routes (e.g. /contact) are flat .html files, so they have no trailing
+        # slash; only parent routes (/services/, /government/) are folders.
         uses: treosh/lighthouse-ci-action@v12
         with:
           urls: |
             http://localhost:8080/
             http://localhost:8080/services/
             http://localhost:8080/services/health
-            http://localhost:8080/contact/
+            http://localhost:8080/contact
             http://localhost:8080/government/
           configPath: .lighthouserc.json
           uploadArtifacts: true
