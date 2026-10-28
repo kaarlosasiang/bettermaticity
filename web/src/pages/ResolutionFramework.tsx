@@ -1,6 +1,5 @@
 import { ScrollText, Info } from 'lucide-react';
 import { Seo } from '@/components/Seo';
-import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Container, Section, SectionTitle, PageHeader } from '@/components/primitives';
 import { resolutions } from '@/lib/govData';
@@ -26,23 +25,6 @@ export default function ResolutionFramework() {
         canonicalPath="/legislative/resolution-framework"
       />
 
-      <Container>
-        <nav
-          className="flex items-center gap-2 py-4 text-sm text-muted-foreground"
-          aria-label="Breadcrumb"
-        >
-          <AppLink to="/" className="hover:text-primary">
-            {t('nav-home')}
-          </AppLink>
-          <span>/</span>
-          <AppLink to="/legislative" className="hover:text-primary">
-            {t('nav-legislative')}
-          </AppLink>
-          <span>/</span>
-          <span aria-current="page">{t('reso-page-title')}</span>
-        </nav>
-      </Container>
-
       <PageHeader
         badge={
           <>
@@ -50,6 +32,12 @@ export default function ResolutionFramework() {
             {t('nav-legislative')}
           </>
         }
+        breadcrumb={[
+          { label: t('nav-home'), to: '/' },
+          { label: t('nav-government'), to: '/government' },
+          { label: t('nav-legislative'), to: '/legislative' },
+          { label: t('reso-page-title') },
+        ]}
         title={t('reso-page-title')}
         description={t('reso-page-desc')}
       />
@@ -57,7 +45,7 @@ export default function ResolutionFramework() {
       {/* What is a Resolution? */}
       <Section compact>
         <Container>
-          <div className="rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-6">
+          <div className="rounded-card bg-white border border-line p-6">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold text-foreground">
               <Info className="size-5 text-primary" aria-hidden="true" />
               {t('reso-what-is')}
@@ -77,7 +65,7 @@ export default function ResolutionFramework() {
             {resolutionTypes.map((k) => (
               <span
                 key={k}
-                className="rounded-full bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] px-3 py-1.5 text-sm font-medium text-foreground"
+                className="rounded-full bg-white border border-line px-3 py-1.5 text-sm font-medium text-foreground"
               >
                 {t(k)}
               </span>

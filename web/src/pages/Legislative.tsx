@@ -86,19 +86,6 @@ export default function Legislative() {
           canonicalPath="/legislative"
         />
 
-        <Container>
-          <nav
-            className="flex items-center gap-2 py-4 text-sm text-muted-foreground"
-            aria-label="Breadcrumb"
-          >
-            <AppLink to="/" className="hover:text-primary">
-              {t('nav-home')}
-            </AppLink>
-            <span>/</span>
-            <span aria-current="page">{t('nav-legislative')}</span>
-          </nav>
-        </Container>
-
         <PageHeader
           badge={
             <>
@@ -106,6 +93,11 @@ export default function Legislative() {
               {t('leg-sangguniang-bayan')}
             </>
           }
+          breadcrumb={[
+            { label: t('nav-home'), to: '/' },
+            { label: t('nav-government'), to: '/government' },
+            { label: t('nav-legislative') },
+          ]}
           title={t('leg-legislative-documents')}
           description={t('leg-ordinances-and-resolutions-of-the-sangguniang')}
         />
@@ -123,16 +115,16 @@ export default function Legislative() {
                 <m.div key={to} variants={fadeUp}>
                   <AppLink
                     to={to}
-                    className="group flex h-full flex-col rounded-xl border-t-[3px] border-[#2b62ee] bg-white p-6 no-underline shadow-[0_0_0_1px_rgba(18,60,122,0.07)] transition hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)]"
+                    className="group flex h-full flex-col rounded-card bg-white p-6 no-underline border border-line transition hover:border-royal"
                   >
-                    <div className="mb-4 flex size-12 items-center justify-center rounded-lg bg-[#eef4fe] text-[#2b62ee]">
+                    <div className="mb-4 flex size-12 items-center justify-center rounded-lg bg-royal-tint text-royal">
                       <Icon className="size-6" aria-hidden="true" />
                     </div>
-                    <h2 className="mb-2 font-display text-lg font-bold text-[#123c7a]">
+                    <h2 className="mb-2 font-display text-lg font-bold text-heading">
                       {t(titleKey)}
                     </h2>
-                    <p className="mb-4 flex-1 text-sm text-[#4c5c78]">{t(descKey)}</p>
-                    <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#2b62ee]">
+                    <p className="mb-4 flex-1 text-sm text-ink-muted">{t(descKey)}</p>
+                    <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-royal">
                       {t(linkKey)}
                       <ArrowRight
                         className="size-4 transition-transform group-hover:translate-x-1"
@@ -153,12 +145,12 @@ export default function Legislative() {
               <GitBranch className="size-5 text-primary" aria-hidden="true" />
               {t('leg-flowchart-for-legislative-proposal')}
             </SectionTitle>
-            <p className="-mt-3 mb-5 text-[0.8125rem] text-[#4c5c78]">
+            <p className="-mt-3 mb-5 text-[0.8125rem] text-ink-muted">
               {t('leg-stepbystep-process-for-enacting-ordinances-and')}
             </p>
 
             <div
-              className="mb-6 inline-flex rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] p-1"
+              className="mb-6 inline-flex rounded-lg bg-white border border-line p-1"
               role="tablist"
               aria-label="Legislative process"
             >
@@ -194,16 +186,16 @@ export default function Legislative() {
               {steps.map((s, i) => (
                 <li
                   key={s.titleKey}
-                  className="flex gap-3 rounded-xl bg-white p-4 shadow-[0_0_0_1px_rgba(18,60,122,0.07)]"
+                  className="flex gap-3 rounded-card bg-white p-4 border border-line"
                 >
-                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-[#eef4fe] text-sm font-semibold text-[#2b62ee]">
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-royal-tint text-sm font-semibold text-royal">
                     {i + 1}
                   </span>
                   <div>
-                    <h3 className="mb-0.5 font-display text-sm font-bold text-[#123c7a]">
+                    <h3 className="mb-0.5 font-display text-sm font-bold text-heading">
                       {t(s.titleKey)}
                     </h3>
-                    <p className="m-0 text-[0.8125rem] text-[#4c5c78]">{t(s.descKey)}</p>
+                    <p className="m-0 text-[0.8125rem] text-ink-muted">{t(s.descKey)}</p>
                   </div>
                 </li>
               ))}
@@ -215,7 +207,7 @@ export default function Legislative() {
         <Section compact altBg>
           <Container>
             <SectionTitle>
-              <Scale className="size-5 text-[#2b62ee]" aria-hidden="true" />
+              <Scale className="size-5 text-royal" aria-hidden="true" />
               {t('leg-understanding-local-legislation')}
             </SectionTitle>
             <m.div
@@ -229,13 +221,13 @@ export default function Legislative() {
                 <m.div
                   key={titleKey}
                   variants={fadeUp}
-                  className="rounded-xl bg-white p-6 shadow-[0_0_0_1px_rgba(18,60,122,0.07)]"
+                  className="rounded-card bg-white p-6 border border-line"
                 >
-                  <h3 className="mb-2 flex items-center gap-2 font-display text-base font-bold text-[#123c7a]">
-                    <Icon className="size-5 text-[#2b62ee]" aria-hidden="true" />
+                  <h3 className="mb-2 flex items-center gap-2 font-display text-base font-bold text-heading">
+                    <Icon className="size-5 text-royal" aria-hidden="true" />
                     {t(titleKey)}
                   </h3>
-                  <p className="m-0 text-sm text-[#4c5c78]">{t(descKey)}</p>
+                  <p className="m-0 text-sm text-ink-muted">{t(descKey)}</p>
                 </m.div>
               ))}
             </m.div>

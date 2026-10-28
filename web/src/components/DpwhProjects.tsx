@@ -18,19 +18,19 @@ function ProcurementCard({ notice: p, index }: { notice: ProcurementNotice; inde
       initial="hidden"
       whileInView="show"
       viewport={revealViewport}
-      className="rounded-xl border-t-[3px] border-[#2b62ee] bg-white p-5 shadow-[0_0_0_1px_rgba(18,60,122,0.07)]"
+      className="rounded-card bg-white p-5 border border-line"
     >
-      <p className="text-xs font-semibold uppercase tracking-wide text-[#2b62ee]">
+      <p className="text-xs font-semibold uppercase tracking-wide text-royal">
         {t(p.scope === 'local' ? 'trans-local-procurement' : 'budget-national-government-projects')}
       </p>
-      <h3 className="mt-2 font-display text-lg font-bold text-[#123c7a]">
+      <h3 className="mt-2 font-display text-lg font-bold text-heading">
         {t(`trans-project-${p.reference}`)}
       </h3>
-      <p className="mt-2 flex items-start gap-1 text-sm text-[#4c5c78]">
+      <p className="mt-2 flex items-start gap-1 text-sm text-ink-muted">
         <MapPin className="size-4 shrink-0" aria-hidden="true" />
         {p.location}
       </p>
-      <p className="mt-3 font-mono text-xs text-[#4c5c78]">
+      <p className="mt-3 font-mono text-xs text-ink-muted">
         {p.id} · {p.sourceName} {p.reference}
       </p>
 
@@ -39,7 +39,7 @@ function ProcurementCard({ notice: p, index }: { notice: ProcurementNotice; inde
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls={detailId}
-        className="mt-4 flex w-full items-center justify-between gap-2 border-t border-[#e3e8ef] pt-4 text-sm font-semibold text-[#2b62ee]"
+        className="mt-4 flex w-full items-center justify-between gap-2 border-t border-line pt-4 text-sm font-semibold text-royal"
       >
         <span>{t(open ? 'trans-hide-details' : 'trans-show-details')}</span>
         <ChevronDown
@@ -55,45 +55,45 @@ function ProcurementCard({ notice: p, index }: { notice: ProcurementNotice; inde
         <div className="overflow-hidden">
           <dl className="mt-4 space-y-3 text-sm">
             <div>
-              <dt className="text-[#4c5c78]">{t('trans-procuring-entity')}</dt>
-              <dd className="font-semibold text-[#123c7a]">{p.agency}</dd>
+              <dt className="text-ink-muted">{t('trans-procuring-entity')}</dt>
+              <dd className="font-semibold text-heading">{p.agency}</dd>
             </div>
             <div>
-              <dt className="text-[#4c5c78]">{t('trans-funding')}</dt>
-              <dd className="text-[#123c7a]">{p.funding ?? t('trans-not-stated')}</dd>
+              <dt className="text-ink-muted">{t('trans-funding')}</dt>
+              <dd className="text-heading">{p.funding ?? t('trans-not-stated')}</dd>
             </div>
             <div>
-              <dt className="text-[#4c5c78]">{t('trans-abc')}</dt>
-              <dd className="font-display text-2xl font-bold tabular-nums text-[#2b62ee]">
+              <dt className="text-ink-muted">{t('trans-abc')}</dt>
+              <dd className="font-display text-2xl font-bold tabular-nums text-royal">
                 {pesoFull(p.abc)}
               </dd>
             </div>
             <div>
-              <dt className="text-[#4c5c78]">{t('trans-notice-status')}</dt>
-              <dd className="text-[#123c7a]">
+              <dt className="text-ink-muted">{t('trans-notice-status')}</dt>
+              <dd className="text-heading">
                 {t(p.noticeStatus === 'Awarded' ? 'trans-awarded' : 'trans-closed-expired')}
                 {p.updatedOn && ` · ${p.updatedOn}`}
               </dd>
             </div>
             <div>
-              <dt className="text-[#4c5c78]">{t('trans-published')}</dt>
-              <dd className="text-[#123c7a]">{p.publishedOn}</dd>
+              <dt className="text-ink-muted">{t('trans-published')}</dt>
+              <dd className="text-heading">{p.publishedOn}</dd>
             </div>
             {p.closingOn && (
               <div>
-                <dt className="text-[#4c5c78]">{t('trans-closing')}</dt>
-                <dd className="text-[#123c7a]">{p.closingOn}</dd>
+                <dt className="text-ink-muted">{t('trans-closing')}</dt>
+                <dd className="text-heading">{p.closingOn}</dd>
               </div>
             )}
           </dl>
-          <p className="mt-4 text-sm leading-relaxed text-[#4c5c78]">
+          <p className="mt-4 text-sm leading-relaxed text-ink-muted">
             {t('trans-project-unknowns')}
           </p>
           <a
             href={p.sourceUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#2b62ee] underline underline-offset-4"
+            className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-royal underline underline-offset-4"
           >
             [{index + 2}] {t('trans-read-notice')} · {p.reference}
             <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
@@ -108,12 +108,12 @@ function ProcurementCard({ notice: p, index }: { notice: ProcurementNotice; inde
 export function DpwhProjects() {
   const { t } = useLanguage();
   return (
-    <section className="bg-[#f1f6fc] py-12">
+    <section className="bg-surface-subtle py-12">
       <Container>
-        <h2 className="border-l-4 border-[#2b62ee] pl-4 font-display text-2xl font-extrabold tracking-[-0.02em] text-[#123c7a]">
+        <h2 className="border-l-4 border-royal pl-4 font-display text-2xl font-extrabold tracking-[-0.02em] text-heading">
           {t('trans-procurement-title')}
         </h2>
-        <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[#4c5c78]">
+        <p className="mt-4 max-w-3xl text-sm leading-relaxed text-ink-muted">
           {t('trans-procurement-note')}
         </p>
         <div className="mt-6 grid gap-5 lg:grid-cols-2">

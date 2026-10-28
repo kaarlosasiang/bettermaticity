@@ -1,26 +1,7 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import {
-  ChevronDown,
-  Globe,
-  Menu,
-  X,
-  // Dropdown icons — each one matches the icon that category's own page already
-  // uses for its PageHeader badge, so the nav and the destination agree.
-  FileText,
-  Store,
-  Coins,
-  Users,
-  HeartPulse,
-  Trees,
-  Building2,
-  GraduationCap,
-  ShieldCheck,
-  Recycle,
-  BookMarked,
-  ScrollText,
-  type LucideIcon,
-} from 'lucide-react';
+import { Dialog as DialogPrimitive } from 'radix-ui';
+import { ChevronDown, ChevronRight, Globe, Home, Menu, Search, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { AppLink } from '@/components/AppLink';
 import {
@@ -31,50 +12,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useLanguage } from '@/hooks/useLanguage';
+import { NAV, type NavEntry, type NavMenu } from '@/lib/navMenus';
 import type { Language } from '@/i18n';
-
-type NavChild = { to: string; key: string; Icon: LucideIcon };
-type NavEntry = { to: string; key: string; children?: NavChild[]; highlight?: boolean };
-
-const SERVICES: NavChild[] = [
-  { to: '/services/certificates', key: 'dropdown-certificates', Icon: FileText },
-  { to: '/services/business', key: 'dropdown-business', Icon: Store },
-  { to: '/services/tax-payments', key: 'dropdown-tax-payments', Icon: Coins },
-  { to: '/services/social-services', key: 'dropdown-social-services', Icon: Users },
-  { to: '/services/health', key: 'dropdown-health', Icon: HeartPulse },
-  { to: '/services/agriculture', key: 'dropdown-agriculture', Icon: Trees },
-  { to: '/services/infrastructure', key: 'dropdown-infrastructure', Icon: Building2 },
-  { to: '/services/education', key: 'dropdown-education', Icon: GraduationCap },
-  { to: '/services/public-safety', key: 'dropdown-public-safety', Icon: ShieldCheck },
-  { to: '/services/environment', key: 'dropdown-environment', Icon: Recycle },
-];
-
-const LEGISLATIVE: NavChild[] = [
-  { to: '/legislative/ordinance-framework', key: 'dropdown-ordinance-framework', Icon: BookMarked },
-  {
-    to: '/legislative/resolution-framework',
-    key: 'dropdown-resolution-framework',
-    Icon: ScrollText,
-  },
-];
-
-// A long list (Services) reads better split in two; a 2-item list (Legislative) does not.
-const TWO_COL_THRESHOLD = 4;
-
-const NAV: NavEntry[] = [
-  { to: '/', key: 'nav-home' },
-  { to: '/services', key: 'nav-services', children: SERVICES },
-  { to: '/government', key: 'nav-government' },
-  { to: '/statistics', key: 'nav-statistics' },
-  { to: '/legislative', key: 'nav-legislative', children: LEGISLATIVE },
-  { to: '/budget', key: 'nav-transparency' },
-  { to: '/visit-mati', key: 'nav-visit-mati', highlight: true },
-];
-
-const LANGS: { code: Language; label: string; name: string }[] = [
-  { code: 'en', label: 'EN', name: 'English' },
-  { code: 'ceb', label: 'CEB', name: 'Cebuano' },
-];
+import { LANGS } from '@/lib/languages';
 
 // Highlighted tabs (Visit Mati) get only their first word in Feel-Mati amber;
 // the rest of the label keeps the normal nav styling.
@@ -83,261 +23,295 @@ function renderNavLabel(label: string, highlight?: boolean): React.ReactNode {
   const [first, ...rest] = label.split(' ');
   return (
     <>
-      <span className="text-yellow-500 font-semibold">{first}</span>
-      <span className="text-navy font-semibold">{rest.length ? ` ${rest.join(' ')}` : null}</span>
+      <span className="font-semibold text-yellow-500">{first}</span>
+      <span className="font-semibold text-navy">{rest.length ? ` ${rest.join(' ')}` : null}</span>
     </>
   );
 }
 
-function isMobileNav(): boolean {
-  return typeof window !== 'undefined' && window.matchMedia('(max-width: 1024px)').matches;
+const pad = (i: number) => String(i + 1).padStart(2, '0');
+
+function GroupNumber({ i }: { i: number }) {
+  return (
+    <span
+      className="rounded-none bg-royal-tint px-1.5 py-0.5 font-mono text-[11px] font-semibold text-royal"
+      aria-hidden="true"
+    >
+      {pad(i)}
+    </span>
+  );
+}
+
+function isActive(entry: NavEntry, pathname: string): boolean {
+  if (entry.to === '/') return pathname === '/';
+  return [entry.to, ...(entry.matches ?? [])].some((prefix) => pathname.startsWith(prefix));
+}
+
+// Desktop mega panel (BetterSanFernando pattern): one column per group, each item an
+// icon tile + title + one-line description + chevron.
+function MegaPanel({ menu, label }: { menu: NavMenu; label: string }) {
+  const { t } = useLanguage();
+  return (
+    <div
+      id={`desktop-mega-${menu.id}`}
+      className="absolute inset-x-0 top-full hidden px-4 pt-2 pb-4 xl:block"
+    >
+      <div
+        role="region"
+        aria-label={label}
+        className="container mx-auto grid max-h-[calc(100vh-var(--sticky-offset)-2rem)] animate-in items-start gap-5 overflow-y-auto rounded-xl bg-white p-6 shadow-[0_0_0_1px_#e9ecef,0_18px_48px_rgba(15,23,42,0.16)] duration-150 fade-in-0 slide-in-from-top-1 motion-reduce:animate-none"
+        style={{ gridTemplateColumns: `repeat(${menu.groups.length}, minmax(0, 1fr))` }}
+      >
+        {menu.groups.map((group, gi) => (
+          <div key={group.key} className="min-w-0">
+            <div className="mb-3 flex items-center gap-2 border-b border-line pb-3">
+              <GroupNumber i={gi} />
+              <h2 className="text-sm font-semibold text-heading">{t(group.key)}</h2>
+            </div>
+            <ul className="grid gap-1">
+              {group.items.map(({ to, key, descKey, Icon }) => (
+                <li key={to}>
+                  <AppLink
+                    to={to}
+                    className="group flex w-full items-center justify-between gap-3 rounded-lg px-2.5 py-2.5 text-ink transition-colors duration-200 hover:bg-royal-tint hover:text-navy"
+                  >
+                    <span className="flex min-w-0 items-start">
+                      <span className="mt-0.5 mr-2.5 flex size-8 shrink-0 items-center justify-center rounded-md bg-royal-tint text-royal transition-colors duration-200 group-hover:bg-[#d9e5fd] group-hover:text-navy">
+                        <Icon className="size-4" aria-hidden="true" />
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block text-sm leading-5 font-semibold transition-colors duration-200 group-hover:text-royal">
+                          {t(key)}
+                        </span>
+                        <span className="mt-0.5 block text-xs leading-4 text-ink-muted">
+                          {t(descKey)}
+                        </span>
+                      </span>
+                    </span>
+                    <ChevronRight
+                      className="size-4 shrink-0 text-ink-muted/60 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:text-royal"
+                      aria-hidden="true"
+                    />
+                  </AppLink>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Mobile drawer section: a button that expands the menu's groups in place.
+function DrawerSection({
+  entry,
+  active,
+}: {
+  entry: NavEntry & { menu: NavMenu };
+  active: boolean;
+}) {
+  const { t } = useLanguage();
+  const [open, setOpen] = useState(active);
+  const label = t(entry.key);
+  const panelId = `mobile-mega-${entry.menu.id}`;
+  return (
+    <div>
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls={panelId}
+        onClick={() => setOpen((o) => !o)}
+        className={cn(
+          'flex min-h-[50px] w-full items-center justify-between rounded-md px-3.5 py-3 text-left text-[15px] font-medium transition-colors duration-200 hover:bg-surface-subtle',
+          active ? 'text-royal' : 'text-ink'
+        )}
+      >
+        <span>{label}</span>
+        <ChevronDown
+          className={cn(
+            'size-4 shrink-0 text-ink-muted/60 transition-transform duration-200 motion-reduce:transition-none',
+            open && 'rotate-180'
+          )}
+          aria-hidden="true"
+        />
+      </button>
+      <div
+        id={panelId}
+        inert={!open}
+        className={cn(
+          'grid transition-[grid-template-rows,opacity] duration-[250ms] motion-reduce:transition-none',
+          open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+        )}
+      >
+        <div className="min-h-0 overflow-hidden">
+          <div className="space-y-4 pt-1 pr-1 pb-3 pl-3.5">
+            <AppLink
+              to={entry.to}
+              className="group flex min-h-[44px] items-center justify-between rounded-md px-3 py-2.5 text-sm font-semibold text-navy transition-colors duration-150 hover:bg-royal-tint"
+            >
+              <span>{t('nav-view-overview', { menu: label })}</span>
+              <ChevronRight
+                className="size-4 text-royal transition-transform duration-150 group-hover:translate-x-0.5"
+                aria-hidden="true"
+              />
+            </AppLink>
+            {entry.menu.groups.map((group, gi) => (
+              <div key={group.key} className="space-y-1">
+                <div className="flex items-center gap-2 border-b border-line px-3 pt-2 pb-1.5">
+                  <GroupNumber i={gi} />
+                  <h2 className="text-xs font-semibold text-heading">{t(group.key)}</h2>
+                </div>
+                <ul className="space-y-0.5">
+                  {group.items.map(({ to, key }) => (
+                    <li key={to}>
+                      <AppLink
+                        to={to}
+                        className="group flex min-h-[44px] w-full items-center justify-between rounded-md px-3 py-2 text-sm text-ink-muted transition-colors duration-150 hover:bg-surface-subtle hover:text-ink"
+                      >
+                        <span className="leading-snug">{t(key)}</span>
+                        <ChevronRight
+                          className="size-4 shrink-0 text-ink-muted/50"
+                          aria-hidden="true"
+                        />
+                      </AppLink>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
   const { pathname } = useLocation();
   const { language, setLanguage, t } = useLanguage();
-  const navRef = useRef<HTMLElement>(null);
-  const toggleRef = useRef<HTMLButtonElement>(null);
-  const scrollYRef = useRef(0);
-  const isAnimatingRef = useRef(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
-  const lockBodyScroll = useCallback(() => {
-    scrollYRef.current = window.scrollY;
-    const b = document.body.style;
-    b.position = 'fixed';
-    b.top = `-${scrollYRef.current}px`;
-    b.width = '100%';
-    b.overflow = 'hidden';
-  }, []);
+  // Close everything on route change (state adjusted during render, not in an effect).
+  const [lastPath, setLastPath] = useState(pathname);
+  if (pathname !== lastPath) {
+    setLastPath(pathname);
+    setOpenMenu(null);
+    setDrawerOpen(false);
+  }
 
-  const unlockBodyScroll = useCallback(() => {
-    const b = document.body.style;
-    b.position = '';
-    b.top = '';
-    b.width = '';
-    b.overflow = '';
-    window.scrollTo(0, scrollYRef.current);
-  }, []);
-
-  const closeMenu = useCallback(() => {
-    if (isAnimatingRef.current) return;
-    isAnimatingRef.current = true;
-    setMobileMenuOpen(false);
-    setOpenDropdown(null);
-    unlockBodyScroll();
-    setTimeout(() => {
-      isAnimatingRef.current = false;
-    }, 320);
-  }, [unlockBodyScroll]);
-
-  const toggleDropdown = useCallback((key: string, e: React.MouseEvent) => {
-    if (isMobileNav()) {
-      e.preventDefault();
-      setOpenDropdown((prev) => (prev === key ? null : key));
+  // Desktop mega menu: Escape closes and returns focus to its chevron; a pointer
+  // press outside the header closes it.
+  useEffect(() => {
+    if (!openMenu) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key !== 'Escape') return;
+      const trigger = openMenu ? triggerRefs.current[openMenu] : null;
+      setOpenMenu(null);
+      trigger?.focus();
     }
-  }, []);
-
-  // Close menu on route change.
-  useEffect(() => {
-    isAnimatingRef.current = false;
-    closeMenu();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
-
-  // Cleanup scroll lock on unmount.
-  useEffect(() => {
+    function onPointer(e: PointerEvent) {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) setOpenMenu(null);
+    }
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('pointerdown', onPointer);
     return () => {
-      const b = document.body.style;
-      b.position = '';
-      b.top = '';
-      b.width = '';
-      b.overflow = '';
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('pointerdown', onPointer);
     };
-  }, []);
+  }, [openMenu]);
 
-  // Click outside to close.
-  useEffect(() => {
-    if (!mobileMenuOpen) return;
-    function handleClickOutside(e: MouseEvent) {
-      const target = e.target as Node;
-      if (
-        navRef.current &&
-        !navRef.current.contains(target) &&
-        toggleRef.current &&
-        !toggleRef.current.contains(target)
-      ) {
-        closeMenu();
-      }
-    }
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, [mobileMenuOpen, closeMenu]);
-
-  // Escape to close.
-  useEffect(() => {
-    function handleEscape(e: KeyboardEvent) {
-      if (e.key === 'Escape' && mobileMenuOpen) {
-        closeMenu();
-        toggleRef.current?.focus();
-      }
-    }
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }, [mobileMenuOpen, closeMenu]);
-
-  // Close on resize to desktop (debounced).
-  useEffect(() => {
-    let timer: ReturnType<typeof setTimeout>;
-    function handleResize() {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        if (!isMobileNav() && mobileMenuOpen) {
-          isAnimatingRef.current = false;
-          closeMenu();
-        }
-      }, 150);
-    }
-    window.addEventListener('resize', handleResize);
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [mobileMenuOpen, closeMenu]);
-
-  // Inactive: small, medium-weight, muted. Desktop links become rounded pills with a
-  // subtle hover fill. Active pill = tinted primary bg + semibold (see linkActive).
-  const linkBase =
-    'block rounded-lg py-3 text-[0.9375rem] font-medium text-foreground transition select-none hover:text-primary lg:px-3.5 lg:py-2 lg:hover:bg-muted';
-  const linkActive = 'font-semibold text-primary lg:bg-primary/10 lg:hover:bg-primary/10';
+  const pill =
+    'inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium whitespace-nowrap transition-colors duration-200';
+  const pillIdle = 'text-ink hover:bg-surface-subtle';
+  const pillActive = 'bg-royal-tint font-semibold text-royal';
+  const openEntry = NAV.find((e) => e.menu && e.menu.id === openMenu);
 
   return (
-    <header className="sticky top-0 z-[1000] bg-white py-1.5 shadow-sm">
-      <div className="mx-auto flex min-h-12 w-full max-w-[1200px] flex-wrap items-center justify-between px-6">
-        {/* Logo */}
-        <AppLink to="/" className="flex items-center py-1.5 lg:py-2" aria-label="Better Mati home">
+    <header ref={headerRef} className="relative border-b border-line bg-white">
+      <div className="container mx-auto flex h-16 items-center gap-4 px-4 xl:h-[72px]">
+        <AppLink to="/" className="flex shrink-0 items-center" aria-label="Better Mati home">
           <img
             src="/assets/images/logo/better-mati-logo.png"
             alt="Better Mati Logo"
-            className="h-8.5 w-auto lg:h-12"
+            className="h-8.5 w-auto xl:h-11"
           />
         </AppLink>
 
-        {/* Nav */}
-        <nav
-          ref={navRef}
-          aria-label="Main Navigation"
-          className={cn(
-            // Mobile: a panel overlaid on the content, anchored under the header bar.
-            // It used to be an in-flow `w-full` flex item, which grew the sticky
-            // header and pushed the whole page down as it opened.
-            'absolute top-full left-0 z-10 w-full overflow-hidden bg-white shadow-md transition-all duration-300',
-            mobileMenuOpen
-              ? 'visible max-h-[80vh] overflow-y-auto border-t border-border px-6 py-4 opacity-100'
-              : 'invisible max-h-0 opacity-0',
-            'lg:visible lg:static lg:z-auto lg:order-none lg:max-h-none lg:w-auto lg:overflow-visible lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 lg:opacity-100 lg:shadow-none'
-          )}
-        >
-          <ul className="flex flex-col gap-0 lg:flex-row lg:items-center lg:gap-1">
+        {/* Desktop nav */}
+        <nav aria-label="Main Navigation" className="ml-auto hidden xl:block">
+          <ul className="flex items-center gap-0.5">
             {NAV.map((entry) => {
-              const active = entry.to === '/' ? pathname === '/' : pathname.startsWith(entry.to);
-              if (!entry.children) {
+              const active = isActive(entry, pathname);
+              const label = t(entry.key);
+              if (!entry.menu) {
                 return (
                   <li key={entry.to}>
                     <AppLink
                       to={entry.to}
-                      onClick={closeMenu}
-                      className={cn(linkBase, active && linkActive)}
+                      aria-current={active ? 'page' : undefined}
+                      className={cn(pill, active ? pillActive : pillIdle)}
                     >
-                      {renderNavLabel(t(entry.key), entry.highlight)}
+                      {renderNavLabel(label, entry.highlight)}
                     </AppLink>
                   </li>
                 );
               }
-              const open = openDropdown === entry.to;
-              const twoCol = entry.children.length > TWO_COL_THRESHOLD;
+              const id = entry.menu.id;
+              const open = openMenu === id;
               return (
-                <li key={entry.to} className="group relative">
-                  <AppLink
-                    to={entry.to}
-                    aria-haspopup="true"
-                    aria-expanded={open}
-                    onClick={(e) => toggleDropdown(entry.to, e)}
-                    className={cn(
-                      linkBase,
-                      'flex items-center justify-between gap-1 lg:justify-start',
-                      active && linkActive
-                    )}
-                  >
-                    {t(entry.key)}
-                    <ChevronDown
-                      className={cn(
-                        'size-4 shrink-0 transition-transform lg:group-hover:rotate-180',
-                        open && 'rotate-180'
-                      )}
-                      aria-hidden="true"
-                    />
-                  </AppLink>
-                  <ul
-                    className={cn(
-                      'overflow-hidden transition-all duration-200',
-                      twoCol ? 'grid grid-cols-2 gap-x-2' : 'flex flex-col',
-                      open ? 'max-h-[500px] py-1' : 'max-h-0',
-                      'lg:invisible lg:absolute lg:top-full lg:left-0 lg:z-[1001] lg:max-h-none lg:translate-y-2 lg:rounded-lg lg:bg-white lg:py-2 lg:pl-0 lg:opacity-0 lg:shadow-md',
-                      twoCol ? 'lg:grid lg:grid-cols-2 lg:min-w-[440px]' : 'lg:min-w-[220px]',
-                      'lg:group-hover:visible lg:group-hover:translate-y-0 lg:group-hover:opacity-100',
-                      open && 'lg:visible lg:translate-y-0 lg:opacity-100'
-                    )}
-                  >
-                    {entry.children.map(({ to, key, Icon }) => (
-                      <li key={to}>
-                        <AppLink
-                          to={to}
-                          onClick={closeMenu}
-                          // pl/pr not px: a base `px-*` and an `lg:pl-*` both write
-                          // padding-left, and the winner is stylesheet order, not class order.
-                          className="flex items-center gap-2.5 py-2.5 pl-3 text-[0.9375rem] text-muted-foreground transition-colors hover:bg-muted hover:text-primary lg:py-2 lg:pr-4 lg:pl-4 lg:text-sm lg:whitespace-nowrap lg:text-foreground"
-                        >
-                          <Icon className="size-4 shrink-0 text-primary/70" aria-hidden="true" />
-                          <span>{t(key)}</span>
-                        </AppLink>
-                      </li>
-                    ))}
-                  </ul>
+                <li key={entry.to}>
+                  <div className={cn(pill, active || open ? pillActive : pillIdle)}>
+                    <AppLink
+                      to={entry.to}
+                      aria-current={active ? 'page' : undefined}
+                      className="rounded-md"
+                    >
+                      {label}
+                    </AppLink>
+                    <button
+                      ref={(el) => {
+                        triggerRefs.current[id] = el;
+                      }}
+                      type="button"
+                      aria-expanded={open}
+                      aria-controls={`desktop-mega-${id}`}
+                      aria-label={t(open ? 'nav-close-menu' : 'nav-open-menu', { menu: label })}
+                      onClick={() => setOpenMenu(open ? null : id)}
+                      className="rounded-md p-0.5 text-inherit"
+                    >
+                      <ChevronDown
+                        className={cn(
+                          'size-3.5 opacity-75 transition-transform duration-200 motion-reduce:transition-none',
+                          open && 'rotate-180'
+                        )}
+                        aria-hidden="true"
+                      />
+                    </button>
+                  </div>
                 </li>
               );
             })}
           </ul>
         </nav>
 
-        {/* Right cluster: language control + mobile menu toggle */}
-        <div className="flex items-center gap-2 lg:gap-1">
-          {/* Desktop language pills */}
-          <div className="hidden items-center gap-1 lg:flex">
-            {LANGS.map((l) => (
-              <button
-                key={l.code}
-                type="button"
-                onClick={() => void setLanguage(l.code)}
-                aria-label={`Switch to ${l.name}`}
-                className={cn(
-                  'rounded-md border px-2.5 py-1.5 text-xs font-semibold transition',
-                  language === l.code
-                    ? 'border-primary bg-primary text-white'
-                    : 'border-border text-foreground opacity-70 hover:opacity-100'
-                )}
-              >
-                {l.label}
-              </button>
-            ))}
-          </div>
+        <div className="ml-auto flex items-center gap-1 xl:ml-0">
+          <AppLink
+            to="/services"
+            aria-label={t('nav-search')}
+            className="hidden size-10 items-center justify-center rounded-lg text-ink transition-colors hover:bg-royal-tint hover:text-royal xl:flex"
+          >
+            <Search className="size-[18px]" aria-hidden="true" />
+          </AppLink>
 
-          {/* Mobile compact language dropdown */}
+          {/* Phones/tablets: compact language dropdown (desktop uses the info bar toggle) */}
           <DropdownMenu>
             <DropdownMenuTrigger
               aria-label="Change language"
-              className="flex h-11 items-center gap-1 rounded-md px-2.5 text-xs font-semibold text-foreground transition hover:bg-muted lg:hidden"
+              className="flex h-10 items-center gap-1 rounded-lg px-2.5 text-xs font-semibold text-foreground transition hover:bg-muted xl:hidden"
             >
               <Globe className="size-4" aria-hidden="true" />
               {language.toUpperCase()}
@@ -357,31 +331,99 @@ export default function Header() {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* Mobile toggle */}
-          <button
-            ref={toggleRef}
-            type="button"
-            onClick={() => {
-              if (isAnimatingRef.current) return;
-              if (mobileMenuOpen) {
-                closeMenu();
-              } else {
-                isAnimatingRef.current = true;
-                setMobileMenuOpen(true);
-                lockBodyScroll();
-                setTimeout(() => {
-                  isAnimatingRef.current = false;
-                }, 320);
-              }
-            }}
-            aria-label="Toggle Navigation"
-            aria-expanded={mobileMenuOpen}
-            className="flex size-11 items-center justify-center text-primary lg:hidden"
-          >
-            {mobileMenuOpen ? <X className="size-6" /> : <Menu className="size-6" />}
-          </button>
+          {/* Mobile drawer: Radix Dialog gives the focus trap, scroll lock, Escape and
+              backdrop-click handling, and returns focus to this trigger on close. */}
+          <DialogPrimitive.Root open={drawerOpen} onOpenChange={setDrawerOpen}>
+            <DialogPrimitive.Trigger
+              aria-label={t('nav-open-main-menu')}
+              aria-controls="mobile-navigation"
+              className="inline-flex size-10 items-center justify-center rounded-lg text-ink transition-colors hover:bg-royal-tint hover:text-royal xl:hidden"
+            >
+              <Menu className="size-6" aria-hidden="true" />
+            </DialogPrimitive.Trigger>
+            <DialogPrimitive.Portal>
+              <DialogPrimitive.Overlay className="fixed inset-0 z-[1100] bg-slate-900/40 duration-[250ms] data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0 motion-reduce:animate-none xl:hidden" />
+              <DialogPrimitive.Content
+                id="mobile-navigation"
+                aria-describedby={undefined}
+                className="fixed inset-y-0 right-0 z-[1101] flex w-full flex-col bg-white shadow-[-12px_0_40px_rgba(15,23,42,0.14)] duration-[250ms] data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:animate-in data-[state=open]:slide-in-from-right motion-reduce:animate-none sm:w-[min(92vw,420px)] xl:hidden"
+              >
+                <DialogPrimitive.Title className="sr-only">
+                  {t('nav-main-menu')}
+                </DialogPrimitive.Title>
+                <div className="flex items-center justify-between border-b border-line py-3 pr-3 pl-4">
+                  <img
+                    src="/assets/images/logo/better-mati-logo.png"
+                    alt="Better Mati Logo"
+                    className="h-8.5 w-auto"
+                  />
+                  <DialogPrimitive.Close
+                    aria-label={t('nav-close-main-menu')}
+                    className="inline-flex size-10 items-center justify-center rounded-lg text-ink transition-colors hover:bg-royal-tint hover:text-royal"
+                  >
+                    <X className="size-6" aria-hidden="true" />
+                  </DialogPrimitive.Close>
+                </div>
+                <nav aria-label="Main Navigation" className="flex-1 overflow-y-auto p-4">
+                  <AppLink
+                    to="/services"
+                    className="group mb-4 flex min-h-[48px] items-center justify-between rounded-md border border-line bg-surface-subtle px-3.5 py-2.5 text-sm font-medium text-ink-muted transition-colors hover:text-ink"
+                  >
+                    <span className="inline-flex items-center gap-2.5">
+                      <Search className="size-[17px]" aria-hidden="true" />
+                      {t('nav-search')}
+                    </span>
+                    <ChevronRight className="size-4" aria-hidden="true" />
+                  </AppLink>
+                  <ul className="grid gap-0.5">
+                    {NAV.map((entry) => {
+                      const active = isActive(entry, pathname);
+                      if (entry.menu) {
+                        return (
+                          <li key={entry.to}>
+                            <DrawerSection
+                              entry={entry as NavEntry & { menu: NavMenu }}
+                              active={active}
+                            />
+                          </li>
+                        );
+                      }
+                      return (
+                        <li key={entry.to}>
+                          <AppLink
+                            to={entry.to}
+                            aria-current={active ? 'page' : undefined}
+                            className={cn(
+                              'flex min-h-[50px] items-center gap-3 rounded-md px-3.5 py-3 text-[15px] font-medium transition-colors duration-200',
+                              active
+                                ? 'bg-royal-tint font-semibold text-royal'
+                                : 'text-ink hover:bg-surface-subtle'
+                            )}
+                          >
+                            {entry.to === '/' ? (
+                              <Home className="size-[18px] text-ink-muted" aria-hidden="true" />
+                            ) : null}
+                            {renderNavLabel(t(entry.key), entry.highlight)}
+                          </AppLink>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </nav>
+                <div className="m-4 mt-3 grid gap-1 rounded-md bg-royal px-[18px] py-4 text-white">
+                  <span className="font-mono text-[11px] font-semibold tracking-[0.12em] text-white/80 uppercase">
+                    BetterMati.org
+                  </span>
+                  <span className="text-base font-bold">{t('nav-drawer-tagline')}</span>
+                  <span className="text-[13px] text-white/80">{t('nav-drawer-place')}</span>
+                </div>
+              </DialogPrimitive.Content>
+            </DialogPrimitive.Portal>
+          </DialogPrimitive.Root>
         </div>
       </div>
+
+      {openEntry?.menu ? <MegaPanel menu={openEntry.menu} label={t(openEntry.key)} /> : null}
     </header>
   );
 }

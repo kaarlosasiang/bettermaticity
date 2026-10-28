@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Pause, Play, type LucideIcon } from 'lucide-react';
+import { ArrowRight, Pause, Play, TriangleAlert, type LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Container } from '@/components/primitives';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -33,16 +33,28 @@ const toItem = (h: Hotline | Omit<Hotline, 'category'>): BarItem => {
 };
 
 // 911 first, then the flagged offices in priority order. Sourced from
-// data/emergency-hotlines.json — never hard-code a number here.
-const items: BarItem[] = [toItem(nationalHotline), ...priorityHotlines.map(toItem)];
+// data/emergency-hotlines.json — never hard-code a number here. The bar already carries an
+// "Emergency" title, so 911 is labelled "National" here instead of its short "Emergency".
+const items: BarItem[] = [
+  { ...toItem(nationalHotline), label: 'National', labelKey: 'hotline-bar-national' },
+  ...priorityHotlines.map(toItem),
+];
 
-// Hover/focus darkens rather than lightens: white text over the bar needs 4.5:1,
-// and lightening the pill pushes it under (bg-white/30 lands at 3.8:1).
-const pillClass =
-  'inline-flex shrink-0 items-center gap-1 rounded-full bg-white/15 px-2.5 py-1 ' +
-  'whitespace-nowrap text-white no-underline transition hover:-translate-y-px hover:bg-black/20 ' +
-  'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ' +
-  'motion-reduce:transition-none motion-reduce:hover:translate-y-0';
+// Plain text links with an underline on hover (BetterSanFernando strip), no pill.
+const linkClass =
+  'inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap text-white decoration-white/70 ' +
+  'underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 ' +
+  'focus-visible:outline-white';
+
+function EmergencyTitle({ className }: { className?: string }) {
+  const { t } = useLanguage();
+  return (
+    <span className={cn('inline-flex shrink-0 items-center gap-2 font-semibold', className)}>
+      <TriangleAlert className="size-4" aria-hidden="true" />
+      {t('hotline-emergency', { defaultValue: 'Emergency' })}
+    </span>
+  );
+}
 
 function HotlineItem({
   label,
@@ -51,26 +63,27 @@ function HotlineItem({
   tel,
   Icon,
   hidden,
-}: BarItem & { hidden?: boolean }) {
+  showIcon = true,
+}: BarItem & { hidden?: boolean; showIcon?: boolean }) {
   const { t } = useLanguage();
   const text = labelKey ? t(labelKey, { defaultValue: label }) : label;
   return (
     <a
       href={`tel:${tel}`}
-      className={cn(pillClass, hidden && 'motion-reduce:hidden')}
+      className={cn(linkClass, hidden && 'motion-reduce:hidden')}
       aria-hidden={hidden || undefined}
       tabIndex={hidden ? -1 : undefined}
     >
-      <Icon className="size-3" aria-hidden="true" />
-      <span>
-        {text}: {number}
-      </span>
+      {showIcon ? <Icon className="size-3 opacity-90" aria-hidden="true" /> : null}
+      <span className="font-medium">{text}</span> <span className="font-mono">{number}</span>
     </a>
   );
 }
 
-// Emergency strip above the header. Desktop = static wrapped row; below lg the items
-// scroll as a seamless marquee (duplicated once, translateX(-50%) loop).
+// Emergency strip above the header: "Emergency" title on the left, then the numbers.
+// Desktop (xl, where the header nav also appears) = static row divided by hairlines, with
+// a "View all hotlines" link on the right; below xl the numbers scroll as a seamless
+// marquee (duplicated once, translateX(-50%) loop).
 //
 // WCAG 2.2.2 requires a way to pause motion that auto-starts and runs past 5s. The
 // original bar paused on hover only — which does not exist on the touch devices this
@@ -81,26 +94,40 @@ export default function HotlineBar() {
   const [playing, setPlaying] = useState(true);
 
   return (
-    <div className="bg-[linear-gradient(135deg,#b91c1c_0%,#991b1b_100%)] text-[0.8125rem] text-white">
-      {/* Desktop: everything visible at once, no motion needed */}
-      <Container className="hidden py-2 lg:block">
-        <div className="flex flex-wrap items-center justify-center gap-4">
-          {items.map((h) => (
-            <HotlineItem key={h.id} {...h} />
-          ))}
+    <div className="bg-navy text-[0.8125rem] text-white">
+      {/* Desktop: everything visible at once, no motion needed. Item icons are dropped here
+          so the row stays on one line with room to spare at the narrowest desktop
+          container (1280px). */}
+      <Container className="hidden xl:block">
+        <div className="flex items-center gap-5 py-2.5 text-xs">
+          <EmergencyTitle />
+          <ul className="flex flex-1 flex-wrap items-center justify-center gap-y-1 divide-x divide-white/30">
+            {items.map((h) => (
+              <li key={h.id} className="px-3">
+                <HotlineItem {...h} showIcon={false} />
+              </li>
+            ))}
+          </ul>
+          {/* Plain <a>: a full load lands on the anchor (client-side links don't scroll to
+              hashes). */}
+          <a href="/contact#hotlines" className={cn(linkClass, 'font-semibold')}>
+            {t('hotline-view-all', { defaultValue: 'View all hotlines' })}
+            <ArrowRight className="size-3.5" aria-hidden="true" />
+          </a>
         </div>
       </Container>
 
-      {/* Tablet / mobile marquee */}
-      <div className="relative lg:hidden">
+      {/* Tablet / mobile: fixed title, scrolling numbers */}
+      <div className="relative flex items-center xl:hidden">
+        <EmergencyTitle className="z-10 border-r border-white/30 py-2 pr-3 pl-4 text-xs" />
         <div
           role="region"
           aria-label={t('hotline-bar-label', { defaultValue: 'Emergency contacts' })}
-          className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_16px,black_calc(100%-56px),transparent)] motion-reduce:overflow-x-auto"
+          className="min-w-0 flex-1 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_16px,black_calc(100%-56px),transparent)] motion-reduce:overflow-x-auto"
         >
           <div
             className={cn(
-              'flex w-max animate-hotline-scroll gap-4 py-2 pr-14 pl-4 text-xs',
+              'flex w-max animate-hotline-scroll gap-6 py-2 pr-14 pl-4 text-xs',
               'hover:[animation-play-state:paused] motion-reduce:animate-none',
               !playing && '[animation-play-state:paused]'
             )}

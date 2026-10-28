@@ -4,7 +4,7 @@ import { ClientOnly } from 'vite-react-ssg';
 import { Line, Bar } from 'react-chartjs-2';
 import { Seo } from '@/components/Seo';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Container } from '@/components/primitives';
+import { Breadcrumb, Container, heroClasses } from '@/components/primitives';
 import {
   LazyMotion,
   domAnimation,
@@ -28,12 +28,12 @@ import {
   populationDensity,
   ntaShareOfReceipts,
 } from '@/lib/statsData';
-import { CHART_COLORS, chartFont } from '@/lib/charts';
+import { CHART_COLORS, CHART_GRID, chartMonoFont } from '@/lib/charts';
 
-const CARD = 'rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)]';
+const CARD = 'rounded-card bg-white border border-line';
 
 const ChartFallback = () => (
-  <div className="h-full animate-pulse rounded-lg bg-[#eef4fe]" aria-hidden="true" />
+  <div className="h-full animate-pulse rounded-lg bg-royal-tint" aria-hidden="true" />
 );
 
 // ── Chart options ─────────────────────────────────────────────────────────────
@@ -47,8 +47,8 @@ const lineOptions: ChartOptions<'line'> = {
     tooltip: { callbacks: { label: (c) => thousands(c.parsed.y ?? 0) } },
   },
   scales: {
-    x: { ticks: { font: chartFont }, grid: { display: false } },
-    y: { ticks: { font: chartFont, callback: thousands }, grid: { color: 'rgba(18,60,122,0.08)' } },
+    x: { ticks: { font: chartMonoFont }, grid: { display: false } },
+    y: { ticks: { font: chartMonoFont, callback: thousands }, grid: { color: CHART_GRID } },
   },
 };
 
@@ -61,10 +61,10 @@ const barOptions: ChartOptions<'bar'> = {
   },
   scales: {
     x: {
-      ticks: { font: chartFont, autoSkip: false, maxRotation: 60, minRotation: 45 },
+      ticks: { font: chartMonoFont, autoSkip: false, maxRotation: 60, minRotation: 45 },
       grid: { display: false },
     },
-    y: { ticks: { font: chartFont, callback: thousands }, grid: { color: 'rgba(18,60,122,0.08)' } },
+    y: { ticks: { font: chartMonoFont, callback: thousands }, grid: { color: CHART_GRID } },
   },
 };
 
@@ -87,8 +87,8 @@ function SectionHead({ children }: { children: ReactNode }) {
       viewport={revealViewport}
       className="mb-[18px] flex items-center gap-3.5"
     >
-      <span className="h-[26px] w-1 rounded bg-[#2b62ee]" aria-hidden="true" />
-      <h2 className="font-display text-2xl font-extrabold tracking-[-0.02em] text-[#123c7a]">
+      <span className="h-[26px] w-1 rounded-none bg-royal" aria-hidden="true" />
+      <h2 className="font-display text-2xl font-extrabold tracking-[-0.02em] text-heading">
         {children}
       </h2>
     </m.div>
@@ -100,7 +100,7 @@ function MetricCard({
   label,
   meta,
   accent = '#2b62ee',
-  metaClass = 'text-[#4c5c78]',
+  metaClass = 'text-ink-muted',
 }: {
   value: ReactNode;
   label: ReactNode;
@@ -116,7 +116,7 @@ function MetricCard({
       >
         {value}
       </span>
-      <span className="mt-0.5 block text-sm font-semibold text-[#123c7a]">{label}</span>
+      <span className="mt-0.5 block text-sm font-semibold text-heading">{label}</span>
       {meta && <span className={`mt-1 block font-mono text-[0.6875rem] ${metaClass}`}>{meta}</span>}
     </m.div>
   );
@@ -124,7 +124,7 @@ function MetricCard({
 
 function SourceLink({ source }: { source: { title: string; url: string } }) {
   return (
-    <a className="underline underline-offset-4 hover:text-[#2b62ee]" href={source.url}>
+    <a className="underline underline-offset-4 hover:text-royal" href={source.url}>
       {source.title}
     </a>
   );
@@ -163,8 +163,8 @@ export default function Statistics() {
     datasets: [
       {
         data: historicalData.populations,
-        borderColor: '#9dc0ff',
-        backgroundColor: 'rgba(157,192,255,0.20)',
+        borderColor: '#2b62ee',
+        backgroundColor: 'rgba(43,98,238,0.12)',
         fill: true,
         tension: 0.4,
         borderWidth: 2,
@@ -179,7 +179,7 @@ export default function Statistics() {
         label: 'Population',
         data: top10.map((b) => b.pop),
         backgroundColor: CHART_COLORS[0],
-        borderRadius: 4,
+        borderRadius: 0,
       },
     ],
   };
@@ -194,36 +194,30 @@ export default function Statistics() {
         />
 
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
-        <section className="bg-[#123c7a] py-12 lg:py-16">
+        <section className={heroClasses.section}>
           <Container>
-            <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10">
+            <Breadcrumb
+              className={heroClasses.breadcrumb}
+              items={[{ label: t('nav-home'), to: '/' }, { label: t('nav-statistics') }]}
+            />
+            <div className="grid items-start gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
               <m.div
                 className="min-w-0"
                 variants={staggerContainer}
                 initial="hidden"
                 animate="show"
               >
-                <m.span
-                  variants={fadeUp}
-                  className="inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-[0.08em] text-[#9dc0ff]"
-                >
-                  <span className="h-0.5 w-6 bg-[#2b62ee]" aria-hidden="true" />
+                <m.span variants={fadeUp} className={heroClasses.eyebrow}>
                   {t('nav-statistics')}
                 </m.span>
-                <m.h1
-                  variants={fadeUp}
-                  className="mt-3 font-display text-4xl font-extrabold leading-[1.08] tracking-[-0.03em] text-white sm:text-[2.75rem]"
-                >
+                <m.h1 variants={fadeUp} className={heroClasses.title}>
                   {t('stats-title')}
                 </m.h1>
-                <m.p
-                  variants={fadeUp}
-                  className="mt-3 max-w-xl text-base leading-relaxed text-white/75"
-                >
+                <m.p variants={fadeUp} className={heroClasses.lede}>
                   {t('stats-verified-intro')}
-                  <span className="mt-2 block text-sm">
-                    {t('stats-checked-on', { date: statisticsCheckedOn })}
-                  </span>
+                </m.p>
+                <m.p variants={fadeUp} className={heroClasses.meta}>
+                  {t('stats-checked-on', { date: statisticsCheckedOn })}
                 </m.p>
               </m.div>
 
@@ -232,12 +226,12 @@ export default function Statistics() {
                 variants={fadeUp}
                 initial="hidden"
                 animate="show"
-                className="min-w-0 rounded-xl bg-white/[0.06] p-6 ring-1 ring-white/15"
+                className="min-w-0 rounded-card border border-line bg-surface-subtle p-6"
               >
-                <div className="font-mono text-[0.625rem] tracking-[0.08em] text-white/60">
+                <div className="font-mono text-[0.625rem] tracking-[0.08em] text-ink-muted">
                   {t('stats-population-label').toUpperCase()} · {t('stats-population-source')}
                 </div>
-                <div className="mt-1 font-display text-5xl font-extrabold leading-none tracking-[-0.03em] text-white">
+                <div className="mt-1 font-display text-5xl font-extrabold leading-none tracking-[-0.03em] text-royal tabular-nums">
                   {totalPopulation.toLocaleString()}
                 </div>
                 <div
@@ -249,9 +243,9 @@ export default function Statistics() {
                     {() => <Line data={sparkData} options={sparkOptions} />}
                   </ClientOnly>
                 </div>
-                <div className="mt-2 flex items-center justify-between font-mono text-[0.625rem] text-white/50">
+                <div className="mt-2 flex items-center justify-between font-mono text-[0.625rem] text-ink-muted">
                   <span>{firstYear}</span>
-                  <span className="text-[#9dc0ff]">
+                  <span className="text-royal">
                     +{growthPct}% since {firstYear}
                   </span>
                   <span>{lastYear}</span>
@@ -301,7 +295,7 @@ export default function Statistics() {
         </section>
 
         {/* ── Population trend ──────────────────────────────────────────────── */}
-        <section className="bg-[#f1f6fc] py-12">
+        <section className="bg-surface-subtle py-12">
           <Container>
             <SectionHead>{t('stats-population-trends')}</SectionHead>
             <div className={`${CARD} p-[22px]`}>
@@ -336,7 +330,7 @@ export default function Statistics() {
                   </tbody>
                 </table>
               </div>
-              <p className="mt-3 font-mono text-[0.6875rem] text-[#4c5c78]">
+              <p className="mt-3 font-mono text-[0.6875rem] text-ink-muted">
                 {t('stats-source')}: <SourceLink source={statisticsSources.history} /> ·{' '}
                 <SourceLink source={statisticsSources.census2007} /> ·{' '}
                 <SourceLink source={statisticsSources.area} /> ·{' '}
@@ -350,7 +344,7 @@ export default function Statistics() {
         <section className="bg-white py-12">
           <Container>
             <SectionHead>{t('stats-population-by-barangay')} (2024)</SectionHead>
-            <p className="mb-4 text-sm text-[#4c5c78]">
+            <p className="mb-4 text-sm text-ink-muted">
               {t('stats-census-date')} · <SourceLink source={statisticsSources.psgc} />
             </p>
             <div className={`${CARD} p-[22px]`}>
@@ -365,13 +359,13 @@ export default function Statistics() {
               </div>
             </div>
             <details className={`mt-4 ${CARD}`}>
-              <summary className="cursor-pointer px-[22px] py-3.5 text-sm font-semibold text-[#123c7a]">
+              <summary className="cursor-pointer px-[22px] py-3.5 text-sm font-semibold text-heading">
                 All {barangayCount} barangays
               </summary>
-              <div className="overflow-x-auto border-t border-[#e3e8ef]">
+              <div className="overflow-x-auto border-t border-line">
                 <table className="w-full text-left text-sm">
                   <thead>
-                    <tr className="bg-[#f1f6fc] text-[#123c7a]">
+                    <tr className="bg-surface-subtle text-heading">
                       <th className="px-4 py-2.5 font-semibold">Barangay</th>
                       <th className="px-4 py-2.5 font-semibold">
                         {t('stats-population-label')} (2024)
@@ -380,9 +374,9 @@ export default function Statistics() {
                   </thead>
                   <tbody>
                     {barangayData.map((b) => (
-                      <tr key={b.name} className="border-t border-[#e3e8ef]">
-                        <td className="px-4 py-2 text-[#123c7a]">{b.name}</td>
-                        <td className="px-4 py-2 tabular-nums text-[#4c5c78]">
+                      <tr key={b.name} className="border-t border-line">
+                        <td className="px-4 py-2 text-heading">{b.name}</td>
+                        <td className="px-4 py-2 tabular-nums text-ink-muted">
                           {b.pop.toLocaleString()}
                         </td>
                       </tr>
@@ -394,12 +388,12 @@ export default function Statistics() {
           </Container>
         </section>
 
-        <section className="bg-[#f1f6fc] py-12">
+        <section className="bg-surface-subtle py-12">
           <Container>
             <SectionHead>
               {t('stats-finance-heading')} (FY {municipalFinance.fiscalYear})
             </SectionHead>
-            <p className="mb-4 text-sm text-[#4c5c78]">{t('stats-finance-period')}</p>
+            <p className="mb-4 text-sm text-ink-muted">{t('stats-finance-period')}</p>
             <m.div
               variants={staggerContainer}
               initial="hidden"
@@ -420,11 +414,11 @@ export default function Statistics() {
             </m.div>
             <div className={`mt-4 ${CARD} overflow-x-auto`}>
               <table className="w-full text-left text-sm">
-                <caption className="px-4 py-3 text-left font-semibold text-[#123c7a]">
+                <caption className="px-4 py-3 text-left font-semibold text-heading">
                   {t('stats-receipt-breakdown')}
                 </caption>
                 <thead>
-                  <tr className="bg-[#f1f6fc]">
+                  <tr className="bg-surface-subtle">
                     <th scope="col" className="px-4 py-2">
                       {t('stats-category')}
                     </th>
@@ -435,7 +429,7 @@ export default function Statistics() {
                 </thead>
                 <tbody>
                   {(['local', 'external', 'nonIncome'] as const).map((key) => (
-                    <tr key={key} className="border-t border-[#e3e8ef]">
+                    <tr key={key} className="border-t border-line">
                       <th scope="row" className="px-4 py-2 font-normal">
                         {t(`stats-receipts-${key}`)}
                       </th>
@@ -446,9 +440,9 @@ export default function Statistics() {
                   ))}
                 </tbody>
               </table>
-              <p className="px-4 py-3 text-sm text-[#4c5c78]">{t('stats-receipts-note')}</p>
+              <p className="px-4 py-3 text-sm text-ink-muted">{t('stats-receipts-note')}</p>
             </div>
-            <p className="mt-3 text-xs text-[#4c5c78]">
+            <p className="mt-3 text-xs text-ink-muted">
               {t('stats-source')}: <SourceLink source={statisticsSources.finance} />
             </p>
           </Container>
@@ -457,7 +451,7 @@ export default function Statistics() {
         <section className="bg-white py-12">
           <Container>
             <SectionHead>{t('stats-poverty-statistics')}</SectionHead>
-            <p className="mb-4 max-w-3xl text-sm text-[#4c5c78]">{t('stats-poverty-definition')}</p>
+            <p className="mb-4 max-w-3xl text-sm text-ink-muted">{t('stats-poverty-definition')}</p>
             <m.div
               variants={staggerContainer}
               initial="hidden"
@@ -477,28 +471,26 @@ export default function Statistics() {
                 />
               ))}
             </m.div>
-            <p className="mt-4 text-sm text-[#4c5c78]">{t('stats-poverty-release')}</p>
-            <p className="mt-3 text-xs text-[#4c5c78]">
+            <p className="mt-4 text-sm text-ink-muted">{t('stats-poverty-release')}</p>
+            <p className="mt-3 text-xs text-ink-muted">
               {t('stats-source')}: <SourceLink source={statisticsSources.poverty} /> ·{' '}
               <SourceLink source={statisticsSources.povertyArchive} />
             </p>
           </Container>
         </section>
 
-        <section className="bg-[#f1f6fc] py-12">
+        <section className="bg-surface-subtle py-12">
           <Container>
             <SectionHead>{t('stats-data-availability')}</SectionHead>
             <div className="grid gap-4 md:grid-cols-2">
               <div className={`${CARD} p-5`}>
-                <h3 className="font-semibold text-[#123c7a]">{t('stats-economic-indicators')}</h3>
-                <p className="mt-2 text-sm text-[#4c5c78]">{t('stats-economic-unverified')}</p>
+                <h3 className="font-semibold text-heading">{t('stats-economic-indicators')}</h3>
+                <p className="mt-2 text-sm text-ink-muted">{t('stats-economic-unverified')}</p>
               </div>
               <div className={`${CARD} p-5`}>
-                <h3 className="font-semibold text-[#123c7a]">
-                  {t('stats-mati-competitive-index')}
-                </h3>
-                <p className="mt-2 text-sm text-[#4c5c78]">{t('stats-cmci-unverified')}</p>
-                <p className="mt-3 text-xs text-[#4c5c78]">
+                <h3 className="font-semibold text-heading">{t('stats-mati-competitive-index')}</h3>
+                <p className="mt-2 text-sm text-ink-muted">{t('stats-cmci-unverified')}</p>
+                <p className="mt-3 text-xs text-ink-muted">
                   <SourceLink source={statisticsSources.cmci} />
                 </p>
               </div>

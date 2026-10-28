@@ -20,6 +20,9 @@ import {
 import { ServicesBusiness, ServicesTaxPayments, ServicesEducation } from './pages/categories2';
 import Government from './pages/Government';
 import GovernmentOfficials from './pages/GovernmentOfficials';
+import GovernmentOffices from './pages/GovernmentOffices';
+import GovernmentBarangays from './pages/GovernmentBarangays';
+import About from './pages/About';
 import Legislative from './pages/Legislative';
 import OrdinanceFramework from './pages/OrdinanceFramework';
 import ResolutionFramework from './pages/ResolutionFramework';
@@ -78,8 +81,11 @@ export const routes: RouteRecord[] = [
       { path: 'faq', Component: Faq },
       { path: 'sitemap', Component: SitemapPage },
       { path: 'contact', Component: Contact },
+      { path: 'about', Component: About },
       { path: 'government', Component: Government },
       { path: 'government/officials', Component: GovernmentOfficials },
+      { path: 'government/offices', Component: GovernmentOffices },
+      { path: 'government/barangays', Component: GovernmentBarangays },
       { path: 'legislative', Component: Legislative },
       { path: 'legislative/ordinance-framework', Component: OrdinanceFramework },
       { path: 'legislative/resolution-framework', Component: ResolutionFramework },

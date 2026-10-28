@@ -48,6 +48,7 @@ const sections: SitemapSection[] = [
       { to: '/services', i18n: 'sitemap-services' },
       { to: '/government', i18n: 'sitemap-government' },
       { to: '/statistics', i18n: 'sitemap-statistics' },
+      { to: '/about', i18n: 'nav-about' },
       { to: '/legislative', i18n: 'sitemap-legislative' },
       { to: '/budget', i18n: 'sitemap-transparency' },
       { to: '/contact', i18n: 'sitemap-contact' },
@@ -102,6 +103,8 @@ const sections: SitemapSection[] = [
     links: [
       { to: '/government', i18n: 'sitemap-government-structure' },
       { to: '/government/officials', i18n: 'sitemap-elected-officials' },
+      { to: '/government/offices', i18n: 'gov-link-offices' },
+      { to: '/government/barangays', i18n: 'gov-link-barangays' },
       { to: '/legislative', i18n: 'sitemap-legislative-documents' },
       { to: '/legislative/ordinance-framework', i18n: 'sitemap-ordinance-framework' },
       { to: '/legislative/resolution-framework', i18n: 'sitemap-resolution-framework' },
@@ -186,7 +189,7 @@ function LinkItem({ link, t }: { link: SitemapLink; t: TFn }) {
   return (
     <AppLink
       to={link.to}
-      className="group flex items-center gap-2 rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] px-3.5 py-2.5 text-[0.8125rem] font-medium text-foreground transition hover:translate-x-0.5 hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)] hover:bg-primary/[0.04] hover:text-primary"
+      className="group flex items-center gap-2 rounded-lg bg-white border border-line px-3.5 py-2.5 text-[0.8125rem] font-medium text-foreground transition hover:translate-x-0.5 hover:border-royal hover:bg-primary/[0.04] hover:text-primary"
     >
       <ArrowRight
         className="size-3 shrink-0 text-muted-foreground transition group-hover:text-primary"
@@ -208,20 +211,6 @@ export default function SitemapPage() {
         canonicalPath="/sitemap"
       />
 
-      {/* Breadcrumbs */}
-      <Container>
-        <nav
-          className="flex items-center gap-2 py-4 text-sm text-muted-foreground"
-          aria-label="Breadcrumb"
-        >
-          <AppLink to="/" className="hover:text-primary">
-            {t('sitemap-home')}
-          </AppLink>
-          <span>/</span>
-          <span aria-current="page">{t('sitemap-sitemap')}</span>
-        </nav>
-      </Container>
-
       <PageHeader
         badge={
           <>
@@ -229,6 +218,7 @@ export default function SitemapPage() {
             {t('sitemap-navigation')}
           </>
         }
+        breadcrumb={[{ label: t('nav-home'), to: '/' }, { label: t('sitemap-sitemap') }]}
         title={t('sitemap-sitemap')}
         description={t('sitemap-navigate-all-pages-and-services-of-better-mati')}
       />

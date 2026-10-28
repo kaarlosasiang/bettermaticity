@@ -106,8 +106,8 @@ function CoastCard({ coast }: { coast: Coast }) {
       variants={fadeUp}
       className={
         pacific
-          ? 'flex flex-col overflow-hidden rounded-2xl bg-navy text-white'
-          : 'flex flex-col overflow-hidden rounded-2xl bg-[#eef4fe] text-navy ring-1 ring-[#d9e5fb]'
+          ? 'flex flex-col overflow-hidden rounded-card bg-navy text-white'
+          : 'flex flex-col overflow-hidden rounded-card bg-surface-subtle text-heading ring-1 ring-line'
       }
     >
       <div className="relative aspect-[16/9]">
@@ -133,7 +133,7 @@ function CoastCard({ coast }: { coast: Coast }) {
             {coast.title}
           </h3>
           <p
-            className={`text-[0.9375rem] leading-relaxed ${pacific ? 'text-white/85' : 'text-[#4c5c78]'}`}
+            className={`text-[0.9375rem] leading-relaxed ${pacific ? 'text-white/85' : 'text-ink-muted'}`}
           >
             {coast.blurb}
           </p>
@@ -147,7 +147,7 @@ function CoastCard({ coast }: { coast: Coast }) {
                 className={
                   pacific
                     ? 'inline-flex h-[30px] items-center gap-1.5 rounded-lg bg-white/10 px-2.5 text-[0.8125rem] font-medium text-white'
-                    : 'inline-flex h-[30px] items-center gap-1.5 rounded-lg bg-white px-2.5 text-[0.8125rem] font-medium text-navy ring-1 ring-[#d9e5fb]'
+                    : 'inline-flex h-[30px] items-center gap-1.5 rounded-lg bg-white px-2.5 text-[0.8125rem] font-medium text-heading ring-1 ring-line'
                 }
               >
                 {Icon ? (
@@ -178,18 +178,18 @@ function CoastCard({ coast }: { coast: Coast }) {
 function PlaceCard({ a }: { a: Attraction }) {
   const inner = (
     <>
-      <div className="relative aspect-[4/3] bg-[#e3ebf8]">
+      <div className="relative aspect-[4/3] bg-surface-subtle">
         <ImageSlot label={a.imageLabel} src={a.image || undefined} />
-        <span className="absolute top-3 left-3 inline-flex h-[22px] items-center rounded-full bg-white/95 px-2.5 text-[0.6875rem] font-bold text-navy">
+        <span className="absolute top-3 left-3 inline-flex h-[22px] items-center rounded-full bg-white/95 px-2.5 text-[0.6875rem] font-bold text-heading">
           {a.filter}
         </span>
       </div>
       <div className="flex flex-1 flex-col gap-2 p-4 pb-[18px]">
-        <h3 className="font-display text-[1.0625rem] font-extrabold tracking-[-0.015em] text-navy">
+        <h3 className="font-display text-[1.0625rem] font-extrabold tracking-[-0.015em] text-heading">
           {a.name}
         </h3>
-        <p className="text-sm leading-[1.55] text-[#4c5c78]">{a.blurb}</p>
-        <div className="mt-auto flex flex-col gap-1.5 pt-2.5 text-xs text-[#4c5c78] shadow-[inset_0_1px_0_#eef1f5]">
+        <p className="text-sm leading-[1.55] text-ink-muted">{a.blurb}</p>
+        <div className="mt-auto flex flex-col gap-1.5 pt-2.5 text-xs text-ink-muted shadow-[inset_0_1px_0_var(--tone-line)]">
           <span className="flex items-center gap-1.5 pt-2">
             <MapPin className="size-3 shrink-0 text-royal" aria-hidden="true" />
             {a.where}
@@ -204,7 +204,7 @@ function PlaceCard({ a }: { a: Attraction }) {
   );
 
   const className =
-    'group flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.08),0_4px_14px_rgba(18,60,122,0.05)] transition hover:shadow-[0_0_0_1px_rgba(43,98,238,0.25),0_8px_22px_rgba(18,60,122,0.12)]';
+    'group flex h-full flex-col overflow-hidden rounded-card bg-white border border-line transition hover:border-royal';
 
   if (a.featured) {
     return (
@@ -225,7 +225,7 @@ function PlaceCard({ a }: { a: Attraction }) {
 function seasonBarClass(state: string): string {
   if (state === 'peak') return 'bg-amber';
   if (state === 'on') return 'bg-royal';
-  return 'bg-[#f1f4f8]';
+  return 'bg-surface-subtle';
 }
 
 export default function VisitMati() {
@@ -294,7 +294,7 @@ export default function VisitMati() {
                 />
                 <m.h1
                   variants={fadeUp}
-                  className="mt-5 mb-3.5 font-display text-[2.5rem] leading-[1.02] font-extrabold tracking-[-0.035em] text-white md:text-6xl"
+                  className="mt-5 mb-3.5 font-display text-[2.25rem] leading-[1.05] font-bold tracking-[-0.03em] text-balance sm:text-[2.75rem] lg:text-[3rem] text-white"
                 >
                   {hero.tagline}
                   <br />
@@ -309,14 +309,14 @@ export default function VisitMati() {
                 <m.div variants={fadeUp} className="mt-7 flex flex-wrap gap-3">
                   <a
                     href="#plan"
-                    className="inline-flex h-[46px] items-center gap-2 rounded-lg bg-amber px-5 font-display text-[0.9375rem] font-bold text-navy transition hover:brightness-105"
+                    className="inline-flex h-[46px] items-center gap-2 rounded-btn bg-amber px-5 font-display text-[0.9375rem] font-bold text-navy transition hover:brightness-105"
                   >
                     Plan your trip
                     <ArrowRight className="size-3.5" aria-hidden="true" />
                   </a>
                   <a
                     href="#places"
-                    className="inline-flex h-[46px] items-center gap-2 rounded-lg bg-white/10 px-5 font-display text-[0.9375rem] font-semibold text-white ring-1 ring-white/40 transition hover:bg-white/15"
+                    className="inline-flex h-[46px] items-center gap-2 rounded-btn bg-white/10 px-5 font-display text-[0.9375rem] font-semibold text-white ring-1 ring-white/40 transition hover:bg-white/15"
                   >
                     <MapPin className="size-3.5" aria-hidden="true" />
                     See all places
@@ -329,14 +329,14 @@ export default function VisitMati() {
                 variants={fadeUp}
                 initial="hidden"
                 animate="show"
-                className="w-full max-w-[360px] justify-self-start overflow-hidden rounded-xl border-t-[3px] border-amber bg-white shadow-[0_18px_44px_rgba(3,10,30,0.34)] lg:justify-self-end"
+                className="w-full max-w-[360px] justify-self-start overflow-hidden rounded-card border-t-[3px] border-amber bg-white shadow-[0_18px_44px_rgba(3,10,30,0.34)] lg:justify-self-end"
               >
                 <div className="flex items-center justify-between px-[18px] pt-4 pb-3">
                   <div>
-                    <div className="font-mono text-[0.6875rem] tracking-[0.09em] text-[#4c5c78]">
+                    <div className="font-mono text-[0.6875rem] tracking-[0.09em] text-ink-muted">
                       {conditions.place.toUpperCase()}
                     </div>
-                    <div className="mt-0.5 font-display text-[1.0625rem] font-extrabold text-navy">
+                    <div className="mt-0.5 font-display text-[1.0625rem] font-extrabold text-heading">
                       {conditions.status}
                     </div>
                   </div>
@@ -347,20 +347,20 @@ export default function VisitMati() {
                     </span>
                   ) : null}
                 </div>
-                <div className="grid grid-cols-3 shadow-[inset_0_1px_0_#e3e8ef,inset_0_-1px_0_#e3e8ef]">
+                <div className="grid grid-cols-3 shadow-[inset_0_1px_0_var(--tone-line),inset_0_-1px_0_var(--tone-line)]">
                   {conditions.metrics.map((metric, i) => (
                     <div
                       key={metric.label}
-                      className={`px-[18px] py-3.5 ${i > 0 ? 'shadow-[inset_1px_0_0_#e3e8ef]' : ''}`}
+                      className={`px-[18px] py-3.5 ${i > 0 ? 'shadow-[inset_1px_0_0_var(--tone-line)]' : ''}`}
                     >
-                      <div className="text-xs text-[#4c5c78]">{metric.label}</div>
-                      <div className="mt-0.5 font-display text-xl font-extrabold text-navy">
+                      <div className="text-xs text-ink-muted">{metric.label}</div>
+                      <div className="mt-0.5 font-display text-xl font-extrabold text-heading">
                         {metric.value}
                       </div>
                     </div>
                   ))}
                 </div>
-                <div className="flex items-center justify-between gap-2.5 px-[18px] py-[11px] text-xs text-[#4c5c78]">
+                <div className="flex items-center justify-between gap-2.5 px-[18px] py-[11px] text-xs text-ink-muted">
                   <span className="inline-flex items-center gap-1.5">
                     <Radio className="size-3" aria-hidden="true" />
                     Source: {conditions.source}
@@ -383,10 +383,10 @@ export default function VisitMati() {
               className="mb-8 max-w-[640px]"
             >
               <Eyebrow>Pick your side — or both</Eyebrow>
-              <h2 className="mt-2.5 mb-2.5 font-display text-[2.25rem] font-extrabold tracking-[-0.03em] text-navy">
+              <h2 className="mt-2.5 mb-2.5 font-display text-[2.25rem] font-extrabold tracking-[-0.03em] text-heading">
                 The open Pacific, and the sheltered bay
               </h2>
-              <p className="text-base leading-relaxed text-[#4c5c78]">
+              <p className="text-base leading-relaxed text-ink-muted">
                 Mati sits on a peninsula. Its east shore takes the full Pacific swell; its west
                 shore wraps around Pujada Bay, one of the calmest protected seascapes in Mindanao.
                 Most visitors do both in one trip.
@@ -407,12 +407,12 @@ export default function VisitMati() {
         </section>
 
         {/* ── Directory ────────────────────────────────────────────────────── */}
-        <section id="places" className="scroll-mt-20 bg-[#f1f6fc] py-14 md:py-16">
+        <section id="places" className="bg-surface-subtle py-14 md:py-16">
           <Container>
             <div className="mb-6 flex flex-wrap items-end justify-between gap-5">
               <div>
                 <Eyebrow>Places to go</Eyebrow>
-                <h2 className="mt-2.5 font-display text-[2rem] font-extrabold tracking-[-0.03em] text-navy">
+                <h2 className="mt-2.5 font-display text-[2rem] font-extrabold tracking-[-0.03em] text-heading">
                   Where to go in Mati
                 </h2>
               </div>
@@ -428,12 +428,12 @@ export default function VisitMati() {
                       className={
                         isActive
                           ? 'inline-flex h-[34px] items-center gap-1.5 rounded-lg bg-navy px-3.5 font-display text-[0.8125rem] font-bold text-white'
-                          : 'inline-flex h-[34px] items-center gap-1.5 rounded-lg bg-white px-3.5 font-display text-[0.8125rem] font-semibold text-navy shadow-[0_0_0_1px_#d6dee9] transition hover:bg-[#eef4fe]'
+                          : 'inline-flex h-[34px] items-center gap-1.5 rounded-lg bg-white px-3.5 font-display text-[0.8125rem] font-semibold text-heading border border-line transition hover:bg-royal-tint'
                       }
                     >
                       {f}
                       <span
-                        className={`font-mono text-[0.6875rem] ${isActive ? 'text-amber' : 'text-[#4c5c78]'}`}
+                        className={`font-mono text-[0.6875rem] ${isActive ? 'text-amber' : 'text-ink-muted'}`}
                       >
                         {counts[f]}
                       </span>
@@ -468,25 +468,25 @@ export default function VisitMati() {
             >
               <div>
                 <Eyebrow>When to come</Eyebrow>
-                <h2 className="mt-2.5 font-display text-[2rem] font-extrabold tracking-[-0.03em] text-navy">
+                <h2 className="mt-2.5 font-display text-[2rem] font-extrabold tracking-[-0.03em] text-heading">
                   A year on the water
                 </h2>
               </div>
-              <span className="inline-flex h-6 items-center gap-1.5 rounded-full bg-[#fff6d9] px-2.5 text-xs font-semibold text-[#8a6200] ring-1 ring-[#f5d36b] ring-inset">
+              <span className="inline-flex h-6 items-center gap-1.5 rounded-full bg-[#fff6d9] px-2.5 text-xs font-semibold text-feel-text ring-1 ring-[#f5d36b] ring-inset">
                 <Info className="size-3" aria-hidden="true" />
                 Indicative — to verify with City Tourism Office
               </span>
             </m.div>
-            <div className="overflow-x-auto rounded-xl shadow-[0_0_0_1px_#e3e8ef]">
+            <div className="overflow-x-auto rounded-card border border-line">
               <div
                 className="min-w-[760px]"
                 style={{ display: 'grid', gridTemplateColumns: '200px repeat(12, minmax(0, 1fr))' }}
               >
-                <div className="bg-[#f7f9fc] px-4 py-3 shadow-[inset_0_-1px_0_#e3e8ef]" />
+                <div className="bg-surface-subtle px-4 py-3 shadow-[inset_0_-1px_0_var(--tone-line)]" />
                 {months.map((mo) => (
                   <div
                     key={mo}
-                    className="bg-[#f7f9fc] py-3 text-center font-mono text-[0.6875rem] font-semibold tracking-[0.05em] text-[#4c5c78] shadow-[inset_0_-1px_0_#e3e8ef]"
+                    className="bg-surface-subtle py-3 text-center font-mono text-[0.6875rem] font-semibold tracking-[0.05em] text-ink-muted shadow-[inset_0_-1px_0_var(--tone-line)]"
                   >
                     {mo}
                   </div>
@@ -495,18 +495,18 @@ export default function VisitMati() {
                   const Icon = SEASON_ICONS[row.icon] ?? Waves;
                   return (
                     <div key={row.label} className="contents">
-                      <div className="flex items-center gap-2.5 px-4 py-3.5 font-display text-sm font-bold text-navy shadow-[inset_0_-1px_0_#eef1f5]">
+                      <div className="flex items-center gap-2.5 px-4 py-3.5 font-display text-sm font-bold text-heading shadow-[inset_0_-1px_0_var(--tone-line)]">
                         <Icon className="size-4 text-royal" aria-hidden="true" />
                         {row.label}
                       </div>
                       {row.cells.map((state, i) => (
                         <div
                           key={`${row.label}-${i}`}
-                          className="flex items-center px-0.5 py-3.5 shadow-[inset_0_-1px_0_#eef1f5]"
+                          className="flex items-center px-0.5 py-3.5 shadow-[inset_0_-1px_0_var(--tone-line)]"
                         >
                           <div
-                            className={`h-3 w-full rounded-[3px] ${seasonBarClass(state)} ${
-                              state === 'off' ? 'ring-1 ring-[#e3e8ef] ring-inset' : ''
+                            className={`h-3 w-full rounded-none ${seasonBarClass(state)} ${
+                              state === 'off' ? 'ring-1 ring-line ring-inset' : ''
                             }`}
                           />
                         </div>
@@ -516,18 +516,18 @@ export default function VisitMati() {
                 })}
               </div>
             </div>
-            <div className="mt-3.5 flex flex-wrap gap-4 text-[0.8125rem] text-[#4c5c78]">
+            <div className="mt-3.5 flex flex-wrap gap-4 text-[0.8125rem] text-ink-muted">
               <span className="inline-flex items-center gap-2">
-                <span className="h-2.5 w-[18px] rounded-[3px] bg-amber" aria-hidden="true" />
+                <span className="h-2.5 w-[18px] rounded-none bg-amber" aria-hidden="true" />
                 Best
               </span>
               <span className="inline-flex items-center gap-2">
-                <span className="h-2.5 w-[18px] rounded-[3px] bg-royal" aria-hidden="true" />
+                <span className="h-2.5 w-[18px] rounded-none bg-royal" aria-hidden="true" />
                 Good
               </span>
               <span className="inline-flex items-center gap-2">
                 <span
-                  className="h-2.5 w-[18px] rounded-[3px] bg-[#f1f4f8] ring-1 ring-[#e3e8ef] ring-inset"
+                  className="h-2.5 w-[18px] rounded-none bg-surface-subtle ring-1 ring-line ring-inset"
                   aria-hidden="true"
                 />
                 Off-season
@@ -560,14 +560,14 @@ export default function VisitMati() {
                 <div className="flex flex-wrap gap-3">
                   <a
                     href="#"
-                    className="inline-flex h-11 items-center gap-2 rounded-lg bg-navy px-5 font-display text-[0.9375rem] font-bold text-white transition hover:brightness-110"
+                    className="inline-flex h-11 items-center gap-2 rounded-btn bg-navy px-5 font-display text-[0.9375rem] font-bold text-white transition hover:brightness-110"
                   >
                     Festival schedule
                     <ArrowRight className="size-3.5" aria-hidden="true" />
                   </a>
                   <a
                     href="#"
-                    className="inline-flex h-11 items-center gap-2 rounded-lg px-5 font-display text-[0.9375rem] font-semibold text-navy shadow-[inset_0_0_0_1.5px_#123c7a] transition hover:bg-navy/5"
+                    className="inline-flex h-11 items-center gap-2 rounded-btn border-[1.5px] border-navy px-5 font-display text-[0.9375rem] font-semibold text-navy transition hover:bg-navy/5"
                   >
                     <CalendarPlus className="size-3.5" aria-hidden="true" />
                     Add to calendar
@@ -576,7 +576,7 @@ export default function VisitMati() {
               </m.div>
               <m.div
                 variants={fadeUp}
-                className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#f0b400] shadow-[0_18px_40px_rgba(18,60,122,0.22)]"
+                className="relative aspect-[4/3] overflow-hidden rounded-card bg-[#f0b400] shadow-[0_18px_40px_rgba(18,60,122,0.22)]"
               >
                 <ImageSlot label={sambuokan.imageLabel} />
               </m.div>
@@ -585,7 +585,7 @@ export default function VisitMati() {
         </section>
 
         {/* ── Plan ─────────────────────────────────────────────────────────── */}
-        <section id="plan" className="scroll-mt-20 bg-white py-14 md:py-16">
+        <section id="plan" className="bg-white py-14 md:py-16">
           <Container>
             <m.div
               variants={fadeUp}
@@ -595,7 +595,7 @@ export default function VisitMati() {
               className="mb-7 max-w-[640px]"
             >
               <Eyebrow>Plan your trip</Eyebrow>
-              <h2 className="mt-2.5 font-display text-[2rem] font-extrabold tracking-[-0.03em] text-navy">
+              <h2 className="mt-2.5 font-display text-[2rem] font-extrabold tracking-[-0.03em] text-heading">
                 Getting here, getting around
               </h2>
             </m.div>
@@ -612,15 +612,15 @@ export default function VisitMati() {
                   <m.div
                     key={card.title}
                     variants={fadeUp}
-                    className="flex flex-col gap-3 rounded-xl bg-white p-[22px] shadow-[0_0_0_1px_#e3e8ef]"
+                    className="flex flex-col gap-3 rounded-card bg-white p-[22px] border border-line"
                   >
-                    <span className="flex size-10 items-center justify-center rounded-[10px] bg-[#eef4fe] text-royal">
+                    <span className="flex size-10 items-center justify-center rounded-card bg-royal-tint text-royal">
                       <Icon className="size-[18px]" aria-hidden="true" />
                     </span>
-                    <h3 className="font-display text-[1.0625rem] font-extrabold text-navy">
+                    <h3 className="font-display text-[1.0625rem] font-extrabold text-heading">
                       {card.title}
                     </h3>
-                    <p className="text-sm leading-relaxed text-[#4c5c78]">{card.body}</p>
+                    <p className="text-sm leading-relaxed text-ink-muted">{card.body}</p>
                     {card.linkLabel ? (
                       <a
                         href="#"
@@ -635,9 +635,9 @@ export default function VisitMati() {
               })}
               <m.div
                 variants={fadeUp}
-                className="flex flex-col gap-3 rounded-xl bg-navy p-[22px] text-white"
+                className="flex flex-col gap-3 rounded-card bg-navy p-[22px] text-white"
               >
-                <span className="flex size-10 items-center justify-center rounded-[10px] bg-amber/15 text-amber">
+                <span className="flex size-10 items-center justify-center rounded-card bg-amber/15 text-amber">
                   <ShieldCheck className="size-[18px]" aria-hidden="true" />
                 </span>
                 <h3 className="font-display text-[1.0625rem] font-extrabold text-white">
@@ -657,25 +657,25 @@ export default function VisitMati() {
               initial="hidden"
               whileInView="show"
               viewport={revealViewport}
-              className="mt-4 flex flex-wrap items-center justify-between gap-x-6 gap-y-4 rounded-xl bg-[#f1f6fc] px-[22px] py-[18px] shadow-[inset_0_0_0_1px_#d9e5fb]"
+              className="mt-4 flex flex-wrap items-center justify-between gap-x-6 gap-y-4 rounded-card border border-line bg-surface-subtle px-[22px] py-[18px]"
             >
               <div className="flex items-center gap-3.5">
                 <HandHelping className="size-[22px] text-royal" aria-hidden="true" />
                 <div>
-                  <div className="font-display text-[0.9375rem] font-bold text-navy">
+                  <div className="font-display text-[0.9375rem] font-bold text-heading">
                     {tourismOffice.name}
                   </div>
-                  <div className="text-[0.8125rem] text-[#4c5c78]">{tourismOffice.hours}</div>
+                  <div className="text-[0.8125rem] text-ink-muted">{tourismOffice.hours}</div>
                 </div>
               </div>
               <div className="flex flex-wrap items-center gap-2.5">
-                <span className="inline-flex h-6 items-center gap-1.5 rounded-full bg-[#fff6d9] px-2.5 text-xs font-semibold text-[#8a6200] ring-1 ring-[#f5d36b] ring-inset">
+                <span className="inline-flex h-6 items-center gap-1.5 rounded-full bg-[#fff6d9] px-2.5 text-xs font-semibold text-feel-text ring-1 ring-[#f5d36b] ring-inset">
                   <Info className="size-3" aria-hidden="true" />
                   {tourismOffice.phoneNote}
                 </span>
                 <AppLink
                   to="/contact"
-                  className="inline-flex h-[38px] items-center gap-2 rounded-lg bg-royal px-4 font-display text-sm font-semibold text-white transition hover:brightness-110"
+                  className="inline-flex h-[38px] items-center gap-2 rounded-btn bg-royal px-4 font-display text-sm font-semibold text-white transition hover:brightness-110"
                 >
                   <Flag className="size-3.5" aria-hidden="true" />
                   Report a tourism concern

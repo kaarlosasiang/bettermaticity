@@ -1,7 +1,8 @@
 import type { ComponentProps } from 'react';
 import { cn } from '@/lib/utils';
 
-// Legacy .container: width 100%; max-width 1200px; margin 0 auto; padding 0 24px.
+// Page container: Tailwind's stepped `container` (1280px from xl, 1536px from 2xl), centred,
+// 16px gutters — the same as BetterSanFernando.
 export function Container({ className, ...props }: ComponentProps<'div'>) {
-  return <div className={cn('mx-auto w-full max-w-300 px-4 sm:px-6', className)} {...props} />;
+  return <div className={cn('container mx-auto px-4', className)} {...props} />;
 }

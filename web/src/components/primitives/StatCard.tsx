@@ -4,22 +4,24 @@ import { cn } from '@/lib/utils';
 interface StatCardProps {
   value: ReactNode;
   label: ReactNode;
+  /** Optional mono source line under the label. */
+  caption?: ReactNode;
   className?: string;
 }
 
-// Homepage-style stat tile: hairline ring + royal top-border, font-display royal number.
-export function StatCard({ value, label, className }: StatCardProps) {
+// Hairline-bordered stat tile: mono label, royal figure, optional mono caption.
+export function StatCard({ value, label, caption, className }: StatCardProps) {
   return (
-    <div
-      className={cn(
-        'rounded-xl border-t-[3px] border-[#2b62ee] bg-white px-3 py-4 text-center shadow-[0_0_0_1px_rgba(18,60,122,0.07)]',
-        className
-      )}
-    >
-      <span className="mb-1 block font-display text-[1.75rem] leading-none font-extrabold text-[#2b62ee]">
+    <div className={cn('rounded-card border border-line bg-white px-4 py-4', className)}>
+      <span className="block font-mono text-[0.6875rem] tracking-[0.1em] text-ink-muted uppercase">
+        {label}
+      </span>
+      <span className="mt-1 block font-display text-[1.75rem] leading-none font-extrabold tracking-[-0.02em] text-royal tabular-nums">
         {value}
       </span>
-      <span className="text-xs leading-tight text-[#4c5c78]">{label}</span>
+      {caption ? (
+        <span className="mt-1 block font-mono text-[0.6875rem] text-ink-muted">{caption}</span>
+      ) : null}
     </div>
   );
 }

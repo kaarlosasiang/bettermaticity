@@ -40,7 +40,7 @@ export function LegislativeRecords({
     <Section>
       <Container>
         <SectionTitle>{t('leg-records-heading')}</SectionTitle>
-        <div className="mb-5 space-y-2 rounded-xl bg-muted p-5 text-sm text-muted-foreground">
+        <div className="mb-5 space-y-2 rounded-card bg-muted p-5 text-sm text-muted-foreground">
           <p>{t('leg-records-scope')}</p>
           <p>{t('leg-records-evidence')}</p>
         </div>
@@ -126,7 +126,7 @@ export function LegislativeRecords({
             </tbody>
           </table>
         </div>
-        <aside className="mt-6 space-y-3 rounded-xl border border-border p-5 text-sm text-muted-foreground">
+        <aside className="mt-6 space-y-3 rounded-card border border-border p-5 text-sm text-muted-foreground">
           <h2 className="text-lg font-semibold text-foreground">{t('leg-copy-heading')}</h2>
           <p>{t('leg-copy-body')}</p>
           <a className={linkClass} href={charterUrl} target="_blank" rel="noopener noreferrer">

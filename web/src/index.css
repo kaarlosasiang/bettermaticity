@@ -2,12 +2,11 @@
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 @import '@fontsource-variable/inter';
-/* Homepage revamp typography: Plus Jakarta Sans (display) + IBM Plex Mono (labels).
+/* BetterSanFernando-style typography: Inter for everything + Roboto Mono for labels and figures.
    Self-hosted to satisfy the .htaccess CSP (no Google Fonts / CDN). */
-@import '@fontsource-variable/plus-jakarta-sans';
-@import '@fontsource/ibm-plex-mono/400.css';
-@import '@fontsource/ibm-plex-mono/500.css';
-@import '@fontsource/ibm-plex-mono/600.css';
+@import '@fontsource/roboto-mono/400.css';
+@import '@fontsource/roboto-mono/500.css';
+@import '@fontsource/roboto-mono/600.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -20,14 +19,38 @@
   --font-heading: var(--font-sans);
   --font-sans: 'Inter Variable', sans-serif;
 
-  /* Homepage revamp (variant 3a "Feel Mati"): additive utilities only — these do
-     NOT override the global semantic tokens, so the other routes are untouched.
-     font-display / font-mono, and the Pujada-navy + royal + Feel-Mati-amber palette. */
-  --font-display: 'Plus Jakarta Sans Variable', 'Inter Variable', sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  /* Display is Inter too (BetterSanFernando uses one family, weight 800 for headlines);
+     the token stays so existing font-display uses keep working. */
+  --font-display: 'Inter Variable', sans-serif;
+  --font-mono: 'Roboto Mono', ui-monospace, monospace;
   --color-navy: #123c7a; /* Pujada navy — dark surfaces & headings */
   --color-royal: #2b62ee; /* royal blue — primary accent */
   --color-amber: #ffc001; /* Feel Mati amber */
+
+  /* Named versions of the colours the site already hard-codes (see the sweep in the
+     restyle plan). Values are BetterMati's own; only the structure follows BetterSanFernando.
+     The four content neutrals read CSS variables (set in :root, swapped by .tone-neutral) so
+     they can change per page. */
+  --color-ink: #1a1a1a; /* body text */
+  --color-ink-soft: #495057; /* hero lede (BetterSanFernando gray-700) */
+  --color-ink-faint: #6c757d; /* hero note + breadcrumb; 4.7:1 on white (SF's #868e96 is 3.3:1) */
+  --color-heading: var(--tone-heading); /* headings */
+  --color-ink-muted: var(--tone-ink-muted); /* support text */
+  --color-line: var(--tone-line); /* hairline borders */
+  --color-surface-subtle: var(--tone-surface); /* alt band */
+  --color-royal-tint: #eef4fe; /* light-blue tint, active nav pill */
+  --color-footer-from: #1a1a1a;
+  --color-footer-to: #111111;
+  --color-feel-bg: #fffbef;
+  --color-feel-tint: #fdf0c8;
+  --color-feel-text: #8a6200;
+  --color-danger-tint: #fdecec;
+  --color-focus: #ffc001;
+
+  /* Square corners everywhere (shadcn "Lyra" look). Every rounded-* step below derives
+     from --radius, so 0 squares them all; rounded-full (circles, pills) is unaffected. */
+  --radius-btn: 0px;
+  --radius-card: 0px;
 
   /* shadcn semantic color tokens */
   --color-sidebar-ring: var(--sidebar-ring);
@@ -103,6 +126,12 @@
   --popover: #ffffff;
   --popover-foreground: #1a1a1a;
 
+  /* Content neutrals: BetterMati's blue-tinted set. Chrome and the homepage use these. */
+  --tone-heading: #123c7a;
+  --tone-ink-muted: #4c5c78;
+  --tone-line: #e3e8ef;
+  --tone-surface: #f1f6fc;
+
   --primary: #2b62ee; /* royal (homepage brand) */
   --primary-foreground: #ffffff;
   --secondary: #f1f3f5; /* shadcn secondary = subtle neutral */
@@ -116,7 +145,12 @@
   --border: #e3e8ef; /* homepage hairline border */
   --input: #e3e8ef;
   --ring: #2b62ee; /* focus ring = royal */
-  --radius: 0.5rem; /* 8px */
+  --radius: 0px; /* square — see --radius-btn above */
+
+  /* Height of the pinned hotline strip + info bar + header. Layout.tsx measures and
+     overwrites this; these values (135px phones, 156px desktop) only cover the moment
+     before it runs. */
+  --sticky-offset: 8.4375rem;
 
   /* LGU brand extras */
   --brand-primary-dark: #0b2a5e;
@@ -142,14 +176,49 @@
   --sidebar-ring: #0032a0;
 }
 
+/* Plain greys like BetterSanFernando for page content on every route except the homepage
+   (Layout puts this class on <main>). Royal stays for links, labels and icons. */
+.tone-neutral {
+  --tone-heading: #111111;
+  --tone-ink-muted: #5f6368; /* 5.8:1 on --tone-surface */
+  --tone-line: #dcdee2;
+  --tone-surface: #f7f7f8;
+  --border: var(--tone-line);
+  --input: var(--tone-line);
+  --muted: var(--tone-surface);
+  --muted-foreground: var(--tone-ink-muted);
+}
+
+@media (min-width: 80rem) {
+  :root {
+    --sticky-offset: 9.75rem;
+  }
+}
+
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
+  }
+  /* Two-layer focus ring: amber alone is ~1.6:1 on white, so it sits on an ink halo. */
+  :focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 0;
+    box-shadow: 0 0 0 6px var(--color-ink);
+  }
+  /* Text fields: a royal outline instead of the amber + ink halo, which reads as a broken
+     box around an input. Wrapped fields (ServiceSearch) hide this and show focus on their
+     own border via focus-within. */
+  :is(input:not([type='checkbox'], [type='radio']), textarea, select):focus-visible {
+    outline: 2px solid var(--color-royal);
+    outline-offset: 0;
+    box-shadow: none;
   }
   body {
     @apply bg-background text-foreground;
   }
   html {
     @apply font-sans;
+    /* Anchor jumps and keyboard focus land below the pinned chrome, not under it. */
+    scroll-padding-top: calc(var(--sticky-offset) + 1rem);
   }
 }

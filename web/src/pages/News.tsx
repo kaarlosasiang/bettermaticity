@@ -1,7 +1,6 @@
 import { Newspaper, ArrowRight, ExternalLink } from 'lucide-react';
 import { FaFacebookF } from 'react-icons/fa6';
 import { Seo } from '@/components/Seo';
-import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Container, Section, SectionTitle, PageHeader } from '@/components/primitives';
 import {
@@ -16,7 +15,7 @@ import {
 import { useNews, formatNewsDate, safeNewsUrl, type NewsBadge } from '@/hooks/useNews';
 
 const badgeClass: Record<NewsBadge, string> = {
-  info: 'bg-[#eef4fe] text-[#2b62ee]',
+  info: 'bg-royal-tint text-royal',
   success: 'bg-[#06a77d]/10 text-[#06a77d]',
   warning: 'bg-[#f77f00]/10 text-[#a37400]',
 };
@@ -34,19 +33,6 @@ export default function News() {
           canonicalPath="/news"
         />
 
-        <Container>
-          <nav
-            className="flex items-center gap-2 py-4 text-sm text-[#4c5c78]"
-            aria-label="Breadcrumb"
-          >
-            <AppLink to="/" className="hover:text-[#2b62ee]">
-              {t('nav-home')}
-            </AppLink>
-            <span>/</span>
-            <span aria-current="page">{t('news-news-updates')}</span>
-          </nav>
-        </Container>
-
         <PageHeader
           badge={
             <>
@@ -54,6 +40,7 @@ export default function News() {
               {t('news-news-updates')}
             </>
           }
+          breadcrumb={[{ label: t('nav-home'), to: '/' }, { label: t('news-news-updates') }]}
           title={t('news-news-updates')}
           description={t('news-updates-subtitle')}
         />
@@ -63,7 +50,7 @@ export default function News() {
             {loading ? (
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3" aria-busy="true">
                 {[0, 1, 2].map((i) => (
-                  <div key={i} className="h-44 animate-pulse rounded-xl bg-[#eef4fe]" />
+                  <div key={i} className="h-44 animate-pulse rounded-card bg-royal-tint" />
                 ))}
               </div>
             ) : items && items.length > 0 ? (
@@ -80,7 +67,7 @@ export default function News() {
                     <m.article
                       key={a.id}
                       variants={fadeUp}
-                      className="flex flex-col rounded-xl border-t-[3px] border-[#2b62ee] bg-white p-6 shadow-[0_0_0_1px_rgba(18,60,122,0.07)]"
+                      className="flex flex-col rounded-card bg-white p-6 border border-line"
                     >
                       <div className="mb-3 flex items-center justify-between gap-2">
                         <span
@@ -88,17 +75,17 @@ export default function News() {
                         >
                           {a.category}
                         </span>
-                        <span className="font-mono text-[0.6875rem] text-[#4c5c78]">
+                        <span className="font-mono text-[0.6875rem] text-ink-muted">
                           {formatNewsDate(a.date)}
                         </span>
                       </div>
-                      <h3 className="mb-2 font-display text-base font-bold text-[#123c7a]">
+                      <h3 className="mb-2 font-display text-base font-bold text-heading">
                         {url ? (
                           <a
                             href={url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="hover:text-[#2b62ee]"
+                            className="hover:text-royal"
                           >
                             {a.title}
                           </a>
@@ -106,13 +93,13 @@ export default function News() {
                           a.title
                         )}
                       </h3>
-                      <p className="mb-4 flex-1 text-sm text-[#4c5c78]">{a.summary}</p>
+                      <p className="mb-4 flex-1 text-sm text-ink-muted">{a.summary}</p>
                       {url && (
                         <a
                           href={url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#2b62ee] hover:underline"
+                          className="inline-flex items-center gap-1.5 text-sm font-semibold text-royal hover:underline"
                         >
                           {a.source || t('news-read-more')}
                           <ArrowRight className="size-4" aria-hidden="true" />
@@ -123,12 +110,12 @@ export default function News() {
                 })}
               </m.div>
             ) : (
-              <div className="rounded-xl bg-white p-10 text-center shadow-[0_0_0_1px_rgba(18,60,122,0.07)]">
-                <Newspaper className="mx-auto mb-3 size-8 text-[#4c5c78]" aria-hidden="true" />
-                <h3 className="font-display text-base font-bold text-[#123c7a]">
+              <div className="rounded-card bg-white p-10 text-center border border-line">
+                <Newspaper className="mx-auto mb-3 size-8 text-ink-muted" aria-hidden="true" />
+                <h3 className="font-display text-base font-bold text-heading">
                   {t('news-no-updates-yet')}
                 </h3>
-                <p className="text-sm text-[#4c5c78]">{t('news-check-back')}</p>
+                <p className="text-sm text-ink-muted">{t('news-check-back')}</p>
               </div>
             )}
           </Container>
@@ -138,11 +125,11 @@ export default function News() {
         <Section compact altBg>
           <Container>
             <SectionTitle>
-              <FaFacebookF className="size-4 text-[#2b62ee]" aria-hidden="true" />
+              <FaFacebookF className="size-4 text-royal" aria-hidden="true" />
               {t('news-from-our-facebook')}
             </SectionTitle>
-            <p className="-mt-3 mb-5 text-[0.8125rem] text-[#4c5c78]">{t('news-latest-posts')}</p>
-            <div className="overflow-hidden rounded-xl shadow-[0_0_0_1px_rgba(18,60,122,0.07)]">
+            <p className="-mt-3 mb-5 text-[0.8125rem] text-ink-muted">{t('news-latest-posts')}</p>
+            <div className="overflow-hidden rounded-card border border-line">
               <iframe
                 title="LGU Mati Facebook"
                 className="h-[500px] w-full"
@@ -154,7 +141,7 @@ export default function News() {
               href="https://www.facebook.com/OfficialLGUMati/"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-[#2b62ee] hover:underline"
+              className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-royal hover:underline"
             >
               {t('news-visit-facebook')}
               <ExternalLink className="size-4" aria-hidden="true" />

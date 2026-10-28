@@ -55,7 +55,7 @@ export default function VolunteerDialog() {
         <DialogFooter>
           <a
             href="mailto:volunteer@bettermati.org"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-dark"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-btn bg-primary px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-dark"
             onClick={() => dismiss(false)}
           >
             <Mail className="size-4" aria-hidden="true" />

@@ -11,7 +11,6 @@ import {
   Hospital,
 } from 'lucide-react';
 import { Seo } from '@/components/Seo';
-import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Container, Section, PageHeader } from '@/components/primitives';
 import { emergencyHotlines as emergency, medicalHotlines as medical } from '@/lib/hotlines';
@@ -62,19 +61,6 @@ export default function Contact() {
         canonicalPath="/contact"
       />
 
-      <Container>
-        <nav
-          className="flex items-center gap-2 py-4 text-sm text-muted-foreground"
-          aria-label="Breadcrumb"
-        >
-          <AppLink to="/" className="hover:text-primary">
-            {t('contact-home')}
-          </AppLink>
-          <span>/</span>
-          <span aria-current="page">{t('contact-contact')}</span>
-        </nav>
-      </Container>
-
       <PageHeader
         badge={
           <>
@@ -82,6 +68,7 @@ export default function Contact() {
             {t('contact-contact')}
           </>
         }
+        breadcrumb={[{ label: t('nav-home'), to: '/' }, { label: t('contact-contact') }]}
         title={t('contact-title')}
         description={t('contact-subtitle')}
       />
@@ -94,7 +81,7 @@ export default function Contact() {
               <a
                 key={c.titleKey}
                 href={c.href}
-                className="flex overflow-hidden rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] text-foreground no-underline transition hover:-translate-y-0.5 hover:shadow-sm"
+                className="flex overflow-hidden rounded-card bg-white border border-line text-foreground no-underline transition hover:shadow-sm"
               >
                 <div className="flex w-14 shrink-0 items-center justify-center bg-[linear-gradient(135deg,var(--primary)_0%,var(--brand-secondary)_100%)] text-xl text-white">
                   <c.Icon className="size-5" aria-hidden="true" />
@@ -115,7 +102,7 @@ export default function Contact() {
       {/* Office hours */}
       <Section compact>
         <Container>
-          <div className="overflow-hidden rounded-xl bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)]">
+          <div className="overflow-hidden rounded-card bg-white border border-line">
             <div className="flex items-center gap-4 bg-[linear-gradient(135deg,var(--primary)_0%,var(--brand-secondary)_100%)] px-8 py-6 text-white">
               <Clock className="size-5" aria-hidden="true" />
               <h2 className="m-0 text-lg font-semibold">{t('contact-office-hours')}</h2>
@@ -170,10 +157,10 @@ export default function Contact() {
         </Container>
       </Section>
 
-      {/* Emergency hotlines */}
+      {/* Emergency hotlines (target of the hotline bar's "View all hotlines") */}
       <Section>
         <Container>
-          <div className="mb-6">
+          <div id="hotlines" className="mb-6">
             <div className="mb-2 flex flex-wrap items-center gap-3">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-[#fef2f2] px-3 py-1 text-xs font-semibold text-[#dc2626]">
                 <TriangleAlert className="size-3.5" aria-hidden="true" />

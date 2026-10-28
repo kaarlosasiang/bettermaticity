@@ -10,22 +10,22 @@ interface ServiceCardProps {
   className?: string;
 }
 
-// Homepage-style card: hairline ring + royal top-border accent, navy title.
+// Hairline-bordered card, navy title; the border turns royal on hover.
 export function ServiceCard({ icon, title, description, meta, className }: ServiceCardProps) {
   return (
     <div
       className={cn(
-        'rounded-xl border-t-[3px] border-[#2b62ee] bg-white p-6 shadow-[0_0_0_1px_rgba(18,60,122,0.07)] transition hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)]',
+        'rounded-card border border-line bg-white p-6 transition-colors hover:border-royal',
         className
       )}
     >
-      <h3 className="m-0 mb-2 flex items-center gap-2 font-display text-base font-bold text-[#123c7a]">
+      <h3 className="m-0 mb-2 flex items-center gap-2 font-display text-base font-bold text-heading">
         {icon}
         {title}
       </h3>
-      {description && <p className="m-0 mb-3 text-sm text-[#4c5c78]">{description}</p>}
+      {description && <p className="m-0 mb-3 text-sm text-ink-muted">{description}</p>}
       {meta && (
-        <div className="flex gap-6 border-t border-[#e3e8ef] pt-3 text-[0.8125rem] text-[#4c5c78]">
+        <div className="flex gap-6 border-t border-line pt-3 text-[0.8125rem] text-ink-muted">
           {meta}
         </div>
       )}

@@ -2,7 +2,7 @@ import { cleanup, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { FileText, IdCard } from 'lucide-react';
-import { ServiceCards } from './ServiceCards';
+import { ServiceList } from './ServiceList';
 import { serviceOnlineActions } from '@/lib/serviceOnlineActions';
 import { serviceReferences } from '@/lib/serviceReferences';
 import en from '@/locales/en.json';
@@ -13,11 +13,12 @@ vi.mock('@/hooks/useLanguage', () => ({
 }));
 afterEach(cleanup);
 
-describe('service cards', () => {
-  it('keeps fee/time rows and separate local-guide and online-order links', () => {
+describe('service list', () => {
+  it('keeps time/fee rows and separate local-guide and online-order links', () => {
     const { container } = render(
       <MemoryRouter>
-        <ServiceCards
+        <ServiceList
+          title="Services"
           services={[
             {
               Icon: FileText,
@@ -32,7 +33,8 @@ describe('service cards', () => {
     );
     expect(screen.getAllByText('Confirm with office')).toHaveLength(2);
     expect(screen.getByText('Fee:')).toBeTruthy();
-    expect(screen.getByText('Time:')).toBeTruthy();
+    expect(screen.getByText('Processing time:')).toBeTruthy();
+    expect(screen.getByText('Online option')).toBeTruthy();
     const online = screen.getByRole('link', { name: /Request PSA copy online/ });
     expect(online.getAttribute('href')).toBe('https://psahelpline.ph/');
     expect(online.getAttribute('rel')).toContain('noopener');
@@ -45,14 +47,22 @@ describe('service cards', () => {
     expect(container.querySelector('a a')).toBeNull();
   });
 
-  it('does not fabricate an online option for barangay services', () => {
+  it('does not fabricate an online option or guide link', () => {
     render(
-      <ServiceCards
+      <ServiceList
+        title="Services"
         services={[{ Icon: IdCard, titleKey: 'cert-brgy-id', descKey: 'cert-brgy-id-desc' }]}
       />
     );
     expect(screen.getByRole('heading', { name: 'Barangay ID' })).toBeTruthy();
     expect(screen.queryByRole('link')).toBeNull();
+    expect(screen.queryByText('Online option')).toBeNull();
+  });
+
+  it('shows the empty-state text instead of rows when nothing matches', () => {
+    render(<ServiceList title="Services" services={[]} emptyText="No services match." />);
+    expect(screen.getByText('No services match.')).toBeTruthy();
+    expect(screen.queryAllByRole('article')).toHaveLength(0);
   });
 
   it('all online destinations have evidence and translated action labels and scope notes', () => {

@@ -35,7 +35,7 @@ function HotlineCard({
 
   return (
     <div
-      className={`flex gap-3 rounded-lg bg-white shadow-[0_0_0_1px_rgba(18,60,122,0.07)] text-foreground transition hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(43,98,238,0.35)] ${
+      className={`flex gap-3 rounded-lg bg-white border border-line text-foreground transition hover:border-royal ${
         compact ? 'p-4' : 'p-6'
       }`}
     >
@@ -99,7 +99,7 @@ export function NationalHotlineBanner() {
   return (
     <a
       href={`tel:${n.tel}`}
-      className="mb-6 flex items-center gap-4 rounded-xl border border-[#dc2626] bg-[#fef2f2] p-5 text-[#7f1d1d] no-underline transition hover:shadow-sm"
+      className="mb-6 flex items-center gap-4 rounded-card border border-[#dc2626] bg-[#fef2f2] p-5 text-[#7f1d1d] no-underline transition hover:shadow-sm"
     >
       <Phone className="size-6 shrink-0" aria-hidden="true" />
       <span className="text-sm font-semibold">

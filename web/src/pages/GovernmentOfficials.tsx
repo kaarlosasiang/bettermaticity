@@ -1,134 +1,133 @@
-import type { ReactNode } from 'react';
-import { Landmark } from 'lucide-react';
+import { useState } from 'react';
+import { UserRound } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
+import { DirectoryList } from '@/components/DirectoryList';
+import { OfficialChannels } from '@/components/OfficialChannels';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Container } from '@/components/primitives';
-import {
-  LazyMotion,
-  domAnimation,
-  m,
-  MotionConfig,
-  fadeUp,
-  staggerContainer,
-  revealViewport,
-} from '@/components/motion';
-import { OfficialCard } from '@/components/OfficialCard';
-import { officials, officialsAreDraft } from '@/lib/govData';
+import { Container, PageHeader, Section, SectionHead } from '@/components/primitives';
+import { officials, type Official } from '@/lib/govData';
+import { officialInitials } from '@/lib/utils';
 
-function SectionHead({ children }: { children: ReactNode }) {
+const councilors = (officials.councilors ?? []).map((c, i) => ({ ...c, rank: i + 1 }));
+const executives = [officials.mayor, officials.vice_mayor].filter((o): o is Official => !!o);
+
+function Avatar({ name, large = false }: { name: string; large?: boolean }) {
   return (
-    <m.div
-      variants={fadeUp}
-      initial="hidden"
-      whileInView="show"
-      viewport={revealViewport}
-      className="mb-[18px] flex items-center gap-3.5"
+    <span
+      aria-hidden="true"
+      className={
+        large
+          ? 'flex size-16 shrink-0 items-center justify-center rounded-full bg-royal-tint font-display text-lg font-bold text-royal'
+          : 'flex size-10 shrink-0 items-center justify-center rounded-full bg-royal-tint font-display text-sm font-bold text-royal'
+      }
     >
-      <span className="h-[26px] w-1 rounded bg-[#2b62ee]" aria-hidden="true" />
-      <h2 className="font-display text-2xl font-extrabold tracking-[-0.02em] text-[#123c7a]">
-        {children}
-      </h2>
-    </m.div>
+      {officialInitials(name)}
+    </span>
   );
 }
 
+// Elected officials in BetterSanFernando's directory style. Names are verified from the
+// May 2025 election; photos and contact details in data/officials.json are still
+// placeholders, so they are not shown — every contact slot defers to the office.
 export default function GovernmentOfficials() {
   const { t } = useLanguage();
+  // Client-only filter; starts empty so all councilors are in the prerendered HTML.
+  const [query, setQuery] = useState('');
+  const q = query.trim().toLowerCase();
+  const visible = q ? councilors.filter((c) => c.name.toLowerCase().includes(q)) : councilors;
 
   return (
-    <LazyMotion features={domAnimation}>
-      <MotionConfig reducedMotion="user">
-        <Seo
-          title={t('officials-elected-officials')}
-          description="The elected officials of the City of Mati, Davao Oriental."
-          canonicalPath="/government/officials"
-        />
+    <>
+      <Seo
+        title={t('officials-elected-officials')}
+        description="The mayor, vice mayor and Sangguniang Panlungsod members of the City of Mati, 2025–2028 term."
+        canonicalPath="/government/officials"
+      />
 
-        {/* ── Hero ─────────────────────────────────────────────────────────── */}
-        <section className="bg-[#123c7a] py-12 lg:py-16">
-          <Container>
-            <m.div
-              variants={staggerContainer}
-              initial="hidden"
-              animate="show"
-              className="max-w-2xl"
-            >
-              <m.span
-                variants={fadeUp}
-                className="inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-[0.08em] text-[#9dc0ff]"
-              >
-                <Landmark className="size-3.5" aria-hidden="true" />
-                {t('gov-government')}
-              </m.span>
-              <m.h1
-                variants={fadeUp}
-                className="mt-3 font-display text-4xl font-extrabold leading-[1.08] tracking-[-0.03em] text-white sm:text-[2.75rem]"
-              >
-                {t('officials-elected-officials')}
-              </m.h1>
-              <m.p variants={fadeUp} className="mt-3 text-base leading-relaxed text-white/75">
-                {t('gov-subtitle')}
-              </m.p>
-            </m.div>
-          </Container>
-        </section>
+      <PageHeader
+        badge={
+          <>
+            <UserRound className="size-4" aria-hidden="true" />
+            {t('gov-officials-eyebrow')}
+          </>
+        }
+        title={t('officials-elected-officials')}
+        description={t('gov-officials-lede')}
+        note={t('gov-officials-note')}
+        breadcrumb={[
+          { label: t('nav-home'), to: '/' },
+          { label: t('nav-government'), to: '/government' },
+          { label: t('officials-elected-officials') },
+        ]}
+        aside={{ label: t('gov-officials-about-label'), body: t('gov-officials-about-body') }}
+        stats={[
+          { label: t('gov-stat-officials'), value: executives.length + councilors.length },
+          { label: t('gov-stat-councilors'), value: councilors.length },
+          { label: t('gov-stat-term'), value: t('gov-term-value') },
+        ]}
+      />
 
-        {/* ── Executive Branch ─────────────────────────────────────────────── */}
-        <section className="bg-white py-12">
-          <Container>
-            {officialsAreDraft && (
-              <p
-                role="note"
-                className="mb-6 rounded-xl border-l-[3px] border-[#ffc001] bg-[#fffbef] px-4 py-3 text-sm text-[#8a6200]"
-              >
-                {t('gov-officials-note')}
-              </p>
-            )}
-            <SectionHead>{t('gov-executive-branch')}</SectionHead>
-            <m.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="show"
-              viewport={revealViewport}
-              className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2"
-            >
-              {officials.mayor && <OfficialCard official={officials.mayor} role="City Mayor" />}
-              {officials.vice_mayor && (
-                <OfficialCard official={officials.vice_mayor} role="City Vice Mayor" />
-              )}
-            </m.div>
-          </Container>
-        </section>
+      <Section>
+        <Container>
+          <SectionHead eyebrow={t('gov-executive-branch')} title={t('gov-executive-title')} />
+          <ul className="grid gap-px overflow-hidden border border-line bg-line md:grid-cols-2">
+            {executives.map((o) => (
+              <li key={o.name} className="flex items-start gap-5 bg-white p-6">
+                <Avatar name={o.name} large />
+                <div className="min-w-0">
+                  <p className="font-mono text-[0.6875rem] font-medium tracking-[0.18em] text-royal uppercase">
+                    {o.title}
+                  </p>
+                  <h3 className="mt-1 font-display text-xl font-bold text-heading">{o.name}</h3>
+                  <p className="mt-3 text-sm text-ink-muted">
+                    <span className="text-feel-text">{t('service-confirm-office')}</span>
+                    {' · '}
+                    <AppLink to="/contact" className="font-semibold text-royal hover:underline">
+                      {t('service-contact-link')}
+                    </AppLink>
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </Section>
 
-        {/* ── Sangguniang Panlungsod ───────────────────────────────────────── */}
-        {officials.councilors && officials.councilors.length > 0 && (
-          <section className="bg-[#f1f6fc] py-12">
-            <Container>
-              <SectionHead>{t('gov-sb-members')}</SectionHead>
-              <m.div
-                variants={staggerContainer}
-                initial="hidden"
-                whileInView="show"
-                viewport={revealViewport}
-                className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4"
-              >
-                {officials.councilors.map((c, i) => (
-                  <OfficialCard key={`${c.name}-${i}`} official={c} role="City Councilor" />
-                ))}
-              </m.div>
-              <div className="mt-6">
-                <AppLink
-                  to="/government"
-                  className="text-sm font-semibold text-[#2b62ee] hover:underline"
-                >
-                  ← {t('nav-government')}
-                </AppLink>
+      <Section className="border-t border-line">
+        <Container>
+          <DirectoryList
+            id="councilors"
+            eyebrow={t('gov-legislative-branch')}
+            title={t('gov-sb-members')}
+            help={t('gov-sp-help')}
+            items={visible}
+            total={councilors.length}
+            query={query}
+            onQueryChange={setQuery}
+            searchPlaceholder={t('gov-sp-search')}
+            emptyText={t('gov-sp-empty')}
+            getKey={(c) => c.name}
+            renderItem={(c) => (
+              <div className="flex items-center gap-4">
+                <span className="w-6 shrink-0 font-mono text-xs font-semibold text-ink-faint">
+                  {String(c.rank).padStart(2, '0')}
+                </span>
+                <Avatar name={c.name} />
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-semibold text-heading">{c.name}</h3>
+                  <p className="text-sm text-ink-muted">{c.title}</p>
+                </div>
+                <p className="hidden text-xs font-medium text-feel-text sm:block">
+                  {t('service-confirm-office')}
+                </p>
               </div>
-            </Container>
-          </section>
-        )}
-      </MotionConfig>
-    </LazyMotion>
+            )}
+          />
+        </Container>
+      </Section>
+
+      <OfficialChannels />
+    </>
   );
 }

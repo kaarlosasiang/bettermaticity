@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 interface SectionProps extends ComponentProps<'section'> {
   /** Legacy .section-compact: 24px vertical padding instead of 48/64px. */
   compact?: boolean;
-  /** Legacy .bg-alt: subtle #f8f9fa background. */
+  /** Pale-blue alt band with hairline top/bottom borders. */
   altBg?: boolean;
 }
 
@@ -12,7 +12,11 @@ interface SectionProps extends ComponentProps<'section'> {
 export function Section({ className, compact, altBg, ...props }: SectionProps) {
   return (
     <section
-      className={cn(compact ? 'py-6' : 'py-12 md:py-16', altBg && 'bg-[#f1f6fc]', className)}
+      className={cn(
+        compact ? 'py-6' : 'py-12 md:py-16',
+        altBg && 'border-y border-line bg-surface-subtle',
+        className
+      )}
       {...props}
     />
   );

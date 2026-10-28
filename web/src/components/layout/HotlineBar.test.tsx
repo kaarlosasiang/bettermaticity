@@ -4,15 +4,20 @@ import userEvent from '@testing-library/user-event';
 import HotlineBar from './HotlineBar';
 import { nationalHotline, primaryNumber, priorityHotlines } from '@/lib/hotlines';
 
-// The bar renders two variants from one item list — a static row (>=lg) and a
-// marquee (<lg) — so every hotline is exposed twice. The marquee's duplicate copy
+// The bar renders two variants from one item list — a static row (>=xl) and a
+// marquee (<xl) — so every hotline is exposed twice. The marquee's duplicate copy
 // is aria-hidden, so it is deliberately NOT counted by *ByRole queries.
 const VARIANTS = 2;
 
-const expected = [nationalHotline, ...priorityHotlines].map((h) => ({
+// The bar has its own "Emergency" title, so 911 shows as "National" there.
+const expected = [{ ...nationalHotline, short: 'National' }, ...priorityHotlines].map((h) => ({
   short: h.short,
   ...primaryNumber(h),
 }));
+
+// Only the dialable numbers; the desktop row also has a "View all hotlines" link.
+const telLinks = () =>
+  screen.getAllByRole('link').filter((a) => a.getAttribute('href')?.startsWith('tel:'));
 
 const track = (container: HTMLElement) =>
   container.querySelector<HTMLElement>('[class*="animate-hotline-scroll"]');
@@ -23,18 +28,17 @@ const PAUSED = /(^|\s)\[animation-play-state:paused\]/;
 describe('HotlineBar', () => {
   it('renders 911 first, then the flagged offices in priority order', () => {
     render(<HotlineBar />);
-    const order = screen
-      .getAllByRole('link')
+    const order = telLinks()
       .slice(0, expected.length)
       .map((a) => a.textContent);
 
-    expect(order).toEqual(expected.map((e) => `${e.short}: ${e.display}`));
+    expect(order).toEqual(expected.map((e) => `${e.short} ${e.display}`));
   });
 
   it('links every number as a dialable tel: URL from the JSON feed', () => {
     render(<HotlineBar />);
     for (const e of expected) {
-      const links = screen.getAllByRole('link', { name: `${e.short}: ${e.display}` });
+      const links = screen.getAllByRole('link', { name: `${e.short} ${e.display}` });
       expect(links).toHaveLength(VARIANTS);
       for (const link of links) expect(link).toHaveAttribute('href', `tel:${e.tel}`);
     }
@@ -42,7 +46,7 @@ describe('HotlineBar', () => {
 
   it('keeps the marquee duplicates out of the a11y tree and the tab order', () => {
     const { container } = render(<HotlineBar />);
-    expect(screen.getAllByRole('link')).toHaveLength(expected.length * VARIANTS);
+    expect(telLinks()).toHaveLength(expected.length * VARIANTS);
 
     const clones = container.querySelectorAll('a[aria-hidden="true"]');
     expect(clones).toHaveLength(expected.length);
@@ -81,6 +85,14 @@ describe('HotlineBar', () => {
     }
     expect(screen.getByRole('button').className).toMatch(/motion-reduce:hidden/);
     expect(screen.getByRole('region').className).toMatch(/motion-reduce:overflow-x-auto/);
+  });
+
+  it('links to the full hotline list on the contact page', () => {
+    render(<HotlineBar />);
+    expect(screen.getByRole('link', { name: /view all hotlines/i })).toHaveAttribute(
+      'href',
+      '/contact#hotlines'
+    );
   });
 
   it('labels the marquee region', () => {
