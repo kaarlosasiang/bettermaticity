@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom';
 import HotlineBar from '@/components/layout/HotlineBar';
 import Header from '@/components/layout/Header';
 import InfoBar from '@/components/layout/InfoBar';
@@ -52,6 +52,9 @@ export default function Layout() {
       </main>
       <ReportIssueBand />
       <Footer />
+      {/* Client-side navigations start at the top (or at the #hash target); Back/Forward
+          return to the previous scroll position. Renders nothing in the prerender. */}
+      <ScrollRestoration />
       <PWAManager />
       <Analytics />
     </>
