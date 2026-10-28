@@ -1,269 +1,239 @@
 import type { ReactNode } from 'react';
-import { ArrowRight, Landmark, MapPin, Mail, Phone, ExternalLink } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
+import { ArrowUpRight, ChevronRight, Info, Landmark, Scale } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
+import { OfficialChannels } from '@/components/OfficialChannels';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Breadcrumb, Container, heroClasses } from '@/components/primitives';
-import {
-  LazyMotion,
-  domAnimation,
-  m,
-  MotionConfig,
-  fadeUp,
-  staggerContainer,
-  revealViewport,
-} from '@/components/motion';
-import { OfficialCard } from '@/components/OfficialCard';
-import { officials, officialsAreDraft } from '@/lib/govData';
+import { Container, PageHeader, Section, SectionHead } from '@/components/primitives';
+import { officials } from '@/lib/govData';
 import { departments } from '@/lib/govDirectory';
-import { barangayData, barangayCount, totalPopulation } from '@/lib/statsData';
-import matiBarangays from '@data/mati/dist/mati_barangays.min.json';
+import { barangayCount } from '@/lib/statsData';
 
-const CARD = 'rounded-card bg-white border border-line';
+const officialsCount =
+  (officials.mayor ? 1 : 0) + (officials.vice_mayor ? 1 : 0) + (officials.councilors?.length ?? 0);
 
-const norm = (s: string) => s.toLowerCase().replace(/[^a-z]/g, '');
-const popByName = new Map(barangayData.map((b) => [norm(b.name), b.pop]));
+type HubLink = { to: string; key: string; descKey: string };
 
-const barangays: { name: string; pop: number | null }[] = (
-  matiBarangays as { features: { properties: { barangay: string } }[] }
-).features
-  .map((f) => f.properties.barangay)
-  .filter(Boolean)
-  .sort((a, b) => a.localeCompare(b))
-  .map((name) => ({ name, pop: popByName.get(norm(name)) ?? null }));
-
-function SectionHead({ eyebrow, children }: { eyebrow?: ReactNode; children: ReactNode }) {
-  return (
-    <m.div
-      variants={fadeUp}
-      initial="hidden"
-      whileInView="show"
-      viewport={revealViewport}
-      className="mb-[18px] flex items-center gap-3.5"
-    >
-      <span className="h-[26px] w-1 rounded-none bg-royal" aria-hidden="true" />
-      <div>
-        {eyebrow && (
-          <span className="font-mono text-[0.6875rem] font-semibold tracking-[0.06em] text-royal">
-            {eyebrow}
-          </span>
-        )}
-        <h2 className="font-display text-2xl font-extrabold tracking-[-0.02em] text-heading">
-          {children}
-        </h2>
-      </div>
-    </m.div>
-  );
-}
-
-function DraftNote({ children }: { children: ReactNode }) {
-  return (
-    <p
-      role="note"
-      className="mb-6 rounded-card border-l-[3px] border-amber bg-feel-bg px-4 py-3 text-sm text-feel-text"
-    >
+// Links with a #hash are plain <a> so a full load lands on the anchor.
+function HubAnchor({
+  to,
+  className,
+  children,
+}: {
+  to: string;
+  className: string;
+  children: ReactNode;
+}) {
+  return to.includes('#') ? (
+    <a href={to} className={className}>
       {children}
-    </p>
+    </a>
+  ) : (
+    <AppLink to={to} className={className}>
+      {children}
+    </AppLink>
   );
 }
 
+const START: HubLink[] = [
+  {
+    to: '/government/officials',
+    key: 'officials-elected-officials',
+    descKey: 'nav-desc-officials',
+  },
+  { to: '/government/offices', key: 'gov-link-offices', descKey: 'gov-link-offices-desc' },
+  { to: '/contact', key: 'gov-link-contact', descKey: 'gov-link-contact-desc' },
+];
+
+const CITY_GOVERNMENT: HubLink[] = [
+  {
+    to: '/government/officials',
+    key: 'officials-elected-officials',
+    descKey: 'nav-desc-officials',
+  },
+  { to: '/government/offices', key: 'gov-link-offices', descKey: 'gov-link-offices-desc' },
+  { to: '/government/barangays', key: 'gov-link-barangays', descKey: 'gov-link-barangays-desc' },
+];
+
+const GROUPS: { Icon: LucideIcon; titleKey: string; descKey: string; links: HubLink[] }[] = [
+  {
+    Icon: Scale,
+    titleKey: 'gov-legislation-title',
+    descKey: 'gov-legislation-desc',
+    links: [
+      {
+        to: '/legislative',
+        key: 'nav-legislative-overview',
+        descKey: 'nav-desc-legislative-overview',
+      },
+      {
+        to: '/legislative/ordinance-framework',
+        key: 'dropdown-ordinance-framework',
+        descKey: 'nav-desc-ordinance-framework',
+      },
+      {
+        to: '/legislative/resolution-framework',
+        key: 'dropdown-resolution-framework',
+        descKey: 'nav-desc-resolution-framework',
+      },
+    ],
+  },
+  {
+    Icon: Info,
+    titleKey: 'gov-public-title',
+    descKey: 'gov-public-desc',
+    links: [
+      { to: '/contact#hotlines', key: 'gov-link-hotlines', descKey: 'gov-link-hotlines-desc' },
+      { to: '/budget', key: 'nav-public-funds', descKey: 'nav-desc-public-funds' },
+      { to: '/statistics', key: 'nav-statistics', descKey: 'gov-link-statistics-desc' },
+    ],
+  },
+];
+
+// Government hub, laid out like BetterSanFernando's /government: a hero with a
+// "start with what you need" card, an explore section (City Government panel, then
+// Legislation and Public information), and the official-channels band. Officials,
+// offices and barangays each have their own page.
 export default function Government() {
   const { t } = useLanguage();
+  const counts = [
+    t('gov-count-officials', { count: officialsCount }),
+    t('gov-count-offices', { count: departments.length }),
+    t('gov-count-barangays', { count: barangayCount }),
+  ];
 
   return (
-    <LazyMotion features={domAnimation}>
-      <MotionConfig reducedMotion="user">
-        <Seo
-          title={t('gov-title')}
-          description="Government structure and officials of the City of Mati, Davao Oriental."
-          canonicalPath="/government"
-        />
+    <>
+      <Seo
+        title={t('nav-government')}
+        description="Find City of Mati officials, offices, legislation, barangays and official resources in one place."
+        canonicalPath="/government"
+      />
 
-        {/* ── Hero ─────────────────────────────────────────────────────────── */}
-        <section className={heroClasses.section}>
-          <Container>
-            <Breadcrumb
-              className={heroClasses.breadcrumb}
-              items={[{ label: t('nav-home'), to: '/' }, { label: t('nav-government') }]}
-            />
-            <m.div
-              variants={staggerContainer}
-              initial="hidden"
-              animate="show"
-              className="max-w-2xl"
-            >
-              <m.span
-                variants={fadeUp}
-                className="inline-flex items-center gap-2 font-mono text-[0.71875rem] font-semibold tracking-[0.14em] text-royal uppercase"
-              >
-                <Landmark className="size-3.5" aria-hidden="true" />
-                {t('gov-government')}
-              </m.span>
-              <m.h1 variants={fadeUp} className={heroClasses.title}>
-                {t('gov-title')}
-              </m.h1>
-              <m.p variants={fadeUp} className={heroClasses.lede}>
-                {t('gov-subtitle')}
-              </m.p>
-            </m.div>
-          </Container>
-        </section>
-
-        {/* ── Executive Branch ─────────────────────────────────────────────── */}
-        <section className="bg-white py-12">
-          <Container>
-            <SectionHead eyebrow={t('gov-executive-branch')}>{t('gov-executive')}</SectionHead>
-            {officialsAreDraft && <DraftNote>{t('gov-officials-note')}</DraftNote>}
-            <m.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="show"
-              viewport={revealViewport}
-              className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2"
-            >
-              {officials.mayor && <OfficialCard official={officials.mayor} role="City Mayor" />}
-              {officials.vice_mayor && (
-                <OfficialCard official={officials.vice_mayor} role="City Vice Mayor" />
-              )}
-            </m.div>
-          </Container>
-        </section>
-
-        {/* ── Sangguniang Panlungsod (real councilors) ─────────────────────── */}
-        <section className="bg-surface-subtle py-12">
-          <Container>
-            <SectionHead eyebrow={t('gov-legislative-branch')}>{t('gov-sb-members')}</SectionHead>
-            <p className="-mt-2 mb-5 text-[0.8125rem] text-ink-muted">{t('gov-sb-subtitle')}</p>
-            {officials.councilors && officials.councilors.length > 0 && (
-              <m.div
-                variants={staggerContainer}
-                initial="hidden"
-                whileInView="show"
-                viewport={revealViewport}
-                className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
-              >
-                {officials.councilors.map((c, i) => (
-                  <OfficialCard key={`${c.name}-${i}`} official={c} role="City Councilor" />
-                ))}
-              </m.div>
-            )}
-            <div className="mt-6">
-              <AppLink
-                to="/government/officials"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-royal hover:underline"
-              >
-                {t('officials-elected-officials')}
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </AppLink>
-            </div>
-          </Container>
-        </section>
-
-        {/* ── Department Heads & Key Offices ───────────────────────────────── */}
-        <section className="bg-white py-12">
-          <Container>
-            <SectionHead eyebrow={t('gov-municipal-offices')}>{t('gov-departments')}</SectionHead>
-            <p className="-mt-2 mb-5 text-[0.8125rem] text-ink-muted">{t('gov-dept-subtitle')}</p>
-            <m.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="show"
-              viewport={revealViewport}
-              className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
-            >
-              {departments.map((d) => (
-                <m.div
-                  key={(d.titleKey ?? d.title) + d.descKey}
-                  variants={fadeUp}
-                  className={`flex flex-col ${CARD} p-5`}
-                >
-                  <div className="mb-2 flex items-center gap-3">
-                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-royal-tint text-royal">
-                      <d.Icon className="size-5" aria-hidden="true" />
-                    </div>
-                    <h3 className="font-display text-sm font-bold text-heading">
-                      {d.titleKey ? t(d.titleKey) : d.title}
-                    </h3>
-                  </div>
-                  <p className="mb-3 flex-1 text-[0.8125rem] text-ink-muted">{t(d.descKey)}</p>
-                  <div className="flex flex-col gap-1 text-[0.8125rem] text-ink-muted">
-                    <a
-                      href={`tel:${d.tel}`}
-                      className="inline-flex items-center gap-1.5 hover:text-royal"
-                    >
-                      <Phone className="size-3.5" aria-hidden="true" /> {d.phone}
-                    </a>
-                    {d.emailKey && (
-                      <a
-                        href={`mailto:${t(d.emailKey)}`}
-                        className="inline-flex items-center gap-1.5 hover:text-royal"
-                      >
-                        <Mail className="size-3.5" aria-hidden="true" /> {t(d.emailKey)}
-                      </a>
-                    )}
-                  </div>
-                  <div className="mt-3 flex items-center gap-4 border-t border-line pt-3">
-                    <AppLink
-                      to={d.to}
-                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-royal hover:underline"
-                    >
-                      {t('gov-view-services')}
-                      <ArrowRight className="size-4" aria-hidden="true" />
-                    </AppLink>
-                    {d.jobUrl && (
-                      <a
-                        href={d.jobUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-royal hover:underline"
-                      >
-                        {t('gov-view-job-vacancies')}
-                        <ExternalLink className="size-3.5" aria-hidden="true" />
-                      </a>
-                    )}
-                  </div>
-                </m.div>
-              ))}
-            </m.div>
-          </Container>
-        </section>
-
-        {/* ── Barangays ────────────────────────────────────────────────────── */}
-        <section className="bg-surface-subtle py-12">
-          <Container>
-            <SectionHead eyebrow={t('gov-barangay-units')}>{t('gov-barangays')}</SectionHead>
-            <p className="-mt-2 mb-5 text-[0.8125rem] text-ink-muted">
-              {barangayCount} {t('gov-barangays')} · {totalPopulation.toLocaleString()}{' '}
-              {t('gov-residents')}
+      <PageHeader
+        badge={
+          <>
+            <Landmark className="size-4" aria-hidden="true" />
+            {t('nav-government')}
+          </>
+        }
+        title={t('gov-hub-title')}
+        description={t('gov-hub-lede')}
+        ledeTone="strong"
+        note={t('gov-hub-note')}
+        breadcrumb={[{ label: t('nav-home'), to: '/' }, { label: t('nav-government') }]}
+        meta={counts}
+        sidePanel={
+          <div className="border border-line bg-surface-subtle p-5">
+            <p className="font-mono text-[0.6875rem] tracking-[0.12em] text-ink-muted uppercase">
+              {t('gov-start-title')}
             </p>
-            <m.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="show"
-              viewport={revealViewport}
-              className="grid grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-2.5"
-            >
-              {barangays.map((b) => (
-                <m.div
-                  key={b.name}
-                  variants={fadeUp}
-                  className="flex items-center justify-between gap-2 rounded-lg bg-white px-3 py-2.5 border border-line"
-                >
-                  <span className="flex items-center gap-2 text-[0.8125rem] font-medium text-heading">
-                    <MapPin className="size-3.5 shrink-0 text-royal" aria-hidden="true" />
-                    {b.name}
-                  </span>
-                  {b.pop != null && (
-                    <span className="font-mono text-[0.6875rem] tabular-nums text-ink-muted">
-                      {b.pop.toLocaleString()}
+            <ol className="mt-2 divide-y divide-line">
+              {START.map((s, i) => (
+                <li key={s.to}>
+                  <AppLink to={s.to} className="group flex items-start gap-3 py-3">
+                    <span className="mt-0.5 font-mono text-xs font-semibold text-royal">
+                      {String(i + 1).padStart(2, '0')}
                     </span>
-                  )}
-                </m.div>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-sm font-semibold text-heading group-hover:text-royal">
+                        {t(s.key)}
+                      </span>
+                      <span className="block text-xs leading-5 text-ink-muted">{t(s.descKey)}</span>
+                    </span>
+                    <ArrowUpRight
+                      className="mt-0.5 size-4 shrink-0 text-ink-faint group-hover:text-royal"
+                      aria-hidden="true"
+                    />
+                  </AppLink>
+                </li>
               ))}
-            </m.div>
-          </Container>
-        </section>
-      </MotionConfig>
-    </LazyMotion>
+            </ol>
+          </div>
+        }
+      />
+
+      <Section>
+        <Container>
+          <SectionHead
+            eyebrow={t('gov-explore-eyebrow')}
+            title={t('gov-explore-title')}
+            lede={t('gov-explore-lede')}
+          />
+
+          {/* City Government panel */}
+          <div className="grid gap-5 border border-line bg-surface-subtle p-5 sm:p-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2.2fr)] lg:items-center lg:gap-8">
+            <div>
+              <h3 className="text-lg font-bold text-heading">{t('gov-panel-title')}</h3>
+              <p className="mt-2 text-sm leading-6 text-ink-muted">{t('gov-panel-desc')}</p>
+              <p className="mt-3 text-sm font-semibold text-heading">{counts.join(' · ')}</p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {CITY_GOVERNMENT.map((l) => (
+                <AppLink
+                  key={l.to}
+                  to={l.to}
+                  className="group flex h-full items-start justify-between gap-3 border border-line bg-white p-4 transition-colors hover:border-royal"
+                >
+                  <span>
+                    <span className="block text-sm font-semibold text-heading group-hover:text-royal">
+                      {t(l.key)}
+                    </span>
+                    <span className="mt-1 block text-xs leading-5 text-ink-muted">
+                      {t(l.descKey)}
+                    </span>
+                  </span>
+                  <ArrowUpRight
+                    className="size-4 shrink-0 text-ink-faint group-hover:text-royal"
+                    aria-hidden="true"
+                  />
+                </AppLink>
+              ))}
+            </div>
+          </div>
+
+          {/* Legislation + Public information */}
+          <div className="mt-6 grid gap-6 lg:grid-cols-2">
+            {GROUPS.map(({ Icon, titleKey, descKey, links }) => (
+              <div key={titleKey} className="border border-line bg-white">
+                <div className="flex items-start gap-3 border-b border-line px-5 py-4">
+                  <Icon className="mt-0.5 size-5 shrink-0 text-royal" aria-hidden="true" />
+                  <div>
+                    <h3 className="text-base font-bold text-heading">{t(titleKey)}</h3>
+                    <p className="mt-0.5 text-sm leading-6 text-ink-muted">{t(descKey)}</p>
+                  </div>
+                </div>
+                <ul className="divide-y divide-line">
+                  {links.map((l) => (
+                    <li key={l.to}>
+                      <HubAnchor
+                        to={l.to}
+                        className="group flex items-center gap-4 px-5 py-3.5 transition-colors hover:bg-surface-subtle"
+                      >
+                        <span className="min-w-0 flex-1">
+                          <span className="block text-sm font-semibold text-heading group-hover:text-royal">
+                            {t(l.key)}
+                          </span>
+                          <span className="block text-xs leading-5 text-ink-muted">
+                            {t(l.descKey)}
+                          </span>
+                        </span>
+                        <ChevronRight
+                          className="size-4 shrink-0 text-ink-faint group-hover:text-royal"
+                          aria-hidden="true"
+                        />
+                      </HubAnchor>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </Section>
+
+      <OfficialChannels />
+    </>
   );
 }

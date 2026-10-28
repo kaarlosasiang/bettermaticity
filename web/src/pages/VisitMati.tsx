@@ -407,7 +407,7 @@ export default function VisitMati() {
         </section>
 
         {/* ── Directory ────────────────────────────────────────────────────── */}
-        <section id="places" className="scroll-mt-20 bg-surface-subtle py-14 md:py-16">
+        <section id="places" className="bg-surface-subtle py-14 md:py-16">
           <Container>
             <div className="mb-6 flex flex-wrap items-end justify-between gap-5">
               <div>
@@ -585,7 +585,7 @@ export default function VisitMati() {
         </section>
 
         {/* ── Plan ─────────────────────────────────────────────────────────── */}
-        <section id="plan" className="scroll-mt-20 bg-white py-14 md:py-16">
+        <section id="plan" className="bg-white py-14 md:py-16">
           <Container>
             <m.div
               variants={fadeUp}

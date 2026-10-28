@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react';
 import { FileText, List, Heart, Info, Lightbulb, Mail } from 'lucide-react';
 import { Seo } from '@/components/Seo';
-import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Container, Section, PageHeader } from '@/components/primitives';
 
@@ -41,7 +40,7 @@ function LegalSection({
   return (
     <section
       id={id}
-      className="mb-12 scroll-mt-24 border-b border-border pb-12 last:mb-0 last:border-0 last:pb-0"
+      className="mb-12 border-b border-border pb-12 last:mb-0 last:border-0 last:pb-0"
     >
       <h2 className="mb-4 inline-block border-b-2 border-primary pb-3 text-2xl font-semibold text-foreground">
         {title}
@@ -107,20 +106,6 @@ export default function Terms() {
         canonicalPath="/terms"
       />
 
-      {/* Breadcrumbs */}
-      <Container>
-        <nav
-          className="flex items-center gap-2 py-4 text-sm text-muted-foreground"
-          aria-label="Breadcrumb"
-        >
-          <AppLink to="/" className="hover:text-primary">
-            {t('terms-home')}
-          </AppLink>
-          <span>/</span>
-          <span aria-current="page">{t('terms-terms-of-use')}</span>
-        </nav>
-      </Container>
-
       {/* Hero (legacy .legal-hero) */}
       <PageHeader
         badge={
@@ -129,6 +114,7 @@ export default function Terms() {
             {t('terms-legal')}
           </>
         }
+        breadcrumb={[{ label: t('nav-home'), to: '/' }, { label: t('terms-terms-of-use') }]}
         title={t('terms-terms-of-use')}
         description={t('terms-guidelines-for-using-bettermatiorg')}
       />

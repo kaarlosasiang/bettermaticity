@@ -100,7 +100,7 @@ export function AttractionDetail({ slug }: { slug: string }) {
             </div>
 
             {/* Aside: highlights + map */}
-            <aside className="space-y-4 lg:sticky lg:top-20 lg:self-start">
+            <aside className="space-y-4 lg:sticky lg:top-[calc(var(--sticky-offset)+1.5rem)] lg:self-start">
               <div className="rounded-card border-t-2 border-amber bg-white p-5 ring-1 ring-navy/8">
                 <h2 className="mb-3 font-display text-lg font-bold text-heading">Highlights</h2>
                 <ul className="space-y-2.5 text-sm leading-relaxed text-ink-muted">

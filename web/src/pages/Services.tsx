@@ -12,6 +12,7 @@ import {
   ShieldCheck,
   Globe,
   ArrowRight,
+  ArrowUpRight,
   LayoutGrid,
   Baby,
   HeartHandshake,
@@ -102,49 +103,55 @@ export default function Services() {
         }
         title={t('services-title')}
         description={t('services-subtitle')}
+        ledeTone="strong"
+        note={servicesData.verificationNote}
         breadcrumb={[{ label: t('nav-home'), to: '/' }, { label: t('services-title') }]}
         meta={[
           t('services-count', { count: services.length }),
           t('services-categories-count', { count: categories.length }),
           t('services-reviewed', { date: servicesData.reviewedOn }),
         ]}
-        aside={{
-          label: t('services-scope-label'),
-          body: servicesData.verificationNote,
-        }}
-      >
-        <div className="max-w-[560px]">
-          <ServiceSearch />
-        </div>
-      </PageHeader>
+        sidePanel={
+          <div className="border border-line bg-surface-subtle p-5 lg:p-6">
+            <h2 className="text-base font-bold text-heading">{t('services-find-title')}</h2>
+            <ServiceSearch className="mt-3" placeholder={`${t('nav-search')}…`} />
+            <p className="mt-3 text-sm leading-6 text-ink-muted">{t('services-find-help')}</p>
+          </div>
+        }
+      />
 
       <Section>
         <Container>
-          <RuledGrid className="sm:grid-cols-2 lg:grid-cols-3">
+          <SectionHead
+            eyebrow={t('services-browse-eyebrow')}
+            title={t('services-browse-title')}
+            lede={t('services-browse-lede')}
+          />
+          <RuledGrid className="sm:grid-cols-2">
             {categories.map(({ Icon, key, descKey, to }) => {
               const id = to.split('/').pop();
               return (
                 <AppLink
                   key={to}
                   to={to}
-                  className="group grid min-w-0 content-start gap-2 bg-white p-6 transition-colors hover:bg-surface-subtle"
+                  className="group flex min-w-0 items-start gap-4 bg-white p-5 transition-colors hover:bg-surface-subtle md:px-6"
                 >
-                  <span className="mb-1 flex size-10 items-center justify-center rounded-md bg-royal-tint text-royal">
-                    <Icon className="size-5" aria-hidden="true" />
+                  <Icon className="mt-0.5 size-5 shrink-0 text-royal" aria-hidden="true" />
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-semibold text-royal">{t(key)}</span>
+                    <span className="mt-1 block text-sm leading-6 text-ink-muted">
+                      {t(descKey)}
+                    </span>
+                    <span className="mt-2 block text-xs text-ink-faint">
+                      {t('services-count', {
+                        count: services.filter((s) => s.categoryId === id).length,
+                      })}
+                    </span>
                   </span>
-                  <h3 className="font-display text-[1.0625rem] font-bold tracking-[-0.01em] text-heading group-hover:text-royal">
-                    {t(key)}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-ink-muted">{t(descKey)}</p>
-                  <span className="font-mono text-[0.6875rem] tracking-[0.1em] text-ink-muted uppercase">
-                    {t('services-count', {
-                      count: services.filter((s) => s.categoryId === id).length,
-                    })}
-                  </span>
-                  <span className="mt-1 inline-flex items-center gap-1.5 text-sm font-semibold text-royal underline decoration-1 underline-offset-[5px] group-hover:decoration-2">
-                    {t('svc-view-services')}
-                    <ArrowRight className="size-3.5" aria-hidden="true" />
-                  </span>
+                  <ArrowUpRight
+                    className="mt-0.5 size-4 shrink-0 text-ink-faint group-hover:text-royal"
+                    aria-hidden="true"
+                  />
                 </AppLink>
               );
             })}

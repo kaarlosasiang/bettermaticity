@@ -1,6 +1,5 @@
 import { BookMarked, Info } from 'lucide-react';
 import { Seo } from '@/components/Seo';
-import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Container, Section, SectionTitle, PageHeader } from '@/components/primitives';
 import { ordinances } from '@/lib/govData';
@@ -26,23 +25,6 @@ export default function OrdinanceFramework() {
         canonicalPath="/legislative/ordinance-framework"
       />
 
-      <Container>
-        <nav
-          className="flex items-center gap-2 py-4 text-sm text-muted-foreground"
-          aria-label="Breadcrumb"
-        >
-          <AppLink to="/" className="hover:text-primary">
-            {t('nav-home')}
-          </AppLink>
-          <span>/</span>
-          <AppLink to="/legislative" className="hover:text-primary">
-            {t('nav-legislative')}
-          </AppLink>
-          <span>/</span>
-          <span aria-current="page">{t('ord-page-title')}</span>
-        </nav>
-      </Container>
-
       <PageHeader
         badge={
           <>
@@ -50,6 +32,12 @@ export default function OrdinanceFramework() {
             {t('nav-legislative')}
           </>
         }
+        breadcrumb={[
+          { label: t('nav-home'), to: '/' },
+          { label: t('nav-government'), to: '/government' },
+          { label: t('nav-legislative'), to: '/legislative' },
+          { label: t('ord-page-title') },
+        ]}
         title={t('ord-page-title')}
         description={t('ord-page-desc')}
       />

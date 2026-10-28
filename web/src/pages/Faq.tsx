@@ -31,20 +31,6 @@ export default function Faq() {
         canonicalPath="/faq"
       />
 
-      {/* Breadcrumbs */}
-      <Container>
-        <nav
-          className="flex items-center gap-2 py-4 text-sm text-muted-foreground"
-          aria-label="Breadcrumb"
-        >
-          <AppLink to="/" className="hover:text-primary">
-            {t('faq-home')}
-          </AppLink>
-          <span>/</span>
-          <span aria-current="page">FAQ</span>
-        </nav>
-      </Container>
-
       <PageHeader
         badge={
           <>
@@ -52,6 +38,7 @@ export default function Faq() {
             FAQ
           </>
         }
+        breadcrumb={[{ label: t('nav-home'), to: '/' }, { label: 'FAQ' }]}
         title={t('faq-title')}
         description={t('faq-subtitle')}
       />

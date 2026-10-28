@@ -1,9 +1,6 @@
-import { ServiceCards } from '@/components/ServiceCards';
 import { HeartPulse, Building2, Hospital, ShieldPlus, Heart, Pill } from 'lucide-react';
-import { Seo } from '@/components/Seo';
-import { AppLink } from '@/components/AppLink';
-import { Container, Section, PageHeader, SectionTitle } from '@/components/primitives';
-import { ServiceSources } from '@/components/ServiceSources';
+import { Container, Section, SectionTitle } from '@/components/primitives';
+import { ServiceCategoryPage, type CategoryService } from '@/components/ServiceCategoryPage';
 import {
   HotlineGrid,
   HotlineSourceNote,
@@ -12,74 +9,54 @@ import {
 import { medicalHotlines } from '@/lib/hotlines';
 import { useLanguage } from '@/hooks/useLanguage';
 
+const healthServices: CategoryService[] = [
+  {
+    Icon: Hospital,
+    titleKey: 'health-consultation',
+    descKey: 'service-health-consultation-desc',
+  },
+  {
+    Icon: ShieldPlus,
+    titleKey: 'health-vaccination',
+    descKey: 'health-vaccination-desc',
+  },
+  { Icon: Heart, titleKey: 'health-maternal', descKey: 'health-maternal-desc' },
+  {
+    Icon: Pill,
+    titleKey: 'health-medicine',
+    descKey: 'health-medicine-desc',
+    to: '/service-details/mswdo-services',
+  },
+];
+
+// Health shares the category shell; its office guidance and medical hotlines follow the
+// service list as page-specific sections.
 export default function ServicesHealth() {
   const { t } = useLanguage();
   return (
-    <>
-      <Seo
-        title={t('health-page-title')}
-        description={t('health-page-desc')}
-        canonicalPath="/services/health"
-      />
-      <Container>
-        <nav
-          aria-label={t('service-breadcrumb')}
-          className="flex flex-wrap gap-2 py-4 text-sm text-muted-foreground"
-        >
-          <AppLink to="/">{t('nav-home')}</AppLink>
-          <span aria-hidden="true">/</span>
-          <AppLink to="/services">{t('nav-services')}</AppLink>
-          <span aria-hidden="true">/</span>
-          <span aria-current="page">{t('health-page-title')}</span>
-        </nav>
-      </Container>
-      <PageHeader
-        badge={
-          <>
-            <HeartPulse className="size-4" aria-hidden="true" />
-            {t('health-page-badge')}
-          </>
-        }
-        title={t('health-page-title')}
-        description={t('health-page-desc')}
-      />
-      <Section>
-        <Container>
-          <ServiceCards
-            services={[
-              {
-                Icon: Hospital,
-                titleKey: 'health-consultation',
-                descKey: 'service-health-consultation-desc',
-              },
-              {
-                Icon: ShieldPlus,
-                titleKey: 'health-vaccination',
-                descKey: 'health-vaccination-desc',
-              },
-              { Icon: Heart, titleKey: 'health-maternal', descKey: 'health-maternal-desc' },
-              {
-                Icon: Pill,
-                titleKey: 'health-medicine',
-                descKey: 'health-medicine-desc',
-                to: '/service-details/mswdo-services',
-              },
-            ]}
-          />
-        </Container>
-      </Section>
-      <Section compact>
+    <ServiceCategoryPage
+      path="/services/health"
+      seoTitleKey="health-page-title"
+      seoDescription={t('health-page-desc')}
+      badgeIcon={HeartPulse}
+      titleKey="health-page-title"
+      descKey="health-page-desc"
+      services={healthServices}
+    >
+      <Section className="border-t border-line">
         <Container>
           <SectionTitle>
             <Building2 className="size-5" aria-hidden="true" />
             {t('health-section-mho')}
           </SectionTitle>
-          <p className="max-w-3xl text-muted-foreground">{t('service-health-guidance')}</p>
-          <h2 className="mt-6 mb-2 text-xl font-semibold">{t('health-section-bhs')}</h2>
-          <p className="max-w-3xl text-muted-foreground">{t('service-health-directory')}</p>
+          <p className="max-w-3xl text-ink-muted">{t('service-health-guidance')}</p>
+          <h2 className="mt-6 mb-2 text-xl font-semibold text-heading">
+            {t('health-section-bhs')}
+          </h2>
+          <p className="max-w-3xl text-ink-muted">{t('service-health-directory')}</p>
         </Container>
       </Section>
-      <Section compact>
+      <Section className="border-t border-line">
         <Container>
           <SectionTitle>
             <Hospital className="size-5" aria-hidden="true" />
@@ -90,7 +67,6 @@ export default function ServicesHealth() {
           <HotlineSourceNote />
         </Container>
       </Section>
-      <ServiceSources category="health" />
-    </>
+    </ServiceCategoryPage>
   );
 }

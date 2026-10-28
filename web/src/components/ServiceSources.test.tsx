@@ -52,7 +52,7 @@ describe('service evidence and navigation', () => {
   it('distinguishes supported guidance from unconfirmed local transaction details', () => {
     render(<ServiceSources category="education" />);
     expect(
-      screen.getByRole('link', { name: 'DOrSU — Scholarships and Grants' }).getAttribute('href')
+      screen.getByRole('link', { name: /^DOrSU — Scholarships and Grants/ }).getAttribute('href')
     ).toBe('https://dorsu.edu.ph/scholarships-grants/');
     expect(screen.getByText(/listing does not confirm open slots/)).toBeTruthy();
     expect(screen.getByText(/Current Mati fees, complete requirements/)).toBeTruthy();

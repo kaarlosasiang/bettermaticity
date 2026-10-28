@@ -13,6 +13,8 @@
   "/services/environment",
   "/government",
   "/government/officials",
+  "/government/offices",
+  "/government/barangays",
   "/legislative",
   "/legislative/ordinance-framework",
   "/legislative/resolution-framework",
@@ -52,5 +54,6 @@
   "/accessibility",
   "/faq",
   "/sitemap",
-  "/contact"
+  "/contact",
+  "/about"
 ]

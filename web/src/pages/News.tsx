@@ -1,7 +1,6 @@
 import { Newspaper, ArrowRight, ExternalLink } from 'lucide-react';
 import { FaFacebookF } from 'react-icons/fa6';
 import { Seo } from '@/components/Seo';
-import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Container, Section, SectionTitle, PageHeader } from '@/components/primitives';
 import {
@@ -34,19 +33,6 @@ export default function News() {
           canonicalPath="/news"
         />
 
-        <Container>
-          <nav
-            className="flex items-center gap-2 py-4 text-sm text-ink-muted"
-            aria-label="Breadcrumb"
-          >
-            <AppLink to="/" className="hover:text-royal">
-              {t('nav-home')}
-            </AppLink>
-            <span>/</span>
-            <span aria-current="page">{t('news-news-updates')}</span>
-          </nav>
-        </Container>
-
         <PageHeader
           badge={
             <>
@@ -54,6 +40,7 @@ export default function News() {
               {t('news-news-updates')}
             </>
           }
+          breadcrumb={[{ label: t('nav-home'), to: '/' }, { label: t('news-news-updates') }]}
           title={t('news-news-updates')}
           description={t('news-updates-subtitle')}
         />

@@ -15,6 +15,9 @@ import {
   Landmark,
   UserRound,
   Newspaper,
+  MapPin,
+  Phone,
+  BarChart3,
 } from 'lucide-react';
 
 /**
@@ -24,7 +27,14 @@ import {
 export type NavMenuItem = { to: string; key: string; descKey: string; Icon: LucideIcon };
 export type NavMenuGroup = { key: string; items: NavMenuItem[] };
 export type NavMenu = { id: string; groups: NavMenuGroup[] };
-export type NavEntry = { to: string; key: string; menu?: NavMenu; highlight?: boolean };
+export type NavEntry = {
+  to: string;
+  key: string;
+  menu?: NavMenu;
+  highlight?: boolean;
+  /** Extra path prefixes that also mark this entry active (e.g. /legislative under Government). */
+  matches?: string[];
+};
 
 const SERVICES: NavMenu = {
   id: 'services',
@@ -112,11 +122,34 @@ const SERVICES: NavMenu = {
   ],
 };
 
-const LEGISLATIVE: NavMenu = {
-  id: 'legislative',
+const GOVERNMENT: NavMenu = {
+  id: 'government',
   groups: [
     {
-      key: 'nav-group-legislative-process',
+      key: 'nav-group-city-government',
+      items: [
+        {
+          to: '/government/officials',
+          key: 'nav-officials',
+          descKey: 'nav-desc-officials',
+          Icon: UserRound,
+        },
+        {
+          to: '/government/offices',
+          key: 'gov-link-offices',
+          descKey: 'gov-link-offices-desc',
+          Icon: Building2,
+        },
+        {
+          to: '/government/barangays',
+          key: 'gov-link-barangays',
+          descKey: 'gov-link-barangays-desc',
+          Icon: MapPin,
+        },
+      ],
+    },
+    {
+      key: 'nav-group-legislation',
       items: [
         {
           to: '/legislative',
@@ -139,15 +172,21 @@ const LEGISLATIVE: NavMenu = {
       ],
     },
     {
-      key: 'nav-group-related-records',
+      key: 'nav-group-public-information',
       items: [
         {
-          to: '/government/officials',
-          key: 'nav-officials',
-          descKey: 'nav-desc-officials',
-          Icon: UserRound,
+          to: '/contact',
+          key: 'gov-link-hotlines',
+          descKey: 'gov-link-hotlines-desc',
+          Icon: Phone,
         },
         { to: '/budget', key: 'nav-public-funds', descKey: 'nav-desc-public-funds', Icon: Coins },
+        {
+          to: '/statistics',
+          key: 'nav-statistics',
+          descKey: 'gov-link-statistics-desc',
+          Icon: BarChart3,
+        },
         { to: '/news', key: 'nav-news', descKey: 'nav-desc-news', Icon: Newspaper },
       ],
     },
@@ -157,9 +196,9 @@ const LEGISLATIVE: NavMenu = {
 export const NAV: NavEntry[] = [
   { to: '/', key: 'nav-home' },
   { to: '/services', key: 'nav-services', menu: SERVICES },
-  { to: '/government', key: 'nav-government' },
+  { to: '/government', key: 'nav-government', menu: GOVERNMENT, matches: ['/legislative'] },
   { to: '/statistics', key: 'nav-statistics' },
-  { to: '/legislative', key: 'nav-legislative', menu: LEGISLATIVE },
   { to: '/budget', key: 'nav-transparency' },
+  { to: '/about', key: 'nav-about' },
   { to: '/visit-mati', key: 'nav-visit-mati', highlight: true },
 ];

@@ -14,11 +14,7 @@ import {
 import { useLanguage } from '@/hooks/useLanguage';
 import { NAV, type NavEntry, type NavMenu } from '@/lib/navMenus';
 import type { Language } from '@/i18n';
-
-const LANGS: { code: Language; label: string; name: string }[] = [
-  { code: 'en', label: 'EN', name: 'English' },
-  { code: 'ceb', label: 'CEB', name: 'Cebuano' },
-];
+import { LANGS } from '@/lib/languages';
 
 // Highlighted tabs (Visit Mati) get only their first word in Feel-Mati amber;
 // the rest of the label keeps the normal nav styling.
@@ -47,7 +43,8 @@ function GroupNumber({ i }: { i: number }) {
 }
 
 function isActive(entry: NavEntry, pathname: string): boolean {
-  return entry.to === '/' ? pathname === '/' : pathname.startsWith(entry.to);
+  if (entry.to === '/') return pathname === '/';
+  return [entry.to, ...(entry.matches ?? [])].some((prefix) => pathname.startsWith(prefix));
 }
 
 // Desktop mega panel (BetterSanFernando pattern): one column per group, each item an
@@ -62,7 +59,7 @@ function MegaPanel({ menu, label }: { menu: NavMenu; label: string }) {
       <div
         role="region"
         aria-label={label}
-        className="mx-auto grid max-h-[calc(100vh-10rem)] max-w-350 animate-in items-start gap-5 overflow-y-auto rounded-xl bg-white p-6 shadow-[0_0_0_1px_#e9ecef,0_18px_48px_rgba(15,23,42,0.16)] duration-150 fade-in-0 slide-in-from-top-1 motion-reduce:animate-none"
+        className="container mx-auto grid max-h-[calc(100vh-var(--sticky-offset)-2rem)] animate-in items-start gap-5 overflow-y-auto rounded-xl bg-white p-6 shadow-[0_0_0_1px_#e9ecef,0_18px_48px_rgba(15,23,42,0.16)] duration-150 fade-in-0 slide-in-from-top-1 motion-reduce:animate-none"
         style={{ gridTemplateColumns: `repeat(${menu.groups.length}, minmax(0, 1fr))` }}
       >
         {menu.groups.map((group, gi) => (
@@ -234,8 +231,8 @@ export default function Header() {
   const openEntry = NAV.find((e) => e.menu && e.menu.id === openMenu);
 
   return (
-    <header ref={headerRef} className="sticky top-0 z-[1000] border-b border-line bg-white">
-      <div className="mx-auto flex h-16 w-full max-w-350 items-center gap-4 px-6 xl:h-[72px]">
+    <header ref={headerRef} className="relative border-b border-line bg-white">
+      <div className="container mx-auto flex h-16 items-center gap-4 px-4 xl:h-[72px]">
         <AppLink to="/" className="flex shrink-0 items-center" aria-label="Better Mati home">
           <img
             src="/assets/images/logo/better-mati-logo.png"
@@ -310,27 +307,7 @@ export default function Header() {
             <Search className="size-[18px]" aria-hidden="true" />
           </AppLink>
 
-          {/* Desktop language pills */}
-          <div className="hidden items-center gap-1 xl:flex">
-            {LANGS.map((l) => (
-              <button
-                key={l.code}
-                type="button"
-                onClick={() => void setLanguage(l.code)}
-                aria-label={`Switch to ${l.name}`}
-                className={cn(
-                  'rounded-btn border px-2.5 py-1.5 text-xs font-semibold transition',
-                  language === l.code
-                    ? 'border-primary bg-primary text-white'
-                    : 'border-border text-foreground opacity-70 hover:opacity-100'
-                )}
-              >
-                {l.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Mobile compact language dropdown */}
+          {/* Phones/tablets: compact language dropdown (desktop uses the info bar toggle) */}
           <DropdownMenu>
             <DropdownMenuTrigger
               aria-label="Change language"

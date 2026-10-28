@@ -32,6 +32,8 @@
      The four content neutrals read CSS variables (set in :root, swapped by .tone-neutral) so
      they can change per page. */
   --color-ink: #1a1a1a; /* body text */
+  --color-ink-soft: #495057; /* hero lede (BetterSanFernando gray-700) */
+  --color-ink-faint: #6c757d; /* hero note + breadcrumb; 4.7:1 on white (SF's #868e96 is 3.3:1) */
   --color-heading: var(--tone-heading); /* headings */
   --color-ink-muted: var(--tone-ink-muted); /* support text */
   --color-line: var(--tone-line); /* hairline borders */
@@ -145,6 +147,11 @@
   --ring: #2b62ee; /* focus ring = royal */
   --radius: 0px; /* square — see --radius-btn above */
 
+  /* Height of the pinned hotline strip + info bar + header. Layout.tsx measures and
+     overwrites this; these values (135px phones, 156px desktop) only cover the moment
+     before it runs. */
+  --sticky-offset: 8.4375rem;
+
   /* LGU brand extras */
   --brand-primary-dark: #0b2a5e;
   --brand-secondary: #123c7a; /* Pujada navy */
@@ -182,6 +189,12 @@
   --muted-foreground: var(--tone-ink-muted);
 }
 
+@media (min-width: 80rem) {
+  :root {
+    --sticky-offset: 9.75rem;
+  }
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -192,21 +205,20 @@
     outline-offset: 0;
     box-shadow: 0 0 0 6px var(--color-ink);
   }
+  /* Text fields: a royal outline instead of the amber + ink halo, which reads as a broken
+     box around an input. Wrapped fields (ServiceSearch) hide this and show focus on their
+     own border via focus-within. */
+  :is(input:not([type='checkbox'], [type='radio']), textarea, select):focus-visible {
+    outline: 2px solid var(--color-royal);
+    outline-offset: 0;
+    box-shadow: none;
+  }
   body {
     @apply bg-background text-foreground;
   }
   html {
     @apply font-sans;
-  }
-}
-
-/* ── Buttons: compact, uppercase, letter-spaced (shadcn "Lyra" look) ───────────────
-   Applies to the shadcn <Button> and to every link or button styled with rounded-btn. */
-@layer components {
-  :where(a, button).rounded-btn,
-  [data-slot='button'] {
-    font-size: 0.75rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    /* Anchor jumps and keyboard focus land below the pinned chrome, not under it. */
+    scroll-padding-top: calc(var(--sticky-offset) + 1rem);
   }
 }

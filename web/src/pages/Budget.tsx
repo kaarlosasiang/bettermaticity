@@ -182,12 +182,9 @@ export default function Budget() {
               className={heroClasses.breadcrumb}
               items={[{ label: t('nav-home'), to: '/' }, { label: t('nav-transparency') }]}
             />
-            <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+            <div className="grid items-start gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
               <m.div variants={staggerContainer} initial="hidden" animate="show">
-                <m.span
-                  variants={fadeUp}
-                  className="inline-flex items-center gap-2 font-mono text-[0.71875rem] font-semibold tracking-[0.14em] text-royal uppercase"
-                >
+                <m.span variants={fadeUp} className={heroClasses.eyebrow}>
                   {t('nav-transparency')}
                 </m.span>
                 <m.h1 variants={fadeUp} className={heroClasses.title}>

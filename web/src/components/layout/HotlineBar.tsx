@@ -75,7 +75,7 @@ function HotlineItem({
       tabIndex={hidden ? -1 : undefined}
     >
       {showIcon ? <Icon className="size-3 opacity-90" aria-hidden="true" /> : null}
-      <span className="font-semibold">{text}</span> <span className="font-mono">{number}</span>
+      <span className="font-medium">{text}</span> <span className="font-mono">{number}</span>
     </a>
   );
 }
@@ -96,10 +96,10 @@ export default function HotlineBar() {
   return (
     <div className="bg-navy text-[0.8125rem] text-white">
       {/* Desktop: everything visible at once, no motion needed. Item icons are dropped here
-          so the row stays on one line with room to spare (the strip is capped at the
-          1400px container, so wider screens don't add room). */}
+          so the row stays on one line with room to spare at the narrowest desktop
+          container (1280px). */}
       <Container className="hidden xl:block">
-        <div className="flex items-center gap-5 py-2.5">
+        <div className="flex items-center gap-5 py-2.5 text-xs">
           <EmergencyTitle />
           <ul className="flex flex-1 flex-wrap items-center justify-center gap-y-1 divide-x divide-white/30">
             {items.map((h) => (
@@ -109,11 +109,8 @@ export default function HotlineBar() {
             ))}
           </ul>
           {/* Plain <a>: a full load lands on the anchor (client-side links don't scroll to
-              hashes). Shown from 1400px, where it fits beside the numbers on one line. */}
-          <a
-            href="/contact#hotlines"
-            className={cn(linkClass, 'hidden font-semibold min-[1400px]:inline-flex')}
-          >
+              hashes). */}
+          <a href="/contact#hotlines" className={cn(linkClass, 'font-semibold')}>
             {t('hotline-view-all', { defaultValue: 'View all hotlines' })}
             <ArrowRight className="size-3.5" aria-hidden="true" />
           </a>

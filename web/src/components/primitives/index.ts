@@ -16,3 +16,4 @@ export { ScopeAside } from './ScopeAside';
 export { Breadcrumb, type BreadcrumbItem } from './Breadcrumb';
 export { TaskCard } from './TaskCard';
 export { CategoryCard } from './CategoryCard';
+export { SearchField } from './SearchField';

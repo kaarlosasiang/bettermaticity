@@ -1,11 +1,20 @@
 // Shared spacing and type scale for the white page heroes, so PageHeader and the hand-built
-// heroes (Statistics, Budget, Government) stay in step. Hierarchy, top to bottom: mono
-// eyebrow → large bold title (max 48px) → medium-weight dark lede → small muted facts.
+// heroes (Statistics, Budget, Government) stay in step. Copied from BetterSanFernando's
+// page heroes (e.g. /projects/city-projects): breadcrumb → mono eyebrow → title (36/48px)
+// → grey lede (16/18px) → small faint note.
 export const heroClasses = {
-  section: 'border-b border-line bg-white pt-8 pb-12 sm:pt-12 lg:pt-16 lg:pb-20',
-  breadcrumb: 'mb-8 lg:mb-10',
+  section: 'border-b border-line bg-white py-8 sm:py-10 lg:py-12',
+  breadcrumb: 'mb-6',
+  eyebrow:
+    'flex items-center gap-2 font-mono text-[0.6875rem] leading-normal font-medium tracking-[0.18em] text-royal uppercase',
   title:
-    'mt-3 font-display text-[2.25rem] leading-[1.05] font-bold tracking-[-0.03em] text-balance sm:text-[2.75rem] lg:text-[3rem] text-heading',
-  lede: 'mt-5 max-w-[42rem] text-lg leading-snug font-medium text-ink sm:text-[1.375rem]',
-  meta: 'mt-6 text-[0.9375rem] text-ink-muted',
+    'mt-3 font-display text-4xl leading-tight font-bold tracking-[-0.02em] text-balance text-heading md:text-5xl',
+  lede: 'mt-5 text-base leading-7 text-ink-soft md:text-lg',
+  /** Stronger lede used on the services pages (BetterSanFernando category hero). */
+  ledeStrong: 'mt-4 text-lg leading-7 font-medium text-ink sm:text-xl',
+  /** Small faint line under the lede. */
+  note: 'mt-3 text-sm leading-6 text-ink-faint',
+  meta: 'mt-2 text-sm text-ink-faint',
+  /** Facts row: plain items spaced apart, no separators. */
+  facts: 'mt-5 flex flex-wrap items-center gap-x-6 gap-y-1 text-sm text-ink-faint',
 } as const;

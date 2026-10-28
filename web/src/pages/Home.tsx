@@ -231,7 +231,9 @@ export default function Home() {
       <MotionConfig reducedMotion="user">
         <Seo description="Everything the City of Mati does, in one place — government services, public funds, and the coast that makes this place worth the trip." />
         {/* ── Hero: city-hall photo under a navy wash, text left + search card right ── */}
-        <section className="relative isolate overflow-hidden bg-navy text-white">
+        {/* No overflow-hidden: the search results overlay must be able to extend past the
+            hero; z-10 keeps it above the next section. */}
+        <section className="relative isolate z-10 bg-navy text-white">
           <div className="absolute inset-0 -z-10">
             <ImageSlot label="City of Mati" src="./bg-matigov_hero.jpg" />
           </div>

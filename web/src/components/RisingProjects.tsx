@@ -194,7 +194,7 @@ export function RisingProjects({ preview = false }: { preview?: boolean }) {
     <section
       id="rising-in-mati"
       aria-labelledby="rising-heading"
-      className="scroll-mt-28 bg-white py-12 lg:py-14"
+      className="bg-white py-12 lg:py-14"
     >
       <Container>
         {preview ? (
@@ -255,7 +255,7 @@ export function RisingProjects({ preview = false }: { preview?: boolean }) {
                 <article
                   key={project.id}
                   id={projectAnchor(project)}
-                  className="flex scroll-mt-28 flex-col rounded-card border border-line bg-surface-subtle p-5 target:ring-2 target:ring-royal"
+                  className="flex flex-col rounded-card border border-line bg-surface-subtle p-5 target:ring-2 target:ring-royal"
                 >
                   <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_auto]">
                     <div>

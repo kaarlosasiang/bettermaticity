@@ -13,7 +13,6 @@ import {
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { Seo } from '@/components/Seo';
-import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Container, Section, PageHeader } from '@/components/primitives';
 
@@ -76,20 +75,6 @@ export default function Accessibility() {
         canonicalPath="/accessibility"
       />
 
-      {/* Breadcrumbs */}
-      <Container>
-        <nav
-          className="flex items-center gap-2 py-4 text-sm text-muted-foreground"
-          aria-label="Breadcrumb"
-        >
-          <AppLink to="/" className="hover:text-primary">
-            {t('a11y-home')}
-          </AppLink>
-          <span>/</span>
-          <span aria-current="page">{t('a11y-accessibility')}</span>
-        </nav>
-      </Container>
-
       <PageHeader
         badge={
           <>
@@ -97,6 +82,7 @@ export default function Accessibility() {
             {t('a11y-accessibility')}
           </>
         }
+        breadcrumb={[{ label: t('nav-home'), to: '/' }, { label: t('a11y-accessibility') }]}
         title={t('access-title')}
         description={t('access-subtitle')}
       />

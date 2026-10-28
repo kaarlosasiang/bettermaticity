@@ -12,7 +12,7 @@ function LegalSection({ id, children }: { id: string; children: ReactNode }) {
   return (
     <section
       id={id}
-      className="mb-12 scroll-mt-28 border-b border-border pb-12 last:mb-0 last:border-b-0 last:pb-0"
+      className="mb-12 border-b border-border pb-12 last:mb-0 last:border-b-0 last:pb-0"
     >
       {children}
     </section>
@@ -129,20 +129,6 @@ export default function Privacy() {
         canonicalPath="/privacy"
       />
 
-      {/* Breadcrumbs */}
-      <Container>
-        <nav
-          className="flex items-center gap-2 py-4 text-sm text-muted-foreground"
-          aria-label="Breadcrumb"
-        >
-          <a href="/" className="hover:text-primary">
-            {t('privacy-home')}
-          </a>
-          <span>/</span>
-          <span aria-current="page">{t('privacy-privacy-policy')}</span>
-        </nav>
-      </Container>
-
       {/* Hero */}
       <PageHeader
         badge={
@@ -151,6 +137,7 @@ export default function Privacy() {
             {t('privacy-privacy')}
           </>
         }
+        breadcrumb={[{ label: t('nav-home'), to: '/' }, { label: t('privacy-privacy-policy') }]}
         title={t('privacy-privacy-policy')}
         description={t('privacy-how-we-collect-use-and-protect-your-information')}
       />
@@ -160,7 +147,7 @@ export default function Privacy() {
         <Container>
           <div className="grid items-start gap-12 lg:grid-cols-[240px_1fr]">
             {/* Table of Contents */}
-            <aside className="sticky top-[100px] hidden self-start rounded-card bg-white border border-line p-5 shadow-sm lg:block">
+            <aside className="sticky top-[calc(var(--sticky-offset)+1.5rem)] hidden self-start rounded-card bg-white border border-line p-5 shadow-sm lg:block">
               <h4 className="mb-4 flex items-center gap-2 border-b border-border pb-3 text-sm font-semibold text-foreground">
                 <List className="size-4 text-primary" aria-hidden="true" />
                 {t('privacy-contents')}

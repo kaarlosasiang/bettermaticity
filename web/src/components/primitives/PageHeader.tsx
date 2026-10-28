@@ -10,6 +10,10 @@ import { heroClasses } from './hero';
 interface PageHeaderProps {
   title: ReactNode;
   description?: ReactNode;
+  /** `strong` = larger medium-weight lede (services pages). */
+  ledeTone?: 'default' | 'strong';
+  /** Small faint line under the lede. */
+  note?: ReactNode;
   /** Mono kicker above the title. */
   eyebrow?: ReactNode;
   /** @deprecated Alias for `eyebrow`, kept for existing callers. */
@@ -21,6 +25,10 @@ interface PageHeaderProps {
   actions?: ReactNode;
   /** Provenance box in the right column. */
   aside?: { label: ReactNode; title?: ReactNode; body?: ReactNode; footer?: ReactNode };
+  /** Any other right-column content (e.g. a search card); used instead of `aside`. */
+  sidePanel?: ReactNode;
+  /** Full-width content under the title block (e.g. a "Service at a glance" box). */
+  below?: ReactNode;
   /** Hairline stat row under the header. */
   stats?: StatRowItem[];
   /** `light` (default): white BetterSanFernando-style header. `brand`: the old navy band. */
@@ -35,12 +43,16 @@ interface PageHeaderProps {
 export function PageHeader({
   title,
   description,
+  ledeTone = 'default',
+  note,
   eyebrow,
   badge,
   breadcrumb,
   meta,
   actions,
   aside,
+  sidePanel,
+  below,
   stats,
   tone = 'light',
   children,
@@ -48,6 +60,13 @@ export function PageHeader({
 }: PageHeaderProps) {
   const brand = tone === 'brand';
   const kicker = eyebrow ?? badge;
+  const side =
+    sidePanel ??
+    (aside ? (
+      <ScopeAside label={aside.label} title={aside.title} footer={aside.footer}>
+        {aside.body}
+      </ScopeAside>
+    ) : null);
   return (
     <section className={cn(brand ? 'bg-navy py-12 lg:py-16' : heroClasses.section, className)}>
       <Container>
@@ -61,51 +80,42 @@ export function PageHeader({
         <div
           className={cn(
             'grid items-start gap-6 lg:gap-10',
-            aside && 'lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-16'
+            side && 'lg:grid-cols-[minmax(0,1fr)_440px] lg:gap-16'
           )}
         >
           <div className="max-w-3xl">
             {kicker ? (
-              <Eyebrow tone={brand ? 'dark' : 'light'} className="inline-flex items-center gap-2">
+              <Eyebrow tone={brand ? 'dark' : 'light'} className="flex items-center gap-2">
                 {kicker}
               </Eyebrow>
             ) : null}
             <h1 className={cn(heroClasses.title, brand && 'text-white')}>{title}</h1>
             {description ? (
-              <p className={cn(heroClasses.lede, brand && 'text-white/85')}>{description}</p>
-            ) : null}
-            {meta && meta.length > 0 ? (
-              <ul
+              <p
                 className={cn(
-                  heroClasses.meta,
-                  'flex flex-wrap gap-x-4 gap-y-1',
-                  brand && 'text-white/70'
+                  ledeTone === 'strong' ? heroClasses.ledeStrong : heroClasses.lede,
+                  brand && 'text-white/85'
                 )}
               >
+                {description}
+              </p>
+            ) : null}
+            {note ? <p className={cn(heroClasses.note, brand && 'text-white/70')}>{note}</p> : null}
+            {meta && meta.length > 0 ? (
+              <ul className={cn(heroClasses.facts, brand && 'text-white/70')}>
                 {meta.map((m, i) => (
-                  <li
-                    key={i}
-                    className={cn(
-                      i > 0 &&
-                        "before:mr-3 before:inline-block before:size-[3px] before:rounded-full before:bg-current before:align-middle before:content-['']"
-                    )}
-                  >
-                    {m}
-                  </li>
+                  <li key={i}>{m}</li>
                 ))}
               </ul>
             ) : null}
             {actions ? (
-              <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">{actions}</div>
+              <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">{actions}</div>
             ) : null}
-            {children ? <div className="mt-8">{children}</div> : null}
+            {children ? <div className="mt-6">{children}</div> : null}
           </div>
-          {aside ? (
-            <ScopeAside label={aside.label} title={aside.title} footer={aside.footer}>
-              {aside.body}
-            </ScopeAside>
-          ) : null}
+          {side}
         </div>
+        {below ? <div className="mt-8">{below}</div> : null}
         {stats ? (
           <StatRow items={stats} tone={brand ? 'brand' : 'light'} className="mt-10" />
         ) : null}

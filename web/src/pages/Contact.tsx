@@ -11,7 +11,6 @@ import {
   Hospital,
 } from 'lucide-react';
 import { Seo } from '@/components/Seo';
-import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Container, Section, PageHeader } from '@/components/primitives';
 import { emergencyHotlines as emergency, medicalHotlines as medical } from '@/lib/hotlines';
@@ -62,19 +61,6 @@ export default function Contact() {
         canonicalPath="/contact"
       />
 
-      <Container>
-        <nav
-          className="flex items-center gap-2 py-4 text-sm text-muted-foreground"
-          aria-label="Breadcrumb"
-        >
-          <AppLink to="/" className="hover:text-primary">
-            {t('contact-home')}
-          </AppLink>
-          <span>/</span>
-          <span aria-current="page">{t('contact-contact')}</span>
-        </nav>
-      </Container>
-
       <PageHeader
         badge={
           <>
@@ -82,6 +68,7 @@ export default function Contact() {
             {t('contact-contact')}
           </>
         }
+        breadcrumb={[{ label: t('nav-home'), to: '/' }, { label: t('contact-contact') }]}
         title={t('contact-title')}
         description={t('contact-subtitle')}
       />
@@ -173,7 +160,7 @@ export default function Contact() {
       {/* Emergency hotlines (target of the hotline bar's "View all hotlines") */}
       <Section>
         <Container>
-          <div id="hotlines" className="mb-6 scroll-mt-28">
+          <div id="hotlines" className="mb-6">
             <div className="mb-2 flex flex-wrap items-center gap-3">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-[#fef2f2] px-3 py-1 text-xs font-semibold text-[#dc2626]">
                 <TriangleAlert className="size-3.5" aria-hidden="true" />

@@ -61,18 +61,20 @@ function CommandInput({
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Input>) {
   return (
-    <div data-slot="command-input-wrapper" className="p-1 pb-0">
-      <InputGroup className="h-8! rounded-lg! border-input/30 bg-input/30 shadow-none! *:data-[slot=input-group-addon]:pl-2!">
+    // One flat field: the surrounding Command draws the border and the focus state
+    // (focus-within), so the input itself drops the global focus ring.
+    <div data-slot="command-input-wrapper">
+      <InputGroup className="h-11! border-0 bg-transparent shadow-none! *:data-[slot=input-group-addon]:pl-3!">
         <CommandPrimitive.Input
           data-slot="command-input"
           className={cn(
-            'w-full text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50',
+            'h-full w-full bg-transparent pr-3 text-[0.9375rem] text-ink outline-hidden placeholder:text-ink-faint focus-visible:shadow-none disabled:cursor-not-allowed disabled:opacity-50',
             className
           )}
           {...props}
         />
         <InputGroupAddon>
-          <SearchIcon className="size-4 shrink-0 opacity-50" />
+          <SearchIcon className="size-4 shrink-0 text-ink-faint" />
         </InputGroupAddon>
       </InputGroup>
     </div>

@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import HotlineBar from '@/components/layout/HotlineBar';
 import Header from '@/components/layout/Header';
@@ -15,6 +16,22 @@ export default function Layout() {
   // Neutral greys for page content everywhere but the homepage (see .tone-neutral in index.css).
   const { pathname } = useLocation();
   const tone = pathname === '/' ? undefined : 'tone-neutral';
+
+  // The hotline strip, info bar and header are pinned together. Publish their combined
+  // height as --sticky-offset so anchor jumps and keyboard focus (scroll-padding-top in
+  // index.css), sticky asides and the mega menu all clear it at every width.
+  const chromeRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = chromeRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') return;
+    const publish = () =>
+      document.documentElement.style.setProperty('--sticky-offset', `${el.offsetHeight}px`);
+    publish();
+    const observer = new ResizeObserver(publish);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       {/* Site-wide default metadata; pages override via their own <Seo>. */}
@@ -25,9 +42,11 @@ export default function Layout() {
       >
         Skip to main content
       </a>
-      <HotlineBar />
-      <InfoBar />
-      <Header />
+      <div ref={chromeRef} className="sticky top-0 z-[1000]">
+        <HotlineBar />
+        <InfoBar />
+        <Header />
+      </div>
       <main id="main-content" className={tone}>
         <Outlet />
       </main>

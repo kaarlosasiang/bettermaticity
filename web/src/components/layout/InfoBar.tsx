@@ -2,11 +2,13 @@ import { useState, useEffect, useCallback } from 'react';
 import { ArrowLeftRight, Thermometer, Calendar, Clock, MapPin, ExternalLink } from 'lucide-react';
 import { Container } from '@/components/primitives';
 import { useLanguage } from '@/hooks/useLanguage';
+import { LanguageSwitch } from './LanguageSwitch';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 // Thin white utility row between the hotline strip and the header (BetterSanFernando
-// pattern): place + BetterGov link on the left, live figures on the right.
+// pattern): place + BetterGov link on the left, live figures and (desktop) the language
+// toggle on the right.
 // Live USD->PHP (open.er-api.com), Mati weather (open-meteo), PHT clock.
 export default function InfoBar() {
   const { t } = useLanguage();
@@ -109,6 +111,7 @@ export default function InfoBar() {
                 <span className="hidden lg:inline">&nbsp;PHT</span>
               </span>
             </span>
+            <LanguageSwitch className="hidden xl:flex" />
           </div>
         </div>
       </Container>

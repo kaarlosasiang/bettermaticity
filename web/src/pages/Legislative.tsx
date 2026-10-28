@@ -86,19 +86,6 @@ export default function Legislative() {
           canonicalPath="/legislative"
         />
 
-        <Container>
-          <nav
-            className="flex items-center gap-2 py-4 text-sm text-muted-foreground"
-            aria-label="Breadcrumb"
-          >
-            <AppLink to="/" className="hover:text-primary">
-              {t('nav-home')}
-            </AppLink>
-            <span>/</span>
-            <span aria-current="page">{t('nav-legislative')}</span>
-          </nav>
-        </Container>
-
         <PageHeader
           badge={
             <>
@@ -106,6 +93,11 @@ export default function Legislative() {
               {t('leg-sangguniang-bayan')}
             </>
           }
+          breadcrumb={[
+            { label: t('nav-home'), to: '/' },
+            { label: t('nav-government'), to: '/government' },
+            { label: t('nav-legislative') },
+          ]}
           title={t('leg-legislative-documents')}
           description={t('leg-ordinances-and-resolutions-of-the-sangguniang')}
         />
