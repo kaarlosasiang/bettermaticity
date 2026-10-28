@@ -61,7 +61,7 @@ export default function InfoBar() {
       aria-label="Real-time information"
     >
       <Container>
-        <div className="flex flex-nowrap items-center justify-center gap-4 overflow-x-auto py-1.5 whitespace-nowrap [-ms-overflow-style:none] [scrollbar-width:none] lg:justify-between [&::-webkit-scrollbar]:hidden">
+        <div className="flex flex-nowrap items-center justify-center gap-4 overflow-x-auto py-2.5 whitespace-nowrap [-ms-overflow-style:none] [scrollbar-width:none] lg:justify-between [&::-webkit-scrollbar]:hidden">
           <div className="hidden shrink-0 items-center gap-4 lg:flex">
             <span className="inline-flex items-center gap-1.5">
               <MapPin className={icon} aria-hidden="true" />

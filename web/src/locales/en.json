@@ -373,6 +373,8 @@
   "hotline-bar-label": "Emergency contacts",
   "hotline-pause": "Pause scrolling emergency contacts",
   "hotline-resume": "Resume scrolling emergency contacts",
+  "hotline-bar-national": "National",
+  "hotline-view-all": "View all hotlines",
   "a11y-accessibility": "Accessibility",
   "a11y-all-functionality-available-using-only-a-keyboard": "All functionality available using only a keyboard.",
   "a11y-all-images-have-descriptive-alt-text": "All images have descriptive alt text.",

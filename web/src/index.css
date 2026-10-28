@@ -37,8 +37,6 @@
   --color-line: var(--tone-line); /* hairline borders */
   --color-surface-subtle: var(--tone-surface); /* alt band */
   --color-royal-tint: #eef4fe; /* light-blue tint, active nav pill */
-  --color-hotline-from: #b91c1c;
-  --color-hotline-to: #991b1b;
   --color-footer-from: #1a1a1a;
   --color-footer-to: #111111;
   --color-feel-bg: #fffbef;

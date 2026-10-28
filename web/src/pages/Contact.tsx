@@ -170,10 +170,10 @@ export default function Contact() {
         </Container>
       </Section>
 
-      {/* Emergency hotlines */}
+      {/* Emergency hotlines (target of the hotline bar's "View all hotlines") */}
       <Section>
         <Container>
-          <div className="mb-6">
+          <div id="hotlines" className="mb-6 scroll-mt-28">
             <div className="mb-2 flex flex-wrap items-center gap-3">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-[#fef2f2] px-3 py-1 text-xs font-semibold text-[#dc2626]">
                 <TriangleAlert className="size-3.5" aria-hidden="true" />
