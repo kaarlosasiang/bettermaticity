@@ -6,6 +6,7 @@ import ServicesHealth from './pages/ServicesHealth';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import Accessibility from './pages/Accessibility';
+import Changelog from './pages/Changelog';
 import Faq from './pages/Faq';
 import SitemapPage from './pages/SitemapPage';
 import Contact from './pages/Contact';
@@ -80,6 +81,7 @@ export const routes: RouteRecord[] = [
       { path: 'accessibility', Component: Accessibility },
       { path: 'faq', Component: Faq },
       { path: 'sitemap', Component: SitemapPage },
+      { path: 'changelog', Component: Changelog },
       { path: 'contact', Component: Contact },
       { path: 'about', Component: About },
       { path: 'government', Component: Government },

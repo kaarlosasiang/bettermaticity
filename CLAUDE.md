@@ -27,6 +27,7 @@ Repo root:
 - `npm run build:minor` / `build:major` — bump that level, then build without a second bump
 - `npm run serve:dist` — preview the built `dist/` at :8080
 - `npm run version:patch|minor|major` — bump version only (see below)
+- `npm run release [-- minor|patch|major] [--dry-run]` — start a release: bump the version and draft its `data/changelog.json` entry from commits since the last release (see below)
 - `npm run format` / `format:check` — Prettier over the repo (`web/src/locales` is ignored)
 - `npm run package` — build + zip a cPanel-ready release archive
 
@@ -83,7 +84,7 @@ i18next + react-i18next, three languages: `en` / `fil` (Filipino, full) / `ceb` 
 
 ## Version system — single source of truth
 
-`version.json` (root) is the master version. [`scripts/bump-version.js`](scripts/bump-version.js) propagates it to `package.json` and `web/package.json`; `build.sh` calls this automatically. Never hand-edit version strings. At runtime the React `Footer` fetches `/version.json` and renders `Ver. X.X.X`.
+`version.json` (root) is the master version. [`scripts/bump-version.js`](scripts/bump-version.js) propagates it to `package.json` and `web/package.json`; `build.sh` calls this automatically. Never hand-edit version strings. The React `Footer` imports `version.json` at build time (build.sh bumps it before the Vite build) and renders `Ver. X.X.X` linking to `/changelog`. Release notes live in `data/changelog.json`: a minor/major bump needs a matching entry there, or `npm test` fails; patch bumps from routine builds do not. `npm run release` does the bump and drafts the entry; every drafted line starts with `TODO` and `npm test` fails until each is rewritten for residents or deleted.
 
 ## Build & deploy (`build.sh`)
 

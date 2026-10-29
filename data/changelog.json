@@ -1,0 +1,171 @@
+{
+  "_note": "Plain-language log of notable changes to BetterMati.org, rendered at /changelog. One entry per release, newest first. Start a release with `npm run release` (repo root): it bumps version.json (minor by default; pass patch for fix-only releases) and drafts this entry from the commits since the last release. Rewrite every TODO line for residents before committing; npm test fails while any remain. type is one of new | improved | fixed. Leave out developer-only work (CI, refactors, tests, docs).",
+  "entries": [
+    {
+      "date": "2026-10-29",
+      "title": "Government, About and site pages",
+      "version": "1.9.0",
+      "changes": [
+        {
+          "type": "new",
+          "text": "Separate pages for Elected officials, City offices and Barangays, each with a search filter."
+        },
+        {
+          "type": "new",
+          "text": "An About page explaining why BetterMati.org exists, how information is checked, and that it is independent of the City Government."
+        },
+        {
+          "type": "new",
+          "text": "A Site index listing every section of the site, and this changelog."
+        },
+        {
+          "type": "improved",
+          "text": "Service category and guide pages now have a search box, an at-a-glance summary, and a clear official-source section."
+        },
+        {
+          "type": "improved",
+          "text": "A rewritten accessibility statement that lists what the site does today and its known limitations."
+        },
+        {
+          "type": "improved",
+          "text": "A new footer with links to every main section, and screen readers now announce the page in the language you choose."
+        },
+        {
+          "type": "fixed",
+          "text": "Opening a new page now starts at the top instead of keeping the previous page's scroll position."
+        }
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "title": "A new look",
+      "version": "1.8.0",
+      "changes": [
+        {
+          "type": "improved",
+          "text": "The whole site was restyled with a cleaner layout, neutral colours and clearer headings."
+        },
+        {
+          "type": "improved",
+          "text": "The emergency hotline strip is easier to read, keeps the numbers on one line, and links to the full hotline list."
+        },
+        {
+          "type": "improved",
+          "text": "The language selector moved into the top bar, and the top bars stay in view as you scroll."
+        }
+      ]
+    },
+    {
+      "date": "2026-10-06",
+      "title": "Visit Mati",
+      "version": "1.7.0",
+      "changes": [
+        {
+          "type": "new",
+          "text": "A Visit Mati guide with pages for Dahican Beach, Mount Hamiguitan, Pujada Bay, the Sleeping Dinosaur and the Subangan Museum."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-25",
+      "title": "Projects and service references",
+      "version": "1.6.0",
+      "changes": [
+        {
+          "type": "new",
+          "text": "A homepage section highlighting city projects."
+        },
+        {
+          "type": "improved",
+          "text": "Service listings were reorganised and linked to the official documents they are based on."
+        },
+        {
+          "type": "improved",
+          "text": "The site has a proper icon when added to a phone's home screen."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-21",
+      "title": "Officials, statistics and budget",
+      "version": "1.5.0",
+      "changes": [
+        {
+          "type": "improved",
+          "text": "Elected officials now show names verified from the May 2025 local election."
+        },
+        {
+          "type": "improved",
+          "text": "The Statistics and Budget pages were reworked with clearer charts and layout."
+        },
+        {
+          "type": "improved",
+          "text": "A language dropdown in the header for switching between English, Filipino and Cebuano."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-18",
+      "title": "Emergency hotlines",
+      "version": "1.4.1",
+      "changes": [
+        {
+          "type": "fixed",
+          "text": "The emergency hotline numbers were updated from a sourced list."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-16",
+      "title": "A faster site",
+      "version": "1.4.0",
+      "changes": [
+        {
+          "type": "improved",
+          "text": "The whole site was rebuilt as a faster, pre-rendered app, including all 22 service guides."
+        },
+        {
+          "type": "fixed",
+          "text": "Core facts about the City of Mati were corrected across the site."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-10",
+      "title": "Barangay data",
+      "version": "1.3.0",
+      "changes": [
+        {
+          "type": "new",
+          "text": "Reference data for Mati's 26 barangays, based on the PSA's official geographic codes."
+        },
+        {
+          "type": "improved",
+          "text": "The Statistics page now carries City of Mati branding."
+        }
+      ]
+    },
+    {
+      "date": "2026-08-25",
+      "title": "BetterMati.org",
+      "version": "1.2.0",
+      "changes": [
+        {
+          "type": "new",
+          "text": "The project was rebranded as BetterMati.org for the City of Mati, Davao Oriental."
+        }
+      ]
+    },
+    {
+      "date": "2026-08-17",
+      "title": "First release",
+      "version": "1.0.0",
+      "changes": [
+        {
+          "type": "new",
+          "text": "The first version of the site, built from an open-source local-government portal template."
+        }
+      ]
+    }
+  ]
+}

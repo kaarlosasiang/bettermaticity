@@ -43,6 +43,8 @@ export async function loadLanguage(lang: Language): Promise<void> {
 export async function setLanguage(lang: Language): Promise<void> {
   await loadLanguage(lang);
   await i18n.changeLanguage(lang);
+  // Screen readers pick pronunciation from <html lang>.
+  document.documentElement.lang = lang;
   try {
     localStorage.setItem(STORAGE_KEY, lang);
   } catch {

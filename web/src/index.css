@@ -195,6 +195,17 @@
   }
 }
 
+/* Page container: Tailwind's stepped `container`, a little narrower on wide screens than
+   its 1280px / 1536px steps. Used by <Container> and the header row. */
+@utility container {
+  @media (width >= 80rem) {
+    max-width: 75rem;
+  }
+  @media (width >= 96rem) {
+    max-width: 82.5rem;
+  }
+}
+
 @layer base {
   * {
     @apply border-border;

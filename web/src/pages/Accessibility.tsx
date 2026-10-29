@@ -1,77 +1,97 @@
+import type { ReactNode } from 'react';
+import type { LucideIcon } from 'lucide-react';
 import {
   Accessibility as AccessibilityIcon,
-  CircleCheck,
+  ArrowRight,
+  ArrowUpRight,
+  Contrast,
   Keyboard,
-  Eye,
-  Type,
-  Palette,
-  Smartphone,
-  Hourglass,
-  CircleAlert,
+  Languages,
+  LayoutList,
   Mail,
-  Heart,
+  MousePointerClick,
+  ImageIcon,
 } from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
+import { FaGithub } from 'react-icons/fa6';
 import { Seo } from '@/components/Seo';
+import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Container, Section, PageHeader } from '@/components/primitives';
+import { Container, Eyebrow, PageHeader } from '@/components/primitives';
 
-const features: { Icon: LucideIcon; title: string; desc: string }[] = [
-  {
-    Icon: Keyboard,
-    title: 'a11y-keyboard-navigation',
-    desc: 'a11y-all-functionality-available-using-only-a-keyboard',
-  },
-  {
-    Icon: Eye,
-    title: 'a11y-screen-reader-support',
-    desc: 'a11y-compatible-with-jaws-nvda-and-voiceover',
-  },
-  {
-    Icon: Type,
-    title: 'a11y-text-alternatives',
-    desc: 'a11y-all-images-have-descriptive-alt-text',
-  },
-  {
-    Icon: Palette,
-    title: 'a11y-color-contrast',
-    desc: 'a11y-meets-wcag-aa-contrast-requirements',
-  },
-  {
-    Icon: Smartphone,
-    title: 'a11y-responsive-design',
-    desc: 'a11y-works-on-all-devices-and-screen-sizes',
-  },
-  {
-    Icon: Hourglass,
-    title: 'a11y-no-time-limits',
-    desc: 'a11y-no-time-limits-on-reading-or-interacting',
-  },
+const WCAG_URL = 'https://www.w3.org/WAI/standards-guidelines/wcag/';
+const ISSUE_URL = `https://github.com/kaarlosasiang/bettermaticity/issues/new?title=${encodeURIComponent(
+  'Accessibility issue: '
+)}`;
+
+const MEASURES: { Icon: LucideIcon; key: string }[] = [
+  { Icon: LayoutList, key: 'semantic' },
+  { Icon: Keyboard, key: 'keyboard' },
+  { Icon: ImageIcon, key: 'alt' },
+  { Icon: Contrast, key: 'contrast' },
+  { Icon: MousePointerClick, key: 'motion' },
+  { Icon: Languages, key: 'languages' },
 ];
 
-const limitations = [
-  'a11y-some-pdf-documents-may-not-be-fully-accessible-to',
-  'a11y-some-thirdparty-embedded-content-may-have',
-];
+const LIMITATIONS = ['pdf', 'external', 'translations'];
 
-// Tech stack chips. ARIA is a literal in the legacy markup (no data-i18n key).
-const techTags: { key?: string; label?: string }[] = [
-  { key: 'a11y-html5' },
-  { key: 'a11y-css3' },
-  { key: 'a11y-javascript' },
-  { key: 'a11y-react' },
-  { key: 'a11y-typescript' },
-  { label: 'ARIA' },
-];
+// One titled band per topic, separated by hairlines (BetterSanFernando pattern).
+function Band({
+  id,
+  eyebrow,
+  title,
+  children,
+  last,
+}: {
+  id: string;
+  eyebrow: string;
+  title: string;
+  children: ReactNode;
+  last?: boolean;
+}) {
+  return (
+    <section
+      className={
+        'border-b border-line bg-white py-10 sm:py-12 lg:py-14' +
+        (last ? ' pb-16 sm:pb-20 lg:pb-24' : '')
+      }
+      aria-labelledby={`${id}-heading`}
+    >
+      <Container>
+        <div className="max-w-3xl">
+          <Eyebrow>{eyebrow}</Eyebrow>
+          <h2
+            id={`${id}-heading`}
+            className="mt-2 text-2xl font-bold tracking-[-0.02em] text-heading md:text-3xl"
+          >
+            {title}
+          </h2>
+        </div>
+        {children}
+      </Container>
+    </section>
+  );
+}
 
+function Item({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <div className="space-y-2">
+      <h3 className="text-base font-bold text-heading sm:text-lg">{title}</h3>
+      <p className="text-sm leading-6 text-ink-soft">{children}</p>
+    </div>
+  );
+}
+
+// Accessibility statement, laid out like BetterSanFernando's /accessibility: a hero
+// with the working standard, then approach, measures, known limitations and a
+// feedback box. It states a working goal, not a certified conformance level.
 export default function Accessibility() {
   const { t } = useLanguage();
 
   return (
     <>
       <Seo
-        title={t('access-title')}
-        description="Accessibility statement for BetterMati.org. Our commitment to making municipal services accessible to all citizens of Mati, Davao Oriental through WCAG compliance."
+        title={t('a11y-accessibility')}
+        description="How BetterMati.org approaches accessibility: WCAG 2.1 Level AA as a working goal, the measures in place, known limitations, and how to report a problem."
         canonicalPath="/accessibility"
       />
 
@@ -79,135 +99,147 @@ export default function Accessibility() {
         badge={
           <>
             <AccessibilityIcon className="size-4" aria-hidden="true" />
-            {t('a11y-accessibility')}
+            {t('a11y-page-eyebrow')}
           </>
         }
         breadcrumb={[{ label: t('nav-home'), to: '/' }, { label: t('a11y-accessibility') }]}
-        title={t('access-title')}
-        description={t('access-subtitle')}
+        title={t('a11y-accessibility')}
+        description={t('a11y-page-lede')}
+        aside={{
+          label: t('a11y-page-standard-label'),
+          title: 'WCAG 2.1 Level AA',
+          body: t('a11y-page-standard-body'),
+          footer: (
+            <a
+              href={WCAG_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-sans text-xs font-semibold text-royal hover:underline"
+            >
+              {t('a11y-page-wcag-link')}
+              <ArrowUpRight className="size-3.5" aria-hidden="true" />
+            </a>
+          ),
+        }}
       />
 
-      <Section>
+      <Band
+        id="approach"
+        eyebrow={t('a11y-page-approach-eyebrow')}
+        title={t('a11y-page-approach-title')}
+      >
+        <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-12">
+          <div className="space-y-2">
+            <h3 className="text-base font-bold text-heading sm:text-lg">
+              {t('a11y-page-standard-label')}
+            </h3>
+            <p className="text-sm leading-6 text-ink-soft">{t('a11y-page-approach-standard')}</p>
+            <div className="pt-2">
+              <a
+                href={WCAG_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-royal hover:underline"
+              >
+                {t('a11y-page-wcag-link')}
+                <ArrowUpRight className="size-3.5" aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+          <Item title={t('a11y-page-approach-means-title')}>{t('a11y-page-approach-means')}</Item>
+        </div>
+      </Band>
+
+      <Band
+        id="measures"
+        eyebrow={t('a11y-page-measures-eyebrow')}
+        title={t('a11y-page-measures-title')}
+      >
+        <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-3 lg:gap-10">
+          {MEASURES.map(({ Icon, key }) => (
+            <div key={key} className="space-y-2">
+              <span className="flex size-8 items-center justify-center bg-surface-subtle text-royal">
+                <Icon className="size-4" aria-hidden="true" />
+              </span>
+              <h3 className="pt-1 text-base font-bold text-heading">
+                {t(`a11y-page-measure-${key}`)}
+              </h3>
+              <p className="text-sm leading-6 text-ink-muted">
+                {t(`a11y-page-measure-${key}-desc`)}
+              </p>
+            </div>
+          ))}
+        </div>
+      </Band>
+
+      <Band
+        id="limitations"
+        eyebrow={t('a11y-page-limits-eyebrow')}
+        title={t('a11y-page-limits-title')}
+      >
+        <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-3 lg:gap-12">
+          {LIMITATIONS.map((key) => (
+            <Item key={key} title={t(`a11y-page-limit-${key}`)}>
+              {t(`a11y-page-limit-${key}-desc`)}
+            </Item>
+          ))}
+        </div>
+        <div className="mt-8 border-t border-line pt-4">
+          <p className="text-sm leading-6 text-ink-muted">{t('a11y-page-limits-note')}</p>
+        </div>
+      </Band>
+
+      <section
+        className="bg-white py-10 pb-16 sm:py-12 sm:pb-20 lg:py-14 lg:pb-24"
+        aria-labelledby="feedback-heading"
+      >
         <Container>
-          <div className="mx-auto max-w-[820px]">
-            {/* Conformance Badge */}
-            <div className="mb-12 flex justify-center">
-              <div className="inline-flex items-center gap-3 rounded-card bg-[linear-gradient(135deg,var(--brand-success)_0%,#05c793_100%)] px-6 py-4 text-white">
-                <CircleCheck className="size-8" aria-hidden="true" />
-                <div>
-                  <span className="block text-xs uppercase tracking-[1px] opacity-90">
-                    {t('a11y-wcag-21-level-aa')}
-                  </span>
-                  <span className="block text-xl font-bold">{t('a11y-conformant')}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Commitment */}
-            <div className="mb-12">
-              <h2 className="mb-6 border-b-2 border-muted pb-4 text-xl font-semibold text-foreground">
-                {t('access-commitment')}
-              </h2>
-              <p className="leading-relaxed text-muted-foreground">
-                {t('a11y-better-mati-is-committed-to-ensuring-digital')}
-              </p>
-            </div>
-
-            {/* Features Grid */}
-            <div className="mb-12">
-              <h2 className="mb-6 border-b-2 border-muted pb-4 text-xl font-semibold text-foreground">
-                {t('access-features')}
-              </h2>
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-                {features.map(({ Icon, title, desc }) => (
-                  <div key={title} className="rounded-lg bg-muted p-6 text-center">
-                    <Icon className="mx-auto mb-2 size-6 text-primary" aria-hidden="true" />
-                    <h3 className="m-0 mb-1 text-sm text-foreground">{t(title)}</h3>
-                    <p className="m-0 text-[0.8125rem] text-muted-foreground">{t(desc)}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Known Limitations */}
-            <div className="mb-12">
-              <h2 className="mb-6 border-b-2 border-muted pb-4 text-xl font-semibold text-foreground">
-                {t('access-limitations')}
-              </h2>
-              <ul className="list-none p-0">
-                {limitations.map((key) => (
-                  <li
-                    key={key}
-                    className="flex items-start gap-3 border-b border-border py-3 text-muted-foreground last:border-b-0"
-                  >
-                    <CircleAlert
-                      className="mt-0.5 size-4 shrink-0 text-brand-accent"
-                      aria-hidden="true"
-                    />
-                    <span>{t(key)}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Alternative Access */}
-            <div className="mb-12">
-              <h2 className="mb-6 border-b-2 border-muted pb-4 text-xl font-semibold text-foreground">
-                {t('access-alternative')}
-              </h2>
-              <p className="leading-relaxed text-muted-foreground">
-                {t('a11y-if-you-encounter-difficulty-accessing-any')}
-              </p>
-              <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
-                <a
-                  href="mailto:volunteer@bettermati.org"
-                  className="group flex items-center gap-3 rounded-lg bg-muted p-4 text-foreground no-underline transition-colors hover:bg-primary hover:text-white"
+          <div className="border border-line bg-surface-subtle p-6 sm:p-8">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+              <div className="max-w-2xl">
+                <Eyebrow>{t('a11y-page-feedback-eyebrow')}</Eyebrow>
+                <h2
+                  id="feedback-heading"
+                  className="mt-1 text-xl font-bold tracking-[-0.02em] text-heading sm:text-2xl"
                 >
-                  <Mail
-                    className="size-5 text-primary transition-colors group-hover:text-white"
-                    aria-hidden="true"
-                  />
-                  <span className="text-[0.9375rem] font-medium">
-                    {t('a11y-volunteerbettermatiorg')}
-                  </span>
+                  {t('a11y-page-feedback-title')}
+                </h2>
+                <p className="mt-2 text-sm leading-6 text-ink-soft">
+                  {t('a11y-page-feedback-text')}
+                </p>
+              </div>
+              <div className="flex flex-col gap-2.5 sm:flex-row lg:flex-col">
+                <a
+                  href={ISSUE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-11 items-center justify-center gap-2 rounded-btn bg-royal px-4 text-sm font-semibold text-white transition-colors hover:bg-navy"
+                >
+                  <FaGithub className="size-4" aria-hidden="true" />
+                  {t('a11y-page-feedback-github')}
+                  <ArrowUpRight className="size-3.5" aria-hidden="true" />
+                </a>
+                <a
+                  href="mailto:volunteer@bettermati.org?subject=Accessibility%20issue"
+                  className="inline-flex h-11 items-center justify-center gap-2 rounded-btn border border-line bg-white px-4 text-sm font-semibold text-heading transition-colors hover:border-royal hover:text-royal"
+                >
+                  <Mail className="size-4" aria-hidden="true" />
+                  volunteer@bettermati.org
                 </a>
               </div>
             </div>
-
-            {/* Technical Specifications */}
-            <div className="mb-12">
-              <h2 className="mb-6 border-b-2 border-muted pb-4 text-xl font-semibold text-foreground">
-                {t('access-technical')}
-              </h2>
-              <div className="flex flex-wrap gap-2">
-                {techTags.map(({ key, label }) => (
-                  <span
-                    key={key ?? label}
-                    className="rounded-full bg-muted px-4 py-2 text-sm font-medium text-foreground"
-                  >
-                    {key ? t(key) : label}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Promise Card */}
-            <div className="mt-12 flex flex-col items-start gap-6 rounded-card bg-[linear-gradient(135deg,var(--primary)_0%,var(--brand-secondary)_100%)] p-8 text-white md:flex-row md:text-left max-md:text-center max-md:items-center">
-              <Heart className="size-6 shrink-0 opacity-80" aria-hidden="true" />
-              <div>
-                <h3 className="m-0 mb-2 text-lg text-white">{t('access-promise')}</h3>
-                <p className="m-0 text-white/90">
-                  {t('a11y-better-mati-is-committed-to-ensuring-that-our')}
-                </p>
-              </div>
-            </div>
-
-            <p className="mt-8 text-center text-sm text-muted-foreground">
-              {t('a11y-last-updated-november-29-2025')}
-            </p>
+          </div>
+          <div className="mt-8 text-sm">
+            <AppLink
+              to="/sitemap"
+              className="inline-flex items-center gap-1 font-semibold text-royal hover:underline"
+            >
+              {t('a11y-page-site-index')}
+              <ArrowRight className="size-3.5" aria-hidden="true" />
+            </AppLink>
           </div>
         </Container>
-      </Section>
+      </section>
     </>
   );
 }
