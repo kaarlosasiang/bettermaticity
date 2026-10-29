@@ -7,7 +7,8 @@
 // names no longer match, so returning visitors stop being served the old copy.
 // v8: footer logo switched to the Mati white PNG (the old white SVG was the Solano mark).
 // v9: new Sleeping Dinosaur logo, favicon and PWA icons.
-var CACHE_VERSION = 'v9';
+// v10: /data/ requests go network-first; drops copies of news.json cached as static.
+var CACHE_VERSION = 'v10';
 var STATIC_CACHE = 'bettermati-static-' + CACHE_VERSION;
 var RUNTIME_CACHE = 'bettermati-runtime-' + CACHE_VERSION;
 var OFFLINE_URL = '/offline.html';
@@ -151,6 +152,29 @@ self.addEventListener('fetch', function (event) {
     return;
   }
 
+  // ── Data/API requests: Network-first with short cache ──
+  // Checked before static assets: /data/*.json (e.g. news.json, updated without a
+  // rebuild) would otherwise match the .json rule and be served stale.
+  if (isDataRequest(url)) {
+    event.respondWith(
+      fetch(event.request)
+        .then(function (response) {
+          if (response.ok) {
+            var clone = response.clone();
+            caches.open(RUNTIME_CACHE).then(function (cache) {
+              cache.put(event.request, clone);
+              trimCache(RUNTIME_CACHE, RUNTIME_CACHE_LIMIT);
+            });
+          }
+          return response;
+        })
+        .catch(function () {
+          return caches.match(event.request);
+        })
+    );
+    return;
+  }
+
   // ── Static assets: Stale-while-revalidate ──
   if (isStaticAsset(url)) {
     event.respondWith(
@@ -172,27 +196,6 @@ self.addEventListener('fetch', function (event) {
         // Return cached immediately, update in background
         return cached || fetchPromise;
       })
-    );
-    return;
-  }
-
-  // ── Data/API requests: Network-first with short cache ──
-  if (isDataRequest(url)) {
-    event.respondWith(
-      fetch(event.request)
-        .then(function (response) {
-          if (response.ok) {
-            var clone = response.clone();
-            caches.open(RUNTIME_CACHE).then(function (cache) {
-              cache.put(event.request, clone);
-              trimCache(RUNTIME_CACHE, RUNTIME_CACHE_LIMIT);
-            });
-          }
-          return response;
-        })
-        .catch(function () {
-          return caches.match(event.request);
-        })
     );
     return;
   }

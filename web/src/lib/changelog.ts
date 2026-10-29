@@ -25,7 +25,7 @@ export const entries: ChangelogEntry[] = [...(changelog.entries as ChangelogEntr
   b.date.localeCompare(a.date)
 );
 
-const LOCALES: Record<string, string> = { en: 'en-PH', fil: 'fil-PH', ceb: 'ceb-PH' };
+const LOCALES: Record<string, string> = { en: 'en-PH', ceb: 'ceb-PH' };
 
 // UTC so the prerendered date and the hydrated one never differ by a day.
 export function formatChangeDate(date: string, language = 'en'): string {

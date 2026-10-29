@@ -284,6 +284,19 @@ export default function Faq() {
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground">
                     <p>
+                      {t('faq-dev-maintainer-before')}{' '}
+                      <a
+                        href="https://kaarlosasiang.vercel.app/"
+                        className="text-primary"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Kaarlo Sasiang
+                      </a>
+                      {t('faq-dev-maintainer-after')}
+                    </p>
+                    <p>
+                      {t('faq-dev-template-before')}{' '}
                       <a
                         href="https://ramonloganjr.com/"
                         className="text-primary"
@@ -291,8 +304,8 @@ export default function Faq() {
                         rel="noopener noreferrer"
                       >
                         {t('faq-ramon-logan-jr')}
-                      </a>{' '}
-                      is the developer behind{' '}
+                      </a>
+                      {t('faq-dev-template-after')}{' '}
                       <a
                         href="https://abakada.org"
                         className="text-primary"
@@ -300,48 +313,10 @@ export default function Faq() {
                         rel="noopener noreferrer"
                       >
                         {t('faq-abakadaorg')}
-                      </a>{' '}
-                      and BetterMati.org, a community-driven initiative building a digital bridge
-                      between the residents of Mati and the local government of Mati. Based in the
-                      United Arab Emirates, he works in IT and practices full-stack development,
-                      helping build practical digital solutions in web development, design, cloud
-                      services, and cybersecurity.
-                    </p>
-                    <p>
-                      He also started{' '}
-                      <a
-                        href="https://hellopinas.com"
-                        className="text-primary"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {t('faq-hellopinascom')}
                       </a>
-                      , a small cloud-based solutions initiative. Ramon contributes to{' '}
-                      <a
-                        href="https://bettergov.ph"
-                        className="text-primary"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {t('faq-bettergovph')}
-                      </a>
-                      , a volunteer-driven civic-tech effort focused on improving access to local
-                      government information and services in the Philippines.
+                      .
                     </p>
-                    <p>
-                      He is also an individual participant of the{' '}
-                      <a
-                        href="https://openjsf.org/"
-                        className="text-primary"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {t('faq-openjs-foundation')}
-                      </a>
-                      , a nonprofit supporting open-source JavaScript communities worldwide.
-                    </p>
-                    <p>{t('faq-ramon-has-made-the-mati-project-open-source')}</p>
+                    <p>{t('faq-dev-open-source')}</p>
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>

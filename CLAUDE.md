@@ -74,13 +74,13 @@ The one exception is **`news.json`**, fetched at runtime from `/data/news.json` 
 
 ## i18n (`web/src/i18n.ts`)
 
-i18next + react-i18next, three languages: `en` / `fil` (Filipino, full) / `ceb` (Cebuano).
+i18next + react-i18next, two languages: `en` / `ceb` (Cebuano). Filipino (`fil`) was removed on 2026-10-06 (`5e0217f`); don't claim it in copy.
 
 - **Flat kebab-case keys.** `keySeparator` and `nsSeparator` are `false` — a `.` or `:` in a key is literal, not a path.
-- `en` is bundled (needed synchronously for prerender + hydration); `fil` and `ceb` are code-split and fetched on first switch via `loadLanguage`.
+- `en` is bundled (needed synchronously for prerender + hydration); `ceb` is code-split and fetched on first switch via `loadLanguage`.
 - The choice persists in `localStorage` under `selectedLang`, read client-only in a `useEffect` so the first render stays `en` and matches the prerendered HTML. **Don't move that read to render time** — it causes a hydration mismatch.
-- `ceb.json` is a small machine-assisted starter set (~8 KB vs ~349 KB for `en`), so most Cebuano strings currently fall back to English pending a full translation + native review.
-- Any new UI string needs a key in `en.json` (required), plus `fil`/`ceb` when available. Missing keys fall back to English automatically.
+- `ceb.json` is a small machine-assisted starter set (~20% of `en`'s keys), so most Cebuano strings currently fall back to English pending a full translation + native review.
+- Any new UI string needs a key in `en.json` (required), plus `ceb` when available. Missing keys fall back to English automatically.
 
 ## Version system — single source of truth
 
