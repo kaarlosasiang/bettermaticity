@@ -19,6 +19,26 @@
           "text": "A Site index listing every section of the site, and this changelog."
         },
         {
+          "type": "new",
+          "text": "A Data sources page listing every dataset on the site, who stands behind it, when it was last checked, and how far it is verified."
+        },
+        {
+          "type": "new",
+          "text": "A Transparency section: City finances for FY2021–FY2025, projects and procurement, 22 archived Full Disclosure reports, an official documents library, and an explanation of how the site publishes data."
+        },
+        {
+          "type": "new",
+          "text": "Searchable projects and procurement tables, now including the 12 notices the City has open on PhilGEPS, each linked to its official notice."
+        },
+        {
+          "type": "new",
+          "text": "An Official links page listing the City’s websites, online services and Facebook page, plus the national portals that cover Mati, each checked."
+        },
+        {
+          "type": "new",
+          "text": "Site-wide search: the search button now looks across every page, service, office, project, procurement notice, document and official link."
+        },
+        {
           "type": "improved",
           "text": "Service category and guide pages now have a search box, an at-a-glance summary, and a clear official-source section."
         },
@@ -31,8 +51,36 @@
           "text": "A new footer with links to every main section, and screen readers now announce the page in the language you choose."
         },
         {
+          "type": "improved",
+          "text": "The Contact, FAQ, Terms, Privacy, legislation and News pages now match the rest of the site, and the Contact page puts emergency numbers first."
+        },
+        {
+          "type": "improved",
+          "text": "Menus in the top navigation open when you point at them with a mouse."
+        },
+        {
+          "type": "improved",
+          "text": "Pages load faster on phones: each page now downloads only the code it needs instead of the whole site at once."
+        },
+        {
           "type": "fixed",
           "text": "Opening a new page now starts at the top instead of keeping the previous page's scroll position."
+        },
+        {
+          "type": "fixed",
+          "text": "A mistyped or outdated link now shows a proper \"Page not found\" page instead of an error screen."
+        },
+        {
+          "type": "fixed",
+          "text": "The footer's Citizen's Charter link no longer worked on the City website; it is replaced by the official documents library, which lists the Charter as unavailable."
+        },
+        {
+          "type": "fixed",
+          "text": "The Sangguniang Panlungsod link in the Site index pointed to a web address that does not exist; it now opens the council’s page on the City website."
+        },
+        {
+          "type": "fixed",
+          "text": "The FAQ no longer claims the City is preparing online payments; it says what we actually found."
         }
       ]
     },

@@ -54,6 +54,7 @@ const CITY_GOVERNMENT: HubLink[] = [
   },
   { to: '/government/offices', key: 'gov-link-offices', descKey: 'gov-link-offices-desc' },
   { to: '/government/barangays', key: 'gov-link-barangays', descKey: 'gov-link-barangays-desc' },
+  { to: '/government/links', key: 'links-title', descKey: 'nav-desc-official-links' },
 ];
 
 const GROUPS: { Icon: LucideIcon; titleKey: string; descKey: string; links: HubLink[] }[] = [
@@ -85,7 +86,7 @@ const GROUPS: { Icon: LucideIcon; titleKey: string; descKey: string; links: HubL
     descKey: 'gov-public-desc',
     links: [
       { to: '/contact#hotlines', key: 'gov-link-hotlines', descKey: 'gov-link-hotlines-desc' },
-      { to: '/budget', key: 'nav-public-funds', descKey: 'nav-desc-public-funds' },
+      { to: '/transparency/finance', key: 'nav-public-funds', descKey: 'nav-desc-public-funds' },
       { to: '/statistics', key: 'nav-statistics', descKey: 'gov-link-statistics-desc' },
     ],
   },

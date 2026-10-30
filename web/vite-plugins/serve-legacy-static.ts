@@ -53,7 +53,10 @@ export function serveLegacyStatic(): Plugin {
         if (!filePath.startsWith(repoRoot)) return next();
         if (!fs.existsSync(filePath) || !fs.statSync(filePath).isFile()) return next();
 
-        res.setHeader('Content-Type', MIME[path.extname(filePath).toLowerCase()] || 'application/octet-stream');
+        res.setHeader(
+          'Content-Type',
+          MIME[path.extname(filePath).toLowerCase()] || 'application/octet-stream'
+        );
         fs.createReadStream(filePath).pipe(res);
       });
     },

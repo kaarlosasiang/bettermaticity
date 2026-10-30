@@ -17,6 +17,11 @@
     # RewriteCond %{HTTP_HOST} !^www\. [NC]
     # RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
     
+    # Pages moved into the Transparency section (2026-10-29).
+    RewriteRule ^budget/?$ /transparency/finance [R=301,L]
+    RewriteRule ^sources/?$ /transparency/sources [R=301,L]
+    RewriteRule ^service-details/mswdo/?$ /service-details/mswdo-services [R=301,L]
+
     # Remove .html extension from URLs (redirect to clean URL)
     RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
     RewriteRule ^ /%1 [NC,L,R=301]

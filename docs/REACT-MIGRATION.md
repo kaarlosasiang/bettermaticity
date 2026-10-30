@@ -11,21 +11,22 @@
 
 BetterMati.org — the civic-tech portal for LGU Mati, Davao Oriental — has been fully
 rebuilt from a **hybrid site** (legacy vanilla HTML/CSS/JS at the repo root + a thin
-Next.js island in `react-app/`) into a **single Vite + React + TypeScript + Tailwind v4
-+ shadcn/ui** application in the `web/` directory.
+Next.js island in `react-app/`) into a \*\*single Vite + React + TypeScript + Tailwind v4
+
+- shadcn/ui\*\* application in the `web/` directory.
 
 The migration was executed **incrementally and coexisting** — React and legacy pages
 served side by side, folder by folder — until the last route flipped, at which point the
 legacy static site and the Next.js island were **deleted entirely**. The React app is now
 the whole site.
 
-| Metric | Before | After |
-|---|---|---|
-| Implementations | 2 (legacy HTML + Next.js island) | 1 (Vite/React SSG) |
-| Routes on React | 1 (`/services/health`) | **48** |
-| Production `dist/` size | 9.9 MB | **6.0 MB** |
-| Net diff vs `main` | — | 239 files, **+42,159 / −248,006 lines** |
-| Legacy CSS/JS shipped | ~1.3 MB | **0** (all bundled under `/_app`) |
+| Metric                  | Before                           | After                                   |
+| ----------------------- | -------------------------------- | --------------------------------------- |
+| Implementations         | 2 (legacy HTML + Next.js island) | 1 (Vite/React SSG)                      |
+| Routes on React         | 1 (`/services/health`)           | **48**                                  |
+| Production `dist/` size | 9.9 MB                           | **6.0 MB**                              |
+| Net diff vs `main`      | —                                | 239 files, **+42,159 / −248,006 lines** |
+| Legacy CSS/JS shipped   | ~1.3 MB                          | **0** (all bundled under `/_app`)       |
 
 ---
 
@@ -46,23 +47,23 @@ faithful to the current LGU visual identity, deployable to the same cPanel stati
 
 ## 3. The stack
 
-| Concern | Choice |
-|---|---|
-| Language | TypeScript (strict, `verbatimModuleSyntax`) |
-| Build / dev | **Vite `^8.2.2`** + `@vitejs/plugin-react` |
-| SSG / prerender | **`vite-react-ssg`** — one flat `.html` per route, per-route `<Head>` |
-| Routing | `react-router-dom` (v6) |
-| Styling | **Tailwind CSS v4** (`@tailwindcss/vite`), `cn()` = clsx + tailwind-merge |
-| UI components | **shadcn/ui** (Radix), owned in-repo |
-| Icons | `lucide-react` (+ `react-icons/fa6` for brand icons) |
-| Fonts | self-hosted **Inter** via `@fontsource-variable/inter` (no CDN) |
-| i18n | `i18next` + `react-i18next` — `en` bundled, `fil`/`ceb` lazy-loaded |
-| Search | `fuse.js` + shadcn `Command` combobox |
-| Charts | `chart.js` + `react-chartjs-2` (rendered client-only via `ClientOnly`) |
-| Data (reference) | build-time JSON import from `data/` (baked into prerendered HTML) |
-| Data (news) | runtime `fetch('/data/news.json')` (preserves the FTPS live-update flow) |
-| Node | 20 (`.nvmrc`) |
-| Deploy | cPanel static hosting, `.htaccess` clean URLs, hand-written `sw.js` PWA |
+| Concern          | Choice                                                                    |
+| ---------------- | ------------------------------------------------------------------------- |
+| Language         | TypeScript (strict, `verbatimModuleSyntax`)                               |
+| Build / dev      | **Vite `^8.2.2`** + `@vitejs/plugin-react`                                |
+| SSG / prerender  | **`vite-react-ssg`** — one flat `.html` per route, per-route `<Head>`     |
+| Routing          | `react-router-dom` (v6)                                                   |
+| Styling          | **Tailwind CSS v4** (`@tailwindcss/vite`), `cn()` = clsx + tailwind-merge |
+| UI components    | **shadcn/ui** (Radix), owned in-repo                                      |
+| Icons            | `lucide-react` (+ `react-icons/fa6` for brand icons)                      |
+| Fonts            | self-hosted **Inter** via `@fontsource-variable/inter` (no CDN)           |
+| i18n             | `i18next` + `react-i18next` — `en` bundled, `fil`/`ceb` lazy-loaded       |
+| Search           | `fuse.js` + shadcn `Command` combobox                                     |
+| Charts           | `chart.js` + `react-chartjs-2` (rendered client-only via `ClientOnly`)    |
+| Data (reference) | build-time JSON import from `data/` (baked into prerendered HTML)         |
+| Data (news)      | runtime `fetch('/data/news.json')` (preserves the FTPS live-update flow)  |
+| Node             | 20 (`.nvmrc`)                                                             |
+| Deploy           | cPanel static hosting, `.htaccess` clean URLs, hand-written `sw.js` PWA   |
 
 ---
 
@@ -95,19 +96,19 @@ faithful to the current LGU visual identity, deployable to the same cPanel stati
 
 The work was structured as a foundation phase, eight content waves, and a final cutover.
 
-| Wave / Phase | Scope | Notes |
-|---|---|---|
-| **Phase 0 — Foundation** | Vite scaffold, Tailwind+shadcn, design tokens, shared chrome, i18n infra, SEO/analytics, build pipeline, testing infra | Everything shared by all routes |
-| **Phase 1 — Pilot** | `/services/health` | Proved the whole pipeline; **retired the Next.js `react-app/` island** |
-| **Wave 2** | privacy, terms, accessibility, faq, sitemap, 404/403/500, offline | Static + error pages |
-| **Wave 3** | `/services` + 10 category pages, `/contact` | Site search (fuse.js + Command), mailto/tel contact |
-| **Wave 3b** | 3 bespoke category pages (business, tax, education) | Richer per-category content |
-| **Wave 4** | **All 22 `/service-details/*` pages** | See §6 — the largest wave |
-| **Wave 5** | `/government`, `/government/officials`, `/legislative` + frameworks | Build-time typed-data pattern (officials, ordinances, resolutions) |
-| **Wave 6** | `/budget`, `/statistics` | Chart.js via `react-chartjs-2`, data tables prerendered for SEO/a11y |
-| **Wave 7** | `/news` | Runtime `useNews()` fetch of `/data/news.json` |
-| **Wave 8** | `/` (home) | Flagship: hero, weather widget, OSM map, FB feed, volunteer modal (shadcn `Dialog`), JSON-LD |
-| **Phase 9** | End-state cutover | See §7 — legacy site retired |
+| Wave / Phase             | Scope                                                                                                                  | Notes                                                                                        |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| **Phase 0 — Foundation** | Vite scaffold, Tailwind+shadcn, design tokens, shared chrome, i18n infra, SEO/analytics, build pipeline, testing infra | Everything shared by all routes                                                              |
+| **Phase 1 — Pilot**      | `/services/health`                                                                                                     | Proved the whole pipeline; **retired the Next.js `react-app/` island**                       |
+| **Wave 2**               | privacy, terms, accessibility, faq, sitemap, 404/403/500, offline                                                      | Static + error pages                                                                         |
+| **Wave 3**               | `/services` + 10 category pages, `/contact`                                                                            | Site search (fuse.js + Command), mailto/tel contact                                          |
+| **Wave 3b**              | 3 bespoke category pages (business, tax, education)                                                                    | Richer per-category content                                                                  |
+| **Wave 4**               | **All 22 `/service-details/*` pages**                                                                                  | See §6 — the largest wave                                                                    |
+| **Wave 5**               | `/government`, `/government/officials`, `/legislative` + frameworks                                                    | Build-time typed-data pattern (officials, ordinances, resolutions)                           |
+| **Wave 6**               | `/budget`, `/statistics`                                                                                               | Chart.js via `react-chartjs-2`, data tables prerendered for SEO/a11y                         |
+| **Wave 7**               | `/news`                                                                                                                | Runtime `useNews()` fetch of `/data/news.json`                                               |
+| **Wave 8**               | `/` (home)                                                                                                             | Flagship: hero, weather widget, OSM map, FB feed, volunteer modal (shadcn `Dialog`), JSON-LD |
+| **Phase 9**              | End-state cutover                                                                                                      | See §7 — legacy site retired                                                                 |
 
 ---
 
@@ -125,6 +126,7 @@ municipal-assessor, municipal-budget, municipal-engineering, municipal-planning,
 municipal-treasurer, mswdo, mswdo-services, seedo-public-market, seedo-slaughterhouse.
 
 **Build convention (applied to every page):**
+
 - Reproduce only the `<main>` content — header/footer/nav come from the shared `Layout`.
 - Map every legacy `data-i18n="KEY"` → `t('KEY')`; all keys verified present in `en.json`.
 - Literal values with **no** `data-i18n` (fees, processing times, step numbers, phone
@@ -154,6 +156,7 @@ Once all 48 routes were live and QA'd, the legacy site was removed and the build
 simplified to a single-app pipeline.
 
 **Deletions (legacy only — 80 files):**
+
 - `assets/css`, `assets/js`, `assets/animation` (React bundles everything under `/_app`)
 - legacy root `index.html`
 - all 13 legacy route directories (services, government, legislative, news, budget,
@@ -165,8 +168,9 @@ simplified to a single-app pipeline.
 
 **`build.sh` — rewritten** as a 5-stage single-app pipeline:
 `env → version → clean → vite build → assemble dist → chmod`. Assembly:
+
 1. Copy the SSG output (`/_app` + prerendered route HTML) as the site base.
-2. **Folderize parent routes** — `vite-react-ssg` emits `government.html` *and*
+2. **Folderize parent routes** — `vite-react-ssg` emits `government.html` _and_
    `government/officials.html`; an Apache directory named `government` would shadow
    `government.html`, so parent routes (those with children:
    `services`/`government`/`legislative`) are moved to `<route>/index.html`. Leaf routes
@@ -196,7 +200,7 @@ pages (inline CSS, brand-styled) so they no longer depend on the deleted legacy 
 - **Type safety:** `tsc -b` clean across all 41 page components.
 - **Automated route sweep (all 48 routes, headless):** zero console errors, zero page
   errors, zero white screens, zero raw i18n-key leaks in visible text.
-- **Visual QA:** every page *pattern* reviewed (complex main+sidebar, gradient office
+- **Visual QA:** every page _pattern_ reviewed (complex main+sidebar, gradient office
   pages, tabbed pages, table-heavy pages — both directly- and subagent-built) — faithful,
   consistent rendering; logo correct and left-aligned on every page.
 - **Production build:** `bash build.sh --no-bump` → 48 routes, `dist/` 6.0 MB, parents
@@ -247,9 +251,9 @@ automatically.
 
 ## 11. Key commits (`feat/react-migration`)
 
-| Commit | Summary |
-|---|---|
-| `8df27d2` | Phase 9 end-state cutover — retire legacy static site |
-| `91bcdf1` | Header: PNG logo + pin to far left |
-| `cd7a910` | Wave 4: all 22 service-detail pages |
+| Commit      | Summary                                                                                                            |
+| ----------- | ------------------------------------------------------------------------------------------------------------------ |
+| `8df27d2`   | Phase 9 end-state cutover — retire legacy static site                                                              |
+| `91bcdf1`   | Header: PNG logo + pin to far left                                                                                 |
+| `cd7a910`   | Wave 4: all 22 service-detail pages                                                                                |
 | _(earlier)_ | Phases 0–3, 3b, 5–8 (foundation, pilot, static, services, government, legislative, budget, statistics, news, home) |

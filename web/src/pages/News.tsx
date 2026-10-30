@@ -2,7 +2,7 @@ import { Newspaper, ArrowRight, ExternalLink } from 'lucide-react';
 import { FaFacebookF } from 'react-icons/fa6';
 import { Seo } from '@/components/Seo';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Container, Section, SectionTitle, PageHeader } from '@/components/primitives';
+import { Band, Container, Section, PageHeader } from '@/components/primitives';
 import {
   LazyMotion,
   domAnimation,
@@ -16,8 +16,8 @@ import { useNews, formatNewsDate, safeNewsUrl, type NewsBadge } from '@/hooks/us
 
 const badgeClass: Record<NewsBadge, string> = {
   info: 'bg-royal-tint text-royal',
-  success: 'bg-[#06a77d]/10 text-[#06a77d]',
-  warning: 'bg-[#f77f00]/10 text-[#a37400]',
+  success: 'bg-green-50 text-green-800',
+  warning: 'bg-feel-tint text-feel-text',
 };
 
 export default function News() {
@@ -45,7 +45,7 @@ export default function News() {
           description={t('news-updates-subtitle')}
         />
 
-        <Section>
+        <Section className="border-b border-line">
           <Container>
             {loading ? (
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3" aria-busy="true">
@@ -71,7 +71,7 @@ export default function News() {
                     >
                       <div className="mb-3 flex items-center justify-between gap-2">
                         <span
-                          className={`rounded-full px-3 py-1 text-xs font-semibold ${badgeClass[a.badge] ?? badgeClass.info}`}
+                          className={`px-2 py-0.5 text-[0.6875rem] font-bold tracking-wider uppercase ${badgeClass[a.badge] ?? badgeClass.info}`}
                         >
                           {a.category}
                         </span>
@@ -122,32 +122,32 @@ export default function News() {
         </Section>
 
         {/* From our Facebook Page */}
-        <Section compact altBg>
-          <Container>
-            <SectionTitle>
-              <FaFacebookF className="size-4 text-royal" aria-hidden="true" />
-              {t('news-from-our-facebook')}
-            </SectionTitle>
-            <p className="-mt-3 mb-5 text-[0.8125rem] text-ink-muted">{t('news-latest-posts')}</p>
-            <div className="overflow-hidden rounded-card border border-line">
-              <iframe
-                title="LGU Mati Facebook"
-                className="h-[500px] w-full"
-                loading="lazy"
-                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FOfficialLGUMati%2F&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
-              />
-            </div>
-            <a
-              href="https://www.facebook.com/OfficialLGUMati/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-royal hover:underline"
-            >
-              {t('news-visit-facebook')}
-              <ExternalLink className="size-4" aria-hidden="true" />
-            </a>
-          </Container>
-        </Section>
+        <Band
+          id="facebook"
+          eyebrow={t('news-page-facebook-eyebrow')}
+          title={t('news-from-our-facebook')}
+          lede={t('news-latest-posts')}
+          last
+        >
+          <div className="mt-6 max-w-[500px] overflow-hidden border border-line">
+            <iframe
+              title="LGU Mati Facebook"
+              className="h-[500px] w-full"
+              loading="lazy"
+              src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FOfficialLGUMati%2F&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
+            />
+          </div>
+          <a
+            href="https://www.facebook.com/OfficialLGUMati/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-royal hover:underline"
+          >
+            <FaFacebookF className="size-3.5" aria-hidden="true" />
+            {t('news-visit-facebook')}
+            <ExternalLink className="size-3.5" aria-hidden="true" />
+          </a>
+        </Band>
       </MotionConfig>
     </LazyMotion>
   );

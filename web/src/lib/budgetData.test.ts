@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { annualFinancials as q, fiscalSource, financialOutlook } from './budgetData';
+import { annualFinancials as q, fiscalSource, financialOutlook, fiscalYears } from './budgetData';
 import { procurementNotices } from './infrastructureData';
 import en from '../locales/en.json';
 import ceb from '../locales/ceb.json';
@@ -25,6 +25,31 @@ describe('transparency data integrity', () => {
     expect(Math.abs(availableCash - q.fundCashAvailable)).toBeLessThanOrEqual(0.011);
     const endingCash = q.fundCashAvailable - q.priorYearPayables - q.continuingAppropriation;
     expect(Math.abs(endingCash - q.endingCashBalance)).toBeLessThanOrEqual(0.011);
+  });
+
+  it('reconciles every reported year, each from its own source edition', () => {
+    const years = fiscalYears.map((y) => y.year);
+    expect(years).toEqual([...years].sort((a, b) => a - b));
+    expect(new Set(years).size).toBe(years.length);
+    expect(new Set(fiscalYears.map((y) => y.source.url)).size).toBe(fiscalYears.length);
+    for (const y of fiscalYears) {
+      const r = y.receipts;
+      // Independently rounded source columns can differ by PHP 0.01 million.
+      expect(Math.abs(r.local + r.external + r.nonIncome - r.total), y.period).toBeLessThanOrEqual(
+        0.011
+      );
+      expect(r.nta, y.period).toBeLessThanOrEqual(r.external);
+      const { total, ...categories } = y.expenditures;
+      const spent = Object.values(categories).reduce<number>((sum, a) => sum + (a ?? 0), 0);
+      expect(Math.abs(spent - total), y.period).toBeLessThanOrEqual(0.011);
+      const available = y.beginningCashBalance + r.total - total;
+      expect(Math.abs(available - y.fundCashAvailable), y.period).toBeLessThanOrEqual(0.011);
+      const ending = y.fundCashAvailable - y.priorYearPayables - y.continuingAppropriation;
+      expect(Math.abs(ending - y.endingCashBalance), y.period).toBeLessThanOrEqual(0.011);
+      // A BESF edition reports the fiscal year two years before its own.
+      expect(y.source.url, y.period).toContain(`/BESF${y.year + 2}/F13.pdf`);
+      expect(y.status).toBe('reported');
+    }
   });
 
   it('keeps the fiscal year distinct from the source publication year', () => {

@@ -61,10 +61,6 @@ export const ordinances: Ordinance[] =
 export const officialsAreDraft = officialsJson && '_status' in officialsJson;
 
 /** Extract the year from a resolution/ordinance number like "246-2025-11" -> 2025. */
-export function getRecordYear(no: string): number | null {
-  const m = /(?:^|-)(\d{4})(?:-|$)/.exec(no);
-  return m ? Number(m[1]) : null;
-}
 
 /** "2025-01-06" -> "January 6, 2025" (stable, locale-independent for SSG). */
 export function formatSessionDate(iso: string): string {

@@ -1,0 +1,136 @@
+{
+  "_note": "Official online destinations for the City of Mati, each opened on checkedOn. kind: website (a City Government site or page), service (an online service the City runs), social (an account the City's own website links to), national (a national-government portal that covers Mati). A link appears here only if it opened when checked.",
+  "checkedOn": "2026-10-29",
+  "links": [
+    {
+      "id": "city-website",
+      "kind": "website",
+      "name": "City Government of Mati — official website",
+      "owner": "City Government of Mati",
+      "purpose": "The City's own website: news, the Mayor's page, the Sangguniang Panlungsod and the list of departments.",
+      "url": "https://mati.gov.ph/",
+      "note": null,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "id": "city-departments",
+      "kind": "website",
+      "name": "Departments and offices",
+      "owner": "City Government of Mati",
+      "purpose": "The City's list of its departments and offices.",
+      "url": "https://mati.gov.ph/department-and-offices/",
+      "note": null,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "id": "city-mayor",
+      "kind": "website",
+      "name": "Office of the City Mayor",
+      "owner": "City Government of Mati",
+      "purpose": "The Mayor's page on the City website.",
+      "url": "https://mati.gov.ph/city-of-mati-mayor/",
+      "note": null,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "id": "city-council",
+      "kind": "website",
+      "name": "Sangguniang Panlungsod",
+      "owner": "Sangguniang Panlungsod ng Mati",
+      "purpose": "The City Council's page on the City website.",
+      "url": "https://mati.gov.ph/sangguniang-panglungsod/",
+      "note": "The council has no separate website: sangguniangbayan.mati.gov.ph, linked by earlier versions of this site, does not exist.",
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "id": "city-news",
+      "kind": "website",
+      "name": "City news",
+      "owner": "City Government of Mati",
+      "purpose": "News and announcements posted on the City website.",
+      "url": "https://mati.gov.ph/news/",
+      "note": null,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "id": "trabawho",
+      "kind": "service",
+      "name": "TrabaWho Mati",
+      "owner": "Public Employment Service Office (PESO)",
+      "purpose": "The City's job portal: register, search job openings and apply online.",
+      "url": "https://www.trabawho.mati.gov.ph/",
+      "note": null,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "id": "city-facebook",
+      "kind": "social",
+      "name": "City Government of Mati on Facebook",
+      "owner": "City Government of Mati",
+      "purpose": "The City's Facebook page, as linked from the City website. Advisories and announcements are often posted here first.",
+      "url": "https://www.facebook.com/maticitylgu",
+      "note": null,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "id": "fdp-portal",
+      "kind": "national",
+      "name": "Full Disclosure Policy Portal",
+      "owner": "Department of the Interior and Local Government (DILG)",
+      "purpose": "Where local governments, Mati included, post their required budget, procurement and fund reports.",
+      "url": "https://fdpp.dilg.gov.ph/fdpp/report",
+      "note": null,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "id": "philgeps",
+      "kind": "national",
+      "name": "PhilGEPS bid notices",
+      "owner": "Procurement Service – DBM",
+      "purpose": "The government's procurement notice board, including the City's open bids.",
+      "url": "https://notices.philgeps.gov.ph/",
+      "note": null,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "id": "blgf",
+      "kind": "national",
+      "name": "Bureau of Local Government Finance",
+      "owner": "Department of Finance (DOF)",
+      "purpose": "Publishes local government income and spending reports and supervises local treasurers and assessors.",
+      "url": "https://blgf.gov.ph/",
+      "note": null,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "id": "cmci",
+      "kind": "national",
+      "name": "Cities and Municipalities Competitiveness Index",
+      "owner": "Department of Trade and Industry (DTI)",
+      "purpose": "Yearly competitiveness rankings and data for cities and towns, including Mati.",
+      "url": "https://cmci.dti.gov.ph/",
+      "note": null,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "id": "efoi",
+      "kind": "national",
+      "name": "eFOI portal",
+      "owner": "Presidential Communications Office",
+      "purpose": "Freedom of Information requests to national government agencies.",
+      "url": "https://www.foi.gov.ph/",
+      "note": "Under maintenance when checked; the portal points to an interim way to lodge a request.",
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "id": "open-data",
+      "kind": "national",
+      "name": "Open Data Philippines",
+      "owner": "Department of Information and Communications Technology (DICT)",
+      "purpose": "The national open-data catalogue.",
+      "url": "https://data.gov.ph/",
+      "note": null,
+      "checkedOn": "2026-10-29"
+    }
+  ]
+}

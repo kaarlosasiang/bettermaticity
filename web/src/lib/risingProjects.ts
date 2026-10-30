@@ -39,3 +39,13 @@ export const risingProjects: RisingProject[] = [
 ];
 export const featuredProjects = risingProjects.slice(0, 4);
 export const projectAnchor = (project: RisingProject) => `project-${project.id}`;
+
+// Where each status sits in a public project's paper trail. This is the stage of the dated
+// source record, not a measure of construction progress.
+export const stages = ['announced', 'budgeted', 'awarded', 'completed'] as const;
+export const stageOf: Record<string, number> = {
+  announced: 1,
+  appropriated: 2,
+  awarded: 3,
+  'reported-complete': 4,
+};

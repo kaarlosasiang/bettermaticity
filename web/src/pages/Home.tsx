@@ -407,7 +407,7 @@ export default function Home() {
           </Container>
         </section>
 
-        <RisingProjects preview />
+        <RisingProjects />
 
         {/* ── Feel Mati — tourism ──────────────────────────────────────────── */}
         <section className="bg-navy py-16">
@@ -541,7 +541,7 @@ export default function Home() {
                       </div>
                       <p className="text-[0.8125rem] leading-relaxed">{desc}</p>
                       <span
-                        className={`mt-auto inline-flex h-[22px] w-fit items-center rounded-full px-2.5 text-xs font-semibold ${
+                        className={`mt-auto inline-flex h-[22px] w-fit items-center px-2.5 text-xs font-semibold ${
                           danger
                             ? 'bg-danger-tint text-[#b3151c]'
                             : feel
@@ -637,7 +637,7 @@ export default function Home() {
                     <span>
                       SPENT {M(funds.spendTotal)} · ENDING CASH {M(funds.balance)}
                     </span>
-                    <AppLink to="/budget" className="font-semibold text-royal">
+                    <AppLink to="/transparency/finance" className="font-semibold text-royal">
                       FULL SRE →
                     </AppLink>
                   </div>
@@ -675,7 +675,7 @@ export default function Home() {
                         {officialInitials(l.name)}
                       </span>
                       <div>
-                        <span className="inline-flex h-5 items-center rounded-full bg-royal-tint px-2.5 text-[0.6875rem] font-semibold text-royal">
+                        <span className="inline-flex h-5 items-center bg-royal-tint px-2.5 text-[0.6875rem] font-semibold text-royal">
                           {l.role}
                         </span>
                         <div className="mt-1.5 text-[0.9375rem] font-bold text-heading">

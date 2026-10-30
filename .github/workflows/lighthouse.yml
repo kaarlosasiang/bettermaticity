@@ -41,5 +41,12 @@ jobs:
             http://localhost:8080/services/health
             http://localhost:8080/contact
             http://localhost:8080/government/
+            http://localhost:8080/government/officials
+            http://localhost:8080/transparency/
+            http://localhost:8080/transparency/finance
+            http://localhost:8080/transparency/projects
+            http://localhost:8080/statistics
+            http://localhost:8080/visit-mati/
+            http://localhost:8080/search
           configPath: .lighthouserc.json
           uploadArtifacts: true

@@ -9,7 +9,7 @@ import { AppLink } from '@/components/AppLink';
 import siteVersion from '../../../../version.json';
 
 const REPO = 'https://github.com/kaarlosasiang/bettermaticity';
-const BUILDER = { name: 'Kaarlo Sasiang', href: 'https://kaarlosasiang.vercel.app/' };
+const BUILDER = { name: 'Kaarlo Sasiang & Team', href: 'https://kaarlosasiang.vercel.app/' };
 
 const social = [
   { Icon: FaFacebookF, href: 'https://www.facebook.com/bettermati.org', label: 'Facebook' },
@@ -23,7 +23,7 @@ const social = [
 const explore: [string, string][] = [
   ['/services', 'nav-services'],
   ['/government', 'nav-government'],
-  ['/budget', 'nav-transparency'],
+  ['/transparency', 'nav-transparency'],
   ['/statistics', 'nav-statistics'],
   ['/visit-mati', 'nav-visit-mati'],
   ['/about', 'nav-about'],
@@ -34,11 +34,10 @@ const publicInfo: [string, string][] = [
   ['/contact', 'gov-link-contact'],
   ['/contact#hotlines', 'gov-channels-hotlines'],
   ['/government/barangays', 'gov-link-barangays'],
+  ['/government/links', 'links-title'],
+  ['/transparency/documents', 'docs-page-name'],
+  ['/transparency/sources', 'sources-page-name'],
   ['https://mati.gov.ph/', 'footer-lgu-portal'],
-  [
-    'https://mati.gov.ph/wp-content/uploads/2025/10/As-of-October-21-2025-2.pdf',
-    'footer-citizens-charter',
-  ],
 ];
 
 const legal: [string, string][] = [

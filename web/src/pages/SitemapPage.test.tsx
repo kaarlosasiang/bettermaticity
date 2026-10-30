@@ -2,7 +2,7 @@ import { cleanup, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import en from '@/locales/en.json';
-import { isMigratedRoute } from '@/components/AppLink';
+import { isMigratedRoute } from '@/lib/migratedRoutes';
 
 vi.mock('@/components/Seo', () => ({ Seo: () => null }));
 vi.mock('@/hooks/useLanguage', () => ({

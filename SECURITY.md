@@ -65,7 +65,7 @@ Include in your report:
 | Service          | Purpose          | Data Shared          |
 | ---------------- | ---------------- | -------------------- |
 | Google Analytics | Usage statistics | Anonymous page views |
-| Open-Meteo API   | Weather data     | Location (Mati)    |
+| Open-Meteo API   | Weather data     | Location (Mati)      |
 | ExchangeRate API | Currency rates   | None                 |
 | OpenStreetMap    | Map tiles        | None                 |
 

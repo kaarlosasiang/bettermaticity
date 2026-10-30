@@ -52,7 +52,7 @@ Developers are responsible for ETL (Extract, Transform, Load) operations mapping
 | **Demographics**    | **PSA** (psa.gov.ph)       | Local CBMS Data           | `data/demographics.json`        |
 | **Fiscal Data**     | **BLGF** (blgf.gov.ph)     | LGU Accounting Office     | `data/fiscal_transparency.json` |
 | **Competitiveness** | **CMCI** (cmci.dti.gov.ph) | DTI Provincial Office     | `data/indices.json`             |
-| **Ordinances**      | **Sangguniang Panlungsod**      | Official SB Facebook Page | `data/legislative.json`         |
+| **Ordinances**      | **Sangguniang Panlungsod** | Official SB Facebook Page | `data/legislative.json`         |
 | **Services**        | **Citizen's Charter**      | Department Heads          | `data/services.json`            |
 
 ### 2.2 Integration Workflows
@@ -74,7 +74,7 @@ This section defines the architectural modularity required to allow LGUs to sele
 
 ### 3.1 Stack Comparison Matrix
 
-| Feature         | **BetterMati A (Lightweight)** | **BetterMati B (React/TS)**              |
+| Feature         | **BetterMati A (Lightweight)**   | **BetterMati B (React/TS)**                |
 | :-------------- | :------------------------------- | :----------------------------------------- |
 | **Core Tech**   | Vanilla JS, Bootstrap 5, Leaflet | React, TypeScript, Tailwind                |
 | **Data Store**  | Static JSON Fetching             | Typed JSON Imports / Context API           |

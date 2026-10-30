@@ -30,16 +30,18 @@ Repo root:
 - `npm run release [-- minor|patch|major] [--dry-run]` — start a release: bump the version and draft its `data/changelog.json` entry from commits since the last release (see below)
 - `npm run format` / `format:check` — Prettier over the repo (`web/src/locales` is ignored)
 - `npm run package` — build + zip a cPanel-ready release archive
+- `npm test` — Playwright cross-browser specs for the volunteer dialog (`tests/volunteer-modal.*.spec.js`), run against a fresh `web/` build served by `serve.py`; `npm run test:chrome` for one browser. Slow on a busy machine: pass `--workers=2` if tests time out.
+- `npm run test:integration` — full `build.sh` then smoke tests of the shipped `dist/` (`tests/integration/`)
 
 ## Routes — `migrated-routes.json` is the source of truth
 
-[`web/migrated-routes.json`](web/migrated-routes.json) lists every live route (48 today). It drives three things at once:
+[`web/migrated-routes.json`](web/migrated-routes.json) lists every live route (65 today). It drives three things at once:
 
 1. the SSG prerender set (`ssgOptions.includedRoutes` in [`web/vite.config.ts`](web/vite.config.ts)),
 2. `build.sh`'s flat→folder pass and the route count in its summary,
-3. `AppLink`'s SPA-vs-full-navigation decision ([`web/src/components/AppLink.tsx`](web/src/components/AppLink.tsx)).
+3. `AppLink`'s SPA-vs-full-navigation decision, via `isMigratedRoute` in [`web/src/lib/migratedRoutes.ts`](web/src/lib/migratedRoutes.ts).
 
-**Adding a page means three edits:** the component under `web/src/pages/`, an entry in [`web/src/routes.tsx`](web/src/routes.tsx), and an entry in `migrated-routes.json`. Skipping the third means the page renders in dev but is never prerendered and never ships.
+**Adding a page means three edits:** the component under `web/src/pages/`, an entry in [`web/src/routes.tsx`](web/src/routes.tsx), and an entry in `migrated-routes.json`. Skipping the third means the page renders in dev but is never prerendered and never ships. Routes are code-split: give a new page `lazy: () => import('./pages/X').then((m) => ({ Component: m.default }))`, not an eager `Component` (only Home, `Layout` and the 404 load with the app). Keep the `import()` inside the `lazy` function itself — vite-react-ssg reads it there to preload the page's chunk in the prerendered HTML. A page should also appear in the Site index data ([`web/src/lib/siteIndex.ts`](web/src/lib/siteIndex.ts)), which feeds both `/sitemap` and site-wide search (`/search`); `searchIndex.test.ts` fails if a shipped route is unreachable from search.
 
 Use `AppLink` (not bare `<Link>` or `<a>`) for internal navigation — it falls back to a full page load for anything not in the migrated set, and passes external/`mailto:`/`tel:` links straight through.
 
@@ -48,9 +50,9 @@ Use `AppLink` (not bare `<Link>` or `<a>`) for internal navigation — it falls 
 - `pages/` — route components. Service-category pages are grouped in `categories.tsx` / `categories2.tsx`; the 22 service-detail pages live in `pages/service-details/`.
 - `routes.tsx` — the route table; `Layout.tsx` — persistent chrome; `main.tsx` — the `ViteReactSSG` entry (drives both prerender and hydration).
 - `components/layout/` — `Header`, `Footer`, `HotlineBar`, `InfoBar`.
-- `components/ui/` — shadcn/ui primitives. `components/primitives/` — layout/content primitives (`Container`, `Section`, `Grid`, `PageHeader`, `SectionTitle`, `ServiceCard`, `StatCard`), re-exported from `primitives/index.ts`.
-- `components/` (top level) — `Seo`, `AppLink`, `PWAManager`, `Analytics`, `ServiceSearch`, `VolunteerDialog`, `DpwhProjects`, `OnlineServices`, `ServiceCategoryPage`, `ImageSlot`, `motion.ts`.
-- `lib/` — typed data modules and helpers (`services.ts`, `govData.ts`, `govDirectory.ts`, `budgetData.ts`, `statsData.ts`, `dpwhData.ts`, `infrastructureData.ts`, `legislativeProcess.ts`, `hotlines.ts`, `charts.ts`, `utils.ts`).
+- `components/ui/` — shadcn/ui primitives. `components/primitives/` — layout/content primitives (`Container`, `Section`, `Band`, `PageHeader`, `SectionHead`, `StatRow`, `RuledGrid`, `SearchField`, `FilterPanel`/`FilterSelect`, `Pager`), re-exported from `primitives/index.ts`.
+- `components/` (top level) — `Seo`, `AppLink`, `PWAManager`, `Analytics`, `ServiceSearch`, `VolunteerDialog`, `ProjectLedger`, `ProcurementTable`, `ServiceCategoryPage`, `ImageSlot`, `motion.ts`.
+- `lib/` — typed data modules and helpers (`services.ts`, `govData.ts`, `govDirectory.ts`, `budgetData.ts`, `statsData.ts`, `dpwhData.ts`, `infrastructureData.ts`, `legislativeProcess.ts`, `hotlines.ts`, `charts.ts`, `utils.ts`, plus `siteIndex.ts` / `searchIndex.ts` for the Site index and site-wide search, `officialLinks.ts`, `sourceRegistry.ts`).
 - `hooks/` — `useLanguage`, `useNews`.
 - `index.css` — Tailwind v4 theme. Tokens are declared in `@theme inline`: the shadcn semantic set plus the brand palette (`--color-navy` Pujada navy, `--color-royal`, `--color-amber` "Feel Mati") and `--font-sans` / `--font-display` / `--font-mono`. Fonts are **self-hosted via `@fontsource`** — the `.htaccess` CSP forbids Google Fonts/CDN, so never add a font `<link>`.
 
@@ -103,7 +105,7 @@ Deploy: upload `dist/` contents to cPanel `public_html/`. **Clean URLs** — `.h
 
 - Prettier is enforced (`.prettierrc`): single quotes, semicolons, 2-space, 100-col, ES5 trailing commas. Run `npm run format` before committing.
 - TypeScript strict; avoid `any`. Functional components, PascalCase component files, `@/` alias for `web/src`, `@data` for the root `data/`.
-- Reach for an existing primitive (`Container`, `Section`, `Grid`, `ServiceCard`, `StatCard`) or a shadcn `ui/` component before writing new layout markup.
+- Reach for an existing primitive (`Container`, `Band`, `PageHeader`, `StatRow`, `RuledGrid`, `FilterPanel`) or a shadcn `ui/` component before writing new layout markup.
 - Tests are Vitest + Testing Library colocated next to the code (`primitives.test.tsx`, `AppLink.test.tsx`, `i18n.test.ts`), run from `web/`.
 - **This is a fork of a template originally built for LGU Solano**, rebranded to the City of Mati. LGU-specific records (officials, barangays, resolutions, ordinances, DPWH projects, statistics, budget, city history) are largely **clearly-marked placeholders** (`[Placeholder]` / `[TODO]` / `_status: "draft"`) awaiting verified City of Mati data — see the checklist in `README.md`. Canonical verified facts are tracked as BM-001; don't "correct" them from general knowledge.
 - [`web/GAP-AUDIT.md`](web/GAP-AUDIT.md) records the content-parity audit against the retired legacy site and the judgment calls made — useful when someone asks "was this section dropped or deliberately cut?"
@@ -131,8 +133,6 @@ They are **deliberately retained**, so don't propose deleting them; just don't t
 extend them without fixing them first, and don't cite them as the way to do something:
 
 - **Root `package.json`** `dev` / `serve` run `python3 -m http.server 8000` against a root `index.html` that no longer exists. Use `cd web && npm run dev`.
-- **`tests/integration/health.spec.js`** — the harness itself is current (it builds `dist/` and serves it via `serve.py`), but two of its five tests assert coexistence that no longer exists: "un-migrated legacy route is still served by legacy" expects `/government/` to be non-React, and "legacy home is still served" expects `/` to load `assets/js/main.js`. Both routes are now React, so those two will fail.
 - **All 10 `scripts/*.py` i18n scripts** (`i18n-upgrade.py`, `add-*-keys.py`, `translate-pass*.py`, `translate-remaining.py`, `fix-footer-quiz-copyright.py`) operate on `assets/js/translations.js` and/or the old page `*.html` — all deleted. Translations now live in `web/src/locales/*.json`; edit those directly or write new tooling against them. (**`data/mati/build_barangays.py` is the exception** — it is current and still the supported way to regenerate the barangay dataset.)
-- **`playwright.config.js` + `tests/volunteer-modal.*.spec.js`** serve the repo root and `goto('/index.html')` — they target the deleted legacy site and cannot pass. The volunteer modal now lives in `web/src/components/VolunteerDialog.tsx`; its coverage belongs in Vitest under `web/`.
 - **`scripts/bump-version.js`** still walks a hardcoded `htmlDirs` list stamping `Ver. X.X.X` into HTML files; those directories are gone, so that pass is a no-op. The `web/package.json` sync is the part that matters.
 - **`react-app/`** may exist on disk as untracked build leftovers (`.next/`, `node_modules/`, `out/`). It is not in git and is safe to delete.

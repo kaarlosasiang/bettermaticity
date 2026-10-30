@@ -16,7 +16,7 @@ import { FaGithub } from 'react-icons/fa6';
 import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Container, Eyebrow, PageHeader } from '@/components/primitives';
+import { Band, Container, Eyebrow, PageHeader } from '@/components/primitives';
 
 const WCAG_URL = 'https://www.w3.org/WAI/standards-guidelines/wcag/';
 const ISSUE_URL = `https://github.com/kaarlosasiang/bettermaticity/issues/new?title=${encodeURIComponent(
@@ -33,44 +33,6 @@ const MEASURES: { Icon: LucideIcon; key: string }[] = [
 ];
 
 const LIMITATIONS = ['pdf', 'external', 'translations'];
-
-// One titled band per topic, separated by hairlines (BetterSanFernando pattern).
-function Band({
-  id,
-  eyebrow,
-  title,
-  children,
-  last,
-}: {
-  id: string;
-  eyebrow: string;
-  title: string;
-  children: ReactNode;
-  last?: boolean;
-}) {
-  return (
-    <section
-      className={
-        'border-b border-line bg-white py-10 sm:py-12 lg:py-14' +
-        (last ? ' pb-16 sm:pb-20 lg:pb-24' : '')
-      }
-      aria-labelledby={`${id}-heading`}
-    >
-      <Container>
-        <div className="max-w-3xl">
-          <Eyebrow>{eyebrow}</Eyebrow>
-          <h2
-            id={`${id}-heading`}
-            className="mt-2 text-2xl font-bold tracking-[-0.02em] text-heading md:text-3xl"
-          >
-            {title}
-          </h2>
-        </div>
-        {children}
-      </Container>
-    </section>
-  );
-}
 
 function Item({ title, children }: { title: string; children: ReactNode }) {
   return (

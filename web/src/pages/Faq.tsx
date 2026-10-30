@@ -1,18 +1,9 @@
-import {
-  CircleHelp,
-  Info,
-  FileText,
-  Store,
-  Coins,
-  Users,
-  Settings,
-  Contact,
-  MessageCircle,
-} from 'lucide-react';
+import type { ReactNode } from 'react';
+import { ArrowRight, CircleHelp } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Container, Section, SectionTitle, PageHeader } from '@/components/primitives';
+import { Container, Eyebrow, PageHeader } from '@/components/primitives';
 import {
   Accordion,
   AccordionItem,
@@ -20,8 +11,225 @@ import {
   AccordionContent,
 } from '@/components/ui/accordion';
 
+type TFn = (key: string) => string;
+
+interface Faq {
+  id: string;
+  q: string;
+  a: (t: TFn) => ReactNode;
+}
+
+interface FaqGroup {
+  id: string;
+  titleKey: string;
+  items: Faq[];
+}
+
+const linkClass = 'font-semibold text-royal';
+
+function External({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" className={linkClass}>
+      {children}
+    </a>
+  );
+}
+
+const GROUPS: FaqGroup[] = [
+  {
+    id: 'general',
+    titleKey: 'faq-general',
+    items: [
+      {
+        id: 'office-hours',
+        q: 'faq-what-are-the-office-hours-of-the-municipal-hall',
+        a: (t) => <p>{t('faq-the-municipal-hall-is-open-monday-to-friday-800')}</p>,
+      },
+      {
+        id: 'contact-office',
+        q: 'faq-how-can-i-contact-a-specific-municipal-office',
+        a: (t) => (
+          <p>
+            Visit our{' '}
+            <AppLink to="/government/offices" className={linkClass}>
+              {t('faq-government-directory')}
+            </AppLink>{' '}
+            page to find contact information for all municipal offices and department heads.
+          </p>
+        ),
+      },
+      {
+        id: 'online',
+        q: 'faq-can-i-request-services-online',
+        a: (t) => <p>{t('faq-currently-most-services-require-inperson')}</p>,
+      },
+    ],
+  },
+  {
+    id: 'certificates',
+    titleKey: 'faq-certificates',
+    items: [
+      {
+        id: 'birth-certificate-time',
+        q: 'faq-how-long-does-it-take-to-get-a-birth-certificate',
+        a: (t) => <p>{t('faq-for-birth-certificates-registered-in-mati-it')}</p>,
+      },
+      {
+        id: 'representative',
+        q: 'faq-can-someone-else-request-my-certificate-for-me',
+        a: (t) => (
+          <>
+            <p>{t('faq-yes-but-they-must-bring')}</p>
+            <ul className="list-disc space-y-1 pl-5">
+              <li>{t('faq-an-authorization-letter-signed-by-you')}</li>
+              <li>{t('faq-valid-id-of-both-you-and-the-representative')}</li>
+              <li>{t('faq-photocopy-of-your-valid-id')}</li>
+            </ul>
+          </>
+        ),
+      },
+      {
+        id: 'psa-vs-local',
+        q: 'faq-what-is-the-difference-between-psa-and-local',
+        a: (t) => <p>{t('faq-both-are-certified-true-copies-psa-certificates')}</p>,
+      },
+    ],
+  },
+  {
+    id: 'business',
+    titleKey: 'faq-business',
+    items: [
+      {
+        id: 'permit-renewal',
+        q: 'faq-when-should-i-renew-my-business-permit',
+        a: (t) => <p>{t('faq-business-permits-must-be-renewed-annually')}</p>,
+      },
+      {
+        id: 'new-business',
+        q: 'faq-what-do-i-need-to-start-a-new-business-in-mati',
+        a: (t) => (
+          <>
+            <p>{t('faq-to-start-a-new-business-youll-need')}</p>
+            <ul className="list-disc space-y-1 pl-5">
+              <li>{t('faq-dti-registration-for-sole-proprietorship-or-sec')}</li>
+              <li>{t('faq-barangay-clearance')}</li>
+              <li>{t('faq-community-tax-certificate-cedula')}</li>
+              <li>{t('faq-location-sketchmap')}</li>
+              <li>Contract of Lease (if renting)</li>
+            </ul>
+            <p>
+              Visit our{' '}
+              <AppLink to="/services/business" className={linkClass}>
+                {t('faq-business-permit-page')}
+              </AppLink>{' '}
+              for complete details.
+            </p>
+          </>
+        ),
+      },
+    ],
+  },
+  {
+    id: 'payments',
+    titleKey: 'faq-payments',
+    items: [
+      {
+        id: 'payment-methods',
+        q: 'faq-what-payment-methods-are-accepted',
+        a: (t) => <p>{t('faq-currently-we-accept-cash-payments-at-the')}</p>,
+      },
+      {
+        id: 'property-tax',
+        q: 'faq-how-can-i-pay-my-real-property-tax',
+        a: (t) => <p>{t('faq-visit-the-municipal-treasurers-office-at-the')}</p>,
+      },
+    ],
+  },
+  {
+    id: 'social',
+    titleKey: 'faq-social',
+    items: [
+      {
+        id: 'senior-id',
+        q: 'faq-how-do-i-apply-for-a-senior-citizen-id',
+        a: (t) => (
+          <>
+            <p>{t('faq-go-to-the-municipal-social-welfare-and')}</p>
+            <ul className="list-disc space-y-1 pl-5">
+              <li>{t('faq-birth-certificate-or-any-valid-id-showing-your')}</li>
+              <li>{t('faq-1x1-id-photo')}</li>
+              <li>{t('faq-barangay-residence-certificate')}</li>
+            </ul>
+            <p>{t('faq-the-id-is-issued-for-free')}</p>
+          </>
+        ),
+      },
+      {
+        id: 'senior-benefits',
+        q: 'faq-what-benefits-do-senior-citizens-receive',
+        a: (t) => <p>{t('faq-senior-citizens-enjoy-20-discount-and-vat')}</p>,
+      },
+    ],
+  },
+  {
+    id: 'technical',
+    titleKey: 'faq-technical',
+    items: [
+      {
+        id: 'report-error',
+        q: 'faq-i-found-a-broken-link-or-error-on-this-website',
+        a: (t) => (
+          <p>
+            Thank you for helping us improve! Please send us message at{' '}
+            <External href="mailto:volunteer@bettermati.org">
+              {t('faq-volunteerbettermatiorg')}
+            </External>{' '}
+            {
+              'and write "Website Issue" as the subject. Describe the problem and include the page URL if possible.'
+            }
+          </p>
+        ),
+      },
+      {
+        id: 'mobile',
+        q: 'faq-is-this-website-mobilefriendly',
+        a: (t) => <p>{t('faq-yes-better-mati-is-fully-responsive-and')}</p>,
+      },
+    ],
+  },
+  {
+    id: 'developer',
+    titleKey: 'faq-about-the-developer',
+    items: [
+      {
+        id: 'who-developed',
+        q: 'faq-who-developed-better-mati',
+        a: (t) => (
+          <>
+            <p>
+              {t('faq-dev-maintainer-before')}{' '}
+              <External href="https://kaarlosasiang.vercel.app/">Kaarlo Sasiang</External>
+              {t('faq-dev-maintainer-after')}
+            </p>
+            <p>
+              {t('faq-dev-template-before')}{' '}
+              <External href="https://ramonloganjr.com/">{t('faq-ramon-logan-jr')}</External>
+              {t('faq-dev-template-after')}{' '}
+              <External href="https://abakada.org">{t('faq-abakadaorg')}</External>.
+            </p>
+            <p>{t('faq-dev-open-source')}</p>
+          </>
+        ),
+      },
+    ],
+  },
+];
+
+// FAQ, in the site's ruled layout: a sticky list of topics on the left and each topic's
+// questions as hairline accordions on the right, then a pointer to the Contact page.
 export default function Faq() {
   const { t } = useLanguage();
+  const total = GROUPS.reduce((n, g) => n + g.items.length, 0);
 
   return (
     <>
@@ -35,312 +243,79 @@ export default function Faq() {
         badge={
           <>
             <CircleHelp className="size-4" aria-hidden="true" />
-            FAQ
+            {t('faq-page-eyebrow')}
           </>
         }
         breadcrumb={[{ label: t('nav-home'), to: '/' }, { label: 'FAQ' }]}
         title={t('faq-title')}
         description={t('faq-subtitle')}
+        meta={[t('faq-page-count', { count: total, topics: GROUPS.length })]}
       />
 
-      <Section>
-        <Container>
-          <div className="mx-auto w-full max-w-[820px] space-y-10">
-            {/* General Questions */}
-            <div>
-              <SectionTitle>
-                <Info className="size-5 text-primary" aria-hidden="true" />
-                {t('faq-general')}
-              </SectionTitle>
-              <Accordion type="single" collapsible>
-                <AccordionItem value="item-1">
-                  <AccordionTrigger className="text-foreground">
-                    {t('faq-what-are-the-office-hours-of-the-municipal-hall')}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    <p>{t('faq-the-municipal-hall-is-open-monday-to-friday-800')}</p>
-                  </AccordionContent>
-                </AccordionItem>
+      <section className="bg-white py-10 sm:py-12 lg:py-16" aria-label={t('faq-title')}>
+        <Container className="lg:grid lg:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] lg:gap-12">
+          <nav
+            aria-label={t('faq-page-topics')}
+            className="mb-8 lg:sticky lg:top-[calc(var(--sticky-offset)+1.5rem)] lg:mb-0 lg:self-start"
+          >
+            <Eyebrow>{t('faq-page-topics')}</Eyebrow>
+            <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2 lg:flex-col lg:gap-0 lg:border-l lg:border-line">
+              {GROUPS.map((g) => (
+                <li key={g.id}>
+                  <a
+                    href={`#${g.id}`}
+                    className="text-sm font-semibold text-royal hover:underline lg:-ml-px lg:block lg:border-l-2 lg:border-transparent lg:py-1.5 lg:pl-4 lg:font-medium lg:text-ink-soft lg:hover:border-royal lg:hover:text-royal lg:hover:no-underline"
+                  >
+                    {t(g.titleKey)}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-                <AccordionItem value="item-2">
-                  <AccordionTrigger className="text-foreground">
-                    {t('faq-how-can-i-contact-a-specific-municipal-office')}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    <p>
-                      Visit our{' '}
-                      <AppLink to="/government" className="text-primary">
-                        {t('faq-government-directory')}
-                      </AppLink>{' '}
-                      page to find contact information for all municipal offices and department
-                      heads.
-                    </p>
-                  </AccordionContent>
-                </AccordionItem>
+          <div className="space-y-12">
+            {GROUPS.map((g) => (
+              <section key={g.id} id={g.id} aria-labelledby={`${g.id}-heading`}>
+                <h2
+                  id={`${g.id}-heading`}
+                  className="text-xl font-bold tracking-[-0.02em] text-heading sm:text-2xl"
+                >
+                  {t(g.titleKey)}
+                </h2>
+                <Accordion type="multiple" className="mt-4 border-y border-line">
+                  {g.items.map((item) => (
+                    <AccordionItem key={item.id} value={item.id} className="border-line">
+                      <AccordionTrigger className="py-4 text-base font-semibold text-heading hover:text-royal hover:no-underline">
+                        {t(item.q)}
+                      </AccordionTrigger>
+                      <AccordionContent className="max-w-3xl space-y-3 pb-5 text-sm leading-6 text-ink-soft [&_a]:no-underline [&_a]:hover:underline [&_p:not(:last-child)]:mb-0">
+                        {item.a(t)}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </section>
+            ))}
 
-                <AccordionItem value="item-3">
-                  <AccordionTrigger className="text-foreground">
-                    {t('faq-can-i-request-services-online')}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    <p>{t('faq-currently-most-services-require-inperson')}</p>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            </div>
-
-            {/* Certificates & Documents */}
-            <div>
-              <SectionTitle>
-                <FileText className="size-5 text-primary" aria-hidden="true" />
-                {t('faq-certificates')}
-              </SectionTitle>
-              <Accordion type="single" collapsible>
-                <AccordionItem value="item-4">
-                  <AccordionTrigger className="text-foreground">
-                    {t('faq-how-long-does-it-take-to-get-a-birth-certificate')}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    <p>{t('faq-for-birth-certificates-registered-in-mati-it')}</p>
-                  </AccordionContent>
-                </AccordionItem>
-
-                <AccordionItem value="item-5">
-                  <AccordionTrigger className="text-foreground">
-                    {t('faq-can-someone-else-request-my-certificate-for-me')}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    <p>{t('faq-yes-but-they-must-bring')}</p>
-                    <ul className="list-disc space-y-1 pl-5">
-                      <li>{t('faq-an-authorization-letter-signed-by-you')}</li>
-                      <li>{t('faq-valid-id-of-both-you-and-the-representative')}</li>
-                      <li>{t('faq-photocopy-of-your-valid-id')}</li>
-                    </ul>
-                  </AccordionContent>
-                </AccordionItem>
-
-                <AccordionItem value="item-6">
-                  <AccordionTrigger className="text-foreground">
-                    {t('faq-what-is-the-difference-between-psa-and-local')}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    <p>{t('faq-both-are-certified-true-copies-psa-certificates')}</p>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            </div>
-
-            {/* Business & Permits */}
-            <div>
-              <SectionTitle>
-                <Store className="size-5 text-primary" aria-hidden="true" />
-                {t('faq-business')}
-              </SectionTitle>
-              <Accordion type="single" collapsible>
-                <AccordionItem value="item-7">
-                  <AccordionTrigger className="text-foreground">
-                    {t('faq-when-should-i-renew-my-business-permit')}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    <p>{t('faq-business-permits-must-be-renewed-annually')}</p>
-                  </AccordionContent>
-                </AccordionItem>
-
-                <AccordionItem value="item-8">
-                  <AccordionTrigger className="text-foreground">
-                    {t('faq-what-do-i-need-to-start-a-new-business-in-mati')}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    <p>{t('faq-to-start-a-new-business-youll-need')}</p>
-                    <ul className="list-disc space-y-1 pl-5">
-                      <li>{t('faq-dti-registration-for-sole-proprietorship-or-sec')}</li>
-                      <li>{t('faq-barangay-clearance')}</li>
-                      <li>{t('faq-community-tax-certificate-cedula')}</li>
-                      <li>{t('faq-location-sketchmap')}</li>
-                      <li>Contract of Lease (if renting)</li>
-                    </ul>
-                    <p>
-                      Visit our{' '}
-                      <AppLink to="/services/business" className="text-primary">
-                        {t('faq-business-permit-page')}
-                      </AppLink>{' '}
-                      for complete details.
-                    </p>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            </div>
-
-            {/* Payments & Fees */}
-            <div>
-              <SectionTitle>
-                <Coins className="size-5 text-primary" aria-hidden="true" />
-                {t('faq-payments')}
-              </SectionTitle>
-              <Accordion type="single" collapsible>
-                <AccordionItem value="item-9">
-                  <AccordionTrigger className="text-foreground">
-                    {t('faq-what-payment-methods-are-accepted')}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    <p>{t('faq-currently-we-accept-cash-payments-at-the')}</p>
-                  </AccordionContent>
-                </AccordionItem>
-
-                <AccordionItem value="item-10">
-                  <AccordionTrigger className="text-foreground">
-                    {t('faq-how-can-i-pay-my-real-property-tax')}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    <p>{t('faq-visit-the-municipal-treasurers-office-at-the')}</p>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            </div>
-
-            {/* Social Services */}
-            <div>
-              <SectionTitle>
-                <Users className="size-5 text-primary" aria-hidden="true" />
-                {t('faq-social')}
-              </SectionTitle>
-              <Accordion type="single" collapsible>
-                <AccordionItem value="item-11">
-                  <AccordionTrigger className="text-foreground">
-                    {t('faq-how-do-i-apply-for-a-senior-citizen-id')}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    <p>{t('faq-go-to-the-municipal-social-welfare-and')}</p>
-                    <ul className="list-disc space-y-1 pl-5">
-                      <li>{t('faq-birth-certificate-or-any-valid-id-showing-your')}</li>
-                      <li>{t('faq-1x1-id-photo')}</li>
-                      <li>{t('faq-barangay-residence-certificate')}</li>
-                    </ul>
-                    <p>{t('faq-the-id-is-issued-for-free')}</p>
-                  </AccordionContent>
-                </AccordionItem>
-
-                <AccordionItem value="item-12">
-                  <AccordionTrigger className="text-foreground">
-                    {t('faq-what-benefits-do-senior-citizens-receive')}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    <p>{t('faq-senior-citizens-enjoy-20-discount-and-vat')}</p>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            </div>
-
-            {/* Technical Questions */}
-            <div>
-              <SectionTitle>
-                <Settings className="size-5 text-primary" aria-hidden="true" />
-                {t('faq-technical')}
-              </SectionTitle>
-              <Accordion type="single" collapsible>
-                <AccordionItem value="item-13">
-                  <AccordionTrigger className="text-foreground">
-                    {t('faq-i-found-a-broken-link-or-error-on-this-website')}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    <p>
-                      Thank you for helping us improve! Please send us message at{' '}
-                      <a
-                        href="mailto:volunteer@bettermati.org"
-                        className="text-primary"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {t('faq-volunteerbettermatiorg')}
-                      </a>{' '}
-                      {
-                        'and write "Website Issue" as the subject. Describe the problem and include the page URL if possible.'
-                      }
-                    </p>
-                  </AccordionContent>
-                </AccordionItem>
-
-                <AccordionItem value="item-14">
-                  <AccordionTrigger className="text-foreground">
-                    {t('faq-is-this-website-mobilefriendly')}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    <p>{t('faq-yes-better-mati-is-fully-responsive-and')}</p>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            </div>
-
-            {/* About the Developer */}
-            <div>
-              <SectionTitle>
-                <Contact className="size-5 text-primary" aria-hidden="true" />
-                {t('faq-about-the-developer')}
-              </SectionTitle>
-              <Accordion type="single" collapsible>
-                <AccordionItem value="item-15">
-                  <AccordionTrigger className="text-foreground">
-                    {t('faq-who-developed-better-mati')}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    <p>
-                      {t('faq-dev-maintainer-before')}{' '}
-                      <a
-                        href="https://kaarlosasiang.vercel.app/"
-                        className="text-primary"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Kaarlo Sasiang
-                      </a>
-                      {t('faq-dev-maintainer-after')}
-                    </p>
-                    <p>
-                      {t('faq-dev-template-before')}{' '}
-                      <a
-                        href="https://ramonloganjr.com/"
-                        className="text-primary"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {t('faq-ramon-logan-jr')}
-                      </a>
-                      {t('faq-dev-template-after')}{' '}
-                      <a
-                        href="https://abakada.org"
-                        className="text-primary"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {t('faq-abakadaorg')}
-                      </a>
-                      .
-                    </p>
-                    <p>{t('faq-dev-open-source')}</p>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            </div>
-
-            {/* Still Have Questions CTA */}
-            <div className="flex flex-col items-center gap-4 rounded-lg border border-border bg-muted p-6 text-center sm:flex-row sm:text-left">
-              <MessageCircle className="size-8 shrink-0 text-primary" aria-hidden="true" />
-              <div className="flex-1">
-                <h3 className="m-0 mb-1 text-lg font-semibold text-foreground">
+            <div className="grid grid-cols-1 gap-5 border border-line bg-surface-subtle p-6 sm:p-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+              <div>
+                <Eyebrow>{t('faq-page-more-eyebrow')}</Eyebrow>
+                <h2 className="mt-1 text-xl font-bold tracking-[-0.02em] text-heading">
                   {t('faq-still-questions')}
-                </h3>
-                <p className="m-0 text-sm text-muted-foreground">{t('faq-contact-help')}</p>
+                </h2>
+                <p className="mt-2 text-sm leading-6 text-ink-soft">{t('faq-page-more-text')}</p>
               </div>
               <AppLink
                 to="/contact"
-                className="inline-flex shrink-0 items-center justify-center rounded-btn bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-dark"
+                className="inline-flex h-11 items-center justify-center gap-2 rounded-btn bg-royal px-5 text-sm font-semibold text-white transition-colors hover:bg-navy"
               >
-                {t('faq-contact-us')}
+                {t('faq-page-more-cta')}
+                <ArrowRight className="size-4" aria-hidden="true" />
               </AppLink>
             </div>
           </div>
         </Container>
-      </Section>
+      </section>
     </>
   );
 }

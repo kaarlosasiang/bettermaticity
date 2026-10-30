@@ -18,7 +18,7 @@ const DIRECTORIES: { to: string; key: string; descKey: string }[] = [
   { to: '/services', key: 'nav-services', descKey: 'about-dir-services' },
   { to: '/government', key: 'nav-government', descKey: 'about-dir-government' },
   { to: '/legislative', key: 'gov-legislation-title', descKey: 'about-dir-legislation' },
-  { to: '/budget', key: 'nav-transparency', descKey: 'about-dir-transparency' },
+  { to: '/transparency', key: 'nav-transparency', descKey: 'about-dir-transparency' },
   { to: '/statistics', key: 'nav-statistics', descKey: 'about-dir-statistics' },
   { to: '/visit-mati', key: 'nav-visit-mati', descKey: 'about-dir-visit' },
 ];
@@ -47,7 +47,7 @@ const DONT = ['replace', 'speak', 'alter', 'infer', 'transact'] as const;
 const INDEPENDENCE = ['official', 'attribution', 'original'] as const;
 
 const EVIDENCE: { to: string; key: string; descKey: string }[] = [
-  { to: '/budget', key: 'nav-public-funds', descKey: 'about-evidence-funds' },
+  { to: '/transparency/finance', key: 'nav-public-funds', descKey: 'about-evidence-funds' },
   { to: '/statistics', key: 'nav-statistics', descKey: 'about-evidence-stats' },
   { to: '/services', key: 'nav-services', descKey: 'about-evidence-services' },
 ];
@@ -55,7 +55,7 @@ const EVIDENCE: { to: string; key: string; descKey: string }[] = [
 const EXPLORE: { to: string; key: string; descKey: string }[] = [
   { to: '/services', key: 'about-explore-services', descKey: 'about-explore-services-desc' },
   { to: '/government', key: 'about-explore-government', descKey: 'about-explore-government-desc' },
-  { to: '/budget', key: 'about-explore-funds', descKey: 'about-explore-funds-desc' },
+  { to: '/transparency/finance', key: 'about-explore-funds', descKey: 'about-explore-funds-desc' },
 ];
 
 const headingClass =
@@ -204,6 +204,15 @@ export default function About() {
                   </li>
                 ))}
               </ul>
+              <p className="mt-2 border-t border-line pt-3 text-sm">
+                <AppLink
+                  to="/transparency/sources"
+                  className="inline-flex items-center gap-1 font-semibold text-royal hover:underline"
+                >
+                  {t('sources-see-all')}
+                  <ArrowRight className="size-3.5" aria-hidden="true" />
+                </AppLink>
+              </p>
             </div>
           </div>
         </Container>

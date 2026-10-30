@@ -115,8 +115,8 @@ function CoastCard({ coast }: { coast: Coast }) {
         <span
           className={
             pacific
-              ? 'absolute top-4 left-4 inline-flex h-6 items-center gap-1.5 rounded-full bg-amber px-2.5 text-xs font-bold text-navy'
-              : 'absolute top-4 left-4 inline-flex h-6 items-center gap-1.5 rounded-full bg-royal px-2.5 text-xs font-bold text-white'
+              ? 'absolute top-4 left-4 inline-flex h-6 items-center gap-1.5 bg-amber px-2.5 text-xs font-bold text-navy'
+              : 'absolute top-4 left-4 inline-flex h-6 items-center gap-1.5 bg-royal px-2.5 text-xs font-bold text-white'
           }
         >
           {pacific ? (
@@ -180,7 +180,7 @@ function PlaceCard({ a }: { a: Attraction }) {
     <>
       <div className="relative aspect-[4/3] bg-surface-subtle">
         <ImageSlot label={a.imageLabel} src={a.image || undefined} />
-        <span className="absolute top-3 left-3 inline-flex h-[22px] items-center rounded-full bg-white/95 px-2.5 text-[0.6875rem] font-bold text-heading">
+        <span className="absolute top-3 left-3 inline-flex h-[22px] items-center bg-white/95 px-2.5 text-[0.6875rem] font-bold text-heading">
           {a.filter}
         </span>
       </div>
@@ -341,7 +341,7 @@ export default function VisitMati() {
                     </div>
                   </div>
                   {conditions.open ? (
-                    <span className="inline-flex h-[22px] items-center gap-1.5 rounded-full bg-[#e6f6ee] px-2.5 text-xs font-bold text-[#11704a]">
+                    <span className="inline-flex h-[22px] items-center gap-1.5 bg-[#e6f6ee] px-2.5 text-xs font-bold text-[#11704a]">
                       <span className="size-1.5 rounded-full bg-[#16a34a]" aria-hidden="true" />
                       Open
                     </span>

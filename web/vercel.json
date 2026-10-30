@@ -1,5 +1,22 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/budget",
+      "destination": "/transparency/finance",
+      "permanent": true
+    },
+    {
+      "source": "/sources",
+      "destination": "/transparency/sources",
+      "permanent": true
+    },
+    {
+      "source": "/service-details/mswdo",
+      "destination": "/service-details/mswdo-services",
+      "permanent": true
+    }
+  ]
 }

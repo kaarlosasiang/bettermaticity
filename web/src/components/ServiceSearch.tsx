@@ -9,6 +9,7 @@ import {
   CommandEmpty,
 } from '@/components/ui/command';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/hooks/useLanguage';
 import { services, type Service } from '@/lib/services';
 
 // Fuzzy index over the service directory (mirrors the legacy search.js weighting).
@@ -29,11 +30,12 @@ interface ServiceSearchProps {
   className?: string;
 }
 
-// Reused by the Services landing and the home hero. shadcn Command drives keyboard
+// Reused by the Services landing and the home hero; its last option opens /search. shadcn Command drives keyboard
 // nav + a11y; Fuse.js drives fuzzy matching (Command's own filter is disabled).
 // Results float below the field as an overlay, so the surrounding card and section keep
 // their height; they close on Escape or when focus leaves the search.
 export function ServiceSearch({ placeholder, className }: ServiceSearchProps) {
+  const { t } = useLanguage();
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
   const results: Service[] = useMemo(
@@ -93,12 +95,22 @@ export function ServiceSearch({ placeholder, className }: ServiceSearchProps) {
               className="flex flex-col items-start gap-0.5"
             >
               <span className="font-medium text-foreground">{s.title}</span>
-              <span className="text-xs text-muted-foreground">
+              <span className="text-xs text-ink-muted">
                 {s.category}
                 {s.office ? ` · ${s.office}` : ''}
               </span>
             </CommandItem>
           ))}
+          {/* Always last: hand the query to site-wide search. */}
+          <CommandItem
+            value="__site-search"
+            onSelect={() => {
+              window.location.href = `/search?q=${encodeURIComponent(query.trim())}`;
+            }}
+            className="mt-1 border-t border-line font-semibold text-royal"
+          >
+            {t('search-everything')} · “{query.trim()}”
+          </CommandItem>
         </CommandList>
       )}
     </Command>

@@ -26,7 +26,7 @@ export function ServiceOnlineAction({
         <span className="sr-only"> ({t('service-new-tab')})</span>
       </a>
       {compact ? (
-        <details className="order-last w-full text-xs text-muted-foreground">
+        <details className="order-last w-full text-xs text-ink-muted">
           <summary className="w-fit cursor-pointer hover:text-primary">
             {t('service-link-details')}
           </summary>
@@ -37,7 +37,7 @@ export function ServiceOnlineAction({
         </details>
       ) : (
         <>
-          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{t(action.noteKey)}</p>
+          <p className="mt-2 text-xs leading-relaxed text-ink-muted">{t(action.noteKey)}</p>
           <a href={source.url} className="text-xs text-primary underline underline-offset-4">
             {t('service-link-source')}: {source.title}
           </a>

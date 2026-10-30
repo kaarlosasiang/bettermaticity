@@ -1,22 +1,20 @@
 // @ts-check
 
-/** localStorage key the popup uses to remember a dismissal. */
+/** localStorage key the dialog uses to remember a dismissal. */
 const STORAGE_KEY = 'bs-vol-popup-v1';
 
-/** Selectors for the "Be Part of Something Greater" modal. */
+/** The first-visit volunteer invite (web/src/components/VolunteerDialog.tsx). */
 const SEL = {
-  overlay: '#vol-popup-overlay',
-  modal: '.vol-popup',
-  title: '#vol-popup-title',
-  close: '.vol-popup-close',
-  skip: '.vol-popup-skip',
-  cta: '.vol-popup-cta',
-  roles: '.vol-popup-role',
+  dialog: '[data-slot="dialog-content"]',
+  overlay: '[data-slot="dialog-overlay"]',
+  close: '[data-slot="dialog-close"]',
+  cta: 'a[href="mailto:volunteer@bettermati.org"]',
 };
+const TITLE = 'Help build BetterMati';
 
 /**
- * Blocks third-party requests (CDN players, tile servers, weather APIs) so the
- * modal's behaviour is measured without unrelated network flakiness.
+ * Blocks third-party requests (weather and exchange-rate APIs, embeds, analytics) so
+ * the dialog is measured without unrelated network flakiness.
  */
 async function blockThirdParty(page) {
   await page.route('**/*', (route) => {
@@ -27,9 +25,9 @@ async function blockThirdParty(page) {
 }
 
 /**
- * Loads the homepage with a clean slate, so the popup treats every visit as a
- * first visit. The storage seed runs as an init script because the popup reads
- * localStorage during its own DOMContentLoaded handler.
+ * Loads the home page (the only page that renders the dialog) with a clean slate, so
+ * every visit is a first visit. The storage seed runs as an init script because the
+ * dialog reads localStorage as soon as it mounts.
  */
 async function gotoFresh(page, { dismissed = false } = {}) {
   await blockThirdParty(page);
@@ -39,29 +37,27 @@ async function gotoFresh(page, { dismissed = false } = {}) {
         if (value) localStorage.setItem(key, value);
         else localStorage.removeItem(key);
       } catch (e) {
-        /* storage disabled — the popup must cope on its own */
+        /* storage disabled — the dialog must cope on its own */
       }
     },
     [STORAGE_KEY, dismissed ? '1' : '']
   );
-  await page.goto('/index.html', { waitUntil: 'domcontentloaded' });
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
 }
 
-/** Waits for the popup to finish its entry animation and settle. */
+/** Waits for the dialog to open (after its ~800 ms delay) and finish animating in. */
 async function waitForOpen(page) {
-  const overlay = page.locator(SEL.overlay);
-  await overlay.waitFor({ state: 'attached' });
+  const dialog = page.locator(SEL.dialog);
+  await dialog.waitFor({ state: 'visible', timeout: 10_000 });
   await page.waitForFunction(
-    (sel) => {
-      const el = document.querySelector(sel);
-      return !!el && el.classList.contains('vol-popup-overlay--visible');
-    },
-    SEL.overlay,
-    { timeout: 10_000 }
+    (sel) =>
+      document
+        .querySelector(sel)
+        ?.getAnimations()
+        .every((a) => a.playState !== 'running'),
+    SEL.dialog
   );
-  // Entry animation is 380ms; give it room to complete before measuring.
-  await page.waitForTimeout(500);
-  return overlay;
+  return dialog;
 }
 
-module.exports = { STORAGE_KEY, SEL, blockThirdParty, gotoFresh, waitForOpen };
+module.exports = { STORAGE_KEY, SEL, TITLE, blockThirdParty, gotoFresh, waitForOpen };

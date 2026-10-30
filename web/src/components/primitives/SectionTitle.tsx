@@ -28,8 +28,3 @@ export function SectionTitle({ className, children, eyebrow, ...props }: Section
     </div>
   );
 }
-
-// Legacy .section-subtitle: 0.8125rem, text-light, margin -8px 0 16px.
-export function SectionSubtitle({ className, ...props }: ComponentProps<'p'>) {
-  return <p className={cn('-mt-2 mb-4 text-[0.8125rem] text-ink-muted', className)} {...props} />;
-}

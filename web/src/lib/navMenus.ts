@@ -1,6 +1,7 @@
 import type { LucideIcon } from 'lucide-react';
 import {
   FileText,
+  Globe,
   Store,
   Coins,
   Users,
@@ -18,6 +19,11 @@ import {
   MapPin,
   Phone,
   BarChart3,
+  Database,
+  HardHat,
+  FileSpreadsheet,
+  FolderOpen,
+  BookOpenCheck,
 } from 'lucide-react';
 
 /**
@@ -146,6 +152,12 @@ const GOVERNMENT: NavMenu = {
           descKey: 'gov-link-barangays-desc',
           Icon: MapPin,
         },
+        {
+          to: '/government/links',
+          key: 'links-title',
+          descKey: 'nav-desc-official-links',
+          Icon: Globe,
+        },
       ],
     },
     {
@@ -180,7 +192,12 @@ const GOVERNMENT: NavMenu = {
           descKey: 'gov-link-hotlines-desc',
           Icon: Phone,
         },
-        { to: '/budget', key: 'nav-public-funds', descKey: 'nav-desc-public-funds', Icon: Coins },
+        {
+          to: '/transparency/finance',
+          key: 'nav-public-funds',
+          descKey: 'nav-desc-public-funds',
+          Icon: Coins,
+        },
         {
           to: '/statistics',
           key: 'nav-statistics',
@@ -193,12 +210,75 @@ const GOVERNMENT: NavMenu = {
   ],
 };
 
+const TRANSPARENCY: NavMenu = {
+  id: 'transparency',
+  groups: [
+    {
+      key: 'nav-group-money',
+      items: [
+        {
+          to: '/transparency/finance',
+          key: 'finance-page-name',
+          descKey: 'transparency-find-finance',
+          Icon: Coins,
+        },
+        {
+          to: '/transparency/projects',
+          key: 'projects-page-name',
+          descKey: 'transparency-find-projects',
+          Icon: HardHat,
+        },
+        {
+          to: '/transparency/full-disclosure',
+          key: 'fdp-page-name',
+          descKey: 'transparency-find-fdp',
+          Icon: FileSpreadsheet,
+        },
+      ],
+    },
+    {
+      key: 'nav-group-records',
+      items: [
+        {
+          to: '/transparency/documents',
+          key: 'docs-page-name',
+          descKey: 'transparency-find-docs',
+          Icon: FolderOpen,
+        },
+        {
+          to: '/legislative',
+          key: 'nav-legislative-overview',
+          descKey: 'transparency-find-legislation',
+          Icon: Landmark,
+        },
+      ],
+    },
+    {
+      key: 'nav-group-about-data',
+      items: [
+        {
+          to: '/transparency/sources',
+          key: 'sources-page-name',
+          descKey: 'nav-desc-sources',
+          Icon: Database,
+        },
+        {
+          to: '/transparency/methodology',
+          key: 'method-page-name',
+          descKey: 'transparency-find-method',
+          Icon: BookOpenCheck,
+        },
+      ],
+    },
+  ],
+};
+
 export const NAV: NavEntry[] = [
   { to: '/', key: 'nav-home' },
   { to: '/services', key: 'nav-services', menu: SERVICES },
   { to: '/government', key: 'nav-government', menu: GOVERNMENT, matches: ['/legislative'] },
   { to: '/statistics', key: 'nav-statistics' },
-  { to: '/budget', key: 'nav-transparency' },
+  { to: '/transparency', key: 'nav-transparency', menu: TRANSPARENCY },
   { to: '/about', key: 'nav-about' },
   { to: '/visit-mati', key: 'nav-visit-mati', highlight: true },
 ];

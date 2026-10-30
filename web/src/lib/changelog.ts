@@ -27,10 +27,15 @@ export const entries: ChangelogEntry[] = [...(changelog.entries as ChangelogEntr
 
 const LOCALES: Record<string, string> = { en: 'en-PH', ceb: 'ceb-PH' };
 
-// UTC so the prerendered date and the hydrated one never differ by a day.
-export function formatChangeDate(date: string, language = 'en'): string {
+// UTC so the prerendered date and the hydrated one never differ by a day. `medium`
+// ("Oct 25, 2026") suits narrow table columns.
+export function formatChangeDate(
+  date: string,
+  language = 'en',
+  style: 'long' | 'medium' = 'long'
+): string {
   return new Intl.DateTimeFormat(LOCALES[language] ?? 'en-PH', {
-    dateStyle: 'long',
+    dateStyle: style,
     timeZone: 'UTC',
   }).format(new Date(`${date}T00:00:00Z`));
 }

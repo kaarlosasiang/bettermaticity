@@ -8,7 +8,8 @@
 // v8: footer logo switched to the Mati white PNG (the old white SVG was the Solano mark).
 // v9: new Sleeping Dinosaur logo, favicon and PWA icons.
 // v10: /data/ requests go network-first; drops copies of news.json cached as static.
-var CACHE_VERSION = 'v10';
+// v11: offline.html restyled (square corners, Mati logo PNG).
+var CACHE_VERSION = 'v11';
 var STATIC_CACHE = 'bettermati-static-' + CACHE_VERSION;
 var RUNTIME_CACHE = 'bettermati-runtime-' + CACHE_VERSION;
 var OFFLINE_URL = '/offline.html';
