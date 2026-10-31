@@ -6,7 +6,8 @@ import InfoBar from '@/components/layout/InfoBar';
 import Footer from '@/components/layout/Footer';
 import ReportIssueBand from '@/components/layout/ReportIssueBand';
 import PWAManager from '@/components/PWAManager';
-import { Analytics } from '@/components/Analytics';
+import { Analytics as GoogleAnalytics } from '@/components/Analytics';
+import { Analytics as VercelAnalytics } from '@vercel/analytics/react';
 import { Seo } from '@/components/Seo';
 import { useSyncStoredLanguage } from '@/hooks/useLanguage';
 
@@ -56,7 +57,8 @@ export default function Layout() {
           return to the previous scroll position. Renders nothing in the prerender. */}
       <ScrollRestoration />
       <PWAManager />
-      <Analytics />
+      <GoogleAnalytics />
+      <VercelAnalytics />
     </>
   );
 }
