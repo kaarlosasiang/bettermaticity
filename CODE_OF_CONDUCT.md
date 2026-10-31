@@ -30,7 +30,7 @@ BetterMati.org is a civic-tech project built for the people of Mati, Davao Orien
 
 This Code of Conduct applies to all project spaces, including:
 
-- GitHub repository (issues, pull requests, discussions)
+- The GitHub repository, [kaarlosasiang/bettermaticity](https://github.com/kaarlosasiang/bettermaticity) (issues, pull requests, discussions)
 - Discord community
 - Social media channels (Facebook, LinkedIn)
 - Email communications
@@ -47,9 +47,10 @@ All complaints will be reviewed and investigated promptly and fairly. The projec
 
 **Enforcement Actions:**
 
-1. **Warning** - Private written warning with clarity on the violation
-2. **Temporary Ban** - Temporary exclusion from community interaction
-3. **Permanent Ban** - Permanent exclusion from all project spaces
+1. **Correction** - A private written note explaining what was inappropriate; a public apology may be requested
+2. **Warning** - A warning with consequences for continued behavior, and no interaction with the people involved for a set period
+3. **Temporary Ban** - Temporary exclusion from community interaction
+4. **Permanent Ban** - Permanent exclusion from all project spaces
 
 ## Attribution
 

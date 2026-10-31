@@ -1,183 +1,150 @@
 # Contributing to BetterMati.org
 
-Thank you for your interest in contributing to BetterMati.org! This civic-tech project thrives on community participation. Whether you're a developer, designer, translator, or a concerned citizen of Mati, your contributions are welcome.
+Thank you for your interest in contributing to BetterMati.org! This civic-tech project thrives on community participation. Whether you're a developer, designer, translator, data researcher or a resident of Mati, your contributions are welcome.
 
-## Choosing a Version
-
-BetterMati.org has two versions. Choose based on your preference:
-
-| Version            | Branch             | Best For                                                          |
-| ------------------ | ------------------ | ----------------------------------------------------------------- |
-| Static HTML        | `main`             | Quick fixes, content updates, contributors new to web development |
-| React + TypeScript | `react-typescript` | New features, complex UI, contributors familiar with React        |
-
-Both versions are actively maintained and contributions to either are welcome.
-
-For detailed differences and migration guidance, see [MIGRATION.md](MIGRATION.md).
+Please read the [Code of Conduct](CODE_OF_CONDUCT.md) before taking part.
 
 ## Getting Started
 
-### Static HTML Version
+The whole site is one Vite + React + TypeScript app in [`web/`](web/), prerendered to static HTML. Content lives as JSON in [`data/`](data/).
 
-#### Prerequisites
+### Prerequisites
 
-- Node.js v16 or higher
-- npm v8 or higher
-- Python 3 (for local development server)
+- Node.js 20 (see `.nvmrc`)
+- npm 10 or higher
 - Git
+- Python 3 (optional: for `serve.py` and the Playwright tests)
 
-#### Setup
+### Setup
 
 ```bash
-git clone https://github.com/BetterMati/bettermati.git
-cd bettermati
+git clone https://github.com/kaarlosasiang/bettermaticity.git
+cd bettermaticity/web
 npm install
 npm run dev
 ```
 
-Open http://localhost:8000 in your browser.
+Open http://localhost:5173 in your browser.
 
-### React + TypeScript Version
-
-#### Prerequisites
-
-- Node.js v18 or higher
-- npm v9 or higher
-- Git
-
-#### Setup
-
-```bash
-git clone https://github.com/BetterMati/bettermati.git
-cd bettermati
-git checkout react-typescript
-cd react-app
-npm install
-npm run dev
-```
-
-Open http://localhost:3000 in your browser.
+The Playwright and production-build tooling lives at the repo root; run `npm install` there too if you need it.
 
 ## How to Contribute
 
 ### Reporting Bugs
 
-1. Check existing [issues](https://github.com/BetterMati/bettermati/issues) to avoid duplicates
+1. Check existing [issues](https://github.com/kaarlosasiang/bettermaticity/issues) to avoid duplicates
 2. Create a new issue with:
    - Clear, descriptive title
-   - Steps to reproduce
+   - The page URL and steps to reproduce
    - Expected vs actual behavior
    - Browser and device information
    - Screenshots if applicable
 
+### Reporting Wrong or Outdated Information
+
+Open an issue with the page, what is wrong, and a link to the official source that shows the correct information. A City office memo, ordinance, or government portal page is the kind of source we need.
+
 ### Suggesting Features
 
 1. Open an issue with the `enhancement` label
-2. Describe the feature and its benefit to users
+2. Describe the feature and how it helps residents
 3. Include mockups or examples if possible
 
 ### Submitting Code
 
-1. **Fork** the repository
-2. **Create** a feature branch
+1. **Fork** the repository and **create** a branch
    ```bash
-   git checkout -b feature/your-feature-name
+   git checkout -b your-change-name
    ```
-3. **Make** your changes
-4. **Test** on multiple browsers (Chrome, Firefox, Safari, Edge)
-5. **Commit** with a descriptive message
+2. **Make** your changes (app code goes in `web/`, content in `data/`)
+3. **Check** your work
    ```bash
-   git commit -m "Add: brief description of changes"
+   cd web
+   npm run typecheck && npm run lint && npm test
+   cd ..
+   npm run format
    ```
-6. **Push** to your fork
+   If you touched the header, footer or volunteer dialog, also run the Playwright specs from the repo root: `npm run test:chrome` (or `npm test` for every browser).
+4. **Commit** with a plain, imperative subject that says what changed
    ```bash
-   git push origin feature/your-feature-name
+   git commit -m "Add search to the barangays page"
    ```
-7. **Open** a Pull Request
+5. **Push** to your fork and **open** a Pull Request against `main`
 
-### Commit Message Format
+### Commit Messages
 
-```
-Type: Brief description
-
-Types:
-- Add: New feature or content
-- Fix: Bug fix
-- Update: Changes to existing feature
-- Remove: Removed feature or content
-- Docs: Documentation changes
-- Style: CSS/formatting changes (no logic change)
-- Refactor: Code restructuring
-```
+Write the subject as an instruction, starting with a verb: "Add …", "Fix …", "Update …", "Remove …". Keep it under about 70 characters and use the body to explain why, when that isn't obvious.
 
 ## Contribution Areas
 
-| Area               | Description                          |
-| ------------------ | ------------------------------------ |
-| Bug Fixes          | Fix reported issues                  |
-| Features           | Implement new functionality          |
-| Content            | Update municipal service information |
-| Translations       | Translate to Filipino or Cebuano     |
-| Design             | Improve UI/UX and accessibility      |
-| Data               | Verify and update statistics         |
-| Documentation      | Improve guides and comments          |
-| API Integration    | Connect real-time data sources       |
-| Data Visualization | Enhance charts and graphs            |
+| Area               | Description                                                         |
+| ------------------ | ------------------------------------------------------------------- |
+| Bug Fixes          | Fix reported issues                                                 |
+| Features           | Implement new functionality                                         |
+| Data               | Replace placeholders with verified City of Mati data, with sources  |
+| Translations       | Translate the site into Cebuano, or review existing Cebuano strings |
+| Design             | Improve UI/UX and accessibility                                     |
+| Documentation      | Improve guides and comments                                         |
+| Data Visualization | Improve charts and tables                                           |
 
-## Code Guidelines
+## Project Rules
 
-### HTML
+[`CLAUDE.md`](CLAUDE.md) is the detailed guide to the codebase. The rules that matter most:
 
-- Use semantic HTML5 elements
-- Include proper ARIA labels for accessibility
-- Validate HTML before submitting
+### Pages and routes
 
-### CSS
+- **Adding a page takes three edits:** the component in `web/src/pages/`, an entry in `web/src/routes.tsx`, and an entry in `web/migrated-routes.json`. Skip the third and the page works in dev but never ships.
+- Give new routes a lazy import: `lazy: () => import('./pages/X').then((m) => ({ Component: m.default }))`.
+- Add the page to the Site index in `web/src/lib/siteIndex.ts`, which feeds `/sitemap` and site-wide search. A test fails if a route can't be found from search.
+- Every page renders `<Seo title description canonicalPath />`.
 
-- Follow existing naming conventions
-- Use CSS custom properties (variables)
-- Ensure responsive design
-- Test on mobile devices
+### Code
 
-### JavaScript
+- TypeScript strict; avoid `any`. Functional components in PascalCase files; use the `@/` alias for `web/src` and `@data` for the root `data/`.
+- Use `AppLink`, not a bare `<Link>` or `<a>`, for internal links.
+- Reach for an existing primitive (`Container`, `Band`, `PageHeader`, `StatRow`, `RuledGrid`, `FilterPanel`, …) or a shadcn `ui/` component before writing new layout markup.
+- Style with Tailwind utilities and the design tokens in `web/src/index.css`; avoid ad-hoc global CSS.
+- Use lucide-react for icons (react-icons only for brand marks).
+- Animate with the shared primitives in `web/src/components/motion.ts`, not a direct `framer-motion` import.
+- Fonts are self-hosted. Never add a Google Fonts or CDN `<link>`: the site's Content Security Policy blocks it.
+- Prettier is enforced: single quotes, semicolons, 2-space indent, 100 columns.
+- Tests are Vitest + Testing Library, next to the code they cover.
 
-- Keep vanilla JS (no frameworks unless approved)
-- Use meaningful variable and function names
-- Add comments for complex logic
-- Avoid global variables
+### Content and data
 
-### Accessibility
+- To change displayed content, edit the JSON in `data/`, not the components.
+- Only use information from official government sources, and record the source.
+- Records not yet confirmed stay clearly marked (`[Placeholder]`, `[TODO]` or `_status: "draft"`) until they are verified.
+- Verified facts are tracked as BM-001. Don't "correct" them from general knowledge.
+- Don't publish personal information about private individuals.
 
-- Maintain WCAG 2.1 compliance
-- Include alt text for images
-- Ensure keyboard navigation works
-- Test with screen readers if possible
+### Translations
 
-### Data Accuracy
+- Strings live in `web/src/locales/en.json` and `ceb.json`, with flat kebab-case keys (a `.` in a key is literal).
+- Every new UI string needs an English key. Cebuano is optional; missing strings fall back to English.
+- The site supports English and Cebuano only.
 
-- Only use data from official government sources
-- Include source attribution
-- Verify information before submitting
-- Do not include unverified or speculative data
+### Versions and releases
+
+- `version.json` is the master version. Never hand-edit version strings; use the scripts.
+- `npm run release` bumps the version and drafts a `data/changelog.json` entry. Rewrite every drafted `TODO` line for residents (or delete it) before merging; tests fail until you do.
 
 ## Pull Request Process
 
-1. Ensure your code follows the style guidelines
-2. Update documentation if needed
-3. Test thoroughly before submitting
-4. Fill out the PR template completely
-5. Link related issues
-6. Wait for review and address feedback
+1. Make sure the checks above pass
+2. Update documentation if your change affects it
+3. Describe what changed and why, with screenshots for visual changes
+4. Link related issues
+5. Wait for review and address feedback
 
 ## Review Criteria
 
 Pull requests are reviewed for:
 
-- Code quality and style consistency
+- Code quality and consistency with the existing code
 - Functionality and bug-free operation
-- Accessibility compliance
-- Mobile responsiveness
-- Data accuracy (for content changes)
+- Accessibility (WCAG 2.1) and mobile layout
+- Data accuracy and sources (for content changes)
 - Security considerations
 
 ## Community
@@ -189,7 +156,7 @@ Pull requests are reviewed for:
 
 ## Recognition
 
-All contributors are recognized in our repository. Significant contributions may be highlighted on the website.
+Contributors are credited through the repository's history. Significant contributions may be highlighted on the website.
 
 ## Questions?
 
