@@ -1,22 +1,23 @@
 # BetterMati.org
 
-A civic-tech initiative providing transparent access to municipal services, programs, and public funds of LGU Mati, Davao Oriental, Philippines.
+A civic-tech portal that gives the people of Mati, Davao Oriental, Philippines plain-language access to their City Government's services, officials, legislation and public funds.
 
-> ### ⚠️ Placeholders to fill with real City of Mati data
+> ### ⚠️ Records still waiting on verified City of Mati data
 >
-> This site was adapted from a template originally built for LGU Solano. All branding, geography (coordinates recentered on Mati, `PH-DAO`), terminology (City / Sangguniang Panlungsod), and the domain (`bettermati.org`) have been rebranded. The following LGU-specific content is **placeholder / draft** and must be replaced with verified data before going live:
+> BetterMati.org started from a template built for LGU Solano and has been rebranded to the City of Mati: name, domain, geography (`PH-DAO`), terminology (City / Sangguniang Panlungsod) and artwork. Much of the content is now sourced and checked (see [Data sources](https://bettermati.org/transparency/sources)), but these records are still **clearly-marked placeholders** (`[Placeholder]`, `[TODO]` or `_status: "draft"`) until the City confirms them:
 >
-> - **Elected officials** — `data/officials.json`, `web/src/lib/govDirectory.ts`, `web/src/pages/Government.tsx`, `web/src/pages/GovernmentOfficials.tsx` (mayor, vice mayor, and SP members shown as `[to be confirmed]` / `[Name]` placeholders).
-> - **Barangays** — Mati has **26 barangays**. Names live in `web/src/lib/statsData.ts` (`barangayData`) and the canonical reference layer under `data/mati/`. Verify any common-word names (e.g. Roxas, Quezon, Concepcion, San Juan, San Luis, Poblacion) against Mati's actual barangays.
-> - **Statistics** — population, land area, density, income class, historical trends, CMCI scores, poverty and economic figures live in `web/src/lib/statsData.ts`, `data/demographics.json`, and `data/competitive-index.json`; several are drafts pending verification (e.g. the `588.63 km²` land area is flagged **NEEDS VERIFICATION**).
-> - **Legislation & projects** — `data/resolutions.json`, `data/ordinances.json`, `data/dpwh-projects.json`, and `web/src/lib/{dpwhData,infrastructureData,legislativeProcess}.ts` are reduced to labeled placeholders.
-> - **City history** — the homepage timeline (`web/src/pages/Home.tsx` + `home-history-*` keys in `web/src/locales/*.json`) is placeholdered; add verified City of Mati history.
-> - **Contact & hotlines** — phone/hotline numbers (`web/src/lib/hotlines.ts`, `web/src/components/layout/HotlineBar.tsx`) use Davao Oriental's `(087)` area code but are placeholder subscriber numbers; emails use `@mati.gov.ph` / `cityofmati` addresses; postal code `8200`. Replace with real values.
-> - **Config** — Google Analytics ID is a placeholder; set your GA4 property. Confirm the `mati.gov.ph` domain and official Facebook page.
-> - **Artwork** — the logo, favicon, PWA icons and OpenGraph banner now use the Mati "Sleeping Dinosaur" mark (Pujada Bay). The OpenGraph banner is a homepage screenshot, so re-capture it when the hero changes. `feel-mati.png` and the partner logos are separate artwork.
-> - **Cebuano (`ceb`)** — `web/src/locales/ceb.json` is a machine-assisted starter set only; the bulk of keys fall back to English pending a full translation + native review.
+> - **Elected officials** — `data/officials.json` is a draft (`_status: "draft"`), so officials are left out of site search until confirmed.
+> - **Barangays** — the 26 barangays and their populations are verified (`data/mati/`); barangay captains and contacts are not.
+> - **Legislation** — `data/ordinances.json` and `data/resolutions.json` list titles only; full texts are pending.
+> - **Office contacts** — City Hall and office phone numbers and emails need confirmation from the City. (Emergency hotlines in `data/emergency-hotlines.json` are transcribed from the City DRRMO's official graphic.)
+> - **Tourism** — some attraction details in `data/tourism.json` are placeholders.
+> - **Audit reports** — COA Annual Audit Reports are not yet collected (Full Disclosure reports are).
+> - **Config** — the Google Analytics ID is a placeholder; set your GA4 property.
+> - **Cebuano (`ceb`)** — `web/src/locales/ceb.json` is a partial, machine-assisted set; missing strings fall back to English pending translation and native review.
+>
+> Verified facts are tracked as BM-001. Don't "correct" them from general knowledge.
 
-![Version](https://img.shields.io/badge/version-1.2.0-green)
+![Version](https://img.shields.io/github/package-json/v/kaarlosasiang/bettermaticity)
 ![License](https://img.shields.io/badge/license-MIT%20%7C%20CC%20BY%204.0-blue)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
 ![React](https://img.shields.io/badge/React%2019-61DAFB?logo=react&logoColor=black)
@@ -26,102 +27,90 @@ A civic-tech initiative providing transparent access to municipal services, prog
 
 ## Open Source for LGUs
 
-This repository is open source under the **MIT License** and **CC BY 4.0** and is freely available for use, modification, redistribution, and publication by any individual or organization that wishes to implement it in their respective local government unit (LGU) across the Philippines.
+This repository is open source under the **MIT License** (code) and **CC BY 4.0** (content) and is free to use, modify, redistribute and publish by anyone who wants to run it for their own local government unit (LGU) in the Philippines.
 
-We encourage adoption by other municipalities in support of:
+We encourage adoption by other cities and municipalities in support of:
 
 - **Transparency** - Making government information accessible to citizens
 - **Accessibility** - Ensuring services are available to all, including persons with disabilities
 - **Modernization** - Bringing local government services to digital platforms
 - **Public Service** - Improving the delivery of government services to the community
 
-To adapt this project for your LGU, fork the repository and customize the content, styling, and data sources to match your municipality's requirements.
+To adapt it for your LGU, fork the repository and replace the JSON feeds in `data/`, the copy in `web/src/locales/`, and the branding in `assets/`.
 
 ## About
 
-BetterMati.org is a volunteer-driven, open-source project that empowers the people of Mati with easy access to local government information. The platform aggregates public data from official government portals and presents it in a user-friendly, accessible format.
+BetterMati.org is a volunteer-driven, open-source project, independent of the City Government. It gathers public information from official government portals and presents it in a plain, accessible format, with every dataset traced back to its source.
 
 **Cost to the People of Mati = ₱0**
 
-## Live Demo
+## Live Site
 
-Visit the live website: [https://bettermati.org](https://bettermati.org)
+[https://bettermati.org](https://bettermati.org)
 
 ## Technology Stack
 
-The site is a single **React + TypeScript** application built with **Vite** and prerendered to static HTML (SSG) for hosting on any static host / cPanel.
+The site is a single **React + TypeScript** application built with **Vite** and prerendered to static HTML, so it runs on any static host or cPanel with no server runtime.
 
 | Category             | Technologies                                                                                                |
 | -------------------- | ----------------------------------------------------------------------------------------------------------- |
-| **Framework**        | React 19, TypeScript, React Router                                                                          |
+| **Framework**        | React 19, TypeScript, React Router 6                                                                        |
 | **Build / SSG**      | Vite 8, [vite-react-ssg](https://github.com/Daydreamer-riri/vite-react-ssg) (static prerender)              |
-| **Styling**          | Tailwind CSS v4, shadcn/ui (Radix UI), CSS custom properties, `tw-animate-css`                              |
-| **Icons**            | lucide-react, react-icons                                                                                   |
-| **Fonts**            | Self-hosted via Fontsource — Inter, Plus Jakarta Sans, IBM Plex Mono (no CDN)                               |
-| **Animation**        | Framer Motion (scroll reveals, hero stagger, reduced-motion aware)                                          |
-| **Search**           | Fuse.js (fuzzy service search), cmdk (command palette)                                                      |
+| **Styling**          | Tailwind CSS v4, shadcn/ui (Radix UI), design tokens, `tw-animate-css`                                      |
+| **Icons**            | lucide-react, react-icons (brand marks)                                                                     |
+| **Fonts**            | Self-hosted via Fontsource — Inter Variable, Roboto Mono (no CDN)                                           |
+| **Animation**        | Framer Motion (`LazyMotion` subset, reduced-motion aware)                                                   |
+| **Search**           | Fuse.js site-wide search (`/search`), cmdk service palette                                                  |
 | **Charts**           | Chart.js + react-chartjs-2                                                                                  |
 | **Maps**             | OpenStreetMap (embedded)                                                                                    |
-| **i18n**             | i18next + react-i18next (English, Filipino, Cebuano)                                                        |
-| **Live data APIs**   | Open-Meteo (weather), ExchangeRate (currency)                                                               |
-| **Testing**          | Vitest + Testing Library, Playwright (cross-browser), Lighthouse CI                                         |
+| **i18n**             | i18next + react-i18next (English, Cebuano)                                                                  |
+| **Live data**        | Open-Meteo (weather), exchange-rate API, Facebook Page plugin (News)                                        |
+| **Testing**          | Vitest + Testing Library, Playwright (cross-browser + integration), Lighthouse CI                           |
 | **Tooling**          | oxlint, Prettier, `tsc` type-checking                                                                       |
 | **PWA**              | Service worker (`sw.js`, versioned + runtime caching, seamless updates), Web App Manifest, offline fallback |
-| **SEO**              | Prerendered HTML, Open Graph, Twitter Cards, XML Sitemap, robots.txt                                        |
+| **SEO**              | Prerendered HTML, Open Graph, Twitter Cards, XML sitemap, robots.txt                                        |
 | **Server / Hosting** | Apache (`.htaccess`: clean URLs, CSP, HSTS, gzip), cPanel (production)                                      |
-| **Analytics**        | Google Analytics (gtag.js)                                                                                  |
+| **Analytics**        | Google Analytics 4 (gtag.js)                                                                                |
 | **Accessibility**    | WCAG 2.1, ARIA, semantic HTML, reduced-motion support                                                       |
 
 ## Key Features
 
-| Feature                     | Description                                                                                                      |
-| --------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| **City Services Directory** | Comprehensive guide to LGU services with requirements, fees, and processing times                                |
-| **Government Officials**    | Directory of elected officials and department heads with contact information                                     |
-| **Budget Transparency**     | Financial reports (BLGF SRE), income/expenditure breakdowns, and infrastructure projects                         |
-| **Legislative Documents**   | Searchable database of ordinances and resolutions from the Sangguniang Panlungsod                                |
-| **City Statistics**         | Demographics, economic data, and DTI CMCI competitive-index rankings                                             |
-| **Appointment Services**    | Online appointment scheduling integration with the Mayor's Office (OASYS)                                        |
-| **Mati Quiz**               | Interactive quiz about Mati history and culture, linked from the homepage and footer                             |
-| **Real-time Information**   | Live weather updates, currency exchange rates, and Philippine time                                               |
-| **Emergency Hotlines**      | Always-visible hotline bar with a clickable scrolling marquee on tablet/mobile, pause-on-hover for accessibility |
-| **Progressive Web App**     | Installable PWA with seamless auto-updates, versioned service-worker caching, and an offline fallback page       |
-| **Multi-language Support**  | English and Filipino, plus a Cebuano starter set (remaining keys fall back to English)                           |
-| **Clean URLs**              | SEO-friendly URLs without `.html` extensions, powered by Apache mod_rewrite                                      |
-| **Accessibility**           | WCAG 2.1: skip links, ARIA labels, keyboard navigation, semantic HTML, reduced-motion                            |
-| **SEO Optimized**           | Statically prerendered pages, meta tags, Open Graph, Twitter Cards, and an XML sitemap                           |
-| **Performance**             | Hashed/minified assets, gzip compression, and browser caching                                                    |
+| Feature                 | Description                                                                                                                        |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| **City Services**       | Ten service categories and 22 step-by-step service guides with requirements, fees, processing times and the official source        |
+| **Government**          | Elected officials, City offices, the 26 barangays, and a checked list of the City's official websites and national portals         |
+| **Legislation**         | Ordinances and resolutions of the Sangguniang Panlungsod, and how a measure becomes law                                            |
+| **Transparency**        | City finances (FY2021–FY2025), projects and procurement, Full Disclosure reports, official documents, data sources and methodology |
+| **City Statistics**     | Population, barangay data, economy, and DTI CMCI competitiveness rankings                                                          |
+| **Visit Mati**          | Dahican Beach, Mount Hamiguitan, Pujada Bay, the Sleeping Dinosaur and the Subangan Museum                                         |
+| **News**                | City updates from a runtime feed (`data/news.json`) plus the City's Facebook Page                                                  |
+| **Site-wide Search**    | One search across every page, service, office, project, procurement notice, document and official link                             |
+| **Emergency Hotlines**  | Always-visible hotline bar; a scrolling marquee on tablet and mobile that pauses on hover and focus                                |
+| **Changelog**           | Plain-language release notes at [/changelog](https://bettermati.org/changelog), linked from the footer version                     |
+| **Progressive Web App** | Installable, with seamless updates, versioned service-worker caching and an offline page                                           |
+| **Languages**           | English and Cebuano (Cebuano strings not yet translated fall back to English)                                                      |
+| **Accessibility**       | Skip links, ARIA labels, keyboard navigation, semantic HTML, reduced motion                                                        |
+| **SEO and Performance** | Prerendered pages, per-page code splitting, clean URLs, meta tags, Open Graph, XML sitemap, gzip and caching                       |
 
 ## Architecture
 
-The project is a **single Vite + React SSG application** living in [`web/`](web/), plus a set
-of **static passthrough** files at the repo root that the build merges into the final output.
+The project is a **single Vite + React SSG application** in [`web/`](web/), plus **static passthrough** files at the repo root that the build merges into the final output.
 
-- **`web/`** — the entire site: React 19 + TypeScript + Tailwind v4 + shadcn/ui. Every route
-  is statically prerendered to HTML by `vite-react-ssg`. The set of routes to prerender is the
-  single source of truth in [`web/migrated-routes.json`](web/migrated-routes.json).
-- **Root static passthrough** — `assets/` (images), `data/` (JSON content feeds), `admin/`
-  (news editor), `sw.js`, `manifest.webmanifest`, `.htaccess`, `offline.html`, and the
-  `403/404/500.html` error pages. These are served as-is and layered into `dist/` at build time.
-- **`build.sh`** (run via `npm run build` at the repo root) — builds the `web/` app, assembles
-  the prerendered HTML + hashed assets (`/_app/*`) together with the root passthrough into
-  **`dist/`**, folderizes parent routes to avoid Apache directory shadowing, and sets cPanel
-  file permissions. Deploy the contents of `dist/` to `public_html/`.
-- **Clean URLs** — `.htaccess` mod_rewrite strips `.html` (301 to the clean URL, internal
-  rewrite back to the file). Internal links use extensionless paths.
+- **`web/`** — the whole site: React 19 + TypeScript + Tailwind v4 + shadcn/ui. Every route is statically prerendered to HTML by `vite-react-ssg`. Routes are code-split, so each page loads only its own code.
+- **[`web/migrated-routes.json`](web/migrated-routes.json)** — the source of truth for the live routes. It drives the prerender set, the build's folder pass, and `AppLink`'s SPA-vs-full-load decision.
+- **[`web/src/lib/siteIndex.ts`](web/src/lib/siteIndex.ts)** — the Site index data that feeds both `/sitemap` and site-wide search.
+- **`data/`** — JSON content feeds, imported at build time (except `news.json`, which is fetched at runtime so news can change without a rebuild).
+- **Root static passthrough** — `assets/` (images), `data/`, `admin/` (news editor), `sw.js`, `manifest.webmanifest`, `.htaccess`, `offline.html`, `robots.txt` and the `403/404/500.html` error pages.
+- **[`build.sh`](build.sh)** (`npm run build` at the repo root) — builds `web/`, assembles the prerendered HTML and hashed bundles (`/_app/*`) with the passthrough files into **`dist/`**, moves parent routes to `<route>/index.html` so Apache directories don't shadow them, generates `sitemap.xml`, and sets cPanel file permissions.
+- **Clean URLs** — `.htaccess` mod_rewrite strips `.html`, so internal links use extensionless paths.
 
 ## Quick Start
 
 ```bash
-# Clone the repository
-git clone https://github.com/BetterMati/bettermati.git
-cd bettermati
-
-# Install and run the app (Vite dev server)
-cd web
+git clone https://github.com/kaarlosasiang/bettermaticity.git
+cd bettermaticity/web
 npm install
 npm run dev
-
 # Open http://localhost:5173
 ```
 
@@ -129,20 +118,20 @@ npm run dev
 
 ### Prerequisites
 
-| Requirement | Version         | Purpose                                            |
-| ----------- | --------------- | -------------------------------------------------- |
-| Node.js     | v20 (`.nvmrc`)  | App tooling and package management                 |
-| npm         | v10+            | Dependency management                              |
-| Git         | Latest          | Version control                                    |
-| Python 3    | v3.x (optional) | Only for `serve.py` / previewing the built `dist/` |
+| Requirement | Version         | Purpose                                                  |
+| ----------- | --------------- | -------------------------------------------------------- |
+| Node.js     | v20 (`.nvmrc`)  | App tooling and package management                       |
+| npm         | v10+            | Dependency management                                    |
+| Git         | Latest          | Version control                                          |
+| Python 3    | v3.x (optional) | `serve.py`, for previewing the built `dist/` and testing |
 
 ### Setup Steps
 
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/BetterMati/bettermati.git
-   cd bettermati
+   git clone https://github.com/kaarlosasiang/bettermaticity.git
+   cd bettermaticity
    ```
 
 2. **Install app dependencies**
@@ -160,51 +149,52 @@ npm run dev
 
 4. **Open in browser** — http://localhost:5173
 
-> Building for production is driven from the **repo root** (see below), which additionally
-> installs/uses the root tooling (`build.sh`, Playwright, Lighthouse).
+> Production builds, Playwright and Lighthouse run from the **repo root**, which has its own `npm install`.
 
 ## Usage
 
 ### App commands (run inside `web/`)
 
-| Command             | Description                                             |
-| ------------------- | ------------------------------------------------------- |
-| `npm run dev`       | Start the Vite dev server (http://localhost:5173)       |
-| `npm run build`     | Build + statically prerender the app (`vite-react-ssg`) |
-| `npm run preview`   | Preview the app's own build output                      |
-| `npm run typecheck` | Type-check with `tsc -b`                                |
-| `npm run lint`      | Lint with oxlint                                        |
-| `npm run test`      | Run unit tests (Vitest + Testing Library)               |
+| Command              | Description                                             |
+| -------------------- | ------------------------------------------------------- |
+| `npm run dev`        | Start the Vite dev server (http://localhost:5173)       |
+| `npm run build`      | Build + statically prerender the app (`vite-react-ssg`) |
+| `npm run preview`    | Preview the app's own build output                      |
+| `npm run typecheck`  | Type-check with `tsc -b`                                |
+| `npm run lint`       | Lint with oxlint                                        |
+| `npm test`           | Run unit tests (Vitest + Testing Library)               |
+| `npm run test:watch` | Run unit tests in watch mode                            |
 
 ### Repo-root commands
 
-| Command                      | Description                                                          |
-| ---------------------------- | -------------------------------------------------------------------- |
-| `npm run build`              | Full production build via `build.sh` → `dist/` (bumps patch version) |
-| `npm run build -- --no-bump` | Build without incrementing the version                               |
-| `npm run build:minor`        | Bump minor version and build                                         |
-| `npm run build:major`        | Bump major version and build                                         |
-| `npm run serve:dist`         | Serve the production build in `dist/` (http://localhost:8080)        |
-| `npm run version:patch`      | Bump patch version only                                              |
-| `npm run version:minor`      | Bump minor version only                                              |
-| `npm run version:major`      | Bump major version only                                              |
-| `npm test`                   | Run Playwright cross-browser tests                                   |
-| `npm run test:report`        | Open the last Playwright HTML report                                 |
-| `npm run lighthouse`         | Run Lighthouse CI                                                    |
+| Command                                    | Description                                                                    |
+| ------------------------------------------ | ------------------------------------------------------------------------------ |
+| `npm run build`                            | Full production build via `build.sh` → `dist/` (bumps the patch version)       |
+| `npm run build -- --no-bump`               | Build without changing the version                                             |
+| `npm run build:minor` / `build:major`      | Bump that level, then build                                                    |
+| `npm run release [-- minor\|patch\|major]` | Bump the version and draft its `data/changelog.json` entry from recent commits |
+| `npm run version:patch\|minor\|major`      | Bump the version only                                                          |
+| `npm run format` / `format:check`          | Format or check the repo with Prettier                                         |
+| `npm test`                                 | Playwright cross-browser specs against a fresh `web/` build                    |
+| `npm run test:chrome`                      | The same specs in Chrome only                                                  |
+| `npm run test:integration`                 | Full `build.sh`, then smoke tests of the shipped `dist/`                       |
+| `npm run test:report`                      | Open the last Playwright HTML report                                           |
+| `npm run lighthouse`                       | Run Lighthouse CI                                                              |
+| `npm run package`                          | Build and zip a cPanel-ready release archive                                   |
+
+To preview a production build with clean URLs working, serve it with `serve.py`, which emulates the `.htaccess` rewrites:
+
+```bash
+python3 serve.py -d dist -p 8888
+```
 
 ### Production Deployment
 
-1. **Build production files**
+1. **Build** — `npm run build` from the repo root (runs `build.sh`).
+2. **Output** — the deployable site is in `dist/` (prerendered HTML, hashed `/_app/*` bundles and the static passthrough).
+3. **Deploy** — upload the contents of `dist/` to your server's `public_html/`, including `.htaccess` for clean URLs, security headers and caching.
 
-   ```bash
-   npm run build   # from the repo root → runs build.sh
-   ```
-
-2. **Output** — the deployable site is generated in `dist/` (prerendered HTML + hashed
-   `/_app/*` assets + static passthrough).
-
-3. **Deploy** — upload the contents of `dist/` to your web server's `public_html/` directory.
-   Ensure `.htaccess` is included for clean URLs, CSP headers, and caching.
+Build-time settings come from an optional, git-ignored root `.env`: `VITE_SITE_URL` sets the canonical origin used in page metadata and `sitemap.xml` (default `https://bettermati.org`). See `.env.example`.
 
 ### File Permissions (cPanel)
 
@@ -213,187 +203,82 @@ npm run dev
 | Files       | rw-r--r--  | 644     |
 | Directories | rwxr-xr-x  | 755     |
 
+`build.sh` sets these for you.
+
 ## Multi-language Support (i18n)
 
-The site supports three languages, powered by **i18next / react-i18next**. Translation
-resources live in [`web/src/locales/`](web/src/locales/) (`en.json`, `fil.json`, `ceb.json`)
-and are consumed through the `useLanguage()` hook's `t()` function. Any key missing in the
-active language automatically falls back to English.
+Powered by **i18next / react-i18next**. Translations live in [`web/src/locales/`](web/src/locales/) as flat key files and are read through the `useLanguage()` hook's `t()`. Any key missing in the chosen language falls back to English.
 
-| Language | Code  | Status                                                                |
-| -------- | ----- | --------------------------------------------------------------------- |
-| English  | `en`  | Complete                                                              |
-| Filipino | `fil` | Complete                                                              |
-| Cebuano  | `ceb` | Starter set (high-visibility UI; remaining keys fall back to English) |
+| Language | Code  | Status                                                        |
+| -------- | ----- | ------------------------------------------------------------- |
+| English  | `en`  | Complete                                                      |
+| Cebuano  | `ceb` | Partial (about 15% of strings); the rest fall back to English |
 
 ## Project Structure
 
 ```
-bettermati/
-├── web/                      # The Vite + React + TypeScript app (the entire site)
+bettermaticity/
+├── web/                      # The Vite + React + TypeScript app (the whole site)
 │   ├── src/
-│   │   ├── pages/            # Route components (Home, Services, Government, Budget, …)
+│   │   ├── pages/            # Route components (Home, Services, Government, Transparency, …)
+│   │   │   └── service-details/  # The 22 service guides
 │   │   ├── components/
 │   │   │   ├── layout/       # Header, Footer, HotlineBar, InfoBar
-│   │   │   ├── ui/           # shadcn/ui primitives (button, card, dialog, …)
-│   │   │   └── primitives/   # Container, Section, Grid, StatCard, …
-│   │   ├── lib/              # Typed data + helpers (statsData, budgetData, hotlines, …)
-│   │   ├── locales/          # i18next resources (en / fil / ceb)
-│   │   ├── hooks/            # useLanguage, useNews, …
-│   │   ├── Layout.tsx        # Shared chrome (persistent header/footer)
-│   │   ├── routes.tsx        # Route table
+│   │   │   ├── ui/           # shadcn/ui primitives
+│   │   │   └── primitives/   # Container, Band, PageHeader, StatRow, RuledGrid, FilterPanel, Pager, …
+│   │   ├── lib/              # Typed data modules and helpers (services, govData, siteIndex, searchIndex, …)
+│   │   ├── locales/          # i18next resources (en, ceb)
+│   │   ├── hooks/            # useLanguage, useNews
+│   │   ├── Layout.tsx        # Shared chrome (header, footer)
+│   │   ├── routes.tsx        # Route table (lazy, code-split)
 │   │   └── main.tsx          # vite-react-ssg entry
-│   ├── migrated-routes.json  # Single source of truth for prerendered routes
-│   ├── vite.config.ts        # Vite + SSG + dev static-passthrough config
-│   └── public/               # App-served static files (favicon, feel-mati.png, …)
-├── assets/                   # Images / logos (static passthrough, merged into dist/)
-├── data/                     # JSON content feeds (officials, services, ordinances, …)
+│   ├── migrated-routes.json  # Source of truth for live routes
+│   └── vite.config.ts        # Vite + SSG config
+├── data/                     # JSON content feeds (services, officials, finances, …) and changelog.json
 │   └── mati/                 # Canonical barangay reference dataset (PSA PSGC + boundaries)
+├── assets/                   # Images and logos (static passthrough)
 ├── admin/                    # News editor (static passthrough)
-├── scripts/                  # Build, version, and data scripts (bump-version.js, …)
-├── dist/                     # Production build output (gitignored)
-├── build.sh                  # Production build: web build → assemble dist → chmod
-├── sw.js                     # Service worker (versioned + runtime caching)
-├── manifest.webmanifest      # PWA web app manifest
+├── docs/                     # Data plan, research and verification notes
+├── scripts/                  # Version, release, sitemap and packaging scripts
+├── tests/                    # Playwright specs (volunteer dialog, integration)
+├── .github/workflows/        # Lighthouse CI, Claude review, Facebook sync
+├── build.sh                  # Production build: web build → assemble dist/ → chmod
+├── serve.py                  # Serves a built dist/ with the .htaccess rewrites
+├── sw.js                     # Service worker
+├── manifest.webmanifest      # PWA manifest
 ├── offline.html              # Offline fallback page
-├── 403.html / 404.html / 500.html  # Error pages
-├── serve.py                  # Optional local server for previewing dist/
+├── 403.html / 404.html / 500.html  # Apache error pages
 ├── .htaccess                 # Apache config (clean URLs, CSP, caching)
-├── version.json              # Version tracking
-└── README.md                 # This file
+└── version.json              # Master version
 ```
 
-## Recent Changes
+## What's New
 
-### v1.2.0 — Full migration to Vite + React + TypeScript
+**1.9.0** added a Transparency section (City finances FY2021–FY2025, projects and procurement, Full Disclosure reports, official documents, data sources and methodology), separate pages for officials, offices and barangays, an Official links page, site-wide search, an About page, a Site index, and faster page loads through code splitting.
 
-- **Rebuilt the entire site** from the vanilla static-HTML pages and the thin Next.js
-  `react-app/` island into a **single Vite + React 19 + TypeScript + Tailwind v4 + shadcn/ui**
-  application in `web/`, statically prerendered by `vite-react-ssg`. The legacy static site and
-  `react-app/` were removed; the repo root now holds only static passthrough merged into
-  `dist/` by `build.sh`.
-- **Faithful design-token port** — legacy `style.css` design tokens mapped onto Tailwind
-  `@theme` + shadcn tokens; self-hosted Inter (no Google Fonts CDN); lucide icons.
-- **Content-parity pass** — audited ~30 migrated routes against the legacy site and restored
-  every dropped section (Budget/Transparency, Statistics, Government/Officials, Legislative,
-  Public Safety, Home, and more).
-- **Homepage "Feel Mati" revamp** — new hero with service search, "Rising in Mati", "Mati at a
-  Glance", tourism, City Services, and a Public Funds panel driven by the real BLGF SRE data;
-  Pujada-navy + Feel-Mati-amber palette with Plus Jakarta Sans + IBM Plex Mono (self-hosted).
-- **Navigation refinement** — active-state pill, tightened sizing/spacing, plain-white header.
-- **Framer Motion** — subtle, reduced-motion-aware homepage animation: section scroll-reveals,
-  hero entrance stagger, grid-card stagger, and Public Funds bars that fill on view.
-- **Tooling** — Vitest + Testing Library, Playwright (cross-browser), Lighthouse CI, oxlint,
-  Prettier, and `tsc` type-checking.
-
----
-
-> The entries below predate the migration and describe the **static-HTML era** of the project.
-> They are retained for historical reference.
-
-### v1.1.15 — Header, PWA, Version Automation & Code Quality
-
-#### PWA Install Prompt & Seamless Updates
-
-- Added "Install App" prompt banner using the `beforeinstallprompt` API with Install/Dismiss buttons, respecting standalone mode and session dismissal
-- Replaced manual-refresh update flow with seamless `skipWaiting` + `controllerchange` auto-reload pattern
-- Service worker now accepts `SKIP_WAITING` message from clients to activate waiting worker on demand
-- Install banner goes full-width (no border-radius, no margins) on mobile viewports (<=575px) with slide-up animation
-- Created `PWAManager` component handling both install prompt and SW update lifecycle
-
-#### Footer Mobile Alignment
-
-- Added `text-align: center` for `.footer-tagline` in the <=575px mobile breakpoint, overriding the tablet `text-align: left` rule
-
-#### Responsive Header & Hotline Marquee
-
-- Standardized header vertical spacing (padding, min-height, logo size) across desktop/tablet/mobile breakpoints
-- Raised tablet breakpoint from 991px to 1024px to properly capture iPad Pro portrait and iPad Air landscape
-- Converted the emergency hotline bar into a clickable scrolling marquee on tablet and mobile viewports (≤1024px) with pause-on-hover/focus for accessibility
-
-#### Progressive Web App (PWA)
-
-- Rewrote `sw.js` with dual-cache architecture: `STATIC_CACHE` (precached app shell) and `RUNTIME_CACHE` (dynamic content, 80-item FIFO, 7-day TTL)
-- Navigation uses network-first with offline fallback; static assets use stale-while-revalidate; data/API uses network-first with cache fallback
-- Upgraded `manifest.webmanifest` with maskable icons, app shortcuts, and iOS PWA meta tags
-- Fixed theme-color to brand blue (#0032a0) across all files
-
-#### Automatic Version Management
-
-- Created cross-platform `scripts/bump-version.js` (Node.js) replacing the bash-only `version.sh`
-- Version bump updates `version.json`, `package.json`, HTML files, and the React app
-- Git pre-commit hook auto-bumps patch version on every commit (skips version-only commits)
-
-#### Code Quality & Tooling
-
-- Installed Prettier with project-wide configuration and a pre-commit format hook
-- Resolved all npm vulnerabilities
-
-### Earlier (static-HTML era)
-
-- Added Mati Quiz CTA and footer link; added the Brief History of Mati interactive timeline (1760–1957)
-- Upgraded translation coverage across English / Filipino / Cebuano with English fallback
-- Standardized copyright and footer across all pages; updated year to 2026
-- Removed `.html` extensions from navigation links (clean URLs via `.htaccess`)
-- Tuned `build.sh` excludes and CSP headers for production
+Every release is listed in plain language at [bettermati.org/changelog](https://bettermati.org/changelog), from [`data/changelog.json`](data/changelog.json).
 
 ## Contributing
 
-We welcome contributions from everyone! Whether you're a developer, designer, data researcher, content writer, translator, or a concerned citizen of Mati, your participation helps shape this project for all.
+Developers, designers, data researchers, writers, translators and residents of Mati are all welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) for setup, checks and project rules, and the [Code of Conduct](CODE_OF_CONDUCT.md) before taking part.
 
-### How to Contribute
-
-1. **Fork** the repository
-2. **Create** a feature branch
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-3. **Make** your changes (work inside `web/` for app code)
-4. **Verify** — `cd web && npm run typecheck && npm run lint && npm run test`
-5. **Commit** with a descriptive message
-   ```bash
-   git commit -m "feat: description of your changes"
-   ```
-6. **Push** to your fork and **open** a Pull Request with a detailed description
-
-### Contribution Areas
-
-| Area                   | Description                                            |
-| ---------------------- | ------------------------------------------------------ |
-| **Bug Fixes**          | Report issues or submit fixes for existing bugs        |
-| **Features**           | Propose or implement new functionality                 |
-| **Content**            | Update service information, add missing municipal data |
-| **Translations**       | Help translate content to Filipino or Cebuano          |
-| **Design**             | Improve UI/UX, accessibility, and visual consistency   |
-| **Data**               | Verify and update municipal statistics and records     |
-| **Documentation**      | Enhance README, code comments, and guides              |
-| **Data Visualization** | Enhance charts, graphs, and interactive presentations  |
-
-### Code Style Guidelines
-
-| Guideline         | Description                                                                           |
-| ----------------- | ------------------------------------------------------------------------------------- |
-| **Formatting**    | Prettier (run `npm run format` at the repo root); enforced on commit                  |
-| **Linting**       | oxlint (`cd web && npm run lint`) — keep new code warning-free                        |
-| **Types**         | TypeScript; type-check with `npm run typecheck` before opening a PR                   |
-| **Components**    | React function components; reuse `components/ui` (shadcn) and `components/primitives` |
-| **Styling**       | Tailwind utility classes + design tokens; avoid ad-hoc global CSS                     |
-| **Icons**         | Use lucide-react (react-icons only for brand marks)                                   |
-| **i18n**          | Add new UI strings to `web/src/locales/en.json` (and `fil`/`ceb` when available)      |
-| **Accessibility** | Maintain WCAG 2.1 (alt text, ARIA, keyboard nav, reduced-motion)                      |
-| **Testing**       | Add/adjust Vitest unit tests and Playwright coverage where relevant                   |
+Short version: work inside `web/`, run `npm run typecheck && npm run lint && npm test` there, run `npm run format` at the root, and open a pull request. Data changes need an official source.
 
 ## Data Sources
 
-All public information is sourced from official government portals:
+Public information comes from official government sources. The full registry, with what each dataset covers, when it was last checked and how far it is verified, is on the [Data sources](https://bettermati.org/transparency/sources) page.
 
-| Source                             | URL                                                                   | Data Type                 |
-| ---------------------------------- | --------------------------------------------------------------------- | ------------------------- |
-| LGU Mati Official Website          | [mati.gov.ph](https://mati.gov.ph/)                                   | Services, Officials       |
-| Sangguniang Panlungsod ng Mati     | [sangguniangbayan.mati.gov.ph](https://sangguniangbayan.mati.gov.ph/) | Ordinances, Resolutions   |
-| Bureau of Local Government Finance | [blgf.gov.ph](https://blgf.gov.ph/)                                   | Budget, Financial Reports |
-| Philippine Statistics Authority    | [psa.gov.ph](https://psa.gov.ph/)                                     | Demographics, Census      |
-| DTI CMCI Portal                    | [cmci.dti.gov.ph](https://cmci.dti.gov.ph/)                           | Competitive Index         |
+| Source                                  | URL                                                                                 | Data                                 |
+| --------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------ |
+| City Government of Mati                 | [mati.gov.ph](https://mati.gov.ph/)                                                 | Services, offices, Citizen's Charter |
+| Sangguniang Panlungsod ng Mati          | [mati.gov.ph/sangguniang-panglungsod](https://mati.gov.ph/sangguniang-panglungsod/) | Ordinances, resolutions              |
+| Department of Budget and Management     | [dbm.gov.ph](https://www.dbm.gov.ph/)                                               | City finances (BESF Table F.13)      |
+| Bureau of Local Government Finance      | [blgf.gov.ph](https://blgf.gov.ph/)                                                 | Local income and expenditure reports |
+| DILG Full Disclosure Policy Portal      | [fdpp.dilg.gov.ph](https://fdpp.dilg.gov.ph/)                                       | Full Disclosure reports              |
+| PhilGEPS                                | [philgeps.gov.ph](https://www.philgeps.gov.ph/)                                     | Procurement notices                  |
+| Department of Public Works and Highways | [dpwh.gov.ph](https://www.dpwh.gov.ph/)                                             | National infrastructure projects     |
+| Philippine Statistics Authority         | [psa.gov.ph](https://psa.gov.ph/)                                                   | Census, PSGC barangay codes          |
+| DTI CMCI Portal                         | [cmci.dti.gov.ph](https://cmci.dti.gov.ph/)                                         | Competitiveness index                |
 
 ## License
 
@@ -401,30 +286,31 @@ This project is dual-licensed:
 
 | License     | Applies To  | Details                                |
 | ----------- | ----------- | -------------------------------------- |
-| MIT License | Source Code | Free to use, modify, and distribute    |
+| MIT License | Source code | Free to use, modify, and distribute    |
 | CC BY 4.0   | Content     | Attribution required for content reuse |
 
 See [LICENSE](LICENSE) for full details.
 
 ## Contact
 
-| Channel  | Link                                                              |
-| -------- | ----------------------------------------------------------------- |
-| Website  | [bettermati.org](https://bettermati.org)                          |
-| Email    | volunteer@bettermati.org                                          |
-| Facebook | [@bettermati.org](https://www.facebook.com/bettermati.org)        |
-| LinkedIn | [BetterMati](https://www.linkedin.com/company/bettermati/)        |
-| Discord  | [Join Community](https://discord.com/invite/qeSu7RJkjQ)           |
-| GitHub   | [BetterMati/bettermati](https://github.com/BetterMati/bettermati) |
+| Channel  | Link                                                                            |
+| -------- | ------------------------------------------------------------------------------- |
+| Website  | [bettermati.org](https://bettermati.org)                                        |
+| Email    | volunteer@bettermati.org                                                        |
+| Facebook | [@bettermati.org](https://www.facebook.com/bettermati.org)                      |
+| LinkedIn | [BetterMati](https://www.linkedin.com/company/bettermati/)                      |
+| Discord  | [Join Community](https://discord.com/invite/qeSu7RJkjQ)                         |
+| GitHub   | [kaarlosasiang/bettermaticity](https://github.com/kaarlosasiang/bettermaticity) |
 
 ## Acknowledgments
 
+- [Ramon Logan Jr.](https://ramonloganjr.com/) for the original BetterSolano template this site is built from
+- [BetterSanFernando.org](https://bettersanfernando.org) for the design and transparency patterns this site follows
 - [BetterGov.ph](https://bettergov.ph) for the civic-tech initiative in the Philippines
-- [Abakada.org](https://abakada.org) for supporting civic technology efforts
-- LGU Mati for public data availability and transparency
-- All volunteers and contributors who dedicate their time
-- Open-source community for the tools and libraries used
-- Citizens of Mati for their feedback and support
+- LGU Mati for making public data available
+- All volunteers and contributors who give their time
+- The open-source community for the tools and libraries used
+- The people of Mati for their feedback and support
 
 ---
 
@@ -432,4 +318,4 @@ Made for the people of Mati, Davao Oriental
 
 ## Developer
 
-[Ramon Logan Jr.](https://ramonloganjr.com/) is a UAE-based full-stack developer and IT professional specializing in web development, design, cloud services, and cybersecurity. He is the developer behind BetterMati.org, [Abakada.org](https://abakada.org), and the founder of the small cloud-based solutions initiative, [HelloPinas.com](https://hellopinas.com). Ramon actively contributes to civic-tech efforts like [BetterGov.ph](https://bettergov.ph) and is an individual participant in the [OpenJS Foundation](https://openjsf.org/).
+BetterMati.org is developed and maintained by [Kaarlo Sasiang](https://github.com/kaarlosasiang).
