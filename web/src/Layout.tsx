@@ -6,9 +6,11 @@ import InfoBar from '@/components/layout/InfoBar';
 import Footer from '@/components/layout/Footer';
 import ReportIssueBand from '@/components/layout/ReportIssueBand';
 import PWAManager from '@/components/PWAManager';
-import { Analytics } from '@/components/Analytics';
+// import { Analytics } from '@/components/Analytics';
 import { Seo } from '@/components/Seo';
 import { useSyncStoredLanguage } from '@/hooks/useLanguage';
+import { Analytics } from "@vercel/analytics/next"
+
 
 // Persistent chrome shared by every route.
 export default function Layout() {
