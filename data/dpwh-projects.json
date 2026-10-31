@@ -1,6 +1,6 @@
 {
   "_status": "selected-official-notices",
-  "checkedOn": "2026-09-24",
+  "checkedOn": "2026-10-29",
   "scope": "Selected procurement notices, not a complete project inventory. ABC is a bidding ceiling, not an award amount or actual expenditure. Notice status does not establish physical completion.",
   "projects": [
     {
@@ -8,19 +8,25 @@
       "reference": "11439666",
       "scope": "national",
       "name": "Completion works for the cultural and sports center in Dahican",
+      "noticeTitle": "25LG0021 - Construction (Completion) of Multi-Purpose Building (Cultural and Sports Center), Barangay Dahican, City of Mati, Davao Oriental",
       "location": "Barangay Dahican, City of Mati, Davao Oriental",
       "agency": "DPWH Davao Oriental 2nd District Engineering Office",
       "funding": "GAA FY2025",
+      "mode": "Public Bidding",
+      "classification": "Civil Works",
+      "category": "Construction Projects",
+      "sale": false,
       "abc": 6930000,
       "noticeStatus": "Awarded",
       "publishedOn": "2024-11-06",
       "updatedOn": "2025-02-18",
+      "closingOn": "2024-11-26",
       "contractor": null,
       "awardAmount": null,
       "completionPercent": null,
-      "sourceUrl": "https://notices.philgeps.gov.ph/GEPSNONPILOT/Tender/PrintableBidNoticeAbstractUI.aspx?refid=11439666",
       "sourceName": "PhilGEPS",
-      "closingOn": null
+      "sourceUrl": "https://notices.philgeps.gov.ph/GEPSNONPILOT/Tender/PrintableBidNoticeAbstractUI.aspx?refid=11439666",
+      "checkedOn": "2026-10-29"
     }
   ]
 }

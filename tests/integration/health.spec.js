@@ -3,8 +3,8 @@ const { test, expect } = require('@playwright/test');
 
 // Coexistence smoke tests against the built dist/ served through serve.py.
 // The real /services/health content tests live with the pilot; this verifies the
-// pipeline: prerender (SSR), hydration, shared chrome, /_app assets, and that the
-// legacy home is untouched.
+// pipeline: prerender (SSR), hydration, shared chrome, /_app assets, and that parent
+// routes and the home page are served by the React build.
 
 test('services/health is prerendered (content present before JS)', async ({ request }) => {
   const res = await request.get('/services/health');
@@ -41,18 +41,26 @@ test('folder-based routes serve the React build, not the legacy folder', async (
   }
 });
 
-test('un-migrated legacy route is still served by legacy', async ({ request }) => {
-  const res = await request.get('/government/');
-  expect(res.status()).toBe(200);
-  const html = await res.text();
-  expect(html).not.toContain('/_app/');
+// Parent routes are moved to <route>/index.html by build.sh so an Apache directory of
+// the same name cannot shadow them. Regression guard for that flat -> folder pass.
+test('parent routes serve their own React page from the folder index', async ({ request }) => {
+  for (const [path, heading] of [
+    ['/government', 'Understand your City Government.'],
+    ['/transparency', 'Public data you can trace.'],
+  ]) {
+    const res = await request.get(path);
+    expect(res.status(), `${path} status`).toBe(200);
+    const html = await res.text();
+    expect(html, `${path} should be the React build`).toMatch(/\/_app\/app-[^"]+\.js/);
+    expect(html, `${path} should be its own page, not a directory listing`).toContain(heading);
+  }
 });
 
-test('legacy home is still served (not clobbered by the React build)', async ({ request }) => {
+test('the home page is the React build, prerendered', async ({ request }) => {
   const res = await request.get('/');
   expect(res.status()).toBe(200);
   const html = await res.text();
-  // Legacy home loads the legacy bundles, not the Vite /_app bundle.
-  expect(html).toContain('assets/js/main.js');
-  expect(html).not.toContain('/_app/');
+  expect(html).toMatch(/\/_app\/app-[^"]+\.js/);
+  // The retired static site's bundle must not come back.
+  expect(html).not.toContain('assets/js/main.js');
 });

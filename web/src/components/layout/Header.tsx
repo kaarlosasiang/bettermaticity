@@ -1,3 +1,4 @@
+import type { PointerEvent as ReactPointerEvent } from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Dialog as DialogPrimitive } from 'radix-ui';
@@ -49,12 +50,24 @@ function isActive(entry: NavEntry, pathname: string): boolean {
 
 // Desktop mega panel (BetterSanFernando pattern): one column per group, each item an
 // icon tile + title + one-line description + chevron.
-function MegaPanel({ menu, label }: { menu: NavMenu; label: string }) {
+function MegaPanel({
+  menu,
+  label,
+  onPointerEnter,
+  onPointerLeave,
+}: {
+  menu: NavMenu;
+  label: string;
+  onPointerEnter?: (e: ReactPointerEvent<HTMLDivElement>) => void;
+  onPointerLeave?: (e: ReactPointerEvent<HTMLDivElement>) => void;
+}) {
   const { t } = useLanguage();
   return (
     <div
       id={`desktop-mega-${menu.id}`}
       className="absolute inset-x-0 top-full hidden px-4 pt-2 pb-4 xl:block"
+      onPointerEnter={onPointerEnter}
+      onPointerLeave={onPointerLeave}
     >
       <div
         role="region"
@@ -194,6 +207,29 @@ export default function Header() {
   const { language, setLanguage, t } = useLanguage();
   const headerRef = useRef<HTMLElement>(null);
   const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  // Hover opens a menu (mouse only; touch and keyboard use the chevron). A short close
+  // delay lets the pointer travel from the nav item down into the panel.
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const openedByHover = useRef(false);
+  const cancelClose = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = null;
+  };
+  const hoverOpen = (id: string) => (e: ReactPointerEvent) => {
+    if (e.pointerType !== 'mouse') return;
+    cancelClose();
+    if (openMenu !== id) openedByHover.current = true;
+    setOpenMenu(id);
+  };
+  const hoverClose = (e: ReactPointerEvent) => {
+    if (e.pointerType !== 'mouse' || !openedByHover.current) return;
+    cancelClose();
+    closeTimer.current = setTimeout(() => {
+      openedByHover.current = false;
+      setOpenMenu(null);
+    }, 200);
+  };
+  useEffect(() => cancelClose, []);
 
   // Close everything on route change (state adjusted during render, not in an effect).
   const [lastPath, setLastPath] = useState(pathname);
@@ -263,7 +299,7 @@ export default function Header() {
               const id = entry.menu.id;
               const open = openMenu === id;
               return (
-                <li key={entry.to}>
+                <li key={entry.to} onPointerEnter={hoverOpen(id)} onPointerLeave={hoverClose}>
                   <div className={cn(pill, active || open ? pillActive : pillIdle)}>
                     <AppLink
                       to={entry.to}
@@ -280,7 +316,13 @@ export default function Header() {
                       aria-expanded={open}
                       aria-controls={`desktop-mega-${id}`}
                       aria-label={t(open ? 'nav-close-menu' : 'nav-open-menu', { menu: label })}
-                      onClick={() => setOpenMenu(open ? null : id)}
+                      onClick={() => {
+                        // A click on a hover-opened menu pins it open instead of closing it.
+                        cancelClose();
+                        const pin = open && openedByHover.current;
+                        openedByHover.current = false;
+                        setOpenMenu(open && !pin ? null : id);
+                      }}
                       className="rounded-md p-0.5 text-inherit"
                     >
                       <ChevronDown
@@ -300,7 +342,7 @@ export default function Header() {
 
         <div className="ml-auto flex items-center gap-1 xl:ml-0">
           <AppLink
-            to="/services"
+            to="/search"
             aria-label={t('nav-search')}
             className="hidden size-10 items-center justify-center rounded-lg text-ink transition-colors hover:bg-royal-tint hover:text-royal xl:flex"
           >
@@ -366,7 +408,7 @@ export default function Header() {
                 </div>
                 <nav aria-label="Main Navigation" className="flex-1 overflow-y-auto p-4">
                   <AppLink
-                    to="/services"
+                    to="/search"
                     className="group mb-4 flex min-h-[48px] items-center justify-between rounded-md border border-line bg-surface-subtle px-3.5 py-2.5 text-sm font-medium text-ink-muted transition-colors hover:text-ink"
                   >
                     <span className="inline-flex items-center gap-2.5">
@@ -423,7 +465,16 @@ export default function Header() {
         </div>
       </div>
 
-      {openEntry?.menu ? <MegaPanel menu={openEntry.menu} label={t(openEntry.key)} /> : null}
+      {openEntry?.menu ? (
+        <MegaPanel
+          menu={openEntry.menu}
+          label={t(openEntry.key)}
+          onPointerEnter={(e) => {
+            if (e.pointerType === 'mouse') cancelClose();
+          }}
+          onPointerLeave={hoverClose}
+        />
+      ) : null}
     </header>
   );
 }

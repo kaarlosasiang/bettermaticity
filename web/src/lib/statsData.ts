@@ -44,7 +44,6 @@ export const landAreaKm2 = '588.63';
 export const incomeClass = '1st';
 
 export const statisticsCheckedOn = '2026-09-24';
-export const populationReferenceDate = '2024-07-01';
 export const statisticsSources = {
   psgc: {
     title: 'PSA PSGC — City of Mati, 2024 POPCEN',

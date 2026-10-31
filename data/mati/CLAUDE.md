@@ -5,13 +5,13 @@ Canonical geographic and demographic data for the City of Mati (PSGC
 
 ## Files
 
-| File | Use |
-|---|---|
-| `dist/mati_barangays.csv` | Seed the database from this |
-| `dist/mati_barangays.geojson` | Choropleths, point-in-polygon lookups (~44 KB) |
-| `dist/mati_barangays.min.json` | Geometry only, first paint (~12 KB) |
-| `build_barangays.py` | Regenerates all three from source |
-| `psa_psgc_mati_2q2026.csv` | PSA source table, hand-transcribed |
+| File                           | Use                                            |
+| ------------------------------ | ---------------------------------------------- |
+| `dist/mati_barangays.csv`      | Seed the database from this                    |
+| `dist/mati_barangays.geojson`  | Choropleths, point-in-polygon lookups (~44 KB) |
+| `dist/mati_barangays.min.json` | Geometry only, first paint (~12 KB)            |
+| `build_barangays.py`           | Regenerates all three from source              |
+| `psa_psgc_mati_2q2026.csv`     | PSA source table, hand-transcribed             |
 
 `dist/` is generated. Never hand-edit it — change `psa_psgc_mati_2q2026.csv` or
 the script and re-run `python3 build_barangays.py`.

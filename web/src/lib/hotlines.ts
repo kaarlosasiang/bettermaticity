@@ -125,11 +125,6 @@ export const hotlineProvenance: HotlineProvenance = {
   approvedBy: hotlinesJson._approved_by,
 };
 
-/** "(087) 388-3426 · 0912-345-4666" — every number for an office, in one line. */
-export function joinNumbers(h: Hotline | Omit<Hotline, 'category'>): string {
-  return h.numbers.map((n) => n.display).join(' · ');
-}
-
 /**
  * The one number to dial when a surface has room for a single line — the red
  * hotline bar, a service page's sidebar, the government directory.

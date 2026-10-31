@@ -1,7 +1,7 @@
-import { BookMarked, Info } from 'lucide-react';
+import { BookMarked } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Container, Section, SectionTitle, PageHeader } from '@/components/primitives';
+import { Band, PageHeader } from '@/components/primitives';
 import { ordinances } from '@/lib/govData';
 import { LegislativeRecords, LegislativeLegalSource } from '@/components/LegislativeRecords';
 
@@ -42,37 +42,26 @@ export default function OrdinanceFramework() {
         description={t('ord-page-desc')}
       />
 
-      {/* What is an Ordinance? */}
-      <Section compact>
-        <Container>
-          <div className="rounded-card bg-white border border-line p-6">
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold text-foreground">
-              <Info className="size-5 text-primary" aria-hidden="true" />
-              {t('ord-what-is')}
-            </h2>
-            <p className="mb-3 text-sm text-muted-foreground">{t('ord-what-is-p1')}</p>
-            <p className="m-0 text-sm text-muted-foreground">{t('ord-what-is-p2')}</p>
-            <LegislativeLegalSource resolution={false} />
-          </div>
-        </Container>
-      </Section>
+      <Band id="what-is" eyebrow={t('nav-legislative')} title={t('ord-what-is')}>
+        <div className="mt-4 max-w-3xl space-y-3 text-[0.9375rem] leading-7 text-ink-soft">
+          <p>{t('ord-what-is-p1')}</p>
+          <p>{t('ord-what-is-p2')}</p>
+        </div>
+        <LegislativeLegalSource resolution={false} />
+      </Band>
 
-      {/* Ordinance categories */}
-      <Section compact altBg>
-        <Container>
-          <SectionTitle>{t('ord-categories-title')}</SectionTitle>
-          <div className="flex flex-wrap gap-2">
-            {ordinanceCategories.map((k) => (
-              <span
-                key={k}
-                className="rounded-full bg-white border border-line px-3 py-1.5 text-sm font-medium text-foreground"
-              >
-                {t(k)}
-              </span>
-            ))}
-          </div>
-        </Container>
-      </Section>
+      <Band id="categories" title={t('ord-categories-title')}>
+        <ul className="mt-5 flex flex-wrap gap-2">
+          {ordinanceCategories.map((k) => (
+            <li
+              key={k}
+              className="border border-line bg-surface-subtle px-3 py-1.5 text-sm font-medium text-heading"
+            >
+              {t(k)}
+            </li>
+          ))}
+        </ul>
+      </Band>
 
       <LegislativeRecords kind="ordinances" rows={ordinances} />
     </>

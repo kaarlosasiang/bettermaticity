@@ -1,0 +1,310 @@
+{
+  "_note": "Full Disclosure Policy (FDP) reports of the City of Mati. Records are archived copies of files the City posted on mati.gov.ph in 2016 (covering 2013–2014), opened and checked one by one; title and period are as printed on each document. Current postings live on the DILG FDP Portal and are not yet indexed here. type must be one of documentTypes.",
+  "portal": {
+    "name": "DILG Full Disclosure Policy Portal",
+    "url": "https://fdpp.dilg.gov.ph/fdpp/report"
+  },
+  "checkedOn": "2026-10-29",
+  "documentTypes": [
+    {
+      "name": "Annual Budget Report",
+      "meaning": "The approved budget: where the City expects its money to come from and how it plans to spend it."
+    },
+    {
+      "name": "Statement of Receipts and Expenditures",
+      "meaning": "What the City actually collected and spent during the period."
+    },
+    {
+      "name": "Statement of Indebtedness Payments and Balances",
+      "meaning": "Loans the City owes, what it paid, and what remains."
+    },
+    {
+      "name": "Quarterly Statement of Cash Flow",
+      "meaning": "Cash coming in and going out each quarter, and the cash left at the end."
+    },
+    {
+      "name": "Annual Procurement Plan",
+      "meaning": "Everything the City plans to buy or build during the year."
+    },
+    {
+      "name": "Supplemental Procurement Plan",
+      "meaning": "Additions to the year's procurement plan."
+    },
+    {
+      "name": "Bid Results on Civil Works Good and Services and Consulting Services",
+      "meaning": "Who won each public bidding, and for how much."
+    },
+    {
+      "name": "20% of the National Tax Allotment Utilization",
+      "meaning": "How the 20% development fund from the national allotment was used."
+    },
+    {
+      "name": "Report of Special Education Fund Utilization",
+      "meaning": "How the Special Education Fund, from the property tax for schools, was spent."
+    },
+    {
+      "name": "Local Disaster Risk Reduction and Management Fund Utilization",
+      "meaning": "How the disaster fund was used for preparedness and response."
+    },
+    {
+      "name": "Trust Fund Utilization",
+      "meaning": "How money held in trust for specific purposes, such as national grants, was used."
+    },
+    {
+      "name": "Unliquidated Cash Advances",
+      "meaning": "Cash advances to officials that are not yet accounted for."
+    },
+    {
+      "name": "Manpower Complement",
+      "meaning": "How many people the City employs, by office and type."
+    },
+    {
+      "name": "Annual Gender and Development Accomplishment Report",
+      "meaning": "What the City did under its gender and development budget."
+    }
+  ],
+  "records": [
+    {
+      "type": "Annual Budget Report",
+      "title": "Statement of Receipts, General Fund (Local Budget Preparation Form No. 1)",
+      "period": "Budget year 2014",
+      "issuer": "City Government of Mati",
+      "url": "https://web.archive.org/web/20170109204844/http://mati.gov.ph/wp-content/uploads/2016/09/Annual-Budget-2014-1.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/Annual-Budget-2014-1.pdf",
+      "archivedOn": "2017-01-09",
+      "pages": 1,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "type": "Statement of Receipts and Expenditures",
+      "title": "Summary Statement of Receipts and Expenditures, General Fund (Local Budget Preparation Form No. 2)",
+      "period": "2012 actual and 2013 current year",
+      "issuer": "City Government of Mati",
+      "url": "https://web.archive.org/web/20170110082605/http://mati.gov.ph/wp-content/uploads/2016/09/Statement-of-Receipts-Expenditures.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/Statement-of-Receipts-Expenditures.pdf",
+      "archivedOn": "2017-01-10",
+      "pages": 16,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "type": "Statement of Indebtedness Payments and Balances",
+      "title": "Summary Statement of Long-Term Obligations and Indebtedness (BESF Table No. 6)",
+      "period": "Not stated on the document",
+      "issuer": "City Government of Mati",
+      "url": "https://web.archive.org/web/20170111091614/http://mati.gov.ph/wp-content/uploads/2016/09/2013-Statement-of-Debt-Service.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/2013-Statement-of-Debt-Service.pdf",
+      "archivedOn": "2017-01-11",
+      "pages": 1,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "type": "Quarterly Statement of Cash Flow",
+      "title": "Consolidated Statement of Cash Flows",
+      "period": "As of 30 September 2013",
+      "issuer": "City Government of Mati",
+      "url": "https://web.archive.org/web/20170110082738/http://mati.gov.ph/wp-content/uploads/2016/09/CASHFLOWS.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/CASHFLOWS.pdf",
+      "archivedOn": "2017-01-10",
+      "pages": 2,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "type": "Quarterly Statement of Cash Flow",
+      "title": "Consolidated Statement of Cash Flows",
+      "period": "As of 31 March 2014",
+      "issuer": "City Government of Mati",
+      "url": "https://web.archive.org/web/20170110023528/http://mati.gov.ph/wp-content/uploads/2016/09/Statement-of-Cash-Flow-1st-quarter-1.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/Statement-of-Cash-Flow-1st-quarter-1.pdf",
+      "archivedOn": "2017-01-10",
+      "pages": 1,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "type": "Annual Procurement Plan",
+      "title": "Annual Procurement Plan",
+      "period": "2014",
+      "issuer": "City Government of Mati",
+      "url": "https://web.archive.org/web/20170111091522/http://mati.gov.ph/wp-content/uploads/2016/09/Annual-Procurement-Plan-2014.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/Annual-Procurement-Plan-2014.pdf",
+      "archivedOn": "2017-01-11",
+      "pages": 26,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "type": "Supplemental Procurement Plan",
+      "title": "Supplemental Procurement Plan (FDP Form 14a)",
+      "period": "Q1 2014",
+      "issuer": "City Government of Mati",
+      "url": "https://web.archive.org/web/20170109035132/http://mati.gov.ph/wp-content/uploads/2016/09/Supplemental-Procurement-Plan.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/Supplemental-Procurement-Plan.pdf",
+      "archivedOn": "2017-01-09",
+      "pages": 4,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "type": "Supplemental Procurement Plan",
+      "title": "Supplemental Procurement Plan (FDP Form 14a)",
+      "period": "Q1–Q2 2014",
+      "issuer": "City Government of Mati",
+      "url": "https://web.archive.org/web/20170110082713/http://mati.gov.ph/wp-content/uploads/2016/09/Supplemental-Procurement-Plan1.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/Supplemental-Procurement-Plan1.pdf",
+      "archivedOn": "2017-01-10",
+      "pages": 7,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "type": "Report of Special Education Fund Utilization",
+      "title": "Report of SEF Utilization",
+      "period": "Quarter ending March 2013",
+      "issuer": "City Government of Mati",
+      "url": "https://web.archive.org/web/20170109204753/http://mati.gov.ph/wp-content/uploads/2016/09/SEF-Utilization-1st-quarter.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/SEF-Utilization-1st-quarter.pdf",
+      "archivedOn": "2017-01-09",
+      "pages": 1,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "type": "Report of Special Education Fund Utilization",
+      "title": "Report of SEF Utilization",
+      "period": "Quarter ending June 2013",
+      "issuer": "City Government of Mati",
+      "url": "https://web.archive.org/web/20170109060448/http://mati.gov.ph/wp-content/uploads/2016/09/SEF-Utilization-2nd-Quarter.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/SEF-Utilization-2nd-Quarter.pdf",
+      "archivedOn": "2017-01-09",
+      "pages": 1,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "type": "Report of Special Education Fund Utilization",
+      "title": "Report of SEF Utilization",
+      "period": "Quarter ending December 2013",
+      "issuer": "City Government of Mati",
+      "url": "https://web.archive.org/web/20170110205440/http://mati.gov.ph/wp-content/uploads/2016/09/SEF-Utilization.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/SEF-Utilization.pdf",
+      "archivedOn": "2017-01-10",
+      "pages": 4,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "type": "Report of Special Education Fund Utilization",
+      "title": "Report of SEF Utilization",
+      "period": "Quarter ending March 2014",
+      "issuer": "City Government of Mati",
+      "url": "https://web.archive.org/web/20170109051243/http://mati.gov.ph/wp-content/uploads/2016/09/1st-quarter-2014-SEF-Utilization.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/1st-quarter-2014-SEF-Utilization.pdf",
+      "archivedOn": "2017-01-09",
+      "pages": 1,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "type": "Report of Special Education Fund Utilization",
+      "title": "Report of SEF Utilization",
+      "period": "Quarter ending June 2014",
+      "issuer": "City Government of Mati",
+      "url": "https://web.archive.org/web/20170109080521/http://mati.gov.ph/wp-content/uploads/2016/09/REPORT-OF-SEF-UTILIZATION.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/REPORT-OF-SEF-UTILIZATION.pdf",
+      "archivedOn": "2017-01-09",
+      "pages": 3,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "type": "20% of the National Tax Allotment Utilization",
+      "title": "20% Component of the Internal Revenue Allotment Utilization",
+      "period": "2013",
+      "issuer": "City Government of Mati",
+      "url": "https://web.archive.org/web/20170109080602/http://mati.gov.ph/wp-content/uploads/2016/09/3-CY-2013-20-Component-of-the-IRA-Utilization.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/3-CY-2013-20-Component-of-the-IRA-Utilization.pdf",
+      "archivedOn": "2017-01-09",
+      "pages": 2,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "type": "20% of the National Tax Allotment Utilization",
+      "title": "20% Component of the IRA Utilization",
+      "period": "Q1 2014",
+      "issuer": "City Government of Mati",
+      "url": "https://web.archive.org/web/20170111091557/http://mati.gov.ph/wp-content/uploads/2016/09/20-Component-of-the-IRA-Utilization.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/20-Component-of-the-IRA-Utilization.pdf",
+      "archivedOn": "2017-01-11",
+      "pages": 4,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "type": "20% of the National Tax Allotment Utilization",
+      "title": "20% Component of the IRA Utilization",
+      "period": "Q2 2014 (as of 30 June 2014)",
+      "issuer": "City Government of Mati",
+      "url": "https://web.archive.org/web/20170110023411/http://mati.gov.ph/wp-content/uploads/2016/09/20-Utilization-2014-Full-Disclosure-Policy-Program.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/20-Utilization-2014-Full-Disclosure-Policy-Program.pdf",
+      "archivedOn": "2017-01-10",
+      "pages": 22,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "type": "Trust Fund Utilization",
+      "title": "Report of PDAF Utilization (Trust Fund)",
+      "period": "Quarter ending 30 June 2013",
+      "issuer": "City Government of Mati",
+      "url": "https://web.archive.org/web/20170109080545/http://mati.gov.ph/wp-content/uploads/2016/09/TRUST-FUND-UTILIZATION-FORM.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/TRUST-FUND-UTILIZATION-FORM.pdf",
+      "archivedOn": "2017-01-09",
+      "pages": 1,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "type": "Trust Fund Utilization",
+      "title": "Consolidated Quarterly Report on Government Projects, Programs or Activities (FDP Form 6, Trust Fund)",
+      "period": "Q1 2014",
+      "issuer": "City Government of Mati",
+      "url": "https://web.archive.org/web/20170109080606/http://mati.gov.ph/wp-content/uploads/2016/09/TF-Utilization-rep.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/TF-Utilization-rep.pdf",
+      "archivedOn": "2017-01-09",
+      "pages": 1,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "type": "Local Disaster Risk Reduction and Management Fund Utilization",
+      "title": "LDRRM Fund Utilization",
+      "period": "Quarter ending 31 March 2014",
+      "issuer": "City Government of Mati",
+      "url": "https://web.archive.org/web/20170109052422/http://mati.gov.ph/wp-content/uploads/2016/09/1st-quarter-2014-LDRRM-Fund-Utilization.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/1st-quarter-2014-LDRRM-Fund-Utilization.pdf",
+      "archivedOn": "2017-01-09",
+      "pages": 1,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "type": "Bid Results on Civil Works Good and Services and Consulting Services",
+      "title": "Bid results on consulting services (FDP Form 10c); no contracts listed",
+      "period": "Q1 2014",
+      "issuer": "City Government of Mati",
+      "url": "https://web.archive.org/web/20170109021040/http://mati.gov.ph/wp-content/uploads/2016/09/1st-quarter-2014-Consulting-Services-Bid-Out.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/1st-quarter-2014-Consulting-Services-Bid-Out.pdf",
+      "archivedOn": "2017-01-09",
+      "pages": 1,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "type": "Unliquidated Cash Advances",
+      "title": "List of accountable officers with unliquidated cash advances",
+      "period": "As of June 2014",
+      "issuer": "City Government of Mati",
+      "url": "https://web.archive.org/web/20170109045633/http://mati.gov.ph/wp-content/uploads/2016/09/Unliquidated-Cash-Advances-as-of-june-corrected.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/Unliquidated-Cash-Advances-as-of-june-corrected.pdf",
+      "archivedOn": "2017-01-09",
+      "pages": 98,
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "type": "Annual Gender and Development Accomplishment Report",
+      "title": "Annual GAD Accomplishment Report",
+      "period": "FY2013",
+      "issuer": "City Government of Mati",
+      "url": "https://web.archive.org/web/20170109043817/http://mati.gov.ph/wp-content/uploads/2016/09/4-Previous-Years-Annual-GAD-Accomplishment.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/4-Previous-Years-Annual-GAD-Accomplishment.pdf",
+      "archivedOn": "2017-01-09",
+      "pages": 10,
+      "checkedOn": "2026-10-29"
+    }
+  ]
+}

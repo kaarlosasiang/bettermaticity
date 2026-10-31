@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { isMigratedRoute } from './AppLink';
+import { isMigratedRoute } from '@/lib/migratedRoutes';
 
 // Reflects web/migrated-routes.json — the single source of truth for which routes
 // React owns. Update these expectations as routes migrate.

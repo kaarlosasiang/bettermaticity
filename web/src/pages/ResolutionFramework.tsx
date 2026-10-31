@@ -1,7 +1,7 @@
-import { ScrollText, Info } from 'lucide-react';
+import { ScrollText } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Container, Section, SectionTitle, PageHeader } from '@/components/primitives';
+import { Band, PageHeader } from '@/components/primitives';
 import { resolutions } from '@/lib/govData';
 import { LegislativeRecords, LegislativeLegalSource } from '@/components/LegislativeRecords';
 
@@ -42,37 +42,26 @@ export default function ResolutionFramework() {
         description={t('reso-page-desc')}
       />
 
-      {/* What is a Resolution? */}
-      <Section compact>
-        <Container>
-          <div className="rounded-card bg-white border border-line p-6">
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold text-foreground">
-              <Info className="size-5 text-primary" aria-hidden="true" />
-              {t('reso-what-is')}
-            </h2>
-            <p className="mb-3 text-sm text-muted-foreground">{t('reso-what-is-p1')}</p>
-            <p className="m-0 text-sm text-muted-foreground">{t('reso-what-is-p2')}</p>
-            <LegislativeLegalSource resolution={true} />
-          </div>
-        </Container>
-      </Section>
+      <Band id="what-is" eyebrow={t('nav-legislative')} title={t('reso-what-is')}>
+        <div className="mt-4 max-w-3xl space-y-3 text-[0.9375rem] leading-7 text-ink-soft">
+          <p>{t('reso-what-is-p1')}</p>
+          <p>{t('reso-what-is-p2')}</p>
+        </div>
+        <LegislativeLegalSource resolution={true} />
+      </Band>
 
-      {/* Types of resolutions */}
-      <Section compact altBg>
-        <Container>
-          <SectionTitle>{t('reso-types-title')}</SectionTitle>
-          <div className="flex flex-wrap gap-2">
-            {resolutionTypes.map((k) => (
-              <span
-                key={k}
-                className="rounded-full bg-white border border-line px-3 py-1.5 text-sm font-medium text-foreground"
-              >
-                {t(k)}
-              </span>
-            ))}
-          </div>
-        </Container>
-      </Section>
+      <Band id="categories" title={t('reso-types-title')}>
+        <ul className="mt-5 flex flex-wrap gap-2">
+          {resolutionTypes.map((k) => (
+            <li
+              key={k}
+              className="border border-line bg-surface-subtle px-3 py-1.5 text-sm font-medium text-heading"
+            >
+              {t(k)}
+            </li>
+          ))}
+        </ul>
+      </Band>
 
       <LegislativeRecords kind="resolutions" rows={resolutions} />
     </>

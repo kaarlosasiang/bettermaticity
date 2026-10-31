@@ -91,7 +91,7 @@ export default function PWAManager() {
                 sessionStorage.setItem('pwa-install-dismissed', '1');
                 setShowInstall(false);
               }}
-              className="p-1 text-muted-foreground hover:text-foreground"
+              className="p-1 text-ink-muted hover:text-foreground"
               aria-label="Dismiss install prompt"
             >
               <X className="size-4" />

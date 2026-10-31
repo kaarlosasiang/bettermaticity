@@ -1,10 +1,26 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useSyncExternalStore } from 'react';
 import { ArrowLeftRight, Thermometer, Calendar, Clock, MapPin, ExternalLink } from 'lucide-react';
 import { Container } from '@/components/primitives';
 import { useLanguage } from '@/hooks/useLanguage';
 import { LanguageSwitch } from './LanguageSwitch';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+// Philippine time as one "Mon D|YYYY|h:mm AM" string. A string snapshot only changes once
+// a minute, so the clock re-renders then and not on every tick. The server snapshot is
+// the placeholder, which keeps the prerendered HTML and hydration identical.
+const PLACEHOLDER = '--- --|----|--:-- --';
+function manilaStamp(): string {
+  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }));
+  const h = now.getHours();
+  const m = now.getMinutes();
+  const time = `${h % 12 || 12}:${m < 10 ? '0' + m : m} ${h >= 12 ? 'PM' : 'AM'}`;
+  return `${MONTHS[now.getMonth()]} ${now.getDate()}|${now.getFullYear()}|${time}`;
+}
+function subscribeClock(onChange: () => void) {
+  const id = setInterval(onChange, 1000);
+  return () => clearInterval(id);
+}
 
 // Thin white utility row between the hotline strip and the header (BetterSanFernando
 // pattern): place + BetterGov link on the left, live figures and (desktop) the language
@@ -14,26 +30,11 @@ export default function InfoBar() {
   const { t } = useLanguage();
   const [rate, setRate] = useState('1 USD = ₱ --');
   const [temp, setTemp] = useState('--°C');
-  const [dateStr, setDateStr] = useState('--- --');
-  const [yearStr, setYearStr] = useState('----');
-  const [timeStr, setTimeStr] = useState('--:-- --');
-
-  const updateClock = useCallback(() => {
-    const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }));
-    setDateStr(`${MONTHS[now.getMonth()]} ${now.getDate()}`);
-    setYearStr(`${now.getFullYear()}`);
-    let h = now.getHours();
-    const m = now.getMinutes();
-    const ampm = h >= 12 ? 'PM' : 'AM';
-    h = h % 12 || 12;
-    setTimeStr(`${h}:${m < 10 ? '0' + m : m} ${ampm}`);
-  }, []);
-
-  useEffect(() => {
-    updateClock();
-    const interval = setInterval(updateClock, 1000);
-    return () => clearInterval(interval);
-  }, [updateClock]);
+  const [dateStr, yearStr, timeStr] = useSyncExternalStore(
+    subscribeClock,
+    manilaStamp,
+    () => PLACEHOLDER
+  ).split('|');
 
   useEffect(() => {
     fetch('https://open.er-api.com/v6/latest/USD')

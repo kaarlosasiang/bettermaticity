@@ -14,7 +14,3 @@ export function RuledGrid({ className, ...props }: ComponentProps<'div'>) {
     />
   );
 }
-
-export function Cell({ className, ...props }: ComponentProps<'div'>) {
-  return <div className={cn('min-w-0 bg-white p-6', className)} {...props} />;
-}

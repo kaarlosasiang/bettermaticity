@@ -1,28 +1,10 @@
 import { useState } from 'react';
-import {
-  BookMarked,
-  ScrollText,
-  ArrowRight,
-  Scale,
-  Landmark,
-  Users,
-  Eye,
-  GitBranch,
-} from 'lucide-react';
+import { BookMarked, ScrollText, ArrowRight, Landmark, Users, Eye } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Container, Section, SectionTitle, PageHeader } from '@/components/primitives';
-import {
-  LazyMotion,
-  domAnimation,
-  m,
-  MotionConfig,
-  fadeUp,
-  staggerContainer,
-  revealViewport,
-} from '@/components/motion';
+import { Band, PageHeader } from '@/components/primitives';
 import { ordinanceSteps, resolutionSteps } from '@/lib/legislativeProcess';
 
 const categories: {
@@ -48,7 +30,7 @@ const categories: {
   },
 ];
 
-// "Understanding Local Legislation" — 4 cards from the legacy page.
+// "Understanding Local Legislation" — the four basics from the legacy page.
 const understandingCards: { Icon: LucideIcon; titleKey: string; descKey: string }[] = [
   {
     Icon: BookMarked,
@@ -72,168 +54,136 @@ const understandingCards: { Icon: LucideIcon; titleKey: string; descKey: string 
   },
 ];
 
+// Legislative hub in the site's band layout: the two record frameworks as ruled link
+// cells, the step-by-step process (ordinances / resolutions tabs), then the basics.
 export default function Legislative() {
   const { t } = useLanguage();
   const [flow, setFlow] = useState<'ordinances' | 'resolutions'>('ordinances');
   const steps = flow === 'ordinances' ? ordinanceSteps : resolutionSteps;
+  const tabClass = (active: boolean) =>
+    active
+      ? 'bg-royal px-4 py-2 text-sm font-semibold text-white'
+      : 'px-4 py-2 text-sm font-medium text-ink-soft transition-colors hover:text-royal';
 
   return (
-    <LazyMotion features={domAnimation}>
-      <MotionConfig reducedMotion="user">
-        <Seo
-          title={t('leg-legislative-documents')}
-          description="Ordinances and resolutions of the Sangguniang Panlungsod of Mati."
-          canonicalPath="/legislative"
-        />
+    <>
+      <Seo
+        title={t('leg-legislative-documents')}
+        description="Ordinances and resolutions of the Sangguniang Panlungsod of Mati."
+        canonicalPath="/legislative"
+      />
 
-        <PageHeader
-          badge={
-            <>
-              <Landmark className="size-4" aria-hidden="true" />
-              {t('leg-sangguniang-bayan')}
-            </>
-          }
-          breadcrumb={[
-            { label: t('nav-home'), to: '/' },
-            { label: t('nav-government'), to: '/government' },
-            { label: t('nav-legislative') },
-          ]}
-          title={t('leg-legislative-documents')}
-          description={t('leg-ordinances-and-resolutions-of-the-sangguniang')}
-        />
+      <PageHeader
+        badge={
+          <>
+            <Landmark className="size-4" aria-hidden="true" />
+            {t('leg-sangguniang-bayan')}
+          </>
+        }
+        breadcrumb={[
+          { label: t('nav-home'), to: '/' },
+          { label: t('nav-government'), to: '/government' },
+          { label: t('nav-legislative') },
+        ]}
+        title={t('leg-legislative-documents')}
+        description={t('leg-ordinances-and-resolutions-of-the-sangguniang')}
+      />
 
-        <Section>
-          <Container>
-            <m.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="show"
-              viewport={revealViewport}
-              className="grid gap-6 md:grid-cols-2"
+      <Band
+        id="records"
+        eyebrow={t('leg-page-records-eyebrow')}
+        title={t('leg-page-records-title')}
+      >
+        <div className="mt-6 grid grid-cols-1 border-t border-l border-line md:grid-cols-2">
+          {categories.map(({ to, Icon, titleKey, descKey, linkKey }) => (
+            <AppLink
+              key={to}
+              to={to}
+              className="group flex flex-col border-r border-b border-line p-5 transition-colors hover:bg-surface-subtle sm:p-6"
             >
-              {categories.map(({ to, Icon, titleKey, descKey, linkKey }) => (
-                <m.div key={to} variants={fadeUp}>
-                  <AppLink
-                    to={to}
-                    className="group flex h-full flex-col rounded-card bg-white p-6 no-underline border border-line transition hover:border-royal"
-                  >
-                    <div className="mb-4 flex size-12 items-center justify-center rounded-lg bg-royal-tint text-royal">
-                      <Icon className="size-6" aria-hidden="true" />
-                    </div>
-                    <h2 className="mb-2 font-display text-lg font-bold text-heading">
-                      {t(titleKey)}
-                    </h2>
-                    <p className="mb-4 flex-1 text-sm text-ink-muted">{t(descKey)}</p>
-                    <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-royal">
-                      {t(linkKey)}
-                      <ArrowRight
-                        className="size-4 transition-transform group-hover:translate-x-1"
-                        aria-hidden="true"
-                      />
-                    </span>
-                  </AppLink>
-                </m.div>
-              ))}
-            </m.div>
-          </Container>
-        </Section>
+              <span className="flex size-9 items-center justify-center bg-surface-subtle text-royal group-hover:bg-white">
+                <Icon className="size-5" aria-hidden="true" />
+              </span>
+              <span className="mt-4 text-lg font-bold text-heading group-hover:text-royal">
+                {t(titleKey)}
+              </span>
+              <span className="mt-1 flex-1 text-sm leading-6 text-ink-muted">{t(descKey)}</span>
+              <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-royal">
+                {t(linkKey)}
+                <ArrowRight
+                  className="size-4 transition-transform group-hover:translate-x-0.5"
+                  aria-hidden="true"
+                />
+              </span>
+            </AppLink>
+          ))}
+        </div>
+      </Band>
 
-        {/* Legislative process flowchart */}
-        <Section compact>
-          <Container>
-            <SectionTitle>
-              <GitBranch className="size-5 text-primary" aria-hidden="true" />
-              {t('leg-flowchart-for-legislative-proposal')}
-            </SectionTitle>
-            <p className="-mt-3 mb-5 text-[0.8125rem] text-ink-muted">
-              {t('leg-stepbystep-process-for-enacting-ordinances-and')}
-            </p>
+      <Band
+        id="process"
+        eyebrow={t('leg-page-process-eyebrow')}
+        title={t('leg-flowchart-for-legislative-proposal')}
+        lede={t('leg-stepbystep-process-for-enacting-ordinances-and')}
+      >
+        <div
+          className="mt-6 inline-flex border border-line"
+          role="tablist"
+          aria-label="Legislative process"
+        >
+          <button
+            type="button"
+            role="tab"
+            aria-selected={flow === 'ordinances'}
+            onClick={() => setFlow('ordinances')}
+            className={tabClass(flow === 'ordinances')}
+          >
+            {t('leg-for-ordinances')} ({ordinanceSteps.length})
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={flow === 'resolutions'}
+            onClick={() => setFlow('resolutions')}
+            className={`border-l border-line ${tabClass(flow === 'resolutions')}`}
+          >
+            {t('leg-for-resolutions')} ({resolutionSteps.length})
+          </button>
+        </div>
 
-            <div
-              className="mb-6 inline-flex rounded-lg bg-white border border-line p-1"
-              role="tablist"
-              aria-label="Legislative process"
-            >
-              <button
-                type="button"
-                role="tab"
-                aria-selected={flow === 'ordinances'}
-                onClick={() => setFlow('ordinances')}
-                className={
-                  flow === 'ordinances'
-                    ? 'rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground'
-                    : 'rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition hover:text-primary'
-                }
-              >
-                {t('leg-for-ordinances')} ({ordinanceSteps.length})
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={flow === 'resolutions'}
-                onClick={() => setFlow('resolutions')}
-                className={
-                  flow === 'resolutions'
-                    ? 'rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground'
-                    : 'rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition hover:text-primary'
-                }
-              >
-                {t('leg-for-resolutions')} ({resolutionSteps.length})
-              </button>
+        <ol className="mt-6 grid grid-cols-1 border-t border-l border-line sm:grid-cols-2 lg:grid-cols-3">
+          {steps.map((s, i) => (
+            <li key={s.titleKey} className="flex gap-4 border-r border-b border-line p-5">
+              <span className="font-mono text-sm font-semibold text-royal tabular-nums">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <div>
+                <h3 className="text-sm font-bold text-heading">{t(s.titleKey)}</h3>
+                <p className="mt-1 text-sm leading-6 text-ink-muted">{t(s.descKey)}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </Band>
+
+      <Band
+        id="basics"
+        eyebrow={t('leg-page-basics-eyebrow')}
+        title={t('leg-understanding-local-legislation')}
+        last
+      >
+        <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
+          {understandingCards.map(({ Icon, titleKey, descKey }) => (
+            <div key={titleKey} className="space-y-2">
+              <span className="flex size-8 items-center justify-center bg-surface-subtle text-royal">
+                <Icon className="size-4" aria-hidden="true" />
+              </span>
+              <h3 className="pt-1 text-base font-bold text-heading">{t(titleKey)}</h3>
+              <p className="text-sm leading-6 text-ink-muted">{t(descKey)}</p>
             </div>
-
-            <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {steps.map((s, i) => (
-                <li
-                  key={s.titleKey}
-                  className="flex gap-3 rounded-card bg-white p-4 border border-line"
-                >
-                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-royal-tint text-sm font-semibold text-royal">
-                    {i + 1}
-                  </span>
-                  <div>
-                    <h3 className="mb-0.5 font-display text-sm font-bold text-heading">
-                      {t(s.titleKey)}
-                    </h3>
-                    <p className="m-0 text-[0.8125rem] text-ink-muted">{t(s.descKey)}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </Container>
-        </Section>
-
-        {/* Understanding local legislation */}
-        <Section compact altBg>
-          <Container>
-            <SectionTitle>
-              <Scale className="size-5 text-royal" aria-hidden="true" />
-              {t('leg-understanding-local-legislation')}
-            </SectionTitle>
-            <m.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="show"
-              viewport={revealViewport}
-              className="grid gap-4 md:grid-cols-2"
-            >
-              {understandingCards.map(({ Icon, titleKey, descKey }) => (
-                <m.div
-                  key={titleKey}
-                  variants={fadeUp}
-                  className="rounded-card bg-white p-6 border border-line"
-                >
-                  <h3 className="mb-2 flex items-center gap-2 font-display text-base font-bold text-heading">
-                    <Icon className="size-5 text-royal" aria-hidden="true" />
-                    {t(titleKey)}
-                  </h3>
-                  <p className="m-0 text-sm text-ink-muted">{t(descKey)}</p>
-                </m.div>
-              ))}
-            </m.div>
-          </Container>
-        </Section>
-      </MotionConfig>
-    </LazyMotion>
+          ))}
+        </div>
+      </Band>
+    </>
   );
 }

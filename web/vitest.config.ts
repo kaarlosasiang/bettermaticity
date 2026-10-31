@@ -17,5 +17,8 @@ export default defineConfig({
     globals: true,
     setupFiles: './src/test/setup.ts',
     include: ['src/**/*.{test,spec}.{ts,tsx}'],
+    // Page tests render whole prerendered pages in jsdom; the 5 s default times out on a
+    // busy machine although each passes in well under a second when idle.
+    testTimeout: 20000,
   },
 });

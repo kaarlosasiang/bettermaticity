@@ -28,7 +28,7 @@ describe('about page', () => {
     const counts = [...container.querySelectorAll('dl dd')].map((dd) => dd.textContent);
     expect(counts).toContain(String(services.length));
     expect(counts).toContain(String(departments.length));
-    for (const href of ['/services', '/government', '/legislative', '/budget', '/statistics'])
+    for (const href of ['/services', '/government', '/legislative', '/transparency', '/statistics'])
       expect(container.querySelector(`a[href="${href}"]`), href).toBeTruthy();
     // Independence is stated plainly; no claimed affiliation the site can't document.
     expect(screen.getByText(en['about-independent-official'])).toBeTruthy();

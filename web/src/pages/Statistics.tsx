@@ -2,7 +2,9 @@ import type { ReactNode } from 'react';
 import type { ChartOptions } from 'chart.js';
 import { ClientOnly } from 'vite-react-ssg';
 import { Line, Bar } from 'react-chartjs-2';
+import { ArrowRight } from 'lucide-react';
 import { Seo } from '@/components/Seo';
+import { AppLink } from '@/components/AppLink';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Breadcrumb, Container, heroClasses } from '@/components/primitives';
 import {
@@ -495,6 +497,15 @@ export default function Statistics() {
                 </p>
               </div>
             </div>
+            <p className="mt-6 text-sm">
+              <AppLink
+                to="/transparency/sources"
+                className="inline-flex items-center gap-1 font-semibold text-royal hover:underline"
+              >
+                {t('sources-see-all')}
+                <ArrowRight className="size-3.5" aria-hidden="true" />
+              </AppLink>
+            </p>
           </Container>
         </section>
       </MotionConfig>

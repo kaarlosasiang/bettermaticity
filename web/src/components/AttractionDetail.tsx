@@ -24,7 +24,7 @@ export function AttractionDetail({ slug }: { slug: string }) {
     return (
       <Section>
         <Container>
-          <p className="text-muted-foreground">Attraction not found.</p>
+          <p className="text-ink-muted">Attraction not found.</p>
           <AppLink to="/visit-mati" className="mt-4 inline-block text-royal underline">
             Back to Visit Mati
           </AppLink>
@@ -54,7 +54,7 @@ export function AttractionDetail({ slug }: { slug: string }) {
         <Container>
           <div className="max-w-[720px] pt-24 pb-10">
             {a.badge ? (
-              <span className="inline-flex h-[24px] items-center rounded-full bg-amber px-3 text-xs font-bold text-heading">
+              <span className="inline-flex h-[24px] items-center bg-amber px-3 text-xs font-bold text-heading">
                 {a.badge}
               </span>
             ) : (
@@ -70,10 +70,7 @@ export function AttractionDetail({ slug }: { slug: string }) {
 
       {/* Breadcrumb */}
       <Container>
-        <nav
-          aria-label="Breadcrumb"
-          className="flex flex-wrap gap-2 py-4 text-sm text-muted-foreground"
-        >
+        <nav aria-label="Breadcrumb" className="flex flex-wrap gap-2 py-4 text-sm text-ink-muted">
           <AppLink to="/">Home</AppLink>
           <span aria-hidden="true">/</span>
           <AppLink to="/visit-mati">Visit Mati</AppLink>

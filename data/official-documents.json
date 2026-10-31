@@ -1,0 +1,126 @@
+{
+  "_note": "Official documents about the City of Mati, each opened and checked. 'archived' entries are Internet Archive copies of files the City posted on mati.gov.ph; they may be out of date, so confirm the current version with the office named. 'unavailable' entries were published but no longer open.",
+  "checkedOn": "2026-10-29",
+  "documents": [
+    {
+      "id": "city-charter",
+      "title": "Charter of the City of Mati (Republic Act No. 9408)",
+      "type": "Law",
+      "issuer": "Congress of the Philippines",
+      "edition": "2007",
+      "status": "current",
+      "url": "https://lawphil.net/statutes/repacts/ra2007/ra_9408_2007.html",
+      "note": "The law that converted the Municipality of Mati into a city.",
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "id": "investment-incentives-code",
+      "title": "Mati Investment Incentives Code (City Ordinance No. 75, s. 2011)",
+      "type": "Ordinance",
+      "issuer": "Sangguniang Panlungsod of Mati",
+      "edition": "2011; amends Ordinance No. 79, s. 2002",
+      "status": "archived",
+      "url": "https://web.archive.org/web/20170110144915/http://mati.gov.ph/wp-content/uploads/2016/09/2011-75-amended-investment-incentives-code-.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/2011-75-amended-investment-incentives-code-.pdf",
+      "archivedOn": "2017-01-10",
+      "pages": 14,
+      "note": "Incentives for new and expanding enterprises in priority investment areas.",
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "id": "revised-tax-code-1993",
+      "title": "Revised Tax Code of the Municipality of Mati (Tax Ordinance No. 02, s. 1993)",
+      "type": "Ordinance",
+      "issuer": "Sangguniang Bayan of Mati",
+      "edition": "Enacted 8 June 1993; posted in 8 parts",
+      "status": "archived",
+      "url": "https://web.archive.org/web/20170109140956/http://mati.gov.ph/wp-content/uploads/2016/09/tax-ordinance-1.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/tax-ordinance-1.pdf",
+      "archivedOn": "2017-01-09",
+      "pages": 159,
+      "parts": [
+        {
+          "label": "Part 1",
+          "url": "https://web.archive.org/web/20170109140956/http://mati.gov.ph/wp-content/uploads/2016/09/tax-ordinance-1.pdf",
+          "pages": 11
+        },
+        {
+          "label": "Part 2",
+          "url": "https://web.archive.org/web/20170109024259/http://mati.gov.ph/wp-content/uploads/2016/09/tax-ordinance-2.pdf",
+          "pages": 12
+        },
+        {
+          "label": "Part 3",
+          "url": "https://web.archive.org/web/20170109035714/http://mati.gov.ph/wp-content/uploads/2016/09/tax-ordinance-3.pdf",
+          "pages": 11
+        },
+        {
+          "label": "Part 4",
+          "url": "https://web.archive.org/web/20170110023449/http://mati.gov.ph/wp-content/uploads/2016/09/tax-ordinance-4.pdf",
+          "pages": 35
+        },
+        {
+          "label": "Part 5",
+          "url": "https://web.archive.org/web/20170109080506/http://mati.gov.ph/wp-content/uploads/2016/09/tax-ordinance-5.pdf",
+          "pages": 15
+        },
+        {
+          "label": "Part 6",
+          "url": "https://web.archive.org/web/20170110025915/http://mati.gov.ph/wp-content/uploads/2016/09/tax-ordinance-6.pdf",
+          "pages": 21
+        },
+        {
+          "label": "Part 7",
+          "url": "https://web.archive.org/web/20170109055014/http://mati.gov.ph/wp-content/uploads/2016/09/tax-ordinance-7.pdf",
+          "pages": 27
+        },
+        {
+          "label": "Part 8",
+          "url": "https://web.archive.org/web/20170109062250/http://mati.gov.ph/wp-content/uploads/2016/09/tax-ordinance-8.pdf",
+          "pages": 27
+        }
+      ],
+      "note": "Predates cityhood and later amendments; check current rates with the City Treasurer's Office.",
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "id": "business-permit-form",
+      "title": "Application for Business Permit",
+      "type": "Form",
+      "issuer": "Business Permits and Licensing Office",
+      "edition": "Version posted on the City website",
+      "status": "archived",
+      "url": "https://web.archive.org/web/20161016173348/http://mati.gov.ph/wp-content/uploads/2016/09/Application-for-Business-Permitlong11-25-2014.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/Application-for-Business-Permitlong11-25-2014.pdf",
+      "archivedOn": "2016-10-16",
+      "pages": 1,
+      "note": "Ask the BPLO whether this is still the current form.",
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "id": "occupational-permit-form",
+      "title": "Application for Occupational Permit",
+      "type": "Form",
+      "issuer": "Business Permits and Licensing Office",
+      "edition": "Version posted on the City website",
+      "status": "archived",
+      "url": "https://web.archive.org/web/20161016234606/http://mati.gov.ph/wp-content/uploads/2016/09/APPLICATION-FOR-OCCUPATIONAL-PERMIT.pdf",
+      "originalUrl": "http://mati.gov.ph/wp-content/uploads/2016/09/APPLICATION-FOR-OCCUPATIONAL-PERMIT.pdf",
+      "archivedOn": "2016-10-16",
+      "pages": 1,
+      "note": "Ask the BPLO whether this is still the current form.",
+      "checkedOn": "2026-10-29"
+    },
+    {
+      "id": "citizens-charter-2025",
+      "title": "Citizen's Charter (as of 21 October 2025)",
+      "type": "Citizen's Charter",
+      "issuer": "City Government of Mati",
+      "edition": "21 October 2025",
+      "status": "unavailable",
+      "url": "https://mati.gov.ph/wp-content/uploads/2025/10/As-of-October-21-2025-2.pdf",
+      "note": "Was published on mati.gov.ph; the link returned an error (HTTP 404) when checked, and no archived copy exists. Ask the City for the current edition.",
+      "checkedOn": "2026-10-29"
+    }
+  ]
+}

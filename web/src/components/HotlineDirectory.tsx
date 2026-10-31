@@ -1,5 +1,6 @@
 import { Phone, type LucideIcon } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
+import { cn } from '@/lib/utils';
 import {
   hotlineIcon,
   hotlineProvenance,
@@ -11,8 +12,8 @@ import {
 type Tone = 'emergency' | 'medical';
 
 const toneClass: Record<Tone, string> = {
-  emergency: 'text-primary',
-  medical: 'text-brand-accent',
+  emergency: 'text-red-700',
+  medical: 'text-royal',
 };
 
 /**
@@ -35,21 +36,22 @@ function HotlineCard({
 
   return (
     <div
-      className={`flex gap-3 rounded-lg bg-white border border-line text-foreground transition hover:border-royal ${
-        compact ? 'p-4' : 'p-6'
-      }`}
+      className={cn(
+        'flex min-w-0 gap-3 border-r border-b border-line bg-white',
+        compact ? 'p-4' : 'p-5'
+      )}
     >
-      <Icon className={`mt-0.5 size-5 shrink-0 ${toneClass[tone]}`} aria-hidden="true" />
+      <Icon className={cn('mt-0.5 size-5 shrink-0', toneClass[tone])} aria-hidden="true" />
       <div className="min-w-0">
-        <h3 className="m-0 text-sm font-semibold text-balance">
+        <h3 className="text-sm font-bold text-balance text-heading">
           {t(hotline.nameKey, { defaultValue: hotline.name })}
         </h3>
-        <ul className="m-0 mt-1.5 flex list-none flex-col gap-0.5 p-0">
+        <ul className="mt-1.5 flex flex-col gap-0.5">
           {hotline.numbers.map((n) => (
             <li key={n.tel}>
               <a
                 href={`tel:${n.tel}`}
-                className="text-sm font-medium text-muted-foreground tabular-nums no-underline hover:text-primary hover:underline"
+                className="font-mono text-sm text-ink-soft tabular-nums hover:text-royal hover:underline"
               >
                 {n.display}
               </a>
@@ -61,6 +63,8 @@ function HotlineCard({
   );
 }
 
+// A hairline grid of offices: the grid draws the top and left edges and each cell its
+// right and bottom, so a short last row leaves no filled gap.
 export function HotlineGrid({
   hotlines,
   tone,
@@ -72,11 +76,12 @@ export function HotlineGrid({
 }) {
   return (
     <div
-      className={`grid gap-4 ${
+      className={cn(
+        'grid border-t border-l border-line',
         compact
-          ? 'grid-cols-[repeat(auto-fit,minmax(260px,1fr))]'
-          : 'grid-cols-[repeat(auto-fit,minmax(280px,1fr))]'
-      }`}
+          ? 'grid-cols-[repeat(auto-fill,minmax(260px,1fr))]'
+          : 'grid-cols-[repeat(auto-fill,minmax(280px,1fr))]'
+      )}
     >
       {hotlines.map((h) => (
         <HotlineCard
@@ -99,13 +104,15 @@ export function NationalHotlineBanner() {
   return (
     <a
       href={`tel:${n.tel}`}
-      className="mb-6 flex items-center gap-4 rounded-card border border-[#dc2626] bg-[#fef2f2] p-5 text-[#7f1d1d] no-underline transition hover:shadow-sm"
+      className="mb-6 flex items-center gap-4 border border-red-200 bg-red-50/60 p-5 text-red-950 transition-colors hover:border-red-400"
     >
-      <Phone className="size-6 shrink-0" aria-hidden="true" />
-      <span className="text-sm font-semibold">
+      <Phone className="size-5 shrink-0 text-red-700" aria-hidden="true" />
+      <span className="text-sm font-bold">
         {t(nationalHotline.nameKey, { defaultValue: nationalHotline.name })}
       </span>
-      <span className="ml-auto text-2xl font-bold tabular-nums">{n.display}</span>
+      <span className="ml-auto text-2xl font-extrabold tracking-tight tabular-nums">
+        {n.display}
+      </span>
     </a>
   );
 }
@@ -119,13 +126,13 @@ export function HotlineSourceNote() {
   const { t } = useLanguage();
 
   return (
-    <p className="mt-6 text-xs text-muted-foreground">
+    <p className="mt-4 text-xs leading-5 text-ink-muted">
       {t('hotline-source-prefix', { defaultValue: 'Source:' })}{' '}
       <a
         href={hotlineProvenance.sourceUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="underline hover:text-primary"
+        className="underline hover:text-royal"
       >
         {hotlineProvenance.sourceTitle}
       </a>{' '}

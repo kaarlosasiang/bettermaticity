@@ -1,90 +1,130 @@
-import { useState, useEffect } from 'react';
-import { Boxes, Mail } from 'lucide-react';
+import type { ReactNode } from 'react';
+import { ArrowUpRight } from 'lucide-react';
 import { FaFacebookF, FaLinkedinIn, FaDiscord, FaGithub } from 'react-icons/fa6';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Container } from '@/components/primitives';
 import { AppLink } from '@/components/AppLink';
+// Imported at build time (build.sh bumps it before the Vite build), so the version is
+// baked into every prerendered page; a runtime fetch was served stale by sw.js.
+import siteVersion from '../../../../version.json';
+
+const REPO = 'https://github.com/kaarlosasiang/bettermaticity';
+const BUILDER = { name: 'Kaarlo Sasiang & Team', href: 'https://kaarlosasiang.vercel.app/' };
 
 const social = [
   { Icon: FaFacebookF, href: 'https://www.facebook.com/bettermati.org', label: 'Facebook' },
   { Icon: FaLinkedinIn, href: 'https://www.linkedin.com/company/bettermati/', label: 'LinkedIn' },
   { Icon: FaDiscord, href: 'https://discord.com/invite/qeSu7RJkjQ', label: 'Discord' },
+  { Icon: FaGithub, href: REPO, label: 'GitHub' },
 ];
 
-// [href, i18n key, external?]
-const quickLinks: [string, string, boolean][] = [
-  ['https://quiz.bettermati.org/', 'footer-mati-quiz', true],
-  ['/sitemap', 'footer-sitemap', false],
-  [
-    'https://mati.gov.ph/wp-content/uploads/2025/10/As-of-October-21-2025-2.pdf',
-    'footer-citizens-charter',
-    true,
-  ],
-  ['/terms', 'footer-terms', false],
-  ['/privacy', 'footer-privacy', false],
-  ['/accessibility', 'footer-accessibility', false],
-  ['/faq', 'footer-faq', false],
+// [href, i18n key]. Absolute URLs open in a new tab; #hash links are plain <a> so a
+// full load lands on the anchor.
+const explore: [string, string][] = [
+  ['/services', 'nav-services'],
+  ['/government', 'nav-government'],
+  ['/transparency', 'nav-transparency'],
+  ['/statistics', 'nav-statistics'],
+  ['/visit-mati', 'nav-visit-mati'],
+  ['/about', 'nav-about'],
 ];
 
-const resources: [string, string][] = [
-  ['https://data.gov.ph', 'footer-open-data'],
-  ['https://www.foi.gov.ph/', 'footer-foi'],
+const publicInfo: [string, string][] = [
+  ['/government/offices', 'gov-link-offices'],
+  ['/contact', 'gov-link-contact'],
+  ['/contact#hotlines', 'gov-channels-hotlines'],
+  ['/government/barangays', 'gov-link-barangays'],
+  ['/government/links', 'links-title'],
+  ['/transparency/documents', 'docs-page-name'],
+  ['/transparency/sources', 'sources-page-name'],
   ['https://mati.gov.ph/', 'footer-lgu-portal'],
-  ['https://sangguniangbayan.mati.gov.ph/', 'footer-sb'],
-  ['https://web.facebook.com/maticitylgu', 'footer-lgu-facebook'],
-  ['https://blgf.gov.ph/', 'footer-blgf'],
-  ['https://cmci.dti.gov.ph/', 'footer-cmci'],
 ];
 
-const partners = [
-  {
-    href: 'https://abakada.org',
-    src: '/assets/images/logo/abakada-footer.svg',
-    alt: 'Abakada.org',
-  },
-  {
-    href: 'https://hivcareph.org/',
-    src: '/assets/images/logo/hiv-care-logo-footer.svg',
-    alt: 'HIV Care Philippines',
-  },
-  {
-    href: 'https://bettergov.ph',
-    src: '/assets/images/logo/bettergov-footer.svg',
-    alt: 'BetterGov.ph',
-  },
+const legal: [string, string][] = [
+  ['/sitemap', 'footer-sitemap'],
+  ['/accessibility', 'footer-accessibility'],
+  ['/privacy', 'footer-privacy'],
+  ['/terms', 'footer-terms'],
+  ['/changelog', 'footer-changelog'],
 ];
 
-const linkClass = 'block text-[0.8125rem] text-white/80 transition-colors hover:text-white';
-const headingClass =
-  'mb-5 font-mono text-[0.6875rem] font-semibold tracking-[0.14em] text-white/50 uppercase';
+const eyebrowClass =
+  'font-mono text-[0.6875rem] leading-normal font-medium tracking-[0.18em] text-neutral-200 uppercase';
+const linkClass = 'text-sm text-neutral-300 transition-colors hover:text-white';
 
+function FooterLink({
+  to,
+  className,
+  children,
+}: {
+  to: string;
+  className: string;
+  children: ReactNode;
+}) {
+  if (to.startsWith('http'))
+    return (
+      <a href={to} target="_blank" rel="noopener noreferrer" className={className}>
+        {children}
+      </a>
+    );
+  if (to.includes('#'))
+    return (
+      <a href={to} className={className}>
+        {children}
+      </a>
+    );
+  return (
+    <AppLink to={to} className={className}>
+      {children}
+    </AppLink>
+  );
+}
+
+function LinkColumn({ title, links }: { title: string; links: [string, string][] }) {
+  const { t } = useLanguage();
+  return (
+    <nav aria-label={title}>
+      <p className={eyebrowClass}>{title}</p>
+      <ul className="mt-4 space-y-3">
+        {links.map(([to, key]) => (
+          <li key={key}>
+            <FooterLink to={to} className={linkClass}>
+              {t(key)}
+              {to.startsWith('http') && (
+                <ArrowUpRight className="ml-1 inline size-3.5 align-[-2px]" aria-hidden="true" />
+              )}
+            </FooterLink>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
+
+// Site footer, laid out like BetterSanFernando's: brand + social, two link columns,
+// a BetterGov.ph column, then a hairline and the copyright / legal row.
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const { t } = useLanguage();
-  const [version, setVersion] = useState('');
-
-  useEffect(() => {
-    fetch('/version.json')
-      .then((r) => (r.ok ? r.json() : null))
-      .then((data) => {
-        if (data?.version) setVersion(data.version);
-      })
-      .catch(() => {});
-  }, []);
 
   return (
     <footer className="bg-[linear-gradient(180deg,var(--color-footer-from)_0%,var(--color-footer-to)_100%)] text-white">
-      <Container>
-        <div className="grid gap-8 border-b border-white/10 pt-[60px] pb-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr] lg:gap-12">
+      <Container className="pt-14 pb-10 lg:pb-14">
+        <div className="grid gap-10 border-b border-white/10 pb-10 md:grid-cols-2 lg:grid-cols-[1.35fr_1fr_1fr_1fr] lg:gap-12">
           {/* Brand */}
-          <div className="max-w-[320px]">
+          <div>
             <img
               src="/assets/images/logo/better-mati-logo-white.png"
-              alt="Better Mati logo"
-              className="mb-4 h-13 w-auto"
+              alt="BetterMati.org"
+              width={230}
+              height={72}
+              className="h-auto w-[230px] max-w-full"
             />
-            <p className="mb-6 text-sm/[1.6] text-white/70">{t('footer-tagline')}</p>
-            <div className="flex gap-3">
+            <p className="mt-5 max-w-sm text-sm leading-6 text-neutral-300">
+              {t('footer-about')}{' '}
+              <span className="font-medium text-neutral-200">{t('footer-not-official')}</span>
+            </p>
+            <div className="mt-5 flex items-center gap-2">
               {social.map(({ Icon, href, label }) => (
                 <a
                   key={label}
@@ -92,99 +132,83 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex size-10 items-center justify-center rounded-btn border border-white/15 text-lg text-white/70 transition-colors hover:bg-primary hover:text-white"
+                  className="inline-flex size-9 items-center justify-center rounded-btn border border-white/15 text-neutral-300 transition-colors hover:border-royal hover:text-white"
                 >
-                  <Icon />
+                  <Icon className="size-4" aria-hidden="true" />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Quick links */}
-          <div>
-            <h4 className={headingClass}>{t('footer-quick-links')}</h4>
-            <ul className="space-y-2">
-              {quickLinks.map(([href, key, external]) => (
-                <li key={key}>
-                  {external ? (
-                    <a href={href} target="_blank" rel="noopener noreferrer" className={linkClass}>
-                      {t(key)}
-                    </a>
-                  ) : (
-                    <AppLink to={href} className={linkClass}>
-                      {t(key)}
-                    </AppLink>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <LinkColumn title={t('footer-explore')} links={explore} />
+          <LinkColumn title={t('footer-public-info')} links={publicInfo} />
 
-          {/* Resources */}
+          {/* BetterGov.ph */}
           <div>
-            <h4 className={headingClass}>{t('footer-resources')}</h4>
-            <ul className="space-y-2">
-              {resources.map(([href, key]) => (
-                <li key={key}>
-                  <a href={href} target="_blank" rel="noopener noreferrer" className={linkClass}>
-                    {t(key)}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Cost + contribute + partners */}
-          <div>
-            <div
-              className="inline-flex items-center gap-1.5 rounded-btn border border-white/15 bg-[rgba(6,167,125,0.08)] px-3 py-1.5 text-xs whitespace-nowrap text-white/80"
-              role="status"
-              aria-label="Cost to the People of Mati: Zero Pesos"
-            >
-              {t('footer-cost')} <span className="font-mono font-bold text-brand-success">₱0</span>
+            <p className={eyebrowClass}>{t('footer-bettergov-eyebrow')}</p>
+            <div className="mt-4 flex items-center gap-2">
+              <img
+                src="/assets/images/logo/bettergov-footer.svg"
+                alt=""
+                width={40}
+                height={40}
+                className="size-10"
+                loading="lazy"
+              />
+              <span className="text-lg font-bold tracking-[-0.02em] text-white">BetterGov.PH</span>
             </div>
+            <p className="mt-4 text-sm leading-6 text-neutral-300">{t('footer-bettergov-text')}</p>
             <a
-              href="mailto:volunteer@bettermati.org"
-              className="mt-3 inline-flex items-center gap-2 rounded-btn border border-white/15 px-4 py-2 text-[0.8125rem] text-white/70 transition-colors hover:bg-white/10 hover:text-white"
-            >
-              <Mail className="size-4" /> {t('footer-volunteer')}
-            </a>
-            <a
-              href="https://github.com/kaarlosasiang/bettermaticity"
+              href="https://bettergov.ph"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center gap-2 rounded-btn border border-white/15 px-4 py-2 text-[0.8125rem] text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+              className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-white transition-colors hover:text-blue-300"
             >
-              <FaGithub className="size-4" /> {t('footer-contribute')}
+              {t('footer-bettergov-visit')}
+              <ArrowUpRight className="size-3.5" aria-hidden="true" />
             </a>
-            <div className="mt-4 flex items-center gap-5">
-              {partners.map((p) => (
-                <a
-                  key={p.alt}
-                  href={p.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={p.alt}
-                  className="inline-flex items-center opacity-60 transition-opacity hover:opacity-100"
-                >
-                  <img src={p.src} alt={p.alt} className="h-[54px] w-auto" loading="lazy" />
-                </a>
-              ))}
-            </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="flex flex-wrap items-center gap-1.5 py-6 text-[0.8125rem] text-white/50">
-          <span className="text-white/60">
-            &copy; {currentYear} {t('footer-copyright-text')}
-          </span>
-          <span className="text-white/45">MIT | CC BY 4.0</span>
-          <span className="text-white/40">{t('footer-copyright-disclaimer')}</span>
-          <span className="ml-auto inline-flex items-center gap-1.5 whitespace-nowrap">
-            <Boxes className="size-3.5" />{' '}
-            <span className="font-mono text-xs">{version ? `Ver. ${version}` : ''}</span>
-          </span>
+        {/* Bottom row */}
+        <div className="flex flex-col gap-4 pt-5 text-xs text-neutral-400 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+            <span>
+              &copy; {currentYear} {t('footer-copyright-text')}
+            </span>
+            <span className="text-white/20" aria-hidden="true">
+              ·
+            </span>
+            <a
+              href={BUILDER.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-medium text-neutral-300 transition-colors hover:text-white"
+            >
+              {t('footer-built-by', { name: BUILDER.name })}
+              <ArrowUpRight className="size-3" aria-hidden="true" />
+            </a>
+            <span className="text-white/20" aria-hidden="true">
+              ·
+            </span>
+            <span>MIT | CC BY 4.0</span>
+            <span className="text-white/20" aria-hidden="true">
+              ·
+            </span>
+            <AppLink to="/changelog" className="font-mono transition-colors hover:text-white">
+              Ver. {siteVersion.version}
+            </AppLink>
+          </div>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <span className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-neutral-300">
+              {t('footer-cost')} <span className="font-mono font-semibold text-white">₱0</span>
+            </span>
+            {legal.map(([to, key]) => (
+              <AppLink key={key} to={to} className="transition-colors hover:text-white">
+                {t(key)}
+              </AppLink>
+            ))}
+          </div>
         </div>
       </Container>
     </footer>
