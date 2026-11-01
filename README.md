@@ -6,7 +6,7 @@ A civic-tech portal that gives the people of Mati, Davao Oriental, Philippines p
 >
 > BetterMati.org started from a template built for LGU Solano and has been rebranded to the City of Mati: name, domain, geography (`PH-DAO`), terminology (City / Sangguniang Panlungsod) and artwork. Much of the content is now sourced and checked (see [Data sources](https://bettermati.org/transparency/sources)), but these records are still **clearly-marked placeholders** (`[Placeholder]`, `[TODO]` or `_status: "draft"`) until the City confirms them:
 >
-> - **Elected officials** — `data/officials.json` is a draft (`_status: "draft"`), so officials are left out of site search until confirmed.
+> - **Officials' photos and office contacts** — names come from mati.gov.ph (`data/officials.json`), but the City doesn't publish photos or contacts for its officials there.
 > - **Barangays** — the 26 barangays and their populations are verified (`data/mati/`); barangay captains and contacts are not.
 > - **Legislation** — `data/ordinances.json` and `data/resolutions.json` list titles only; full texts are pending.
 > - **Office contacts** — City Hall and office phone numbers and emails need confirmation from the City. (Emergency hotlines in `data/emergency-hotlines.json` are transcribed from the City DRRMO's official graphic.)
@@ -214,6 +214,9 @@ Powered by **i18next / react-i18next**. Translations live in [`web/src/locales/`
 | English  | `en`  | Complete                                                      |
 | Cebuano  | `ceb` | Partial (about 15% of strings); the rest fall back to English |
 
+To see what is left to translate, run `node scripts/i18n-report.mjs` (add `--keys <area#|prefix>` for a
+to-do list, or `--json` for machine-readable output).
+
 ## Project Structure
 
 ```
@@ -268,17 +271,17 @@ Short version: work inside `web/`, run `npm run typecheck && npm run lint && npm
 
 Public information comes from official government sources. The full registry, with what each dataset covers, when it was last checked and how far it is verified, is on the [Data sources](https://bettermati.org/transparency/sources) page.
 
-| Source                                  | URL                                                                                 | Data                                 |
-| --------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------ |
-| City Government of Mati                 | [mati.gov.ph](https://mati.gov.ph/)                                                 | Services, offices, Citizen's Charter |
-| Sangguniang Panlungsod ng Mati          | [mati.gov.ph/sangguniang-panglungsod](https://mati.gov.ph/sangguniang-panglungsod/) | Ordinances, resolutions              |
-| Department of Budget and Management     | [dbm.gov.ph](https://www.dbm.gov.ph/)                                               | City finances (BESF Table F.13)      |
-| Bureau of Local Government Finance      | [blgf.gov.ph](https://blgf.gov.ph/)                                                 | Local income and expenditure reports |
-| DILG Full Disclosure Policy Portal      | [fdpp.dilg.gov.ph](https://fdpp.dilg.gov.ph/)                                       | Full Disclosure reports              |
-| PhilGEPS                                | [philgeps.gov.ph](https://www.philgeps.gov.ph/)                                     | Procurement notices                  |
-| Department of Public Works and Highways | [dpwh.gov.ph](https://www.dpwh.gov.ph/)                                             | National infrastructure projects     |
-| Philippine Statistics Authority         | [psa.gov.ph](https://psa.gov.ph/)                                                   | Census, PSGC barangay codes          |
-| DTI CMCI Portal                         | [cmci.dti.gov.ph](https://cmci.dti.gov.ph/)                                         | Competitiveness index                |
+| Source                                  | URL                                                                                                                                       | Data                                 |
+| --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| City Government of Mati                 | [mati.gov.ph](https://mati.gov.ph/)                                                                                                       | Services, offices, Citizen's Charter |
+| Sangguniang Panlungsod ng Mati          | [mati.gov.ph/sangguniang-panglungsod](https://web.archive.org/web/20260508085431/https://mati.gov.ph/sangguniang-panglungsod/) (archived) | Council members                      |
+| Department of Budget and Management     | [dbm.gov.ph](https://www.dbm.gov.ph/)                                                                                                     | City finances (BESF Table F.13)      |
+| Bureau of Local Government Finance      | [blgf.gov.ph](https://blgf.gov.ph/)                                                                                                       | Local income and expenditure reports |
+| DILG Full Disclosure Policy Portal      | [fdpp.dilg.gov.ph](https://fdpp.dilg.gov.ph/)                                                                                             | Full Disclosure reports              |
+| PhilGEPS                                | [philgeps.gov.ph](https://www.philgeps.gov.ph/)                                                                                           | Procurement notices                  |
+| Department of Public Works and Highways | [dpwh.gov.ph](https://www.dpwh.gov.ph/)                                                                                                   | National infrastructure projects     |
+| Philippine Statistics Authority         | [psa.gov.ph](https://psa.gov.ph/)                                                                                                         | Census, PSGC barangay codes          |
+| DTI CMCI Portal                         | [cmci.dti.gov.ph](https://cmci.dti.gov.ph/)                                                                                               | Competitiveness index                |
 
 ## License
 

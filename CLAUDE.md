@@ -70,6 +70,8 @@ import data from '@data/services.json'; // → repo-root data/services.json
 
 To change displayed content, edit the JSON — not the components. Feeds: `services.json`, `officials.json`, `resolutions.json`, `ordinances.json`, `dpwh-projects.json`, `competitive-index.json`, `demographics.json`, `fiscal_transparency.json`, `news.json`.
 
+The project map (`components/ProjectMap.tsx`, on `/transparency/projects` and Home) reads `awarded-civil-works.json` (the City's FDP Bid Results on Civil Works) plus notices and major projects, and draws barangays from `web/src/lib/barangayPaths.json`. That file is generated from `data/mati/dist/mati_barangays.geojson` by `node web/scripts/build-barangay-paths.mjs`; rerun it whenever the boundary file changes (a test fails if they drift).
+
 The one exception is **`news.json`**, fetched at runtime from `/data/news.json` by `useNews` so news can be updated without a rebuild (the `admin/` news editor writes it).
 
 `data/` is copied wholesale into `dist/data/` by `build.sh`, and the dev server is configured with `fs.allow: ['..']` so the root `data/` is importable during `npm run dev`.
@@ -107,7 +109,8 @@ Deploy: upload `dist/` contents to cPanel `public_html/`. **Clean URLs** — `.h
 - TypeScript strict; avoid `any`. Functional components, PascalCase component files, `@/` alias for `web/src`, `@data` for the root `data/`.
 - Reach for an existing primitive (`Container`, `Band`, `PageHeader`, `StatRow`, `RuledGrid`, `FilterPanel`) or a shadcn `ui/` component before writing new layout markup.
 - Tests are Vitest + Testing Library colocated next to the code (`primitives.test.tsx`, `AppLink.test.tsx`, `i18n.test.ts`), run from `web/`.
-- **This is a fork of a template originally built for LGU Solano**, rebranded to the City of Mati. LGU-specific records (officials, barangays, resolutions, ordinances, DPWH projects, statistics, budget, city history) are largely **clearly-marked placeholders** (`[Placeholder]` / `[TODO]` / `_status: "draft"`) awaiting verified City of Mati data — see the checklist in `README.md`. Canonical verified facts are tracked as BM-001; don't "correct" them from general knowledge.
+- **This is a fork of a template originally built for LGU Solano**, rebranded to the City of Mati. LGU-specific records (barangays, resolutions, ordinances, DPWH projects, statistics, budget, city history) are largely **clearly-marked placeholders** (`[Placeholder]` / `[TODO]` / `_status: "draft"`) awaiting verified City of Mati data — see the checklist in `README.md`. Elected officials are the exception: names and councilor order are transcribed from mati.gov.ph (`data/officials.json`, `_status: "verified"`).
+- **mati.gov.ph is compromised (as of 2026-11-01):** its pages load an unrelated outside script and it carries spam posts. Cite Internet Archive copies (`web.archive.org/web/<timestamp>/…`) of City pages instead of live URLs, check any live page for injected content before relying on it, and don't add new direct links to it (the one link on `/government/links` carries a warning note). Canonical verified facts are tracked as BM-001; don't "correct" them from general knowledge.
 - [`web/GAP-AUDIT.md`](web/GAP-AUDIT.md) records the content-parity audit against the retired legacy site and the judgment calls made — useful when someone asks "was this section dropped or deliberately cut?"
 
 ## Mati reference dataset (`data/mati/`)

@@ -27,9 +27,9 @@ function Avatar({ name, large = false }: { name: string; large?: boolean }) {
   );
 }
 
-// Elected officials in BetterSanFernando's directory style. Names are verified from the
-// May 2025 election; photos and contact details in data/officials.json are still
-// placeholders, so they are not shown — every contact slot defers to the office.
+// Elected officials in BetterSanFernando's directory style. Names and councilor order come
+// from mati.gov.ph (cited through archived copies); the City publishes no photos or office
+// contacts for them, so the Mayor and Vice Mayor point to the contact directory instead.
 export default function GovernmentOfficials() {
   const { t } = useLanguage();
   // Client-only filter; starts empty so all councilors are in the prerendered HTML.
@@ -81,8 +81,6 @@ export default function GovernmentOfficials() {
                   </p>
                   <h3 className="mt-1 font-display text-xl font-bold text-heading">{o.name}</h3>
                   <p className="mt-3 text-sm text-ink-muted">
-                    <span className="text-feel-text">{t('service-confirm-office')}</span>
-                    {' · '}
                     <AppLink to="/contact" className="font-semibold text-royal hover:underline">
                       {t('service-contact-link')}
                     </AppLink>
@@ -118,9 +116,6 @@ export default function GovernmentOfficials() {
                   <h3 className="font-semibold text-heading">{c.name}</h3>
                   <p className="text-sm text-ink-muted">{c.title}</p>
                 </div>
-                <p className="hidden text-xs font-medium text-feel-text sm:block">
-                  {t('service-confirm-office')}
-                </p>
               </div>
             )}
           />

@@ -5,7 +5,7 @@
 // data feeds themselves.
 import ordinancesFeed from '@data/ordinances.json';
 import { officials, ordinances, resolutions } from '@/lib/govData';
-import { departments } from '@/lib/govDirectory';
+import { cityOfficeCount, cityOfficesCheckedOn, cityOfficesSource } from '@/lib/govDirectory';
 import { officialLinks, officialLinksCheckedOn } from '@/lib/officialLinks';
 import { allHotlines, hotlineProvenance } from '@/lib/hotlines';
 import {
@@ -16,9 +16,10 @@ import {
   statisticsSources,
   totalPopulation,
 } from '@/lib/statsData';
-import { fiscalSource, fiscalYears } from '@/lib/budgetData';
+import { currentYear, fiscalSource, fiscalYears, specialFunds } from '@/lib/budgetData';
 import { procurementCheckedOn, procurementNotices } from '@/lib/infrastructureData';
 import { projectsCheckedOn, risingProjects } from '@/lib/risingProjects';
+import awardedWorks from '@data/awarded-civil-works.json';
 import { services } from '@/lib/services';
 import { serviceGuides, serviceReferences, serviceReviewDate } from '@/lib/serviceReferences';
 import { attractions } from '@/lib/tourismData';
@@ -123,13 +124,14 @@ export const sourceGroups: DatasetGroup[] = [
         summary:
           'Names and positions of the Mayor, Vice Mayor and City Councilors for the 2025–2028 term.',
         coverage:
-          'Names come from the May 2025 local election results; a link to that source has not been recorded yet. Photos and contact details stay hidden until the City confirms them.',
-        publisher: 'May 2025 local election results',
-        period: '2025–2028 term',
-        checkedOn: null,
-        status: 'partial',
+          'Full names copied from the City Government’s own website, in the order it lists the councilors, and cited through Internet Archive copies because the live site currently loads unrelated outside content. The City does not publish photos or office contacts for officials there, so none are shown.',
+        publisher: 'City Government of Mati',
+        period: '2025–2028 term (8th Sangguniang Panlungsod)',
+        checkedOn: officials._checkedOn ?? null,
+        status: 'verified',
         page: { to: '/government/officials', label: 'Elected officials' },
-        sources: [],
+        sources: (officials._sources ?? []).map((s) => ({ label: s.title, url: s.url })),
+        downloads: [{ label: 'officials.json', href: '/data/officials.json' }],
         confirmWith: "City Mayor's Office (photos and contacts)",
       },
       {
@@ -150,18 +152,19 @@ export const sourceGroups: DatasetGroup[] = [
       {
         id: 'offices',
         title: 'City offices',
-        count: departments.length,
+        count: cityOfficeCount,
         unit: 'offices',
-        summary: 'City offices, what each one handles, and links to the related service pages.',
+        summary:
+          'The City’s departments and offices as the City groups them, with links to the related service pages.',
         coverage:
-          'Office names follow the City’s usual structure but have not been checked against an official directory. Only the CDRRMO’s number is shown, from its own hotline list.',
-        publisher: 'Not yet sourced',
-        period: 'Current directory',
-        checkedOn: null,
-        status: 'draft',
+          'Names and groups copied from the City’s Departments and Offices page (cited through an Internet Archive copy; the live page matched when checked). The City publishes no heads, phone numbers or emails for them; only the CDRRMO’s number is shown, from its own hotline list.',
+        publisher: 'City Government of Mati',
+        period: 'As listed on the City website',
+        checkedOn: cityOfficesCheckedOn,
+        status: 'sourced',
         page: { to: '/government/offices', label: 'City offices' },
-        sources: [],
-        confirmWith: 'City Information Office',
+        sources: [{ label: cityOfficesSource.title, url: cityOfficesSource.url }],
+        confirmWith: 'City Human Resource Management and Development Office (heads and contacts)',
       },
       {
         id: 'official-links',
@@ -210,7 +213,7 @@ export const sourceGroups: DatasetGroup[] = [
         unit: 'barangays',
         summary: `Names, PSGC codes and 2024 populations of every barangay, totalling ${totalPopulation.toLocaleString('en-PH')} residents.`,
         coverage:
-          'Counts are the 2024 census (POPCEN). Barangay land areas are left out because the boundary data available overstates them.',
+          'Counts are the 2024 census (POPCEN). Barangay land areas are left out because the boundary data available overstates them. The project map draws barangay boundaries from faeldon/philippines-json-maps (PSGC 2023); they are approximate.',
         publisher: 'Philippine Statistics Authority',
         period: '2024 POPCEN',
         checkedOn: statisticsCheckedOn,
@@ -267,18 +270,48 @@ export const sourceGroups: DatasetGroup[] = [
         title: 'City finances',
         count: fiscalYears.length,
         unit: 'fiscal years, plus outlook',
-        summary: `City receipts and expenditures for FY${fiscalYears[0].year}–FY${fiscalYears[fiscalYears.length - 1].year}, and the 2026–2027 outlook.`,
+        summary: `City receipts and expenditures for FY${fiscalYears[0].year}–FY${fiscalYears[fiscalYears.length - 1].year}, ${currentYear.period} against the 2026 budget, the 20% Development Fund and the disaster fund, and the 2026–2027 outlook.`,
         coverage:
-          'Transcribed from the DBM table, which compiles the city treasurer’s own submissions. It is not a COA audit.',
-        publisher: fiscalSource.publisher,
-        period: `FY${fiscalYears[0].year}–FY${fiscalYears[fiscalYears.length - 1].year}; outlook to 2027`,
-        checkedOn: fiscalYears.map((y) => y.source.checkedOn).sort()[fiscalYears.length - 1],
+          'Transcribed from DBM tables and BLGF workbooks, which compile the City Treasurer’s own submissions, and from the City’s own Full Disclosure postings. FY2025 was checked against both DBM and BLGF. None is a COA audit.',
+        publisher: `${fiscalSource.publisher}; Bureau of Local Government Finance; City Government of Mati`,
+        period: `FY${fiscalYears[0].year}–FY${fiscalYears[fiscalYears.length - 1].year}; ${currentYear.period}; outlook to 2027`,
+        checkedOn: [...fiscalYears.map((y) => y.source.checkedOn), currentYear.source.checkedOn]
+          .sort()
+          .at(-1)!,
         status: 'verified',
         page: { to: '/transparency/finance', label: 'City finances' },
-        sources: [...fiscalYears]
-          .reverse()
-          .map((y) => ({ label: y.source.title, url: y.source.url })),
+        sources: [
+          { label: currentYear.source.title, url: currentYear.source.url },
+          { label: currentYear.budget.source.title, url: currentYear.budget.source.url },
+          {
+            label: specialFunds.developmentFund.source.title,
+            url: specialFunds.developmentFund.source.url,
+          },
+          { label: specialFunds.ldrrmf.source.title, url: specialFunds.ldrrmf.source.url },
+          ...[...fiscalYears].reverse().map((y) => ({ label: y.source.title, url: y.source.url })),
+        ],
         downloads: [{ label: 'fiscal_transparency.json', href: '/data/fiscal_transparency.json' }],
+      },
+      {
+        id: 'awarded-civil-works',
+        title: 'Awarded civil works',
+        count: awardedWorks.works.length,
+        unit: 'works',
+        summary:
+          'Civil works the City’s Bids and Awards Committee reported as bid out, with location, budget ceiling, winning bidder, winning bid and date. They feed the project map.',
+        coverage: `Transcribed row by row from the City’s quarterly “Bid Results on Civil Works” Full Disclosure postings, ${awardedWorks.reports.filter((r) => r.status === 'read').length} of ${awardedWorks.reports.length} quarters (the rest return a server error on the portal). A barangay is assigned only where the form’s own Location column names it. Winning bids are not final contract costs or actual spending.`,
+        publisher: 'City Government of Mati (Bids and Awards Committee), via the DILG FDP Portal',
+        period: `${awardedWorks.reports[0].period} – ${awardedWorks.reports[awardedWorks.reports.length - 1].period}`,
+        checkedOn: awardedWorks.checkedOn,
+        status: 'sourced',
+        page: { to: '/transparency/projects#awarded-works', label: 'Awarded civil works' },
+        sources: awardedWorks.reports
+          .filter((r) => r.status === 'read')
+          .map((r) => ({
+            label: `Bid Results on Civil Works, ${r.period}`,
+            url: `https://fdpp.dilg.gov.ph/fdpp/report/document-download?id=${r.portalId}`,
+          })),
+        confirmWith: 'BAC Secretariat (missing quarters, contract costs)',
       },
       {
         id: 'procurement',
@@ -309,8 +342,8 @@ export const sourceGroups: DatasetGroup[] = [
         unit: 'projects',
         summary: 'National and city projects in Mati, with their funding status.',
         coverage:
-          'One project rests on the national budget document and two on PhilGEPS notices; the other three rely on Philippine News Agency reports.',
-        publisher: 'DBM (GAA), PhilGEPS and Philippine News Agency',
+          'Two projects rest on national budget documents (the 2026 appropriation for Mati Airport and a 2027 proposal for the Matiao–Magsaysay coastal road), two on PhilGEPS notices, and three on Philippine News Agency reports. A budget proposal is not funding until Congress passes it.',
+        publisher: 'DBM (GAA and NEP), PhilGEPS and Philippine News Agency',
         period: 'Funding status as reported',
         checkedOn: projectsCheckedOn,
         status: 'partial',
@@ -324,11 +357,12 @@ export const sourceGroups: DatasetGroup[] = [
         unit: 'reports',
         summary: `Budget, fund-utilization, procurement and cash-flow reports the City posted, ${fdpYears[0]}–${fdpYears[fdpYears.length - 1]}.`,
         coverage:
-          'Archived copies of files the City once posted on its website, each opened and checked. Reports after 2014 are on the DILG portal and not yet indexed.',
-        publisher: 'City Government of Mati (archived by the Internet Archive)',
+          'The City’s postings on the DILG Full Disclosure portal (posted 2024–2026), as the portal lists them, each download link tried; some files return a server error on the portal and are marked. Older reports are archived copies of files the City once posted on its website (reports from 2012–2014), each opened and checked. Years in between are missing.',
+        publisher:
+          'City Government of Mati, via the DILG Full Disclosure Policy Portal and the Internet Archive',
         period: `${fdpYears[0]}–${fdpYears[fdpYears.length - 1]}`,
         checkedOn: fdpCheckedOn,
-        status: 'partial',
+        status: 'sourced',
         page: { to: '/transparency/full-disclosure', label: 'Full Disclosure reports' },
         sources: [{ label: fdpPortal.name, url: fdpPortal.url }],
         confirmWith: 'City Budget Office (current postings)',
