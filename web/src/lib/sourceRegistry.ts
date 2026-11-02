@@ -22,7 +22,7 @@ import { projectsCheckedOn, risingProjects } from '@/lib/risingProjects';
 import awardedWorks from '@data/awarded-civil-works.json';
 import { services } from '@/lib/services';
 import { serviceGuides, serviceReferences, serviceReviewDate } from '@/lib/serviceReferences';
-import { attractions } from '@/lib/tourismData';
+import { attractions, photos, photosCheckedOn } from '@/lib/tourismData';
 import {
   documentsCheckedOn,
   fdpCheckedOn,
@@ -124,7 +124,7 @@ export const sourceGroups: DatasetGroup[] = [
         summary:
           'Names and positions of the Mayor, Vice Mayor and City Councilors for the 2025–2028 term.',
         coverage:
-          'Full names copied from the City Government’s own website, in the order it lists the councilors, and cited through Internet Archive copies because the live site currently loads unrelated outside content. The City does not publish photos or office contacts for officials there, so none are shown.',
+          'Full names copied from the City Government’s own website, in the order it lists the councilors, and cited through Internet Archive copies because the live site currently loads unrelated outside content. The only photos are the City’s own: the Mayor’s portrait, cropped from the banner on his page, and an unlabelled group photo of the council, shown whole. No office contacts are published.',
         publisher: 'City Government of Mati',
         period: '2025–2028 term (8th Sangguniang Panlungsod)',
         checkedOn: officials._checkedOn ?? null,
@@ -422,14 +422,15 @@ export const sourceGroups: DatasetGroup[] = [
         count: attractions.length,
         unit: 'places',
         summary: 'Attractions, festivals and practical notes on the Visit Mati pages.',
-        coverage:
-          'Placeholder content. Directions, fees, permits, opening hours and photos still need the City Tourism Office’s information.',
-        publisher: 'Not yet sourced',
+        coverage: `Placeholder text: directions, fees, permits and opening hours still need the City Tourism Office’s information. The ${photos.length} photos are sourced and credited one by one: the City’s own (cited through Internet Archive copies), one from the Philippine Carabao Center, and Creative Commons photos from Wikimedia Commons.`,
+        publisher: 'Text not yet sourced; photos credited individually',
         period: '—',
-        checkedOn: null,
+        checkedOn: photosCheckedOn,
         status: 'draft',
-        page: { to: '/visit-mati', label: 'Visit Mati' },
-        sources: [],
+        page: { to: '/visit-mati#photo-credits', label: 'Visit Mati photo credits' },
+        sources: unique(
+          photos.map((ph) => ({ label: ph.sources[0].title, url: ph.sources[0].url }))
+        ),
         confirmWith: 'City Tourism Office',
       },
     ],
