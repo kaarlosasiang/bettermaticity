@@ -3,8 +3,6 @@ import {
   barangayData,
   barangayCount,
   historicalData,
-  municipalFinance,
-  ntaShareOfReceipts,
   povertyStats,
   totalPopulation,
 } from './statsData';
@@ -16,14 +14,6 @@ describe('verified Mati statistics', () => {
     expect(barangayData.reduce((sum, b) => sum + b.pop, 0)).toBe(totalPopulation);
     expect(historicalData.years).toHaveLength(historicalData.populations.length);
     expect(historicalData.years.at(-1)).toBe(2024);
-  });
-
-  it('reconciles FY2025 receipts without double counting NTA', () => {
-    const { local, external, nonIncome, total, nta } = municipalFinance.receipts;
-    expect(municipalFinance.fiscalYear).toBe(2025);
-    expect(local + external + nonIncome).toBeCloseTo(total, 2);
-    expect(nta).toBeLessThanOrEqual(external);
-    expect(ntaShareOfReceipts).toBeCloseTo(74.6987, 3);
   });
 
   it('keeps poverty reference years and uncertainty intervals consistent', () => {

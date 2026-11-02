@@ -23,12 +23,10 @@ import {
   barangayCount,
   landAreaKm2,
   incomeClass,
-  municipalFinance,
   povertyStats,
   statisticsSources,
   statisticsCheckedOn,
   populationDensity,
-  ntaShareOfReceipts,
 } from '@/lib/statsData';
 import { CHART_COLORS, CHART_GRID, chartMonoFont } from '@/lib/charts';
 
@@ -135,9 +133,6 @@ function SourceLink({ source }: { source: { title: string; url: string } }) {
 export default function Statistics() {
   const { t } = useLanguage();
   const top10 = [...barangayData].sort((a, b) => b.pop - a.pop).slice(0, 10);
-  const money = (value: number) =>
-    `₱${value.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}M`;
-
   const firstYear = historicalData.years[0];
   const lastYear = historicalData.years[historicalData.years.length - 1];
   const firstPop = historicalData.populations[0];
@@ -392,66 +387,6 @@ export default function Statistics() {
 
         <section className="bg-surface-subtle py-12">
           <Container>
-            <SectionHead>
-              {t('stats-finance-heading')} (FY {municipalFinance.fiscalYear})
-            </SectionHead>
-            <p className="mb-4 text-sm text-ink-muted">{t('stats-finance-period')}</p>
-            <m.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="show"
-              viewport={revealViewport}
-              className="grid gap-4 sm:grid-cols-3"
-            >
-              <MetricCard
-                value={money(municipalFinance.receipts.total)}
-                label={t('stats-total-receipts')}
-              />
-              <MetricCard value={money(municipalFinance.receipts.nta)} label={t('stats-nta')} />
-              <MetricCard
-                value={`${ntaShareOfReceipts.toFixed(2)}%`}
-                label={t('stats-nta-receipts-share')}
-                meta={t('stats-nta-method')}
-              />
-            </m.div>
-            <div className={`mt-4 ${CARD} overflow-x-auto`}>
-              <table className="w-full text-left text-sm">
-                <caption className="px-4 py-3 text-left font-semibold text-heading">
-                  {t('stats-receipt-breakdown')}
-                </caption>
-                <thead>
-                  <tr className="bg-surface-subtle">
-                    <th scope="col" className="px-4 py-2">
-                      {t('stats-category')}
-                    </th>
-                    <th scope="col" className="px-4 py-2">
-                      {t('stats-php-millions')}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {(['local', 'external', 'nonIncome'] as const).map((key) => (
-                    <tr key={key} className="border-t border-line">
-                      <th scope="row" className="px-4 py-2 font-normal">
-                        {t(`stats-receipts-${key}`)}
-                      </th>
-                      <td className="px-4 py-2 tabular-nums">
-                        {money(municipalFinance.receipts[key])}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className="px-4 py-3 text-sm text-ink-muted">{t('stats-receipts-note')}</p>
-            </div>
-            <p className="mt-3 text-xs text-ink-muted">
-              {t('stats-source')}: <SourceLink source={statisticsSources.finance} />
-            </p>
-          </Container>
-        </section>
-
-        <section className="bg-white py-12">
-          <Container>
             <SectionHead>{t('stats-poverty-statistics')}</SectionHead>
             <p className="mb-4 max-w-3xl text-sm text-ink-muted">{t('stats-poverty-definition')}</p>
             <m.div
@@ -481,7 +416,7 @@ export default function Statistics() {
           </Container>
         </section>
 
-        <section className="bg-surface-subtle py-12">
+        <section className="bg-white py-12">
           <Container>
             <SectionHead>{t('stats-data-availability')}</SectionHead>
             <div className="grid gap-4 md:grid-cols-2">

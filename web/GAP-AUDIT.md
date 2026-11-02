@@ -62,6 +62,10 @@ numbers are faithful, but four whole sections + 2 tiles are missing:
 
 - **Municipal Finance (FY2023)** — Annual Income ₱371.33M (₱371,329,918.71), IRA Share
   ₱220.77M, IRA Dependency 59.45%, Income Composition bar (IRA 59.45% / Local 40.55%); BLGF.
+  _Deliberately cut (2026-11-02):_ a "City finances" section was rebuilt here with FY2025
+  figures, then removed because it duplicated `/transparency/finance` (Public funds), which
+  carries the same DBM/BLGF receipts plus spending and the current year from one feed. Don't
+  restore it on `/statistics`.
 - **Economic Indicators (real)** — Registered Businesses 1,200 (+8%), Agricultural Land
   8,500 ha, Employment Rate 94.2%; Economic Sectors (Agriculture 45 / Trade 30 / Services 20 /
   Industry 5). NOTE: the section currently labeled "Economic Indicators" actually renders CMCI.

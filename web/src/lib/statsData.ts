@@ -61,11 +61,6 @@ export const statisticsSources = {
     title: 'PSA population density table — p. 47 (2013 land areas)',
     url: 'https://psa.gov.ph/system/files/phcd/2022-12/2010-2015-2020%2520Population%2520Density_Table%2520A_Using%25202013%2520Land%2520Areas_12%2520July%25202021.pdf#page=47',
   },
-  finance: {
-    title: 'DBM BESF 2027 — Table F.13, FY2025, pp. 594–595',
-    url: 'https://www.dbm.gov.ph/wp-content/uploads/BESF/BESF2027/F13.pdf#page=3',
-    publishedOn: '2026-08-11',
-  },
   poverty: {
     title: 'PSA 2023 city- and municipal-level poverty estimates',
     url: 'https://psa.gov.ph/content/881-cities-and-municipalities-recorded-poverty-incidence-20-percent-or-lower-2023',
@@ -83,14 +78,6 @@ export const statisticsSources = {
 
 // DBM BESF 2027 F.13: FY2025 actual LIFT submissions, PHP millions.
 // NTA is included in external receipts. Non-income receipts include borrowings.
-export const municipalFinance = {
-  fiscalYear: 2025,
-  receipts: { local: 252.55, external: 1837.19, nonIncome: 289.11, total: 2378.85, nta: 1776.97 },
-  expenditures: 1672.95,
-};
-export const ntaShareOfReceipts =
-  (municipalFinance.receipts.nta / municipalFinance.receipts.total) * 100;
-
 // PSA Annex 1, PSGC 112509, row 1376. Archived workbook inspected directly.
 // Incidence among population; percentages, not fractions. Retain source precision.
 export const povertyStats = [
