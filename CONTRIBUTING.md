@@ -10,7 +10,7 @@ The whole site is one Vite + React + TypeScript app in [`web/`](web/), prerender
 
 ### Prerequisites
 
-- Node.js 26 LTS (see `.nvmrc`)
+- Node.js 26 LTS (see `.nvmrc`; run `nvm use`). npm refuses to install on any other version (`engine-strict` in `.npmrc`).
 - npm 10 or higher
 - Git
 - Python 3 (optional: for `serve.py` and the Playwright tests)
