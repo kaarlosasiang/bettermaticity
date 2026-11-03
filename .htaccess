@@ -43,9 +43,6 @@
     # Prevent MIME type sniffing
     Header always set X-Content-Type-Options "nosniff"
     
-    # Enable XSS filtering (legacy browsers)
-    Header always set X-XSS-Protection "1; mode=block"
-    
     # Control referrer information
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
     
@@ -266,8 +263,9 @@ AddDefaultCharset UTF-8
     </IfModule>
 </FilesMatch>
 
-# Protect backup, config and script files
-<FilesMatch "\.(bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist|old|backup|yml|yaml|lock)$">
+# Protect backup, config and script files (plus stray docs/source that could
+# disclose internals if ever uploaded outside the audited release pipeline)
+<FilesMatch "\.(bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist|old|backup|yml|yaml|lock|py|csv|md|geojson)$">
     <IfModule mod_authz_core.c>
         Require all denied
     </IfModule>
@@ -276,6 +274,14 @@ AddDefaultCharset UTF-8
         Deny from all
     </IfModule>
 </FilesMatch>
+
+# Belt-and-braces: the admin/ news editor is an internal tool and must never be
+# reachable, even if a maintainer uploads it by mistake.
+<IfModule mod_authz_core.c>
+    <If "%{REQUEST_URI} =~ m#^/admin(/|$)#">
+        Require all denied
+    </If>
+</IfModule>
 
 # Re-allow the site's own JSON data files, which the front end fetches
 <FilesMatch "^(officials|ordinances|resolutions|services|competitive-index|dpwh-projects|news|demographics|fiscal_transparency)\.json$">

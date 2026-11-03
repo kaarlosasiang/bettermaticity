@@ -55,7 +55,7 @@ Include in your report:
 - No forms that send or store data; the volunteer invitation opens an email (`mailto:`)
 - Fonts and scripts are self-hosted, apart from the third-party services listed below
 - The only runtime data file is `data/news.json`, fetched from the same site
-- `admin/news-editor.html` runs entirely in the browser: it loads `news.json`, and saves edits by downloading a new file for a maintainer to upload. It cannot write to the server.
+- `admin/news-editor.html` runs entirely in the browser: it loads `news.json`, and saves edits by downloading a new file for a maintainer to upload. It cannot write to the server, is excluded from production builds (see `build.sh` and `web/scripts/copy-legacy-static.mjs`), and `/admin/` is additionally denied in `.htaccess` and `robots.txt`.
 - Browser storage holds only display preferences: the chosen language and whether the volunteer invitation was seen (`localStorage`), and a dismissed install prompt (`sessionStorage`)
 
 **Data Security:**
