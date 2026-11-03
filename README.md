@@ -19,7 +19,7 @@ A civic-tech portal that gives the people of Mati, Davao Oriental, Philippines p
 ![React](https://img.shields.io/badge/React%2019-61DAFB?logo=react&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20v4-06B6D4?logo=tailwindcss&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js%2020-339933?logo=nodedotjs&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js%2026-339933?logo=nodedotjs&logoColor=white)
 
 ## Open Source for LGUs
 
@@ -114,12 +114,12 @@ npm run dev
 
 ### Prerequisites
 
-| Requirement | Version         | Purpose                                                  |
-| ----------- | --------------- | -------------------------------------------------------- |
-| Node.js     | v20 (`.nvmrc`)  | App tooling and package management                       |
-| npm         | v10+            | Dependency management                                    |
-| Git         | Latest          | Version control                                          |
-| Python 3    | v3.x (optional) | `serve.py`, for previewing the built `dist/` and testing |
+| Requirement | Version            | Purpose                                                  |
+| ----------- | ------------------ | -------------------------------------------------------- |
+| Node.js     | v26 LTS (`.nvmrc`) | App tooling and package management                       |
+| npm         | v10+               | Dependency management                                    |
+| Git         | Latest             | Version control                                          |
+| Python 3    | v3.x (optional)    | `serve.py`, for previewing the built `dist/` and testing |
 
 ### Setup Steps
 

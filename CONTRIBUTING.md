@@ -10,7 +10,7 @@ The whole site is one Vite + React + TypeScript app in [`web/`](web/), prerender
 
 ### Prerequisites
 
-- Node.js 20 (see `.nvmrc`)
+- Node.js 26 LTS (see `.nvmrc`)
 - npm 10 or higher
 - Git
 - Python 3 (optional: for `serve.py` and the Playwright tests)

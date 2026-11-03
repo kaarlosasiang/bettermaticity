@@ -12,7 +12,7 @@ BetterMati.org is a React/TypeScript civic information portal, prerendered with 
 
 ## Build, Test, and Development Commands
 
-Use Node.js 20 (`.nvmrc`) and Python 3. Run commands from the repository root:
+Use Node.js 26 LTS (`.nvmrc`) and Python 3. Run commands from the repository root:
 
 - `npm ci && npm --prefix web ci`: install both dependency sets.
 - `npm --prefix web run dev`: start the Vite development server.
