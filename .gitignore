@@ -14,4 +14,6 @@ blob-report/
 
 # Build-time config (see .env.example) and release archives
 .env
+.env.*
+!.env.example
 release/

@@ -21,11 +21,25 @@ export function formatNewsDate(dateStr: string): string {
   return `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
 }
 
-/** Only allow http(s) / site-relative / hash hrefs (mirrors legacy news.js safeUrl). */
+/**
+ * The href for a news item's "Read more" link, or '' for none. Absolute http(s) links are
+ * allowed on purpose: items link to the original post, usually on Facebook, and the feed
+ * is curated by maintainers, so other sites are not allowlisted. A link that looks
+ * relative must stay on this site: it is resolved the way a browser resolves it
+ * (backslashes act as slashes, tabs and newlines are dropped), which rejects "//host",
+ * "/\host" and "/<tab>/host" as well as javascript:, data: and other schemes.
+ */
 export function safeNewsUrl(url?: string | null): string {
   if (!url) return '';
   const u = url.trim();
-  return /^https?:\/\//i.test(u) || u.startsWith('/') || u.startsWith('#') ? u : '';
+  if (/^https?:\/\//i.test(u)) return u;
+  if (!u.startsWith('/') && !u.startsWith('#')) return '';
+  const site = 'https://bettermati.invalid';
+  try {
+    return new URL(u, site).origin === site ? u : '';
+  } catch {
+    return '';
+  }
 }
 
 function sortByDateDesc(items: NewsItem[]): NewsItem[] {

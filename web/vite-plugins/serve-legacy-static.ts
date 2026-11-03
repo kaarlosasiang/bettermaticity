@@ -45,6 +45,9 @@ export function serveLegacyStatic(): Plugin {
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
         const url = decodeURIComponent((req.url || '').split('?')[0]);
+        // Production ships only the top-level data/*.json feeds (see
+        // web/scripts/copy-legacy-static.mjs), so dev serves nothing deeper under /data/.
+        if (url.startsWith('/data/') && !/^\/data\/[^/]+\.json$/.test(url)) return next();
         const matches = prefixes.some((p) => url.startsWith(p)) || exactFiles.has(url);
         if (!matches) return next();
 
