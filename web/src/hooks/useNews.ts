@@ -21,11 +21,16 @@ export function formatNewsDate(dateStr: string): string {
   return `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
 }
 
-/** Only allow http(s) / site-relative / hash hrefs (mirrors legacy news.js safeUrl). */
+/**
+ * Only allow http(s) / site-relative / hash hrefs (mirrors legacy news.js safeUrl).
+ * Protocol-relative URLs ("//example.com") are rejected so a compromised feed
+ * cannot point at an arbitrary host.
+ */
 export function safeNewsUrl(url?: string | null): string {
   if (!url) return '';
   const u = url.trim();
-  return /^https?:\/\//i.test(u) || u.startsWith('/') || u.startsWith('#') ? u : '';
+  if (!/^https?:\/\//i.test(u) && !u.startsWith('/') && !u.startsWith('#')) return '';
+  return u.startsWith('//') ? '' : u;
 }
 
 function sortByDateDesc(items: NewsItem[]): NewsItem[] {

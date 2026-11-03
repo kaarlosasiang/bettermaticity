@@ -7,7 +7,10 @@ declare global {
 }
 
 // GA4 measurement ID — override via VITE_GA_ID; defaults to the live property.
-const GA_ID = (import.meta.env.VITE_GA_ID as string) || 'G-8777S9SP9X';
+// The ID is interpolated into a script src, so it is allowlisted to the GA4
+// format (G-XXXXXXXXXX) before it ever reaches the DOM.
+const GA_ID_RAW = (import.meta.env.VITE_GA_ID as string) || 'G-8777S9SP9X';
+const GA_ID = /^G-[A-Z0-9]{6,}$/i.test(GA_ID_RAW) ? GA_ID_RAW : '';
 
 // Injects gtag once, client-side, in production only. Consolidates the 33
 // hand-copied gtag snippets from the legacy pages into one component.

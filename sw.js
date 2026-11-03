@@ -9,7 +9,8 @@
 // v9: new Sleeping Dinosaur logo, favicon and PWA icons.
 // v10: /data/ requests go network-first; drops copies of news.json cached as static.
 // v11: offline.html restyled (square corners, Mati logo PNG).
-var CACHE_VERSION = 'v11';
+// v12: harden push/notification handlers (malformed payloads, same-origin URLs).
+var CACHE_VERSION = 'v12';
 var STATIC_CACHE = 'bettermati-static-' + CACHE_VERSION;
 var RUNTIME_CACHE = 'bettermati-runtime-' + CACHE_VERSION;
 var OFFLINE_URL = '/offline.html';
@@ -238,7 +239,13 @@ self.addEventListener('sync', function (event) {
 // ─── Push Notifications (foundation) ────────────────────────────────────────
 self.addEventListener('push', function (event) {
   if (!event.data) return;
-  var data = event.data.json();
+  var data;
+  try {
+    data = event.data.json();
+  } catch (e) {
+    // Malformed payloads (e.g. non-JSON pushes) must never crash the handler.
+    return;
+  }
   event.waitUntil(
     self.registration.showNotification(data.title || 'BetterMati', {
       body: data.body || '',
@@ -254,6 +261,18 @@ self.addEventListener('notificationclick', function (event) {
   event.notification.close();
   var url =
     event.notification.data && event.notification.data.url ? event.notification.data.url : '/';
+  var parsed;
+  try {
+    parsed = new URL(url, self.location.origin);
+  } catch (e) {
+    parsed = new URL('/', self.location.origin);
+  }
+  // Only open same-origin pages — never let a crafted push payload navigate
+  // the browser window to an arbitrary (phishing) site.
+  if (parsed.origin !== self.location.origin) {
+    parsed = new URL('/', self.location.origin);
+  }
+  url = parsed.href;
   event.waitUntil(
     self.clients.matchAll({ type: 'window' }).then(function (clients) {
       for (var i = 0; i < clients.length; i++) {
