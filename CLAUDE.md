@@ -76,7 +76,7 @@ Visit Mati photos are listed in `tourism.json`'s `photos` (self-hosted WebP unde
 
 The one exception is **`news.json`**, fetched at runtime from `/data/news.json` by `useNews` so news can be updated without a rebuild (the `admin/` news editor writes it).
 
-`data/` is copied wholesale into `dist/data/` by `build.sh`, and the dev server is configured with `fs.allow: ['..']` so the root `data/` is importable during `npm run dev`.
+Only the top-level `data/*.json` feeds are copied into `dist/data/` (by `build.sh` and `web/scripts/copy-legacy-static.mjs`); subfolders such as `data/mati/` hold build-time sources and never ship, and the dev server's `/data/` route serves the same top-level feeds only. The dev server is configured with `fs.allow: ['..']` so the root `data/` is importable during `npm run dev`.
 
 ## i18n (`web/src/i18n.ts`)
 
@@ -100,7 +100,7 @@ Stage 4 is the one with teeth:
 
 - `web/dist/` is copied in as the site (hashed bundles land in `_app/`, **not** `assets/`, to avoid colliding with the passthrough `assets/`).
 - **Flat → folder for parent routes.** SSG uses `dirStyle: 'flat'`, emitting both `government.html` and `government/officials.html`; an Apache directory named `government` would shadow `government.html`. So any route that has children is moved to `<route>/index.html`. Leaf routes stay flat. This is computed from `migrated-routes.json`, and the build **fails** if an expected parent route HTML is missing.
-- Static passthrough: `assets/`, `data/`, `admin/`, the error pages, `.htaccess`, `sw.js`, `manifest.webmanifest`, `robots.txt`, `version.json`.
+- Static passthrough: `assets/`, the top-level `data/*.json` feeds, the error pages, `.htaccess`, `sw.js`, `manifest.webmanifest`, `robots.txt`, `version.json`. `admin/` is deliberately **not** deployed (and `.htaccess` denies `/admin/`); the integration tests fail if `admin/` or `data/mati/` reach `dist/`.
 - `sitemap.xml` is generated from `migrated-routes.json` by `scripts/generate-sitemap.js`.
 
 Deploy: upload `dist/` contents to cPanel `public_html/`. **Clean URLs** — `.htaccess` mod_rewrite strips `.html`, so links must use extensionless paths. Build-time config comes from an optional git-ignored root `.env`, sourced by `build.sh`: `VITE_SITE_URL` (or `SITE_URL`) sets the canonical origin used for `<Seo>` URLs and `sitemap.xml`, defaulting to `https://bettermati.org`. See `.env.example` / `web/.env.example`.
@@ -125,11 +125,11 @@ The React app is the whole _site_, but a handful of plain static files are still
 
 - `403.html`, `404.html`, `500.html` — Apache error pages (served outside React).
 - `offline.html` — PWA offline fallback, precached and served by `sw.js`.
-- `admin/news-editor.html` — a standalone ~800-line tool that writes `data/news.json` (the feed `useNews` fetches at runtime).
+- `admin/news-editor.html` — a standalone ~800-line tool that writes `data/news.json` (the feed `useNews` fetches at runtime). Internal only: it is never deployed; run it locally (see `docs/news-curation.md`).
 - `sw.js`, `manifest.webmanifest`, `.htaccess`, `robots.txt`.
 - **`serve.py`** — the standard way to serve a built `dist/`. It emulates the `.htaccess` clean-URL rewrites, which a plain `http.server` does not, so it is what CI and the tests use: the Lighthouse workflow (`.github/workflows/lighthouse.yml`), the Playwright integration harness (`playwright.integration.config.js`), and `build.sh` itself, which prints `python3 serve.py -d dist -p 8888` as the preview command. Both packaging scripts list it deliberately. Prefer it over `npm run serve:dist` when previewing a build — that one skips the rewrites, so clean URLs 404. It is not a dev server for source; use Vite for that.
 
-All of the HTML files are self-contained (inline CSS/JS); none reference the deleted `assets/css` or `assets/js`. `build.sh` copies them into `dist/` in the stage-4 static passthrough.
+All of the HTML files are self-contained (inline CSS/JS); none reference the deleted `assets/css` or `assets/js`. `build.sh` copies them into `dist/` in the stage-4 static passthrough, except `admin/`, which stays local.
 
 ## Known stale leftovers from the static era
 

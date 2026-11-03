@@ -246,6 +246,8 @@ self.addEventListener('push', function (event) {
     // Malformed payloads (e.g. non-JSON pushes) must never crash the handler.
     return;
   }
+  // Valid JSON that isn't an object ("null", a number, a string) carries no notification.
+  if (!data || typeof data !== 'object') return;
   event.waitUntil(
     self.registration.showNotification(data.title || 'BetterMati', {
       body: data.body || '',

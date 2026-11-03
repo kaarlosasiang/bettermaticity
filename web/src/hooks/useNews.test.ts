@@ -21,6 +21,14 @@ describe('safeNewsUrl', () => {
     expect(safeNewsUrl('//evil.example.com/phish')).toBe('');
   });
 
+  it('rejects relative-looking URLs that a browser resolves to another host', () => {
+    // Browsers treat "\" as "/" and drop tabs and newlines, so these all mean "//host".
+    expect(safeNewsUrl('/\\evil.example.com/phish')).toBe('');
+    expect(safeNewsUrl('/\t/evil.example.com/phish')).toBe('');
+    expect(safeNewsUrl('/\n/evil.example.com')).toBe('');
+    expect(safeNewsUrl('/news?from=feed')).toBe('/news?from=feed');
+  });
+
   it('returns empty for blank input', () => {
     expect(safeNewsUrl(null)).toBe('');
     expect(safeNewsUrl(undefined)).toBe('');

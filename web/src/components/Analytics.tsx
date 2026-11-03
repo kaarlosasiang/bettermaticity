@@ -26,10 +26,12 @@ export function Analytics() {
     document.head.appendChild(s);
 
     window.dataLayer = window.dataLayer || [];
-    // eslint-disable-next-line prefer-rest-params
-    function gtag(...args: unknown[]) {
-      window.dataLayer.push(args);
-    }
+    // gtag.js only acts on Arguments objects, so this must push `arguments`, as Google's
+    // snippet does; pushing a rest-parameter array is silently ignored.
+    const gtag: (...args: unknown[]) => void = function () {
+      // eslint-disable-next-line prefer-rest-params
+      window.dataLayer.push(arguments);
+    };
     gtag('js', new Date());
     gtag('config', GA_ID);
   }, []);

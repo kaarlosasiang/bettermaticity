@@ -64,3 +64,19 @@ test('the home page is the React build, prerendered', async ({ request }) => {
   // The retired static site's bundle must not come back.
   expect(html).not.toContain('assets/js/main.js');
 });
+
+// Deploy hygiene: only the top-level data/*.json feeds ship. The admin/ news editor and
+// data/ subfolders (build-time sources such as data/mati/) must never reach dist/.
+test('internal tooling and build-time sources are not deployed', async ({ request }) => {
+  const feed = await request.get('/data/news.json');
+  expect(feed.status(), '/data/news.json').toBe(200);
+  for (const path of [
+    '/admin/news-editor.html',
+    '/data/mati/build_barangays.py',
+    '/data/mati/dist/mati_barangays.csv',
+    '/data/mati/dist/mati_barangays.geojson',
+  ]) {
+    const res = await request.get(path);
+    expect(res.status(), `${path} should not be served`).toBeGreaterThanOrEqual(400);
+  }
+});
